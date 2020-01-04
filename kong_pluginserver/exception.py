@@ -1,0 +1,2 @@
+class PluginServerException(Exception):
+    pass
