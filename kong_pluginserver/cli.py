@@ -13,7 +13,7 @@ from . import PluginServer
 from .server import UnixStreamServer
 from .logger import Logger
 
-from .const import __version__
+from .const import __version__, PY3K
 
 def start():
     parser = argparse.ArgumentParser(description='Kong Python Plugin Server.')
@@ -42,7 +42,10 @@ def start():
         ret, err = ss.ps.get_plugin_info(args.dump_info)
         if err:
             raise Exception("error dump info: " + err)
-        sys.stdout.buffer.write(msgpack.packb(ret))
+        if PY3K:
+            sys.stdout.buffer.write(msgpack.packb(ret))
+        else:
+            sys.stdout.write(msgpack.packb(ret))
         sys.exit(0)
     ss.serve_forever()
     
