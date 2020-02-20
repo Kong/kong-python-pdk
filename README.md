@@ -6,11 +6,12 @@ Plugin server for Python language support in Kong plugin.
 
 Requires Kong >= 2.0.0.
 
-## Run the plugin server
+## Install the plugin server
 
 ```shell
 pip3 install kong-pluginserver
-kong-pluginserver -s KONG_PREFIX/go_pluginserver.sock
+# Replace the go-pluginserver with python plugin server
+cp /usr/local/bin/kong-pluginserver /usr/local/bin/go-pluginserver
 ```
 
 ## Configure Kong

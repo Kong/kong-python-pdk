@@ -232,3 +232,5 @@ class PluginServer(object):
 
 for entity in entities:
     setattr(PluginServer, 'step_' + entity, PluginServer.step)
+
+setattr(PluginServer, 'step_multi_map', PluginServer.step)

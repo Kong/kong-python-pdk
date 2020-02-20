@@ -9,6 +9,8 @@ import msgpack
 
 cmdre = re.compile("([a-z])([A-Z])")
 
+SOCKET_NAME = "go_pluginserver.sock"
+
 def write_response(fd, msgid, response):
     fd.send(msgpack.packb([
         1, # is response
@@ -66,12 +68,13 @@ class Server(object):
 class UnixStreamServer(Server):
     def __init__(self, pluginserver, path):
         Server.__init__(self, pluginserver)
-        self.path = path
+        self.path = os.path.join(path, SOCKET_NAME)
     
     def serve_forever(self):
         listener = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         if os.path.exists(self.path):
             os.remove(self.path)
+        print(self.path)
         listener.bind(self.path)
         listener.listen(1)
 
