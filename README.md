@@ -4,14 +4,12 @@
 
 Plugin server for Python language support in Kong plugin.
 
-Requires Kong >= 2.0.0.
+Requires Kong >= 2.3.0.
 
 ## Install the plugin server
 
 ```shell
 pip3 install kong-pluginserver
-# Replace the go-pluginserver with python plugin server
-cp /usr/local/bin/kong-pluginserver /usr/local/bin/go-pluginserver
 ```
 
 ## Configure Kong
@@ -20,11 +18,13 @@ Add the following line into `kong.conf`:
 
 ```
 plugins=bundled,py-hello,py-image
-go_plugins_dir=/your/path/to/python/plugins/dir
+pluginserver_names=go, py
+pluginserver_py_socket=/usr/local/kong/python_pluginserver.sock
+pluginserver_py_start_cmd=/usr/local/bin/kong-pluginserver -d /dir/to/kong-python-pluginserver/examples
+pluginserver_py_query_cmd=/usr/local/bin/kong-pluginserver -d /dir/to/kong-python-pluginserver/examples --dump-all-plugins
 ```
 
-For example, to test examples, clone `kong-python-pluginserver` to `/dir1/kong-python-pluginserver`
-and set `go_plugins_dir` to `/dir1/kong-python-pluginserver/examples`
+For example, to test examples, clone `kong-python-pluginserver` to `/dir/to/kong-python-pluginserver`.
 
 ## Enable the plugin
 

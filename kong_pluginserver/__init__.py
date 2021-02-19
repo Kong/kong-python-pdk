@@ -86,6 +86,14 @@ class PluginServer(object):
         self.plugin_dir = dir
         return "ok", None
 
+    def get_available_plugins(self):
+        ret = []
+        for p in os.listdir(self.plugin_dir):
+            name, ext = os.path.splitext(p)
+            if ext in exts:
+                ret.append(name)
+        return ret
+
     @locked_by("p_lock")
     @locked_by("i_lock")
     def get_status(self, *_):

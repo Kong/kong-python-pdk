@@ -1,4 +1,3 @@
-#!/bin/bash
 import os
 import re
 import traceback
@@ -9,7 +8,7 @@ import msgpack
 
 cmdre = re.compile("([a-z])([A-Z])")
 
-SOCKET_NAME = "go_pluginserver.sock"
+SOCKET_NAME = "python_pluginserver.sock"
 
 def write_response(fd, msgid, response):
     fd.send(msgpack.packb([
@@ -74,10 +73,9 @@ class UnixStreamServer(Server):
         listener = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         if os.path.exists(self.path):
             os.remove(self.path)
-        print(self.path)
         listener.bind(self.path)
         listener.listen(1)
 
-        self.logger.info("server started")
+        self.logger.info("server started at path " + self.path)
 
         gStreamServer(listener, self.handle).serve_forever()
