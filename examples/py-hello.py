@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 
 Schema = (
     { "message": { "type": "string" } },
@@ -17,3 +18,9 @@ class Plugin(object):
         if 'message' in self.config:
             message = self.config['message']
         kong.response.set_header("x-hello-from-python", "Python says %s to %s" % (message, host))
+
+
+# add below section to allow this plugin optionally be running in a dedicated process
+if __name__ == "__main__":
+    from kong_pluginserver import pdk
+    pdk.start_server("py-hello", Plugin)

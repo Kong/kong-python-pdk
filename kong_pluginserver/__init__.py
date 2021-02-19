@@ -63,6 +63,9 @@ class PluginServer(object):
 
     @locked_by("p_lock")
     def _load_plugin(self, name):
+        if name in self.plugins:
+            return self.plugins[name]
+
         if not self.plugin_dir:
             raise PluginServerException("plugin server is not initialized, call SetPluginDir first")
         if name in self.plugins:

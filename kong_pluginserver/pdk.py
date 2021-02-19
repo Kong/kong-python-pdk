@@ -29,3 +29,36 @@ class Kong(object):
 
     def bridge(self, attr, *args):
         return self.rpc(attr, *args)
+
+def start_server(name, plugin, _version=None, _priority=0):
+    import sys
+    import json
+    from .const import PY3K
+    from . import PluginServer
+    from .server import UnixStreamServer
+    from .logger import Logger
+    from .module import Module
+    from .cli import parse
+
+    args = parse(dedicated=True)
+
+    ps = PluginServer(loglevel=Logger.WARNING - args.verbose)
+    ss = UnixStreamServer(ps, args.prefix)
+
+    class mod(object):
+        Plugin = plugin
+        version = _version
+        priority = _priority
+
+    mod = Module(name, module=mod)
+    ps.plugins[name] = mod
+
+    if args.dump:
+        ret, err = ps.get_plugin_info(name)
+        if err:
+            raise Exception("error dump info: " + err)
+        # note a list is returned
+        sys.stdout.write(json.dumps([ret]))
+        sys.exit(0)
+
+    ss.serve_forever()

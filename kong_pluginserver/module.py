@@ -1,6 +1,7 @@
 import os
 import time
-from .const import PY3K
+from .const import PY3K, FILEPATH
+from .exception import PDKException
 if PY3K:
     import importlib.util
     def load_module(name, path):
@@ -24,11 +25,19 @@ else:
 phases = ("certificate", "rewrite", "log", "access", "preread")
 
 class Module(object):
-    def __init__(self, name, path):
-        mod = load_module(name, path)
-
-        self.mod = mod
+    def __init__(self, name, path=None, module=None):
         self.name = name
+        self.load_time = time.time()
+
+        if path:
+            mod = load_module(name, path)
+            self.mod = mod
+            self.mtime = os.stat(path).st_mtime
+        elif module:
+            mod = module
+            self.mtime = os.stat(FILEPATH).st_mtime
+        else:
+            raise PDKException("either path or module needs to be passed in")
     
         self.cls = getattr(mod, "Plugin")
 
@@ -49,8 +58,6 @@ class Module(object):
             self.schema = mod.Schema
         else:
             self.schema = []
-        self.load_time = time.time()
-        self.mtime = os.stat(path).st_mtime
 
         self.last_start_instance_time = 0
         self.last_close_instance_time = 0

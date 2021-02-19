@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/kong-pluginserver.svg)](https://badge.fury.io/py/kong-pluginserver)
 
-Plugin server for Python language support in Kong plugin.
+Plugin server and PDK (Plugin Development Kit) for Python language support in Kong.
 
 Requires Kong >= 2.3.0.
 
@@ -33,12 +33,11 @@ Same step as it's a Lua plugin.
 ## Notes
 
 - All PDK API supported by Go Plugin Server is supported.
-- The plugin server is implemented by gevent module for now, thus only one CPU core will be used. If your plugin is CPU-hungry, consider run the plugin instance in a seperate process and implement a piping IPC.
-- Currently you can't run Go plugins and Python plugins at the same time,
-as Kong only accepts one plugin server socket.
+- The plugin server is implemented by gevent module for now, thus only one CPU core will be used. If your plugin is CPU-hungry, consider run the plugin instance in a seperate process (examples/py-hello.py as an example).
+
 
 ## TODO
 
-- Process per instance
+- Close signal handler?
 - Tests
 - Hot reload
