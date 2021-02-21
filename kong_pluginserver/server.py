@@ -1,8 +1,9 @@
 import os
 import re
+import sys
 import traceback
 
-from gevent import socket
+from gevent import socket, sleep as gsleep, spawn as gspawn
 from gevent.server import StreamServer as gStreamServer
 import msgpack
 
@@ -64,6 +65,13 @@ class Server(object):
                 write_error(fd, msgid, str(ex))
                 continue
 
+def watchdog(logger):
+    while True:
+        if os.getppid() == 1: # parent dead, process adopted by init
+            logger.info("Kong exits, terminating...")
+            sys.exit()
+        gsleep(1)
+
 class UnixStreamServer(Server):
     def __init__(self, pluginserver, path):
         Server.__init__(self, pluginserver)
@@ -78,4 +86,9 @@ class UnixStreamServer(Server):
 
         self.logger.info("server started at path " + self.path)
 
-        gStreamServer(listener, self.handle).serve_forever()
+        gspawn(watchdog, self.logger)
+
+        try:
+            gStreamServer(listener, self.handle).serve_forever()
+        except KeyboardInterrupt:
+            self.logger.info("polite exit requested, terminating...")

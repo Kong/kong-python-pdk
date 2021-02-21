@@ -40,14 +40,16 @@ def parse(dedicated=False):
                             help='Dump plugin info into stdout')
 
     args = parser.parse_args()
+
+    if not os.path.exists(args.prefix):
+        raise OSError("path %s doesn't exist, can't create unix socket file" % args.prefix)
+
     return args
 
 def start():
     args = parse()
 
     prefix = args.prefix
-    if not os.path.exists(prefix):
-        raise OSError("path %s doesn't exist, can't create unix socket file" % prefix)
 
     ss = UnixStreamServer(PluginServer(loglevel=Logger.WARNING - args.verbose), prefix)
     ss.ps.set_plugin_dir(args.directory)
