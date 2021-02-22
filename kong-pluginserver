@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
 
-from kong_pluginserver import cli
+from kong_pdk import cli
 
-cli.start()
+cli.start_server()

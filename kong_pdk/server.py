@@ -11,8 +11,8 @@ from .module import Module
 from .exception import PluginServerException
 from .logger import Logger
 
-exts = ('.py', '.pyd', '.so')
-entities = ( 'service', 'consumer', 'route', 'plugin', 'credential', 'memory_stats')
+exts = ( '.py', '.pyd', '.so' )
+entities = ( 'service', 'consumer', 'route', 'plugin', 'credential', 'memory_stats' )
 
 def locked_by(lock_name):
     def f(fn):

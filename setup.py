@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-PROJ_NAME = 'kong-pluginserver'
-PACKAGE_NAME = 'kong_pluginserver'
+PROJ_NAME = 'kong-pdk'
+PACKAGE_NAME = 'kong_pdk'
 
 PROJ_METADATA = '%s.json' % PROJ_NAME
 
@@ -19,7 +19,7 @@ except:
 VERSION = imp.load_source('version', os.path.join(here, '%s/const.py' % PACKAGE_NAME)).__version__
 
 packages = [
-    'kong_pluginserver',
+    'kong_pdk',
 ]
 requires = ['gevent', 'msgpack']
 
@@ -28,12 +28,12 @@ from setuptools import setup
 setup(
     name=PACKAGE_NAME,
     version=VERSION,
-    description='Kong Python Plugin Server',
+    description='Kong PDK for Python and Plugin Server',
     long_description=README + '\n\n' + CHANGELOG,
     long_description_content_type="text/markdown",
     author='fffonion',
     author_email='fffonion@gmail.com',
-    url='https://github.com/fffonion/kong-python-pluginserver',
+    url='https://github.com/fffonion/kong-python-pdk',
     packages=packages,
     package_dir={'requests': 'requests'},
     include_package_data=True,
@@ -50,5 +50,5 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython'
     ),
     requires=requires,
-    entry_points = {'console_scripts': ["kong-pluginserver = kong_pluginserver.cli:start"]},
+    entry_points = {'console_scripts': ["kong-python-pluginserver = kong_pdk.cli:start_server"]},
 )

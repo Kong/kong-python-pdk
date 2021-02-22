@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
@@ -30,3 +32,8 @@ class Plugin(object):
         kong.response.exit(200,
             b.getvalue()
         )
+
+# add below section to allow this plugin optionally be running in a dedicated process
+if __name__ == "__main__":
+    from kong_pdk.cli import start_dedicated_server
+    start_dedicated_server("py-image", Plugin)

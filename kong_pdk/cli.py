@@ -1,17 +1,17 @@
-#!/usr/bin/env python
 # coding:utf-8
 # Contributor:
 #      fffonion        <fffonion@gmail.com>
 
 import os
+import re
 import sys
 import argparse
 import traceback
 import msgpack
 import json
 
-from . import PluginServer
-from .server import UnixStreamServer
+from .server import PluginServer
+from .listener import UnixStreamServer, DEFAULT_SOCKET_NAME
 from .logger import Logger
 
 from .const import __version__, PY3K
@@ -22,10 +22,12 @@ def parse(dedicated=False):
                         dest='prefix', metavar='prefix', type=str,
                         default="/usr/local/kong/",
                         help='Unix domain socket path to listen')
-    parser.add_argument('-v', '--verbose', action='count', default = Logger.INFO,
+    parser.add_argument('-v', '--verbose', action='count', default=Logger.INFO,
                         help='Turn on verbose logging')
     parser.add_argument('--version', '-version', action='version',
                     version='%(prog)s {version}'.format(version=__version__))
+    parser.add_argument('--socket-name', type=str, dest='socket_name', default=DEFAULT_SOCKET_NAME,
+                    help='socket name to listen on')
 
     if not dedicated:
         parser.add_argument('-d', '--plugins-directory', '-plugins-directory',
@@ -46,15 +48,16 @@ def parse(dedicated=False):
 
     return args
 
-def start():
+def start_server():
     args = parse()
 
     prefix = args.prefix
 
-    ss = UnixStreamServer(PluginServer(loglevel=Logger.WARNING - args.verbose), prefix)
-    ss.ps.set_plugin_dir(args.directory)
+    ps = PluginServer(loglevel=Logger.WARNING - args.verbose)
+    ss = UnixStreamServer(ps, prefix, args.socket_name)
+    ps.set_plugin_dir(args.directory)
     if args.dump_info:
-        ret, err = ss.ps.get_plugin_info(args.dump_info)
+        ret, err = ps.get_plugin_info(args.dump_info)
         if err:
             raise Exception("error dump info: " + err)
         if PY3K:
@@ -63,10 +66,10 @@ def start():
             sys.stdout.write(msgpack.packb(ret))
         sys.exit(0)
     elif args.dump_all_info:
-        plugins = ss.ps.get_available_plugins()
+        plugins = ps.get_available_plugins()
         ret = []
         for p in plugins:
-            inf, err = ss.ps.get_plugin_info(p)
+            inf, err = ps.get_plugin_info(p)
             if err:
                 raise Exception("error dump info for " + p  + " : " + err)
             ret.append(inf)
@@ -74,4 +77,32 @@ def start():
         sys.exit(0)
 
     ss.serve_forever()
-    
+
+def start_dedicated_server(name, plugin, _version=None, _priority=0):
+    from .module import Module
+
+    args = parse(dedicated=True)
+
+    ps = PluginServer(loglevel=Logger.WARNING - args.verbose)
+    socket_name = args.socket_name
+    if socket_name == DEFAULT_SOCKET_NAME:
+        socket_name = "%s.sock" % name.replace("-", "_")
+    ss = UnixStreamServer(ps, args.prefix, socket_name)
+
+    class mod(object):
+        Plugin = plugin
+        version = _version
+        priority = _priority
+
+    mod = Module(name, module=mod)
+    ps.plugins[name] = mod
+
+    if args.dump:
+        ret, err = ps.get_plugin_info(name)
+        if err:
+            raise Exception("error dump info: " + err)
+        # note a list is returned
+        sys.stdout.write(json.dumps([ret]))
+        sys.exit(0)
+
+    ss.serve_forever()

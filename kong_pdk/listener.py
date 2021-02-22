@@ -9,7 +9,7 @@ import msgpack
 
 cmdre = re.compile("([a-z])([A-Z])")
 
-SOCKET_NAME = "python_pluginserver.sock"
+DEFAULT_SOCKET_NAME = "python_pluginserver.sock"
 
 def write_response(fd, msgid, response):
     fd.send(msgpack.packb([
@@ -49,7 +49,7 @@ class Server(object):
             try:
                 self.logger.debug("rpc: #%d method: %s args: %s" % (msgid, method, args))
                 ret = getattr(self.ps, cmd_r)(*args)
-                ret_c = ret and len(ret)
+                ret_c = ret and len(ret) or 0
                 if ret_c != 2:
                     write_error(fd, msgid,
                         "%s should return two arguments, only got %s" % (cmd_r, ret_c))
@@ -73,9 +73,9 @@ def watchdog(logger):
         gsleep(1)
 
 class UnixStreamServer(Server):
-    def __init__(self, pluginserver, path):
+    def __init__(self, pluginserver, path, sock_name=DEFAULT_SOCKET_NAME):
         Server.__init__(self, pluginserver)
-        self.path = os.path.join(path, SOCKET_NAME)
+        self.path = os.path.join(path, sock_name)
     
     def serve_forever(self):
         listener = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)

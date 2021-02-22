@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding:utf-8
 # Contributor:
 #      fffonion        <fffonion@gmail.com>

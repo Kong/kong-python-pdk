@@ -9,7 +9,7 @@ Requires Kong >= 2.3.0.
 ## Install the plugin server
 
 ```shell
-pip3 install kong-pluginserver
+pip3 install kong-pdk
 ```
 
 ## Configure Kong
