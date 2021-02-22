@@ -2,17 +2,25 @@ import sys
 import os
 import time
 import json
-import gevent
+import multiprocessing
+# patch connection API so it share with gevent.queue.Channel
+from multiprocessing import connection
+connection.Connection.get = connection.Connection.recv
+connection.Connection.put = connection.Connection.send
+
+from gevent import sleep as gsleep, spawn as gspawn
 from gevent.lock import Semaphore
 from gevent.queue import Channel
 
 from .pdk import Kong
-from .module import Module
+from .module import Module, load_module
 from .exception import PluginServerException
 from .logger import Logger
 
 exts = ( '.py', '.pyd', '.so' )
 entities = ( 'service', 'consumer', 'route', 'plugin', 'credential', 'memory_stats' )
+
+MSG_RET = 'ret'
 
 def locked_by(lock_name):
     def f(fn):
@@ -31,27 +39,43 @@ def locked_by(lock_name):
 
     return f
 
+def _handler_event_func(cls_phase, ch):
+    cls_phase(Kong(ch).kong)
+    ch.put(MSG_RET)
+
 class PluginServer(object):
-    def __init__(self, loglevel=Logger.WARNING, expire_ttl=60):
-        self.plugin_dir = None
+    def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None, multiprocess=True):
+        if multiprocess:
+            sem = multiprocessing.Semaphore
+        else:
+            sem = Semaphore
+
+        self.plugin_dir = plugin_dir
         self.plugins = {}
-        self.p_lock = Semaphore()
         self.instances = {}
         self.instance_id = 0
-        self.i_lock = Semaphore()
+        self.i_lock = sem()
         self.events = {}
         self.event_id = 0
-        self.e_lock = Semaphore()
+        self.e_lock = sem()
 
         self.logger = Logger()
         self.logger.set_level(loglevel)
 
+        if plugin_dir:
+            self._load_plugins()
+
+        self.multiprocess = multiprocess
+        if multiprocess:
+            self._process_pool = multiprocessing.Pool()
+            self.logger.debug("plugin server is in multiprocessing mode")
+
         # start cleanup timer
-        gevent.spawn(self._clear_expired_plugins, expire_ttl)
+        gspawn(self._clear_expired_plugins, expire_ttl)
     
     def _clear_expired_plugins(self, ttl):
         while True:
-            gevent.sleep(ttl)
+            gsleep(ttl)
             self.i_lock.acquire()
             keys = list(self.instances.keys())
             for iid in keys:
@@ -61,27 +85,26 @@ class PluginServer(object):
                     del(self.instances[iid])
             self.i_lock.release()
 
-    @locked_by("p_lock")
-    def _load_plugin(self, name):
-        if name in self.plugins:
-            return self.plugins[name]
+    def cleanup(self):
+        if self.multiprocess:
+            self._process_pool.terminate()
+            self._process_pool.join()
 
+    def _load_plugins(self):
         if not self.plugin_dir:
             raise PluginServerException("plugin server is not initialized, call SetPluginDir first")
-        if name in self.plugins:
-            return self.plugins[name]
-        path = None
-        for ext in exts:
-            find = os.path.join(self.plugin_dir, name + ext)
-            if os.path.exists(find):
-                path = find
-        if not path:
-            raise PluginServerException("plugin not found")
 
-        mod = Module(name, path)
-    
-        self.plugins[name] = mod
-        return mod
+        for p in os.listdir(self.plugin_dir):
+            n, ext = os.path.splitext(p)
+            if ext in exts:
+                path = os.path.join(self.plugin_dir, p)
+                try:
+                    mod = Module(n, path=path)
+                except Exception as ex:
+                    self.logger.warn("error loading plugin \"%s\": %s" % (n, ex))
+                else:
+                    self.logger.debug("loaded plugin \"%s\" from %s" % (n, path))
+                    self.plugins[n] = mod
 
     def set_plugin_dir(self, dir):
         if not os.path.exists(dir):
@@ -89,15 +112,6 @@ class PluginServer(object):
         self.plugin_dir = dir
         return "ok", None
 
-    def get_available_plugins(self):
-        ret = []
-        for p in os.listdir(self.plugin_dir):
-            name, ext = os.path.splitext(p)
-            if ext in exts:
-                ret.append(name)
-        return ret
-
-    @locked_by("p_lock")
     @locked_by("i_lock")
     def get_status(self, *_):
         plugin_status = {}
@@ -123,7 +137,10 @@ class PluginServer(object):
         }, None
 
     def get_plugin_info(self, name):
-        plugin = self._load_plugin(name)
+        if name not in self.plugins:
+            raise PluginServerException(" not initizlied" % name)
+
+        plugin = self.plugins[name]
 
         info = {
             "Name" : name,
@@ -144,8 +161,11 @@ class PluginServer(object):
     @locked_by("i_lock")
     def start_instance(self, cfg):
         name = cfg['Name']
+        if name not in self.plugins:
+            raise PluginServerException(" not initizlied" % name)
+        plugin = self.plugins[name]
+
         config = json.loads(cfg['Config'])
-        plugin = self._load_plugin(name)
         iid = self.instance_id
         self.instances[iid] = plugin.new(config)
         self.instance_id = iid + 1
@@ -194,19 +214,29 @@ class PluginServer(object):
         phase = event['EventName']
 
         eid = self.event_id
-        # plugin communites to Kong (RPC client) in a reverse way
-        ch = Channel()
-        self.events[eid] = ch
         self.event_id = eid + 1
 
-        gevent.spawn(lambda:(
-            getattr(cls, phase)(Kong(ch).kong),
-            instance.reset_expire_ts(),
-            ch.put("ret")
-        ))
+        if self.multiprocess:
+            ch, child_ch = multiprocessing.Pipe(duplex=True)
+            self.events[eid] = ch
+            self._process_pool.apply_async(
+                _handler_event_func,
+                (getattr(cls, phase), child_ch),
+            )
+        else:
+            # plugin communites to Kong (RPC client) in a reverse way
+            ch = Channel()
+            self.events[eid] = ch
+
+            gspawn(_handler_event_func,
+                getattr(cls, phase), ch,
+            )
+
+        r = ch.get()
+        instance.reset_expire_ts()
 
         return {
-            "Data": ch.get(),
+            "Data": r,
             "EventId": eid,
         }, None
     
@@ -228,8 +258,10 @@ class PluginServer(object):
             ))
 
         ret = ch.get()
-        if ret == "ret":
+
+        if ret == MSG_RET:
             del self.events[eid]
+
         return {
             "Data": ret,
             "EventId": eid,

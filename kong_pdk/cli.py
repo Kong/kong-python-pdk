@@ -22,12 +22,14 @@ def parse(dedicated=False):
                         dest='prefix', metavar='prefix', type=str,
                         default="/usr/local/kong/",
                         help='Unix domain socket path to listen')
-    parser.add_argument('-v', '--verbose', action='count', default=Logger.INFO,
+    parser.add_argument('-v', '--verbose', action='count', default=0,
                         help='Turn on verbose logging')
     parser.add_argument('--version', '-version', action='version',
                     version='%(prog)s {version}'.format(version=__version__))
     parser.add_argument('--socket-name', type=str, dest='socket_name', default=DEFAULT_SOCKET_NAME,
                     help='socket name to listen on')
+    parser.add_argument('-m', '--multiprocessing', dest='multiprocessing', action="store_true",
+                        help='Turn on multiprocessing')
 
     if not dedicated:
         parser.add_argument('-d', '--plugins-directory', '-plugins-directory',
@@ -53,9 +55,10 @@ def start_server():
 
     prefix = args.prefix
 
-    ps = PluginServer(loglevel=Logger.WARNING - args.verbose)
+    ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
+                        plugin_dir=args.directory,
+                        multiprocess=args.multiprocessing)
     ss = UnixStreamServer(ps, prefix, args.socket_name)
-    ps.set_plugin_dir(args.directory)
     if args.dump_info:
         ret, err = ps.get_plugin_info(args.dump_info)
         if err:
@@ -66,9 +69,8 @@ def start_server():
             sys.stdout.write(msgpack.packb(ret))
         sys.exit(0)
     elif args.dump_all_info:
-        plugins = ps.get_available_plugins()
         ret = []
-        for p in plugins:
+        for p in ps.plugins:
             inf, err = ps.get_plugin_info(p)
             if err:
                 raise Exception("error dump info for " + p  + " : " + err)
@@ -76,14 +78,20 @@ def start_server():
         sys.stdout.write(json.dumps(ret))
         sys.exit(0)
 
-    ss.serve_forever()
+    try:
+        ss.serve_forever()
+    except KeyboardInterrupt:
+        self.logger.info("polite exit requested, terminating...")
+
+    ps.cleanup()
 
 def start_dedicated_server(name, plugin, _version=None, _priority=0):
     from .module import Module
 
     args = parse(dedicated=True)
 
-    ps = PluginServer(loglevel=Logger.WARNING - args.verbose)
+    ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
+                        multiprocess=args.multiprocessing)
     socket_name = args.socket_name
     if socket_name == DEFAULT_SOCKET_NAME:
         socket_name = "%s.sock" % name.replace("-", "_")
@@ -105,4 +113,9 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0):
         sys.stdout.write(json.dumps([ret]))
         sys.exit(0)
 
-    ss.serve_forever()
+    try:
+        ss.serve_forever()
+    except KeyboardInterrupt:
+        self.logger.info("polite exit requested, terminating...")
+
+    ps.cleanup()

@@ -88,7 +88,4 @@ class UnixStreamServer(Server):
 
         gspawn(watchdog, self.logger)
 
-        try:
-            gStreamServer(listener, self.handle).serve_forever()
-        except KeyboardInterrupt:
-            self.logger.info("polite exit requested, terminating...")
+        gStreamServer(listener, self.handle).serve_forever()

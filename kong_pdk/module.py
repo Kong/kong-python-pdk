@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 from .const import PY3K, FILEPATH
 from .exception import PDKException
@@ -8,6 +9,7 @@ if PY3K:
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
+        sys.modules[name] = mod
         return mod
 else:
     import imp
@@ -20,7 +22,9 @@ else:
     }
     def load_module(name, path):
         ext = os.path.splitext(path)[1]
-        return methods[ext](name, path)
+        mod = methods[ext](name, path)
+        sys.modules[name] = mod
+        return mod
 
 phases = ("certificate", "rewrite", "log", "access", "preread")
 

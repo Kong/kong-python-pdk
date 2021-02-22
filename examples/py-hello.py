@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 
 Schema = (
     { "message": { "type": "string" } },
@@ -18,6 +19,7 @@ class Plugin(object):
         if 'message' in self.config:
             message = self.config['message']
         kong.response.set_header("x-hello-from-python", "Python says %s to %s" % (message, host))
+        kong.response.set_header("x-python-pid", str(os.getpid()))
 
 
 # add below section to allow this plugin optionally be running in a dedicated process
