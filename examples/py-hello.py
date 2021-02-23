@@ -5,6 +5,9 @@ Schema = (
     { "message": { "type": "string" } },
 )
 
+version = '0.1.0'
+priority = 0
+
 # This is an example plugin that add a header to the response
 
 class Plugin(object):
@@ -25,4 +28,4 @@ class Plugin(object):
 # add below section to allow this plugin optionally be running in a dedicated process
 if __name__ == "__main__":
     from kong_pdk.cli import start_dedicated_server
-    start_dedicated_server("py-hello", Plugin)
+    start_dedicated_server("py-hello", Plugin, version, priority)

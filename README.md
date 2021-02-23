@@ -48,7 +48,7 @@ Add the following line into `kong.conf`:
 plugins=bundled,py-hello,py-image
 pluginserver_names=go, py
 pluginserver_py_socket=/usr/local/kong/python_pluginserver.sock
-pluginserver_py_start_cmd=/usr/local/bin/kong-python-pluginserver -d /dir/to/kkong-python-pdk/examples
+pluginserver_py_start_cmd=/usr/local/bin/kong-python-pluginserver -d /dir/to/kong-python-pdk/examples
 pluginserver_py_query_cmd=/usr/local/bin/kong-python-pluginserver -d /dir/to/kong-python-pdk/examples --dump-all-plugins
 ```
 

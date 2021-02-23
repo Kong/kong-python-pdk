@@ -5,6 +5,9 @@ from PIL import ImageFont
 from PIL import ImageDraw
 import io
 
+version = '0.1.0'
+priority = 0
+
 # This is an example plugin that uses PIL to generate an PNG image
 # containing text of the request headers
 # Run the following commands first:
@@ -36,4 +39,4 @@ class Plugin(object):
 # add below section to allow this plugin optionally be running in a dedicated process
 if __name__ == "__main__":
     from kong_pdk.cli import start_dedicated_server
-    start_dedicated_server("py-image", Plugin)
+    start_dedicated_server("py-image", Plugin, version, priority)

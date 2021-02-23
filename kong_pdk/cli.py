@@ -22,7 +22,7 @@ def parse(dedicated=False):
                         dest='prefix', metavar='prefix', type=str,
                         default="/usr/local/kong/",
                         help='Unix domain socket path to listen')
-    parser.add_argument('-v', '--verbose', action='count', default=0,
+    parser.add_argument('-v', '--verbose', action='count', default=1,
                         help='Turn on verbose logging')
     parser.add_argument('--version', '-version', action='version',
                     version='%(prog)s {version}'.format(version=__version__))
@@ -81,7 +81,7 @@ def start_server():
     try:
         ss.serve_forever()
     except KeyboardInterrupt:
-        self.logger.info("polite exit requested, terminating...")
+        ps.logger.info("polite exit requested, terminating...")
 
     ps.cleanup()
 
@@ -91,7 +91,8 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0):
     args = parse(dedicated=True)
 
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
-                        multiprocess=args.multiprocessing)
+                        multiprocess=args.multiprocessing,
+                        name="%s version %s" % (name, _version or 'unknown'))
     socket_name = args.socket_name
     if socket_name == DEFAULT_SOCKET_NAME:
         socket_name = "%s.sock" % name.replace("-", "_")
@@ -116,6 +117,6 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0):
     try:
         ss.serve_forever()
     except KeyboardInterrupt:
-        self.logger.info("polite exit requested, terminating...")
+        ps.logger.info("polite exit requested, terminating...")
 
     ps.cleanup()

@@ -4,13 +4,20 @@ import time
 import json
 import multiprocessing
 # patch connection API so it share with gevent.queue.Channel
-from multiprocessing import connection
-connection.Connection.get = connection.Connection.recv
-connection.Connection.put = connection.Connection.send
+from .const import PY3K
+if PY3K:
+    from multiprocessing import connection
+    connection.Connection.get = connection.Connection.recv
+    connection.Connection.put = connection.Connection.send
 
 from gevent import sleep as gsleep, spawn as gspawn
 from gevent.lock import Semaphore
 from gevent.queue import Channel
+
+try:
+    import setproctitle
+except:
+    setproctitle = None
 
 from .pdk import Kong
 from .module import Module, load_module
@@ -43,8 +50,14 @@ def _handler_event_func(cls_phase, ch):
     cls_phase(Kong(ch).kong)
     ch.put(MSG_RET)
 
+def _multiprocessing_init(pool_name):
+    p = multiprocessing.current_process()
+    p.name = "%s: %s (ppid: %d)" % (pool_name, p.name, os.getppid())
+    if setproctitle:
+        setproctitle.setproctitle(p.name)
+
 class PluginServer(object):
-    def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None, multiprocess=True):
+    def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None, multiprocess=False, name=None):
         if multiprocess:
             sem = multiprocessing.Semaphore
         else:
@@ -65,11 +78,28 @@ class PluginServer(object):
         if plugin_dir:
             self._load_plugins()
 
+        title = "Kong Python Plugin Server"
+        if name:
+            title = "%s \"%s\"" % (title, name)
+
         self.multiprocess = multiprocess
         if multiprocess:
-            self._process_pool = multiprocessing.Pool()
+            if PY3K:
+                raise NotImplementedError("multiprocessing mode is only supported in Python3")
+
+            self._process_pool = multiprocessing.Pool(
+                os.cpu_count(),
+                _multiprocessing_init,
+                (title, ),
+            )
             self.logger.debug("plugin server is in multiprocessing mode")
 
+        if setproctitle:
+            pid = os.getppid()
+            if multiprocess:
+                setproctitle.setproctitle("%s: Manager (ppid: %d)" % (title, os.getppid()))
+            else:
+                setproctitle.setproctitle("%s (ppid: %d)" % (title, os.getppid()))
         # start cleanup timer
         gspawn(self._clear_expired_plugins, expire_ttl)
     
