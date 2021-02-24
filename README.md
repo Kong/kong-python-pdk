@@ -15,10 +15,9 @@ pip3 install kong-pdk
 ## Usage
 
 ```
-kong-python-pluginserver -h
-usage: kong-python-pluginserver [-h] [-p prefix] [-v] [--version]
-                                [--socket-name SOCKET_NAME] [-m] -d directory
-                                [--dump-plugin-info name] [--dump-all-plugins]
+usage: kong-pluginserver [-h] [-p prefix] [-v] [--version]
+                         [--socket-name SOCKET_NAME] [-m | -g] -d directory
+                         [--dump-plugin-info name] [--dump-all-plugins]
 
 Kong Python Plugin Server.
 
@@ -31,7 +30,8 @@ optional arguments:
   --socket-name SOCKET_NAME
                         socket name to listen on
   -m, --multiprocessing
-                        Turn on multiprocessing
+                        Enable multiprocessing
+  -g, --gevent          Enable gevent
   -d directory, --plugins-directory directory, -plugins-directory directory
                         Plugins directory
   --dump-plugin-info name, -dump-plugin-info name
@@ -76,7 +76,8 @@ Same step as it's a Lua plugin.
 ## Notes
 
 - All PDK API supported by Go Plugin Server is supported.
-- The plugin server is implemented by gevent module, thus only one CPU core will be used. If your plugin is CPU-hungry, consider run the plugin instance in a seperate process (examples/py-hello.py as an example) or turn on multiprocessing mode (`-m` flag).
+- If your plugin is CPU intensive, consider using multiprocessing mode (`-m` flag) or run the plugin instance in a seperate process (examples/py-hello.py as an example) to distribute workloads to multicore.
+- If your plugins are I/O intensive, considering using gevent mode (`-g` flag) and use gevent libraries in the plugin.
 
 
 ## TODO

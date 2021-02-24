@@ -2,6 +2,7 @@ import sys
 import os
 import time
 import json
+import threading
 import multiprocessing
 # patch connection API so it share with gevent.queue.Channel
 from .const import PY3K
@@ -11,8 +12,8 @@ if PY3K:
     connection.Connection.put = connection.Connection.send
 
 from gevent import sleep as gsleep, spawn as gspawn
-from gevent.lock import Semaphore
-from gevent.queue import Channel
+from gevent.lock import Semaphore as gSemaphore
+from gevent.queue import Channel as gChannel
 
 try:
     import setproctitle
@@ -61,7 +62,7 @@ class PluginServer(object):
         if multiprocess:
             sem = multiprocessing.Semaphore
         else:
-            sem = Semaphore
+            sem = gSemaphore
 
         self.plugin_dir = plugin_dir
         self.plugins = {}
@@ -84,7 +85,7 @@ class PluginServer(object):
 
         self.multiprocess = multiprocess
         if multiprocess:
-            if PY3K:
+            if not PY3K:
                 raise NotImplementedError("multiprocessing mode is only supported in Python3")
 
             self._process_pool = multiprocessing.Pool(
@@ -94,18 +95,30 @@ class PluginServer(object):
             )
             self.logger.debug("plugin server is in multiprocessing mode")
 
+            # start cleanup timer
+            threading.Thread(
+                target=self._clear_expired_plugins,
+                args=(expire_ttl, ),
+                daemon=True,
+            ).start()
+        else:
+            # start cleanup timer
+            gspawn(self._clear_expired_plugins, expire_ttl)
+
         if setproctitle:
             pid = os.getppid()
             if multiprocess:
                 setproctitle.setproctitle("%s: Manager (ppid: %d)" % (title, os.getppid()))
             else:
                 setproctitle.setproctitle("%s (ppid: %d)" % (title, os.getppid()))
-        # start cleanup timer
-        gspawn(self._clear_expired_plugins, expire_ttl)
     
     def _clear_expired_plugins(self, ttl):
         while True:
-            gsleep(ttl)
+            if self.multiprocess:
+                time.sleep(ttl)
+            else:
+                gsleep(ttl)
+
             self.i_lock.acquire()
             keys = list(self.instances.keys())
             for iid in keys:
@@ -255,7 +268,7 @@ class PluginServer(object):
             )
         else:
             # plugin communites to Kong (RPC client) in a reverse way
-            ch = Channel()
+            ch = gChannel()
             self.events[eid] = ch
 
             gspawn(_handler_event_func,

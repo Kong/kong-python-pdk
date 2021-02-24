@@ -28,8 +28,11 @@ def parse(dedicated=False):
                     version='%(prog)s {version}'.format(version=__version__))
     parser.add_argument('--socket-name', type=str, dest='socket_name', default=DEFAULT_SOCKET_NAME,
                     help='socket name to listen on')
-    parser.add_argument('-m', '--multiprocessing', dest='multiprocessing', action="store_true",
-                        help='Turn on multiprocessing')
+    mxg = parser.add_mutually_exclusive_group()
+    mxg.add_argument('-m', '--multiprocessing', dest='multiprocessing', action="store_true",
+                        help='Enable multiprocessing')
+    mxg.add_argument('-g', '--gevent', dest='gevent', action="store_true",
+                        help='Enable gevent')
 
     if not dedicated:
         parser.add_argument('-d', '--plugins-directory', '-plugins-directory',
@@ -58,7 +61,9 @@ def start_server():
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
                         plugin_dir=args.directory,
                         multiprocess=args.multiprocessing)
-    ss = UnixStreamServer(ps, prefix, args.socket_name)
+    ss = UnixStreamServer(ps, prefix,
+                            sock_name=args.socket_name,
+                            use_gevent=args.gevent)
     if args.dump_info:
         ret, err = ps.get_plugin_info(args.dump_info)
         if err:
@@ -96,7 +101,9 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0):
     socket_name = args.socket_name
     if socket_name == DEFAULT_SOCKET_NAME:
         socket_name = "%s.sock" % name.replace("-", "_")
-    ss = UnixStreamServer(ps, args.prefix, socket_name)
+    ss = UnixStreamServer(ps, args.prefix,
+                            sock_name=socket_name,
+                            use_gevent=args.gevent)
 
     class mod(object):
         Plugin = plugin

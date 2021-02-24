@@ -1,11 +1,19 @@
 import os
 import re
 import sys
+import time
 import traceback
-
-from gevent import socket, sleep as gsleep, spawn as gspawn
-from gevent.server import StreamServer as gStreamServer
+import threading
 import msgpack
+
+from .const import PY3K
+if PY3K:
+    from socketserver import ThreadingMixIn, UnixStreamServer as sUnixStreamServer
+else:
+    from SocketServer import ThreadingMixIn, UnixStreamServer as sUnixStreamServer
+
+from gevent import socket as gsocket, sleep as gsleep, spawn as gspawn
+from gevent.server import StreamServer as gStreamServer
 
 cmdre = re.compile("([a-z])([A-Z])")
 
@@ -32,7 +40,7 @@ class Server(object):
         self.ps = plugin_server
         self.logger = plugin_server.logger
 
-    def handle(self, fd, address):
+    def handle(self, fd, address, *_):
         while True:
             msg = fd.recv(1024)
             if not msg:
@@ -65,27 +73,43 @@ class Server(object):
                 write_error(fd, msgid, str(ex))
                 continue
 
-def watchdog(logger):
+class tUnixStreamServer(ThreadingMixIn, sUnixStreamServer):
+    pass
+
+def watchdog(sleep, logger):
     while True:
         if os.getppid() == 1: # parent dead, process adopted by init
             logger.info("Kong exits, terminating...")
             sys.exit()
-        gsleep(1)
+        sleep(1)
 
 class UnixStreamServer(Server):
-    def __init__(self, pluginserver, path, sock_name=DEFAULT_SOCKET_NAME):
+    def __init__(self, pluginserver, path, sock_name=DEFAULT_SOCKET_NAME, use_gevent=True):
         Server.__init__(self, pluginserver)
         self.path = os.path.join(path, sock_name)
+        self.use_gevent = use_gevent
     
     def serve_forever(self):
-        listener = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         if os.path.exists(self.path):
             os.remove(self.path)
-        listener.bind(self.path)
-        listener.listen(1)
 
-        self.logger.info("server started at path " + self.path)
+        if self.use_gevent:
+            listener = gsocket.socket(gsocket.AF_UNIX, gsocket.SOCK_STREAM)
+            listener.bind(self.path)
+            listener.listen(1)
 
-        gspawn(watchdog, self.logger)
+            self.logger.info("server (gevent) started at path " + self.path)
 
-        gStreamServer(listener, self.handle).serve_forever()
+            gspawn(watchdog, gsleep, self.logger)
+
+            gStreamServer(listener, self.handle).serve_forever()
+        else:
+
+            self.logger.info("server started at path " + self.path)
+
+            threading.Thread(
+                target=watchdog,
+                args=(time.sleep, self.logger, ),
+                daemon=True,
+            ).start()
+            tUnixStreamServer(self.path, self.handle).serve_forever()
