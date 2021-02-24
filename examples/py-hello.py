@@ -24,7 +24,6 @@ class Plugin(object):
             message = self.config['message']
         kong.response.set_header("x-hello-from-python", "Python says %s to %s" % (message, host))
         kong.response.set_header("x-python-pid", str(os.getpid()))
-        time.sleep(10)
 
 
 # add below section to allow this plugin optionally be running in a dedicated process

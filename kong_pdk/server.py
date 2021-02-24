@@ -2,10 +2,17 @@ import sys
 import os
 import time
 import json
+
+from .const import PY3K
+
 import threading
+if PY3K:
+    from queue import Queue
+else:
+    from Queue import Queue
+
 import multiprocessing
 # patch connection API so it share with gevent.queue.Channel
-from .const import PY3K
 if PY3K:
     from multiprocessing import connection
     connection.Connection.get = connection.Connection.recv
@@ -58,11 +65,14 @@ def _multiprocessing_init(pool_name):
         setproctitle.setproctitle(p.name)
 
 class PluginServer(object):
-    def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None, multiprocess=False, name=None):
-        if multiprocess:
+    def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None,
+                    use_multiprocess=False, use_gevent=False,name=None):
+        if use_multiprocess:
             sem = multiprocessing.Semaphore
-        else:
+        elif use_gevent:
             sem = gSemaphore
+        else:
+            sem = threading.Semaphore
 
         self.plugin_dir = plugin_dir
         self.plugins = {}
@@ -83,8 +93,10 @@ class PluginServer(object):
         if name:
             title = "%s \"%s\"" % (title, name)
 
-        self.multiprocess = multiprocess
-        if multiprocess:
+        self.use_multiprocess = use_multiprocess
+        self.use_gevent = use_gevent
+
+        if use_multiprocess:
             if not PY3K:
                 raise NotImplementedError("multiprocessing mode is only supported in Python3")
 
@@ -95,29 +107,30 @@ class PluginServer(object):
             )
             self.logger.debug("plugin server is in multiprocessing mode")
 
-            # start cleanup timer
+        # start cleanup timer
+        if use_gevent:
+            self.logger.debug("plugin server is in gevent mode")
+            gspawn(self._clear_expired_plugins, expire_ttl)
+        else:
             threading.Thread(
                 target=self._clear_expired_plugins,
                 args=(expire_ttl, ),
                 daemon=True,
             ).start()
-        else:
-            # start cleanup timer
-            gspawn(self._clear_expired_plugins, expire_ttl)
 
         if setproctitle:
             pid = os.getppid()
-            if multiprocess:
+            if use_multiprocess:
                 setproctitle.setproctitle("%s: Manager (ppid: %d)" % (title, os.getppid()))
             else:
                 setproctitle.setproctitle("%s (ppid: %d)" % (title, os.getppid()))
     
     def _clear_expired_plugins(self, ttl):
         while True:
-            if self.multiprocess:
-                time.sleep(ttl)
-            else:
+            if self.use_gevent:
                 gsleep(ttl)
+            else:
+                time.sleep(ttl)
 
             self.i_lock.acquire()
             keys = list(self.instances.keys())
@@ -129,7 +142,7 @@ class PluginServer(object):
             self.i_lock.release()
 
     def cleanup(self):
-        if self.multiprocess:
+        if self.use_multiprocess:
             self._process_pool.terminate()
             self._process_pool.join()
 
@@ -259,14 +272,14 @@ class PluginServer(object):
         eid = self.event_id
         self.event_id = eid + 1
 
-        if self.multiprocess:
+        if self.use_multiprocess:
             ch, child_ch = multiprocessing.Pipe(duplex=True)
             self.events[eid] = ch
             self._process_pool.apply_async(
                 _handler_event_func,
                 (getattr(cls, phase), child_ch),
             )
-        else:
+        elif self.use_gevent:
             # plugin communites to Kong (RPC client) in a reverse way
             ch = gChannel()
             self.events[eid] = ch
@@ -274,6 +287,14 @@ class PluginServer(object):
             gspawn(_handler_event_func,
                 getattr(cls, phase), ch,
             )
+        else: # normal threading mode
+            ch = Queue(maxsize=0)
+            self.events[eid] = ch
+            threading.Thread(
+                target=_handler_event_func,
+                args=(getattr(cls, phase), ch, ),
+                daemon=True
+            ).start()
 
         r = ch.get()
         instance.reset_expire_ts()

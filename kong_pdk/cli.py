@@ -60,7 +60,8 @@ def start_server():
 
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
                         plugin_dir=args.directory,
-                        multiprocess=args.multiprocessing)
+                        use_multiprocess=args.multiprocessing,
+                        use_gevent=args.gevent)
     ss = UnixStreamServer(ps, prefix,
                             sock_name=args.socket_name,
                             use_gevent=args.gevent)
@@ -96,7 +97,8 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0):
     args = parse(dedicated=True)
 
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
-                        multiprocess=args.multiprocessing,
+                        use_multiprocess=args.multiprocessing,
+                        use_gevent=args.gevent,
                         name="%s version %s" % (name, _version or 'unknown'))
     socket_name = args.socket_name
     if socket_name == DEFAULT_SOCKET_NAME:
