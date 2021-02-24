@@ -21,30 +21,30 @@ def parse(dedicated=False):
     parser.add_argument('-p', '--kong-prefix', '-kong-prefix',
                         dest='prefix', metavar='prefix', type=str,
                         default="/usr/local/kong/",
-                        help='Unix domain socket path to listen')
+                        help='unix domain socket path to listen')
     parser.add_argument('-v', '--verbose', action='count', default=1,
-                        help='Turn on verbose logging')
+                        help='turn on verbose logging')
     parser.add_argument('--version', '-version', action='version',
                     version='%(prog)s {version}'.format(version=__version__))
     parser.add_argument('--socket-name', type=str, dest='socket_name', default=DEFAULT_SOCKET_NAME,
                     help='socket name to listen on')
     mxg = parser.add_mutually_exclusive_group()
     mxg.add_argument('-m', '--multiprocessing', dest='multiprocessing', action="store_true",
-                        help='Enable multiprocessing')
+                        help='enable multiprocessing')
     mxg.add_argument('-g', '--gevent', dest='gevent', action="store_true",
-                        help='Enable gevent')
+                        help='enable gevent')
 
     if not dedicated:
         parser.add_argument('-d', '--plugins-directory', '-plugins-directory',
                             dest='directory', metavar='directory', type=str, required=True,
-                            help='Plugins directory')
+                            help='plugins directory')
         parser.add_argument('--dump-plugin-info', '-dump-plugin-info', dest='dump_info', metavar='name', type=str,
-                            help='Dump specific plugin info into stdout')
+                            help='dump specific plugin info into stdout')
         parser.add_argument('--dump-all-plugins', '-dump-all-plugins', dest='dump_all_info', action="store_true",
-                            help='Dump specific plugin info into stdout')
+                            help='dump all plugins info into stdout')
     else:
         parser.add_argument('--dump', '-dump', dest='dump', action="store_true",
-                            help='Dump plugin info into stdout')
+                            help='dump current plugin info into stdout')
 
     args = parser.parse_args()
 

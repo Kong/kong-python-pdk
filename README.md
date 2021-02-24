@@ -15,29 +15,29 @@ pip3 install kong-pdk
 ## Usage
 
 ```
-usage: kong-pluginserver [-h] [-p prefix] [-v] [--version]
-                         [--socket-name SOCKET_NAME] [-m | -g] -d directory
-                         [--dump-plugin-info name] [--dump-all-plugins]
+usage: kong-pluginserver.py [-h] [-p prefix] [-v] [--version]
+                            [--socket-name SOCKET_NAME] [-m | -g] -d directory
+                            [--dump-plugin-info name] [--dump-all-plugins]
 
 Kong Python Plugin Server.
 
 optional arguments:
   -h, --help            show this help message and exit
   -p prefix, --kong-prefix prefix, -kong-prefix prefix
-                        Unix domain socket path to listen
-  -v, --verbose         Turn on verbose logging
+                        unix domain socket path to listen
+  -v, --verbose         turn on verbose logging
   --version, -version   show program's version number and exit
   --socket-name SOCKET_NAME
                         socket name to listen on
   -m, --multiprocessing
-                        Enable multiprocessing
-  -g, --gevent          Enable gevent
+                        enable multiprocessing
+  -g, --gevent          enable gevent
   -d directory, --plugins-directory directory, -plugins-directory directory
-                        Plugins directory
+                        plugins directory
   --dump-plugin-info name, -dump-plugin-info name
-                        Dump specific plugin info into stdout
+                        dump specific plugin info into stdout
   --dump-all-plugins, -dump-all-plugins
-                        Dump specific plugin info into stdout
+                        dump all plugins info into stdout
 ```
 
 ## Configure Kong
@@ -76,7 +76,7 @@ Same step as it's a Lua plugin.
 ## Notes
 
 - All PDK API supported by Go Plugin Server is supported.
-- If your plugin is CPU intensive, consider using multiprocessing mode (`-m` flag) or run the plugin instance in a seperate process (examples/py-hello.py as an example) to distribute workloads to multicore.
+- If your plugins are CPU intensive, consider using multiprocessing mode (`-m` flag) or run the plugin instance in a seperate process (examples/py-hello.py as an example) to distribute workloads to multicore.
 - If your plugins are I/O intensive, considering using gevent mode (`-g` flag) and use gevent libraries in the plugin.
 
 
