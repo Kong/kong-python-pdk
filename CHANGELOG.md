@@ -2,6 +2,17 @@
 ## [Unreleased]
 
 
+<a name="0.2.1"></a>
+## [0.2.1] - 2021-02-24
+### feat
+- set friendly process title [aa59083](https://github.com/fffonion/kong-pdk/commit/aa59083e6ede0394fdf2cb25f9925a36a7cc5aae)
+- multiprocessing mode [1a97d26](https://github.com/fffonion/kong-pdk/commit/1a97d26e773c399149f12bee08943821a3dd9c7b)
+
+### fix
+- disable gevent in multiprocessing and make it optional [5b6fb68](https://github.com/fffonion/kong-pdk/commit/5b6fb682d9237ebb75bc653c0536678f3efe7d67)
+- chmod+x on examples [1f5905d](https://github.com/fffonion/kong-pdk/commit/1f5905dc879528c519411b2914e20e2b5236e749)
+
+
 <a name="0.2.0"></a>
 ## [0.2.0] - 2021-02-22
 ### feat
@@ -27,7 +38,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/fffonion/kong-pdk/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/fffonion/kong-pdk/compare/0.2.1...HEAD
+[0.2.1]: https://github.com/fffonion/kong-pdk/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/fffonion/kong-pdk/compare/0.1.2...0.2.0
 [0.1.2]: https://github.com/fffonion/kong-pdk/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/fffonion/kong-pdk/compare/0.1.0...0.1.1
