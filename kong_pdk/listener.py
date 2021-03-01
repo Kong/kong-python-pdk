@@ -15,6 +15,8 @@ else:
 from gevent import socket as gsocket, sleep as gsleep, spawn as gspawn
 from gevent.server import StreamServer as gStreamServer
 
+from .exception import PluginServerException
+
 cmdre = re.compile("([a-z])([A-Z])")
 
 DEFAULT_SOCKET_NAME = "python_pluginserver.sock"
@@ -57,21 +59,14 @@ class Server(object):
             try:
                 self.logger.debug("rpc: #%d method: %s args: %s" % (msgid, method, args))
                 ret = getattr(self.ps, cmd_r)(*args)
-                ret_c = ret and len(ret) or 0
-                if ret_c != 2:
-                    write_error(fd, msgid,
-                        "%s should return two arguments, only got %s" % (cmd_r, ret_c))
-                    continue
-                r, err = ret
-                if err:
-                    write_error(fd, msgid, err)
-                else:
-                    write_response(fd, msgid, r)
-                continue
-            except Exception as ex:
-                self.logger.error(traceback.format_exc())
+                self.logger.debug("rpc: #%d return: %s" % (msgid, ret))
+                write_response(fd, msgid, ret)
+            except PluginServerException as ex:
+                self.logger.debug("rpc: #%d error: %s" % (msgid, str(ex)))
                 write_error(fd, msgid, str(ex))
-                continue
+            except Exception as ex:
+                self.logger.error("rpc: #%d exception: %s" % (msgid, traceback.format_exc()))
+                write_error(fd, msgid, str(ex))
 
 class tUnixStreamServer(ThreadingMixIn, sUnixStreamServer):
     pass
@@ -104,12 +99,12 @@ class UnixStreamServer(Server):
 
             gStreamServer(listener, self.handle).serve_forever()
         else:
-
             self.logger.info("server started at path " + self.path)
 
-            threading.Thread(
+            t = threading.Thread(
                 target=watchdog,
                 args=(time.sleep, self.logger, ),
-                daemon=True,
-            ).start()
+            )
+            t.setDaemon(True)
+            t.start()
             tUnixStreamServer(self.path, self.handle).serve_forever()

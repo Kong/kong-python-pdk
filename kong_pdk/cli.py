@@ -77,9 +77,7 @@ def start_server():
     elif args.dump_all_info:
         ret = []
         for p in ps.plugins:
-            inf, err = ps.get_plugin_info(p)
-            if err:
-                raise Exception("error dump info for " + p  + " : " + err)
+            inf = ps.get_plugin_info(p)
             ret.append(inf)
         sys.stdout.write(json.dumps(ret))
         sys.exit(0)
@@ -116,9 +114,7 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0):
     ps.plugins[name] = mod
 
     if args.dump:
-        ret, err = ps.get_plugin_info(name)
-        if err:
-            raise Exception("error dump info: " + err)
+        ret = ps.get_plugin_info(name)
         # note a list is returned
         sys.stdout.write(json.dumps([ret]))
         sys.exit(0)

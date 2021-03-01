@@ -112,11 +112,12 @@ class PluginServer(object):
             self.logger.debug("plugin server is in gevent mode")
             gspawn(self._clear_expired_plugins, expire_ttl)
         else:
-            threading.Thread(
+            t = threading.Thread(
                 target=self._clear_expired_plugins,
                 args=(expire_ttl, ),
-                daemon=True,
-            ).start()
+            )
+            t.setDaemon(True)
+            t.start()
 
         if setproctitle:
             pid = os.getppid()
@@ -164,9 +165,9 @@ class PluginServer(object):
 
     def set_plugin_dir(self, dir):
         if not os.path.exists(dir):
-            return None, dir + " not exists"
+            raise PluginServerException("%s not exists" % dir)
         self.plugin_dir = dir
-        return "ok", None
+        return "ok"
 
     @locked_by("i_lock")
     def get_status(self, *_):
@@ -174,9 +175,7 @@ class PluginServer(object):
         for name in self.plugins:
             instances = []
             for iid in self.instances:
-                i, err = self.instance_status(iid)
-                if err:
-                    raise PluginServerException(err)
+                i = self.instance_status(iid)
                 instances.append(i)
             plugin = self.plugins[name]
             plugin_status[name] = {
@@ -190,11 +189,11 @@ class PluginServer(object):
         return {
             "Pid": os.getpid(),
             "Plugins": plugin_status,
-        }, None
+        }
 
     def get_plugin_info(self, name):
         if name not in self.plugins:
-            raise PluginServerException(" not initizlied" % name)
+            raise PluginServerException("%s not initizlied" % name)
 
         plugin = self.plugins[name]
 
@@ -212,13 +211,13 @@ class PluginServer(object):
                 }],
             },
         }
-        return info, None
+        return info
         
     @locked_by("i_lock")
     def start_instance(self, cfg):
         name = cfg['Name']
         if name not in self.plugins:
-            raise PluginServerException(" not initizlied" % name)
+            raise PluginServerException("%s not initizlied" % name)
         plugin = self.plugins[name]
 
         config = json.loads(cfg['Config'])
@@ -233,37 +232,42 @@ class PluginServer(object):
             "Id": iid,
             "Config": config,
             "StartTime": time.time()
-        }, None
+        }
 
     def instance_status(self, iid):
         if iid not in self.instances:
-            return None, "instance #%s not found" % iid
+            raise PluginServerException("instance #%s not found" % iid)
+
         ins = self.instances[iid]
+
         return {
             "Name": ins.name,
             "Id": iid,
             "Config": ins.config,
             "StartTime": ins.start_time,
-        }, None
+        }
 
     @locked_by("i_lock")
     def close_instance(self, iid):
         if iid not in self.instances:
-            return None, "instance #%s not found" % iid
+            raise PluginServerException("instance #%s not found" % iid)
+
         ins = self.instances[iid]
         ins.close_cb()
         del(self.instances[iid])
+
         return {
             "Name": ins['name'],
             "Id": iid,
             "Config": ins['config'],
-        }, None
+        }
 
     @locked_by("e_lock")
     def handle_event(self, event):
         iid = event['InstanceId']
         if iid not in self.instances:
             raise PluginServerException("instance id %s not found" % iid)
+
         instance = self.instances[iid]
         instance.reset_expire_ts()
         cls = instance.cls
@@ -288,13 +292,16 @@ class PluginServer(object):
                 getattr(cls, phase), ch,
             )
         else: # normal threading mode
-            ch = Queue(maxsize=0)
+            ch = Queue()
+            child_ch = Queue()
+            ch.get, child_ch.get = child_ch.get, ch.get
             self.events[eid] = ch
-            threading.Thread(
+            t = threading.Thread(
                 target=_handler_event_func,
-                args=(getattr(cls, phase), ch, ),
-                daemon=True
-            ).start()
+                args=(getattr(cls, phase), child_ch, ),
+            )
+            t.setDaemon(True)
+            t.start()
 
         r = ch.get()
         instance.reset_expire_ts()
@@ -302,7 +309,7 @@ class PluginServer(object):
         return {
             "Data": r,
             "EventId": eid,
-        }, None
+        }
     
     def _step(self, data, is_error):
         eid = data['EventId']
@@ -329,7 +336,7 @@ class PluginServer(object):
         return {
             "Data": ret,
             "EventId": eid,
-        }, None
+        }
 
     def step(self, data):
         return self._step(data, False)
