@@ -20,6 +20,12 @@ VERSION = imp.load_source('version', os.path.join(here, '%s/const.py' % PACKAGE_
 
 packages = [
     'kong_pdk',
+    'kong_pdk/pdk',
+    'kong_pdk/pdk/kong',
+    'kong_pdk/pdk/kong/client',
+    'kong_pdk/pdk/kong/ctx',
+    'kong_pdk/pdk/kong/nginx',
+    'kong_pdk/pdk/kong/service',
 ]
 requires = ['gevent', 'msgpack']
 
@@ -52,4 +58,5 @@ setup(
     ),
     requires=requires,
     entry_points = {'console_scripts': ["kong-python-pluginserver = kong_pdk.cli:start_server"]},
+    package_data={"kong_pdk": ["*.pyi", "**/*.pyi", "**/**/*.pyi", "**/**/**/*.pyi"]}
 )

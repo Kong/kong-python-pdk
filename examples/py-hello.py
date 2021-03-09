@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import time
+import kong_pdk.pdk.kong as kong
 
 Schema = (
     { "message": { "type": "string" } },
@@ -15,7 +16,7 @@ class Plugin(object):
     def __init__(self, config):
         self.config = config
 
-    def access(self, kong):
+    def access(self, kong: kong.kong):
         host, err = kong.request.get_header("host")
         if err:
             kong.log.err(err)
