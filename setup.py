@@ -44,10 +44,11 @@ setup(
     package_dir={'requests': 'requests'},
     include_package_data=True,
     install_requires=requires,
-    license='GPLv3',
+    license="Apache-2.0",
+    license_files = ('LICENSE',),
     zip_safe=False,
     classifiers=(
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
