@@ -2,7 +2,7 @@ style: github
 template: CHANGELOG.tpl.md
 info:
   title: CHANGELOG
-  repository_url: https://github.com/fffonion/kong-pdk
+  repository_url: https://github.com/Kong/kong-python-pdk
 options:
   commits:
      filters:
