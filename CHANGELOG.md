@@ -2,6 +2,17 @@
 ## [Unreleased]
 
 
+<a name="0.2.2"></a>
+## [0.2.2] - 2021-03-29
+### feat
+- add typed interfaces [f98e44d](https://github.com/fffonion/kong-pdk/commit/f98e44d75271d5daceaf00f8f011ce7efaa19865)
+
+### fix
+- correct license in setup.py ([#3](https://github.com/fffonion/kong-pdk/issues/3)) [b257c98](https://github.com/fffonion/kong-pdk/commit/b257c98298343e2911de35d89dc44c1cb0f59547)
+- threading mode pipe and styles [6f73ac7](https://github.com/fffonion/kong-pdk/commit/6f73ac76c6f3fc49081ba67b62e0d9ea4547cbb1)
+- enable plugin server without gevent mode [a29c4d7](https://github.com/fffonion/kong-pdk/commit/a29c4d765fb9e2dfa1a8b27fccb333864a61d529)
+
+
 <a name="0.2.1"></a>
 ## [0.2.1] - 2021-02-24
 ### feat
@@ -38,7 +49,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/fffonion/kong-pdk/compare/0.2.1...HEAD
+[Unreleased]: https://github.com/fffonion/kong-pdk/compare/0.2.2...HEAD
+[0.2.2]: https://github.com/fffonion/kong-pdk/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/fffonion/kong-pdk/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/fffonion/kong-pdk/compare/0.1.2...0.2.0
 [0.1.2]: https://github.com/fffonion/kong-pdk/compare/0.1.1...0.1.2
