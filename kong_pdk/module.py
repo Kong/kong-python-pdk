@@ -26,7 +26,7 @@ else:
         sys.modules[name] = mod
         return mod
 
-phases = ("certificate", "rewrite", "log", "access", "preread")
+phases = ("certificate", "rewrite", "log", "access", "preread", "response")
 
 class Module(object):
     def __init__(self, name, path=None, module=None):
