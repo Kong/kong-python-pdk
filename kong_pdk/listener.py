@@ -62,7 +62,7 @@ class Server(object):
                 self.logger.debug("rpc: #%d return: %s" % (msgid, ret))
                 write_response(fd, msgid, ret)
             except PluginServerException as ex:
-                self.logger.debug("rpc: #%d error: %s" % (msgid, str(ex)))
+                self.logger.warn("rpc: #%d error: %s" % (msgid, str(ex)))
                 write_error(fd, msgid, str(ex))
             except Exception as ex:
                 self.logger.error("rpc: #%d exception: %s" % (msgid, traceback.format_exc()))

@@ -21,18 +21,18 @@ def parse(dedicated=False):
     parser.add_argument('-p', '--kong-prefix', '-kong-prefix',
                         dest='prefix', metavar='prefix', type=str,
                         default="/usr/local/kong/",
-                        help='unix domain socket path to listen')
+                        help='unix domain socket path to listen (default: %(default)s)')
     parser.add_argument('-v', '--verbose', action='count', default=1,
-                        help='turn on verbose logging')
+                        help='turn on verbose logging (default: %(default)s)')
     parser.add_argument('--version', '-version', action='version',
                     version='%(prog)s {version}'.format(version=__version__))
     parser.add_argument('--socket-name', type=str, dest='socket_name', default=DEFAULT_SOCKET_NAME,
-                    help='socket name to listen on')
+                    help='socket name to listen on (default: %(default)s)')
     mxg = parser.add_mutually_exclusive_group()
     mxg.add_argument('-m', '--multiprocessing', dest='multiprocessing', action="store_true",
-                        help='enable multiprocessing')
+                        help='enable multiprocessing (default: %(default)s)')
     mxg.add_argument('-g', '--gevent', dest='gevent', action="store_true",
-                        help='enable gevent')
+                        help='enable gevent (default: %(default)s)')
 
     if not dedicated:
         parser.add_argument('-d', '--plugins-directory', '-plugins-directory',
@@ -48,7 +48,7 @@ def parse(dedicated=False):
 
     args = parser.parse_args()
 
-    if not os.path.exists(args.prefix):
+    if (not args.dump_info and not args.dump_all_info) and not os.path.exists(args.prefix):
         raise OSError("path %s doesn't exist, can't create unix socket file" % args.prefix)
 
     return args
