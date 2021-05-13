@@ -110,21 +110,22 @@ class PluginServer(object):
         # start cleanup timer
         if use_gevent:
             self.logger.debug("plugin server is in gevent mode")
-            gspawn(self._clear_expired_plugins, expire_ttl)
+            # gspawn(self._clear_expired_plugins, expire_ttl)
         else:
-            t = threading.Thread(
-                target=self._clear_expired_plugins,
-                args=(expire_ttl, ),
-            )
-            t.setDaemon(True)
-            t.start()
+            pass
+            # t = threading.Thread(
+            #     target=self._clear_expired_plugins,
+            #     args=(expire_ttl, ),
+            # )
+            # t.setDaemon(True)
+            # t.start()
 
         if setproctitle:
-            pid = os.getppid()
+            ppid = os.getppid()
             if use_multiprocess:
-                setproctitle.setproctitle("%s: Manager (ppid: %d)" % (title, os.getppid()))
+                setproctitle.setproctitle("%s: Manager (ppid: %d)" % (title, ppid))
             else:
-                setproctitle.setproctitle("%s (ppid: %d)" % (title, os.getppid()))
+                setproctitle.setproctitle("%s (ppid: %d)" % (title, ppid))
     
     def _clear_expired_plugins(self, ttl):
         while True:
