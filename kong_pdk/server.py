@@ -236,7 +236,8 @@ class PluginServer(object):
 
     def instance_status(self, iid):
         if iid not in self.instances:
-            raise PluginServerException("instance #%s not found" % iid)
+            # Note: Kong expect the error to start with "no plugin instance"
+            raise PluginServerException("no plugin instance #%s" % iid)
 
         ins = self.instances[iid]
 
@@ -250,7 +251,8 @@ class PluginServer(object):
     @locked_by("i_lock")
     def close_instance(self, iid):
         if iid not in self.instances:
-            raise PluginServerException("instance #%s not found" % iid)
+            # Note: Kong expect the error to start with "no plugin instance"
+            raise PluginServerException("no plugin instance #%s" % iid)
 
         ins = self.instances[iid]
         ins.close_cb()
@@ -266,7 +268,8 @@ class PluginServer(object):
     def handle_event(self, event):
         iid = event['InstanceId']
         if iid not in self.instances:
-            raise PluginServerException("instance id %s not found" % iid)
+            # Note: Kong expect the error to start with "no plugin instance"
+            raise PluginServerException("no plugin instance #%s" % iid)
 
         instance = self.instances[iid]
         instance.reset_expire_ts()
