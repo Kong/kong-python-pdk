@@ -28,6 +28,8 @@ def parse(dedicated=False):
                     version='%(prog)s {version}'.format(version=__version__))
     parser.add_argument('--socket-name', type=str, dest='socket_name', default=DEFAULT_SOCKET_NAME,
                     help='socket name to listen on (default: %(default)s)')
+    parser.add_argument('--listen-queue-size', type=int, dest='listen_queue_size', default=4096,
+                    help='socket listen queue size (default: %(default)s)')
     mxg = parser.add_mutually_exclusive_group()
     mxg.add_argument('-m', '--multiprocessing', dest='multiprocessing', action="store_true",
                         help='enable multiprocessing (default: %(default)s)')
@@ -64,7 +66,8 @@ def start_server():
                         use_gevent=args.gevent)
     ss = UnixStreamServer(ps, prefix,
                             sock_name=args.socket_name,
-                            use_gevent=args.gevent)
+                            use_gevent=args.gevent,
+                            listen_queue_size=args.listen_queue_size)
     if args.dump_info:
         ret, err = ps.get_plugin_info(args.dump_info)
         if err:
@@ -103,7 +106,8 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0):
         socket_name = "%s.sock" % name.replace("-", "_")
     ss = UnixStreamServer(ps, args.prefix,
                             sock_name=socket_name,
-                            use_gevent=args.gevent)
+                            use_gevent=args.gevent,
+                            listen_queue_size=args.listen_queue_size)
 
     class mod(object):
         Plugin = plugin

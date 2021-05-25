@@ -79,10 +79,12 @@ def watchdog(sleep, logger):
         sleep(1)
 
 class UnixStreamServer(Server):
-    def __init__(self, pluginserver, path, sock_name=DEFAULT_SOCKET_NAME, use_gevent=True):
+    def __init__(self, pluginserver, path,
+                sock_name=DEFAULT_SOCKET_NAME, use_gevent=True, listen_queue_size=4096):
         Server.__init__(self, pluginserver)
         self.path = os.path.join(path, sock_name)
         self.use_gevent = use_gevent
+        self.listen_queue_size = listen_queue_size
     
     def serve_forever(self):
         if os.path.exists(self.path):
@@ -91,7 +93,7 @@ class UnixStreamServer(Server):
         if self.use_gevent:
             listener = gsocket.socket(gsocket.AF_UNIX, gsocket.SOCK_STREAM)
             listener.bind(self.path)
-            listener.listen(1)
+            listener.listen(self.listen_queue_size)
 
             self.logger.info("server (gevent) started at path " + self.path)
 
@@ -99,6 +101,7 @@ class UnixStreamServer(Server):
 
             gStreamServer(listener, self.handle).serve_forever()
         else:
+            import socket
             self.logger.info("server started at path " + self.path)
 
             t = threading.Thread(
@@ -107,4 +110,8 @@ class UnixStreamServer(Server):
             )
             t.setDaemon(True)
             t.start()
-            tUnixStreamServer(self.path, self.handle).serve_forever()
+            s = tUnixStreamServer(self.path, self.handle, bind_and_activate=False)
+            s.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+            s.server_bind()
+            s.socket.listen(self.listen_queue_size)
+            s.serve_forever()
