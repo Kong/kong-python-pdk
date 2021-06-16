@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="0.2.4"></a>
+## [0.2.4] - 2021-06-17
+### fix
+- check correct flags existence in dedicated server ([#10](https://github.com/Kong/kong-python-pdk/issues/10)) [b18dd45](https://github.com/Kong/kong-python-pdk/commit/b18dd458def039a6a2dad4c42baa7b55d64fe027)
+
+
 <a name="0.2.3"></a>
 ## [0.2.3] - 2021-05-13
 ### feat
@@ -60,7 +66,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.2.3...HEAD
+[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.2.4...HEAD
+[0.2.4]: https://github.com/Kong/kong-python-pdk/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/Kong/kong-python-pdk/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/Kong/kong-python-pdk/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/Kong/kong-python-pdk/compare/0.2.0...0.2.1
