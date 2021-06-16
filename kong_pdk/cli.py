@@ -50,7 +50,8 @@ def parse(dedicated=False):
 
     args = parser.parse_args()
 
-    if (not args.dump_info and not args.dump_all_info) and not os.path.exists(args.prefix):
+    if ((not dedicated and not args.dump_info and not args.dump_all_info) or \
+        (dedicated and not args.dump)) and not os.path.exists(args.prefix):
         raise OSError("path %s doesn't exist, can't create unix socket file" % args.prefix)
 
     return args
