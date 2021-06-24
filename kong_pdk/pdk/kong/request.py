@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.3.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
 # Original source path: kong/pdk/request.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional

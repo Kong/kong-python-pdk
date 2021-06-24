@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.3.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
 # Original source path: kong/pdk/client.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -9,7 +9,7 @@ table = TypeVar('table', List[Any], Mapping[str, Any])
 cdata = Any
 err = str
 
-from .client.tls import tls as cls_tls
+from .tls import tls as cls_tls
 
 class client():
 
@@ -60,7 +60,7 @@ class client():
         -- Given a client with IP 127.0.0.1 making connection through
         -- a load balancer with IP 10.0.0.1 to Kong answering the request for
         -- https://username:password@example.com:1234/v1/movies
-        kong.request.get_forwarded_ip() -- "127.0.0.1"
+        kong.client.get_forwarded_ip() -- "127.0.0.1"
         -- Note: assuming that 10.0.0.1 is one of the trusted IPs, and that
         -- the load balancer adds the right headers matching with the configuration
         -- of `real_ip_header`, e.g. `proxy_protocol`.

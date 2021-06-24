@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.3.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
 # Original source path: kong/pdk/service.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -9,15 +9,13 @@ table = TypeVar('table', List[Any], Mapping[str, Any])
 cdata = Any
 err = str
 
-from .service.request import request as cls_request
-from .service.response import response as cls_response
-from .service.set_tls_cert_key import set_tls_cert_key as cls_set_tls_cert_key
+from .request import request as cls_request
+from .response import response as cls_response
 
 class service():
 
     request = cls_request
     response = cls_response
-    set_tls_cert_key = cls_set_tls_cert_key
 
     @staticmethod
     def set_target(host: str, port: number) -> None:
@@ -50,22 +48,6 @@ class service():
         -- do something with error
         end
         :param depth: Depth to use when validating. Must be non-negative
-        :returns `true` if the operation succeeded, `nil` if an error occurred
-        returns An error message describing the error if there was one
-        """
-        pass
-
-    @staticmethod
-    def set_tls_verify_store(store: table) -> Tuple[bool, str]:
-        """
-        local store = require("resty.openssl.x509.store")
-        local st = assert(store.new())
-        -- st:add(...certificate)
-        local ok, err = kong.service.set_tls_verify_store(st)
-        if not ok then
-        -- do something with error
-        end
-        :param store: resty.openssl.x509.store object to use
         :returns `true` if the operation succeeded, `nil` if an error occurred
         returns An error message describing the error if there was one
         """
