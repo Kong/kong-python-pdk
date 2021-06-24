@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="0.2.5"></a>
+## [0.2.5] - 2021-06-24
+### fix
+- use .py file for type hint ([#13](https://github.com/Kong/kong-python-pdk/issues/13)) [1bf3820](https://github.com/Kong/kong-python-pdk/commit/1bf3820e316f73d6021897b5979af4826e9f34d6)
+
+
 <a name="0.2.4"></a>
 ## [0.2.4] - 2021-06-17
 ### fix
@@ -66,7 +72,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.2.4...HEAD
+[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.2.5...HEAD
+[0.2.5]: https://github.com/Kong/kong-python-pdk/compare/0.2.4...0.2.5
 [0.2.4]: https://github.com/Kong/kong-python-pdk/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/Kong/kong-python-pdk/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/Kong/kong-python-pdk/compare/0.2.1...0.2.2
