@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.3.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
 # Original source path: kong/pdk/log.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -12,17 +12,6 @@ err = str
 
 class log():
 
-
-    @staticmethod
-    def LEVEL(*args: Any) -> None:
-        """
-        kong.log.warn("something require attention")
-        kong.log.err("something failed: ", err)
-        kong.log.alert("something requires immediate action")
-        :param *args: all params will be concatenated and stringified before being sent to the log
-        :returns throws an error on invalid inputs.
-        """
-        pass
 
     @staticmethod
     def alert(*args: Any) -> None:
@@ -76,15 +65,6 @@ class log():
         kong.log.alert("something requires immediate action")
         :param *args: all params will be concatenated and stringified before being sent to the log
         :returns throws an error on invalid inputs.
-        """
-        pass
-
-    @staticmethod
-    def inspect(*args: Any) -> None:
-        """
-        kong.log.inspect("some value", a_variable)
-        :param *args: Parameters will be concatenated with spaces between them and
-        rendered as described
         """
         pass
 

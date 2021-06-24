@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.3.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
 # Original source path: kong/pdk/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -71,10 +71,8 @@ class response():
         ["WWW-Authenticate"] = "Basic"
         })
         ---
-        ```lua
         -- In L4 proxy mode
         return kong.response.exit(200, "Success")
-        ```
         :param status: The status to be used
         :param body: The body to be used
         :param headers: The headers to be used

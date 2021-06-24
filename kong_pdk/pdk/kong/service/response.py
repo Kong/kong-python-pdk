@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.3.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
 # Original source path: kong/pdk/service/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -14,13 +14,12 @@ class response():
 
 
     @staticmethod
-    def get_body(mimetype: str, mimetype: Optional[str], max_args: Optional[number]) -> str:
+    def get_body(mimetype: Optional[str], max_args: Optional[number]) -> str:
         """
         -- Plugin needs to call kong.service.request.enable_buffering() on `rewrite`
         -- or `access` phase prior calling this function.
         local body = kong.service.response.get_body()
         :param mimetype: The mime-type of the response (if known)
-        :param mimetype: the MIME type
         :param max_args: set a limit on the maximum number of parsed
         :returns body The raw buffered body
         """

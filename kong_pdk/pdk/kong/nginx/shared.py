@@ -1,5 +1,5 @@
-# AUTO GENERATED BASED ON Kong 2.3.x, DO NOT EDIT
-# Original source path: kong/pdk/ctx/shared.lua
+# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
+# Original source path: kong/pdk/nginx/shared.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
 
