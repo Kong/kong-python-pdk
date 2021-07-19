@@ -37,19 +37,26 @@ def write_error(fd, msgid, error):
         None
     ]))
 
+
+class WrapSocket(object):
+    def __init__(self, socket):
+        self.socket = socket
+
+    def read(self, n):
+        return self.socket.recv(n)
+
 class Server(object):
     def __init__(self, plugin_server):
         self.ps = plugin_server
         self.logger = plugin_server.logger
 
     def handle(self, fd, address, *_):
-        while True:
-            msg = fd.recv(1024)
-            if not msg:
-                return
-            # raw=False: decode to str not bytes
-            d = msgpack.unpackb(msg, raw=False)
-            _, msgid, method, args = d
+        # can't use socket.makefile here, since it returns a blocking IO
+        # msgpack.Unpacker only expects read() but no other semantics to exist
+        sockf = WrapSocket(fd)
+        unpacker = msgpack.Unpacker(sockf)
+
+        for _, msgid, method, args in unpacker:
             ns, cmd = method.split(".")
             if ns != "plugin":
                 write_error(fd, msgid, "RPC for %s is not supported" % ns)
