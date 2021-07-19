@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="0.2.6"></a>
+## [0.2.6] - 2021-07-19
+### fix
+- listener to use msgpack.Unpacker iterrator [bed56c4](https://github.com/Kong/kong-python-pdk/commit/bed56c49160d1adb0e591f69b74337ced7820dba)
+
+
 <a name="0.2.5"></a>
 ## [0.2.5] - 2021-06-24
 ### fix
@@ -72,7 +78,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.2.5...HEAD
+[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.2.6...HEAD
+[0.2.6]: https://github.com/Kong/kong-python-pdk/compare/0.2.5...0.2.6
 [0.2.5]: https://github.com/Kong/kong-python-pdk/compare/0.2.4...0.2.5
 [0.2.4]: https://github.com/Kong/kong-python-pdk/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/Kong/kong-python-pdk/compare/0.2.2...0.2.3
