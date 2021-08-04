@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 import os
-import time
 import kong_pdk.pdk.kong as kong
 
 Schema = (
-    { "message": { "type": "string" } },
+    {"message": {"type": "string"}},
 )
 
 version = '0.1.0'
