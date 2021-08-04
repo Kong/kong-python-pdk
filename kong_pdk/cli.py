@@ -91,7 +91,7 @@ def start_server():
 
     ps.cleanup()
 
-def start_dedicated_server(name, plugin, _version=None, _priority=0):
+def start_dedicated_server(name, plugin, _version=None, _priority=0, _schema=[]):
     from .module import Module
 
     args = parse(dedicated=True)
@@ -110,6 +110,7 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0):
 
     class mod(object):
         Plugin = plugin
+        Schema = _schema
         version = _version
         priority = _priority
 
