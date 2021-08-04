@@ -40,4 +40,4 @@ class Plugin(object):
 # add below section to allow this plugin optionally be running in a dedicated process
 if __name__ == "__main__":
     from kong_pdk.cli import start_dedicated_server
-    start_dedicated_server("py-image", Plugin, version, priority)
+    start_dedicated_server("py-image", Plugin, version, priority, [])
