@@ -102,7 +102,7 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0):
                       name="%s version %s" % (name, _version or 'unknown'))
     socket_name = args.socket_name
     if socket_name == DEFAULT_SOCKET_NAME:
-        socket_name = "%s.sock" % name.replace("-", "_")
+        socket_name = "%s.sock" % name
     ss = UnixStreamServer(ps, args.prefix,
                           sock_name=socket_name,
                           use_gevent=args.gevent,
