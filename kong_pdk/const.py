@@ -4,7 +4,6 @@
 #      fffonion        <fffonion@gmail.com>
 
 import os
-import re
 import sys
 import locale
 

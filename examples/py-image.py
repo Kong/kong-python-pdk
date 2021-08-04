@@ -29,12 +29,13 @@ class Plugin(object):
         headers, _ = kong.request.get_headers()
         for h in headers:
             y = y + 32
-            draw.text((0, y), "%s: %s" % (h, headers[h]), (255,255,255), font=font)
+            draw.text((0, y), "%s: %s" % (h, headers[h]), (255, 255, 255), font=font)
         b = io.BytesIO()
         img.save(b, format='PNG')
         kong.response.exit(200,
-            b.getvalue()
-        )
+                           b.getvalue()
+                           )
+
 
 # add below section to allow this plugin optionally be running in a dedicated process
 if __name__ == "__main__":

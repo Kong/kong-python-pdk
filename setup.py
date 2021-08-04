@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
+import os
+import imp
+from setuptools import setup
 
 PROJ_NAME = 'kong-pdk'
 PACKAGE_NAME = 'kong_pdk'
 
 PROJ_METADATA = '%s.json' % PROJ_NAME
 
-import os, json, imp
 here = os.path.abspath(os.path.dirname(__file__))
 
 try:
     README = open(os.path.join(here, 'README.md')).read()
-except:
+except:  # noqa: E722 do not use bare 'except
     README = ""
 try:
     CHANGELOG = open(os.path.join(here, 'CHANGELOG.md')).read()
-except:
+except:  # noqa: E722 do not use bare 'except
     CHANGELOG = ""
 VERSION = imp.load_source('version', os.path.join(here, '%s/const.py' % PACKAGE_NAME)).__version__
 
@@ -29,8 +31,6 @@ packages = [
 ]
 requires = ['gevent', 'msgpack']
 
-from setuptools import setup
-
 setup(
     name=PACKAGE_NAME,
     version=VERSION,
@@ -44,7 +44,7 @@ setup(
     include_package_data=True,
     install_requires=requires,
     license="Apache-2.0",
-    license_files = ('LICENSE',),
+    license_files=('LICENSE',),
     zip_safe=False,
     classifiers=(
         'License :: OSI Approved :: Apache Software License',
@@ -58,6 +58,6 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython'
     ),
     requires=requires,
-    entry_points = {'console_scripts': ["kong-python-pluginserver = kong_pdk.cli:start_server"]},
+    entry_points={'console_scripts': ["kong-python-pluginserver = kong_pdk.cli:start_server"]},
     package_data={"kong_pdk": ["*.pyi", "**/*.pyi", "**/**/*.pyi", "**/**/**/*.pyi"]}
 )

@@ -6,17 +6,17 @@ import os
 import sys
 import datetime
 import locale
-import logging
 import traceback
 from threading import RLock
-#import logging.handlers
-from .const import *
+from .const import PY3K
 
 class tz_GMT8(datetime.tzinfo):
     def utcoffset(self, dt):
-        return datetime.timedelta(hours = 8)
+        return datetime.timedelta(hours=8)
+
     def dst(self, dt):
         return datetime.timedelta(0)
+
 
 if PY3K:
     unicode = None
@@ -32,11 +32,12 @@ def safestr(s):
                 .decode(locale.getdefaultlocale()[1] or 'utf-8', 'replace')
         return s
     return s.encode(locale.getdefaultlocale()[1] or 'utf-8', 'replace')
-    #return _.decode('utf-8') if PY3K else _
+    # return _.decode('utf-8') if PY3K else _
+
 
 if os.name == 'nt':
     endl = '\r\n'
-else:# assume posix
+else:  # assume posix
     endl = '\n'
 
 class Logger(object):
@@ -49,6 +50,7 @@ class Logger(object):
     INFO = 2
     DEBUG = 1
     VERBOSE = 0
+
     def __init__(self, *args, **kwargs):
         # self.level = self.__class__.INFO
         self.logf = None
@@ -79,7 +81,6 @@ class Logger(object):
                 self.__set_bright_color = lambda: __write('\033[32m')
                 self.__reset_color = lambda: __write('\033[0m')
 
-
     @classmethod
     def getLogger(cls, *args, **kwargs):
         return cls(*args, **kwargs)
@@ -107,9 +108,9 @@ class Logger(object):
             try:
                 self.__write('%-4s - [%s] %s\n' % (level, datetime.datetime.now(tz_GMT8()).strftime('%X'), fmt % args))
             except (ValueError, TypeError):
-                fmt = fmt.replace('%','%%')
+                fmt = fmt.replace('%', '%%')
                 self.__write('%-4s - [%s] %s\n' % (level, datetime.datetime.now(tz_GMT8()).strftime('%X'), fmt % args))
-        except IOError: # fix for Windows console
+        except IOError:  # fix for Windows console
             pass
         sys.stdout.flush()
         if self.logf:
@@ -147,7 +148,7 @@ class Logger(object):
 
     def exception(self, fmt, *args, **kwargs):
         self.error(fmt, *args, **kwargs)
-        traceback.print_exc(file = sys.stderr)
+        traceback.print_exc(file=sys.stderr)
 
     def critical(self, fmt, *args, **kwargs):
         self.__set_error_color()

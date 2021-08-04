@@ -23,7 +23,7 @@ DEFAULT_SOCKET_NAME = "python_pluginserver.sock"
 
 def write_response(fd, msgid, response):
     fd.send(msgpack.packb([
-        1, # is response
+        1,  # is response
         msgid,
         None,
         response
@@ -31,7 +31,7 @@ def write_response(fd, msgid, response):
 
 def write_error(fd, msgid, error):
     fd.send(msgpack.packb([
-        1, # is response
+        1,  # is response
         msgid,
         error,
         None
@@ -80,19 +80,19 @@ class tUnixStreamServer(ThreadingMixIn, sUnixStreamServer):
 
 def watchdog(sleep, logger):
     while True:
-        if os.getppid() == 1: # parent dead, process adopted by init
+        if os.getppid() == 1:  # parent dead, process adopted by init
             logger.info("Kong exits, terminating...")
             sys.exit()
         sleep(1)
 
 class UnixStreamServer(Server):
     def __init__(self, pluginserver, path,
-                sock_name=DEFAULT_SOCKET_NAME, use_gevent=True, listen_queue_size=4096):
+                 sock_name=DEFAULT_SOCKET_NAME, use_gevent=True, listen_queue_size=4096):
         Server.__init__(self, pluginserver)
         self.path = os.path.join(path, sock_name)
         self.use_gevent = use_gevent
         self.listen_queue_size = listen_queue_size
-    
+
     def serve_forever(self):
         if os.path.exists(self.path):
             os.remove(self.path)

@@ -1,4 +1,3 @@
-import sys
 import os
 import time
 import json
@@ -24,22 +23,22 @@ from gevent.queue import Channel as gChannel
 
 try:
     import setproctitle
-except:
+except:  # noqa: E722 do not use bare 'except
     setproctitle = None
 
 from .pdk import Kong
-from .module import Module, load_module
+from .module import Module
 from .exception import PluginServerException
 from .logger import Logger
 
-exts = ( '.py', '.pyd', '.so' )
-entities = ( 'service', 'consumer', 'route', 'plugin', 'credential', 'memory_stats' )
+exts = ('.py', '.pyd', '.so')
+entities = ('service', 'consumer', 'route', 'plugin', 'credential', 'memory_stats')
 
 MSG_RET = 'ret'
 
 def locked_by(lock_name):
     def f(fn):
-        def wrapper(*args,**kwargs):
+        def wrapper(*args, **kwargs):
             self = args[0]
             lock = getattr(self, lock_name)
             lock.acquire()
@@ -66,7 +65,7 @@ def _multiprocessing_init(pool_name):
 
 class PluginServer(object):
     def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None,
-                    use_multiprocess=False, use_gevent=False,name=None):
+                 use_multiprocess=False, use_gevent=False, name=None):
         if use_multiprocess:
             sem = multiprocessing.Semaphore
         elif use_gevent:
@@ -126,7 +125,7 @@ class PluginServer(object):
                 setproctitle.setproctitle("%s: Manager (ppid: %d)" % (title, ppid))
             else:
                 setproctitle.setproctitle("%s (ppid: %d)" % (title, ppid))
-    
+
     def _clear_expired_plugins(self, ttl):
         while True:
             if self.use_gevent:
@@ -199,8 +198,8 @@ class PluginServer(object):
         plugin = self.plugins[name]
 
         info = {
-            "Name" : name,
-            "Phases" : plugin.phases,
+            "Name": name,
+            "Phases": plugin.phases,
             "Priority": plugin.priority,
             "Schema": {
                 "name": name,
@@ -213,7 +212,7 @@ class PluginServer(object):
             },
         }
         return info
-        
+
     @locked_by("i_lock")
     def start_instance(self, cfg):
         name = cfg['Name']
@@ -225,7 +224,7 @@ class PluginServer(object):
         iid = self.instance_id
         self.instances[iid] = plugin.new(config)
         self.instance_id = iid + 1
-        
+
         self.logger.info("instance #%d of %s started" % (iid, name))
 
         return {
@@ -293,9 +292,9 @@ class PluginServer(object):
             self.events[eid] = ch
 
             gspawn(_handler_event_func,
-                getattr(cls, phase), ch,
-            )
-        else: # normal threading mode
+                   getattr(cls, phase), ch,
+                   )
+        else:  # normal threading mode
             ch = Queue()
             child_ch = Queue()
             ch.get, child_ch.get = child_ch.get, ch.get
@@ -314,7 +313,7 @@ class PluginServer(object):
             "Data": r,
             "EventId": eid,
         }
-    
+
     def _step(self, data, is_error):
         eid = data['EventId']
         if eid not in self.events:
@@ -347,6 +346,7 @@ class PluginServer(object):
 
     def step_error(self, data):
         return self._step(data, True)
+
 
 for entity in entities:
     setattr(PluginServer, 'step_' + entity, PluginServer.step)
