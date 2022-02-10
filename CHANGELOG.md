@@ -4,6 +4,10 @@
 
 <a name="0.2.7"></a>
 ## [0.2.7] - 2021-08-04
+### bug fixes
+- correctly pass schema in embedded server [099a498](https://github.com/Kong/kong-python-pdk/commit/099a4987d06602b094274ffd523300daa7985b5a)
+- no longer normalize hyphens in socket name in embedded server to keep consistent with what Kong expects [20c01da](https://github.com/Kong/kong-python-pdk/commit/20c01dae1f422e577ec107904f47a57e18788508)
+
 
 <a name="0.2.6"></a>
 ## [0.2.6] - 2021-07-19
@@ -21,6 +25,7 @@
 ## [0.2.4] - 2021-06-17
 ### bug fixes
 - check correct flags existence in dedicated server ([#10](https://github.com/Kong/kong-python-pdk/issues/10)) [b18dd45](https://github.com/Kong/kong-python-pdk/commit/b18dd458def039a6a2dad4c42baa7b55d64fe027)
+- set larger listen queue size ([#9](https://github.com/Kong/kong-python-pdk/issues/9)) [a3eb340](https://github.com/Kong/kong-python-pdk/commit/a3eb3404a42a106cdc4a164ee2c12dcafab90684)
 
 
 <a name="0.2.3"></a>
