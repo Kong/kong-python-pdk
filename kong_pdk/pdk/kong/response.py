@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
 # Original source path: kong/pdk/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -18,8 +18,8 @@ class response():
         """
         kong.response.add_header("Cache-Control", "no-cache")
         kong.response.add_header("Cache-Control", "no-store")
-        :param name: The header name
-        :param value: The header value
+        :param name: The header name.
+        :param value: The header value.
         :returns throws an error on invalid input.
         """
         pass
@@ -47,9 +47,9 @@ class response():
         return kong.response.error(403, "Access Forbidden")
         ---
         return kong.response.error(403)
-        :param status: The status to be used (>399)
-        :param message: The error message to be used
-        :param headers: The headers to be used
+        :param status: The status to be used (>399).
+        :param message: The error message to be used.
+        :param headers: The headers to be used.
         :returns throws an error on invalid input.
         """
         pass
@@ -73,9 +73,9 @@ class response():
         ---
         -- In L4 proxy mode
         return kong.response.exit(200, "Success")
-        :param status: The status to be used
-        :param body: The body to be used
-        :param headers: The headers to be used
+        :param status: The status to be used.
+        :param body: The body to be used.
+        :param headers: The headers to be used.
         :returns throws an error on invalid input.
         """
         pass
@@ -90,11 +90,11 @@ class response():
         kong.response.get_header("x-custom-header") -- "bla"
         kong.response.get_header("X-Another")       -- "foo bar"
         kong.response.get_header("X-None")          -- nil
-        :param name: The name of the header
+        :param name: The name of the header.
         Header names are case-insensitive and dashes (`-`) can be written as
-        underscores (`_`); that is, the header `X-Custom-Header` can also be
+        underscores (`_`). For example, the header `X-Custom-Header` can also be
         retrieved as `x_custom_header`.
-        :returns The value of the header
+        :returns The value of the header.
         """
         pass
 
@@ -109,11 +109,24 @@ class response():
         headers.x_custom_header -- "bla"
         headers.x_another[1]    -- "foo bar"
         headers["X-Another"][2] -- "baz"
-        :param max_headers: Limits how many headers are parsed
+        :param max_headers: Limits the number of headers parsed.
         :returns headers A table representation of the headers in the
-        response
-        returns err If more headers than `max_headers` were present, a
-        string with the error `"truncated"`.
+        response.
+        returns err If more headers than `max_headers` were present,
+        returns a string with the error `"truncated"`.
+        """
+        pass
+
+    @staticmethod
+    def get_raw_body() -> str:
+        """
+        local body = kong.response.get_raw_body()
+        if body then
+        body = transform(body)
+        kong.response.set_raw_body(body)
+        end
+        :returns body The full body when the last chunk has been read,
+        otherwise returns `nil`.
         """
         pass
 
@@ -127,7 +140,7 @@ class response():
         elseif kong.response.get_source() == "exit" then
         kong.log("There was an early exit while processing the request")
         end
-        :returns the source.
+        :returns The source.
         """
         pass
 
@@ -136,7 +149,7 @@ class response():
         """
         kong.response.get_status() -- 200
         :returns status The HTTP status code currently set for the
-        downstream response
+        downstream response.
         """
         pass
 
@@ -145,7 +158,7 @@ class response():
         """
         kong.response.set_header("X-Foo", "value")
         :param name: The name of the header
-        :param value: The new value for the header
+        :param value: The new value for the header.
         :returns throws an error on invalid input.
         """
         pass
@@ -170,10 +183,25 @@ class response():
         pass
 
     @staticmethod
+    def set_raw_body(body: str) -> None:
+        """
+        kong.response.set_raw_body("Hello, world!")
+        -- or
+        local body = kong.response.get_raw_body()
+        if body then
+        body = transform(body)
+        kong.response.set_raw_body(body)
+        end
+        :param body: The raw body.
+        :returns throws an error on invalid inputs.
+        """
+        pass
+
+    @staticmethod
     def set_status(status: number) -> None:
         """
         kong.response.set_status(404)
-        :param status: The new status
+        :param status: The new status.
         :returns throws an error on invalid input.
         """
         pass

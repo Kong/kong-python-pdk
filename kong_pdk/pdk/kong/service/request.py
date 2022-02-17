@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
 # Original source path: kong/pdk/service/request.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -18,8 +18,8 @@ class request():
         """
         kong.service.request.add_header("Cache-Control", "no-cache")
         kong.service.request.add_header("Cache-Control", "no-store")
-        :param header: The header name. Example: "Cache-Control"
-        :param value: The header value. Example: "no-cache"
+        :param header: The header name. Example: "Cache-Control".
+        :param value: The header value. Example: "no-cache".
         :returns throws an error on invalid inputs.
         """
         pass
@@ -31,7 +31,7 @@ class request():
         kong.service.request.add_header("X-Foo", "bar")
         kong.service.request.clear_header("X-Foo")
         -- from here onwards, no X-Foo headers will exist in the request
-        :param header: The header name. Example: "X-Foo"
+        :param header: The header name. Example: "X-Foo".
         :returns throws an error on invalid inputs.
         The function does not throw an error if no header was removed.
         """
@@ -44,7 +44,7 @@ class request():
         if not ok then
         -- do something with error
         end
-        :returns `true` if the operation succeeded, `nil` if an error occurred
+        :returns `true` if the operation succeeded, `nil` if an error occurred.
         returns An error message describing the error if there was one.
         """
         pass
@@ -79,7 +79,7 @@ class request():
         :param args: A table with data to be converted to the appropriate format
         and stored in the body.
         :param mimetype: can be one of:
-        :returns `true` on success, `nil` otherwise
+        :returns `true` on success, `nil` otherwise.
         returns `nil` on success, an error message in case of error.
         Throws an error on invalid inputs.
         """
@@ -89,8 +89,8 @@ class request():
     def set_header(header: str, value: Any) -> None:
         """
         kong.service.request.set_header("X-Foo", "value")
-        :param header: The header name. Example: "X-Foo"
-        :param value: The header value. Example: "hello world"
+        :param header: The header name. Example: "X-Foo".
+        :param value: The header value. Example: "hello world".
         :returns throws an error on invalid inputs.
         """
         pass
@@ -122,10 +122,10 @@ class request():
     def set_method(method: str) -> None:
         """
         kong.service.request.set_method("DELETE")
-        :param method: The method string, which should be given in all
+        :param method: The method string, which must be in all
         uppercase. Supported values are: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`,
         `"DELETE"`, `"OPTIONS"`, `"MKCOL"`, `"COPY"`, `"MOVE"`, `"PROPFIND"`,
-        `"PROPPATCH"`, `"LOCK"`, `"UNLOCK"`, `"PATCH"`, `"TRACE"`.
+        `"PROPPATCH"`, `"LOCK"`, `"UNLOCK"`, `"PATCH"`, or `"TRACE"`.
         :returns throws an error on invalid inputs.
         """
         pass
@@ -134,7 +134,8 @@ class request():
     def set_path(path: str) -> None:
         """
         kong.service.request.set_path("/v2/movies")
-        :param path: The path string. Special characters and UTF-8 characters are allowed. Example: "/v2/movies" or "/foo/😀"
+        :param path: The path string. Special characters and UTF-8
+        characters are allowed, for example: `"/v2/movies"` or `"/foo/😀"`.
         :returns throws an error on invalid inputs.
         """
         pass
@@ -148,10 +149,10 @@ class request():
         zzz = true,
         blo = ""
         })
-        -- Will produce the following query string:
+        -- Produces the following query string:
         -- bar=baz&bar=bla&bar&blo=&foo=hello%20world&zzz
         :param args: A table where each key is a string (corresponding to an
-        argument name), and each value is either a boolean, a string or an array of
+        argument name), and each value is either a boolean, a string, or an array of
         strings or booleans. Any string values given are URL-encoded.
         :returns throws an error on invalid inputs.
         """
@@ -161,7 +162,7 @@ class request():
     def set_raw_body(body: str) -> None:
         """
         kong.service.request.set_raw_body("Hello, world!")
-        :param body: The raw body
+        :param body: The raw body.
         :returns throws an error on invalid inputs.
         """
         pass
@@ -170,7 +171,8 @@ class request():
     def set_raw_query(query: str) -> None:
         """
         kong.service.request.set_raw_query("zzz&bar=baz&bar=bla&bar&blo=&foo=hello%20world")
-        :param query: The raw querystring. Example: "foo=bar&bla&baz=hello%20world"
+        :param query: The raw querystring. Example:
+        `"foo=bar&bla&baz=hello%20world"`.
         :returns throws an error on invalid inputs.
         """
         pass
@@ -179,7 +181,7 @@ class request():
     def set_scheme(scheme: str) -> None:
         """
         kong.service.request.set_scheme("https")
-        :param scheme: The scheme to be used. Supported values are `"http"` or `"https"`
+        :param scheme: The scheme to be used. Supported values are `"http"` or `"https"`.
         :returns throws an error on invalid inputs.
         """
         pass
