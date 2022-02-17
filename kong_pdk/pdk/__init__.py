@@ -13,12 +13,20 @@ class FakeClasses(object):
     def __getattr__(self, k):
         return FakeClasses(self.prefix + "." + k, self.call)
 
+# those methods never return, instead, they exit from current request immediately
+non_return_methods = set((
+    "kong.response.exit",
+    "kong.response.error",
+))
+
 def rpc_of(ch):
     def f(m, *a):
         ch.put({
             "Method": m,
             "Args": a,
         })
+        if m in non_return_methods:
+            return
         return ch.get()
     return f
 
