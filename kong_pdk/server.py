@@ -53,8 +53,8 @@ def locked_by(lock_name):
 
     return f
 
-def _handler_event_func(cls_phase, ch):
-    cls_phase(Kong(ch).kong)
+def _handler_event_func(cls_phase, ch, lua_style):
+    cls_phase(Kong(ch, lua_style).kong)
     ch.put(MSG_RET)
 
 def _multiprocessing_init(pool_name):
@@ -65,7 +65,7 @@ def _multiprocessing_init(pool_name):
 
 class PluginServer(object):
     def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None,
-                 use_multiprocess=False, use_gevent=False, name=None):
+                 use_multiprocess=False, use_gevent=False, name=None, lua_style=True):
         if use_multiprocess:
             sem = multiprocessing.Semaphore
         elif use_gevent:
@@ -94,6 +94,8 @@ class PluginServer(object):
 
         self.use_multiprocess = use_multiprocess
         self.use_gevent = use_gevent
+
+        self.lua_style = lua_style
 
         if use_multiprocess:
             if not PY3K:
@@ -285,7 +287,7 @@ class PluginServer(object):
             self.events[eid] = ch
             self._process_pool.apply_async(
                 _handler_event_func,
-                (getattr(cls, phase), child_ch),
+                (getattr(cls, phase), child_ch, self.lua_style, ),
             )
         elif self.use_gevent:
             # plugin communites to Kong (RPC client) in a reverse way
@@ -293,7 +295,7 @@ class PluginServer(object):
             self.events[eid] = ch
 
             gspawn(_handler_event_func,
-                   getattr(cls, phase), ch,
+                   getattr(cls, phase), ch, self.lua_style,
                    )
         else:  # normal threading mode
             ch = Queue()
@@ -302,7 +304,7 @@ class PluginServer(object):
             self.events[eid] = ch
             t = threading.Thread(
                 target=_handler_event_func,
-                args=(getattr(cls, phase), child_ch, ),
+                args=(getattr(cls, phase), child_ch, self.lua_style, ),
             )
             t.setDaemon(True)
             t.start()

@@ -18,7 +18,12 @@ class Plugin(object):
     def access(self, kong: kong.kong):
         host, err = kong.request.get_header("host")
         if err:
-            kong.log.err(err)
+            pass  # error handling
+        # if run with --no-lua-style
+        # try:
+        #     host = kong.request.get_header("host")
+        # except Exception as ex:
+        #     pass  # error handling
         message = "hello"
         if 'message' in self.config:
             message = self.config['message']
