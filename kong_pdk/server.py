@@ -175,8 +175,9 @@ class PluginServer(object):
         for name in self.plugins:
             instances = []
             for iid in self.instances:
-                i = self.instance_status(iid)
-                instances.append(i)
+                if self.instances[iid].name == name:
+                    i = self.instance_status(iid)
+                    instances.append(i)
             plugin = self.plugins[name]
             plugin_status[name] = {
                 "Name": name,
