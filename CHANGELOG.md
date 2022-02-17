@@ -2,6 +2,14 @@
 ## [Unreleased]
 
 
+<a name="0.3.0"></a>
+## [0.3.0] - 2022-02-17
+### bug fixes
+- add option to use python style error handling to be consistent with style headers [39a75bd](https://github.com/Kong/kong-python-pdk/commit/39a75bd3b060dbda9aec4e84afa01ae6c3000fed)
+- include correct instances list in get_status [56d7ad7](https://github.com/Kong/kong-python-pdk/commit/56d7ad762b07d780068384cc1072d3a54f373083)
+- exit immediately from kong.response.{error,exit} [ba3d5fa](https://github.com/Kong/kong-python-pdk/commit/ba3d5fae2b040804b1463585641919f76390feda)
+
+
 <a name="0.2.7"></a>
 ## [0.2.7] - 2021-08-04
 ### bug fixes
@@ -86,7 +94,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.2.7...HEAD
+[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.0...HEAD
+[0.3.0]: https://github.com/Kong/kong-python-pdk/compare/0.2.7...0.3.0
 [0.2.7]: https://github.com/Kong/kong-python-pdk/compare/0.2.6...0.2.7
 [0.2.6]: https://github.com/Kong/kong-python-pdk/compare/0.2.5...0.2.6
 [0.2.5]: https://github.com/Kong/kong-python-pdk/compare/0.2.4...0.2.5
