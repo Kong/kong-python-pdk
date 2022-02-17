@@ -28,6 +28,9 @@ def parse(dedicated=False):
                         help='socket name to listen on (default: %(default)s)')
     parser.add_argument('--listen-queue-size', type=int, dest='listen_queue_size', default=4096,
                         help='socket listen queue size (default: %(default)s)')
+    parser.add_argument('--no-lua-style', action='store_true', dest='no_lua_style', default=False,
+                        help='turn off Lua-style "data, err" return values for PDK functions '
+                             'and throw exception instead (default: %(default)s)')
     mxg = parser.add_mutually_exclusive_group()
     mxg.add_argument('-m', '--multiprocessing', dest='multiprocessing', action="store_true",
                      help='enable multiprocessing (default: %(default)s)')
@@ -54,6 +57,17 @@ def parse(dedicated=False):
 
     return args
 
+def display_lua_style_notice(lua_style, ps):
+    if not lua_style:
+        ps.logger.debug("python-style return values are enabled, "
+                        "errors are thrown as exception")
+    else:
+        ps.logger.warn("lua-style return values are used, "
+                       "this will be deprecated in the future; instead of returning "
+                       "(data, err) tuple, only data will be returned and err will be "
+                       "thrown as PDKException; please adjust your plugin to use the "
+                       "new python-style PDK API.")
+
 def start_server():
     args = parse()
 
@@ -62,7 +76,8 @@ def start_server():
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
                       plugin_dir=args.directory,
                       use_multiprocess=args.multiprocessing,
-                      use_gevent=args.gevent)
+                      use_gevent=args.gevent,
+                      lua_style=not args.no_lua_style)
     ss = UnixStreamServer(ps, prefix,
                           sock_name=args.socket_name,
                           use_gevent=args.gevent,
@@ -84,6 +99,8 @@ def start_server():
         sys.stdout.write(json.dumps(ret))
         sys.exit(0)
 
+    display_lua_style_notice(not args.no_lua_style, ps)
+
     try:
         ss.serve_forever()
     except KeyboardInterrupt:
@@ -99,7 +116,8 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0, _schema=[])
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
                       use_multiprocess=args.multiprocessing,
                       use_gevent=args.gevent,
-                      name="%s version %s" % (name, _version or 'unknown'))
+                      name="%s version %s" % (name, _version or 'unknown'),
+                      lua_style=not args.no_lua_style)
     socket_name = args.socket_name
     if socket_name == DEFAULT_SOCKET_NAME:
         socket_name = "%s.sock" % name
@@ -122,6 +140,8 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0, _schema=[])
         # note a list is returned
         sys.stdout.write(json.dumps([ret]))
         sys.exit(0)
+
+    display_lua_style_notice(not args.no_lua_style, ps)
 
     try:
         ss.serve_forever()

@@ -15,29 +15,50 @@ pip3 install kong-pdk
 ## Usage
 
 ```
-usage: kong-pluginserver.py [-h] [-p prefix] [-v] [--version]
-                            [--socket-name SOCKET_NAME] [-m | -g] -d directory
-                            [--dump-plugin-info name] [--dump-all-plugins]
+usage: kong-pluginserver [-h] [-p prefix] [-v] [--version] [--socket-name SOCKET_NAME] [--listen-queue-size LISTEN_QUEUE_SIZE]
+                         [--no-lua-style] [-m | -g] -d directory [--dump-plugin-info name] [--dump-all-plugins]
 
 Kong Python Plugin Server.
 
 optional arguments:
   -h, --help            show this help message and exit
   -p prefix, --kong-prefix prefix, -kong-prefix prefix
-                        unix domain socket path to listen
-  -v, --verbose         turn on verbose logging
+                        unix domain socket path to listen (default: /usr/local/kong/)
+  -v, --verbose         turn on verbose logging (default: 1)
   --version, -version   show program's version number and exit
   --socket-name SOCKET_NAME
-                        socket name to listen on
+                        socket name to listen on (default: python_pluginserver.sock)
+  --listen-queue-size LISTEN_QUEUE_SIZE
+                        socket listen queue size (default: 4096)
+  --no-lua-style        turn off Lua-style "data, err" return values for PDK functions and throw exception instead (default: False)
   -m, --multiprocessing
-                        enable multiprocessing
-  -g, --gevent          enable gevent
+                        enable multiprocessing (default: False)
+  -g, --gevent          enable gevent (default: False)
   -d directory, --plugins-directory directory, -plugins-directory directory
                         plugins directory
   --dump-plugin-info name, -dump-plugin-info name
                         dump specific plugin info into stdout
   --dump-all-plugins, -dump-all-plugins
                         dump all plugins info into stdout
+```
+
+## Deprecation Notice
+
+In next major release of Kong Python PDK, return values will default to use Python style error handling instead of
+Lua style. The new style API can be turned on now with `--no-lua-style`.
+
+```python
+# old lua-style PDK API
+host, err = kong.request.get_header("host")
+if err:
+    pass # error handling
+
+# new python-style PDK API
+try:
+    host = kong.request.get_header("host")
+    # no err in return, instead they are thrown if any
+except Exception as ex:
+    pass # error handling
 ```
 
 ## Configure Kong
