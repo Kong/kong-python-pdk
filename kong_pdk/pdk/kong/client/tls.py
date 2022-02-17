@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
 # Original source path: kong/pdk/client/tls.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -20,8 +20,8 @@ class tls():
         if not res then
         -- do something with err
         end
-        :returns true if success, nil if failed
-        returns nil if success, or error message if failure
+        :returns Returns `true` if successful, `nil` if it fails.
+        returns Returns `nil` if successful, or an error message if it fails.
         """
         pass
 
@@ -36,10 +36,10 @@ class tls():
         -- client did not complete mTLS
         end
         -- do something with cert
-        :returns PEM-encoded client certificate if mTLS handshake
-        was completed, nil if an error occurred or client did not present
-        its certificate
-        returns nil if success, or error message if failure
+        :returns Returns a PEM-encoded client certificate if the mTLS
+        handshake was completed, or `nil` if an error occurred or the client did
+        not present its certificate.
+        returns Returns `nil` if successful, or an error message if it fails.
         """
         pass
 
@@ -50,8 +50,10 @@ class tls():
         if not res then
         -- do something with err
         end
-        :returns true if request was received, nil if request failed
-        returns nil if success, or error message if failure
+        :returns Returns `true` if request is received, or `nil` if
+        request fails.
+        returns Returns `nil` if the handshake is successful, or an error
+        message if it fails.
         """
         pass
 

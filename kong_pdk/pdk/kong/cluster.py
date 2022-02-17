@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
 # Original source path: kong/pdk/cluster.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -24,8 +24,8 @@ class cluster():
         -- no cluster ID is available
         end
         -- use id here
-        :returns The v4 UUID used by this cluster as its id
-        returns an error message
+        :returns The v4 UUID used by this cluster as its ID.
+        returns An error message.
         """
         pass
 

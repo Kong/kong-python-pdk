@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
 # Original source path: kong/pdk.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -20,6 +20,7 @@ from .request import request as cls_request
 from .response import response as cls_response
 from .router import router as cls_router
 from .service import service as cls_service
+from .vault import vault as cls_vault
 
 class kong():
 
@@ -34,5 +35,6 @@ class kong():
     response = cls_response
     router = cls_router
     service = cls_service
+    vault = cls_vault
 
     pass

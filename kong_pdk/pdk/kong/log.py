@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
 # Original source path: kong/pdk/log.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -19,8 +19,8 @@ class log():
         kong.log.warn("something require attention")
         kong.log.err("something failed: ", err)
         kong.log.alert("something requires immediate action")
-        :param *args: all params will be concatenated and stringified before being sent to the log
-        :returns throws an error on invalid inputs.
+        :param *args: All params will be concatenated and stringified before being sent to the log.
+        :returns Throws an error on invalid inputs.
         """
         pass
 
@@ -30,8 +30,8 @@ class log():
         kong.log.warn("something require attention")
         kong.log.err("something failed: ", err)
         kong.log.alert("something requires immediate action")
-        :param *args: all params will be concatenated and stringified before being sent to the log
-        :returns throws an error on invalid inputs.
+        :param *args: All params will be concatenated and stringified before being sent to the log.
+        :returns Throws an error on invalid inputs.
         """
         pass
 
@@ -41,7 +41,21 @@ class log():
         kong.log.warn("something require attention")
         kong.log.err("something failed: ", err)
         kong.log.alert("something requires immediate action")
+        :param *args: All params will be concatenated and stringified before being sent to the log.
+        :returns Throws an error on invalid inputs.
+        """
+        pass
+
+    @staticmethod
+    def deprecation(*args: Any) -> None:
+        """
+        kong.log.deprecation("hello ", "world")
+        kong.log.deprecation("hello ", "world", { after = "2.5.0" })
+        kong.log.deprecation("hello ", "world", { removal = "3.0.0" })
+        kong.log.deprecation("hello ", "world", { after = "2.5.0", removal = "3.0.0" })
+        kong.log.deprecation("hello ", "world", { trace = true })
         :param *args: all params will be concatenated and stringified before being sent to the log
+        (if the last param is a table, it is considered as a deprecation metadata)
         :returns throws an error on invalid inputs.
         """
         pass
@@ -52,8 +66,8 @@ class log():
         kong.log.warn("something require attention")
         kong.log.err("something failed: ", err)
         kong.log.alert("something requires immediate action")
-        :param *args: all params will be concatenated and stringified before being sent to the log
-        :returns throws an error on invalid inputs.
+        :param *args: All params will be concatenated and stringified before being sent to the log.
+        :returns Throws an error on invalid inputs.
         """
         pass
 
@@ -63,8 +77,8 @@ class log():
         kong.log.warn("something require attention")
         kong.log.err("something failed: ", err)
         kong.log.alert("something requires immediate action")
-        :param *args: all params will be concatenated and stringified before being sent to the log
-        :returns throws an error on invalid inputs.
+        :param *args: All params will be concatenated and stringified before being sent to the log.
+        :returns Throws an error on invalid inputs.
         """
         pass
 
@@ -74,8 +88,8 @@ class log():
         kong.log.warn("something require attention")
         kong.log.err("something failed: ", err)
         kong.log.alert("something requires immediate action")
-        :param *args: all params will be concatenated and stringified before being sent to the log
-        :returns throws an error on invalid inputs.
+        :param *args: All params will be concatenated and stringified before being sent to the log.
+        :returns Throws an error on invalid inputs.
         """
         pass
 
@@ -104,10 +118,10 @@ class log():
         -- Dots in the key are interpreted as table accesses
         kong.log.set_serialize_value("my.new.value", 4)
         assert(kong.log.serialize().my.new_value == 4)
-        :param key: the name of the field.
-        :param value: value to be set. When a table is used, its keys must be numbers, strings, booleans, and its values can be numbers, strings or other tables like itself, recursively.
-        :param options: can contain two entries: options.mode can be `set` (the default, always sets), `add` (only add if entry does not already exist) and `replace` (only change value if it already exists).
-        :returns the request information table
+        :param key: The name of the field.
+        :param value: Value to be set. When a table is used, its keys must be numbers, strings, or booleans, and its values can be numbers, strings, or other tables like itself, recursively.
+        :param options: Can contain two entries: options.mode can be `set` (the default, always sets), `add` (only add if entry does not already exist) and `replace` (only change value if it already exists).
+        :returns The request information table.
         """
         pass
 
@@ -117,8 +131,8 @@ class log():
         kong.log.warn("something require attention")
         kong.log.err("something failed: ", err)
         kong.log.alert("something requires immediate action")
-        :param *args: all params will be concatenated and stringified before being sent to the log
-        :returns throws an error on invalid inputs.
+        :param *args: All params will be concatenated and stringified before being sent to the log.
+        :returns Throws an error on invalid inputs.
         """
         pass
 

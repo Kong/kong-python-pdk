@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
 # Original source path: kong/pdk/router.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -18,7 +18,7 @@ class router():
         """
         local route = kong.router.get_route()
         local protocols = route.protocols
-        :returns the `route` entity.
+        :returns The `route` entity.
         """
         pass
 
@@ -30,7 +30,7 @@ class router():
         else
         -- routed by a route without a service
         end
-        :returns the `service` entity.
+        :returns The `service` entity.
         """
         pass
 
