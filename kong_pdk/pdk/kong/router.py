@@ -16,21 +16,46 @@ class router():
     @staticmethod
     def get_route() -> table:
         """
-        local route = kong.router.get_route()
-        local protocols = route.protocols
-        :returns The `route` entity.
+
+            Returns the current `route` entity. The request is matched against this
+            route.
+
+        Phases:
+            access, header_filter, response, body_filter, log
+
+        Example:
+            route = kong.router.get_route()
+
+            protocols = route.protocols
+
+        :return: The `route` entity.
+
+        :rtype: table
         """
         pass
 
     @staticmethod
     def get_service() -> table:
         """
-        if kong.router.get_service() then
-        -- routed by route & service entities
-        else
-        -- routed by a route without a service
-        end
-        :returns The `service` entity.
+
+            Returns the current `service` entity. The request is targeted to this
+            upstream service.
+
+        Phases:
+            access, header_filter, response, body_filter, log
+
+        Example:
+            if kong.router.get_service():
+
+                # routed by route & service entities
+
+            else:
+
+                # routed by a route without a service
+
+        :return: The `service` entity.
+
+        :rtype: table
         """
         pass
 

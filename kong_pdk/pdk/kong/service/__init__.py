@@ -20,52 +20,132 @@ class service():
     @staticmethod
     def set_target(host: str, port: number) -> None:
         """
-        kong.service.set_target("service.local", 443)
-        kong.service.set_target("192.168.130.1", 80)
-        :param host: 
-        :param port: 
+
+            Sets the host and port on which to connect to for proxying the request.
+            Using this method is equivalent to ask Kong to not run the load-balancing
+            phase for this request, and consider it manually overridden.
+            Load-balancing components such as retries and health-checks will also be
+            ignored for this request.
+            The `host` argument expects a string containing the IP address of the
+            upstream server (IPv4/IPv6), and the `port` argument must contain a number
+            representing the port on which to connect to.
+
+        Phases:
+            access
+
+        Example:
+            kong.service.set_target("service.local", 443)
+
+            kong.service.set_target("192.168.130.1", 80)
+
+        :parameter host: 
+        :type host: str
+        :parameter port: 
+        :type port: number
+
         """
         pass
 
     @staticmethod
     def set_tls_verify(on: bool) -> Tuple[bool, str]:
         """
-        local ok, err = kong.service.set_tls_verify(true)
-        if not ok then
-        -- do something with error
-        end
-        :param on: Whether to enable TLS certificate verification for the current request
-        :returns `true` if the operation succeeded, `nil` if an error occurred
-        returns An error message describing the error if there was one
+
+            Sets whether TLS verification is enabled while handshaking with the Service.
+            The `on` argument is a boolean flag, where `true` means upstream verification
+            is enabled and `false` disables it.
+            This call affects only the current request. If the trusted certificate store is
+            not set already (via [proxy_ssl_trusted_certificate](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_trusted_certificate)
+            or [kong.service.set_upstream_ssl_trusted_store](#kongserviceset_upstream_ssl_trusted_store)),
+            then TLS verification will always fail with "unable to get local issuer certificate" error.
+
+        Phases:
+            rewrite`, access`, balancer`
+
+        Example:
+            ok, err = kong.service.set_tls_verify(true)
+
+            if not ok:
+
+                # do something with error
+
+        :parameter on: Whether to enable TLS certificate verification for the current request
+        :type on: bool
+
+        :return: `true` if the operation succeeded, `nil` if an error occurred
+
+        :rtype: bool
+        :return: An error message describing the error if there was one
+
+        :rtype: str
         """
         pass
 
     @staticmethod
     def set_tls_verify_depth(depth: number) -> Tuple[bool, str]:
         """
-        local ok, err = kong.service.set_tls_verify_depth(3)
-        if not ok then
-        -- do something with error
-        end
-        :param depth: Depth to use when validating. Must be non-negative
-        :returns `true` if the operation succeeded, `nil` if an error occurred
-        returns An error message describing the error if there was one
+
+            Sets the maximum depth of verification when validating upstream server's TLS certificate.
+            This call affects only the current request. For the depth to be actually used the verification
+            has to be enabled with either the [proxy_ssl_verify](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_verify)
+            directive or using the [kong.service.set_tls_verify](#kongserviceset_tls_verify) function.
+
+        Phases:
+            rewrite`, access`, balancer`
+
+        Example:
+            ok, err = kong.service.set_tls_verify_depth(3)
+
+            if not ok:
+
+                # do something with error
+
+        :parameter depth: Depth to use when validating. Must be non-negative
+        :type depth: number
+
+        :return: `true` if the operation succeeded, `nil` if an error occurred
+
+        :rtype: bool
+        :return: An error message describing the error if there was one
+
+        :rtype: str
         """
         pass
 
     @staticmethod
     def set_upstream(host: str) -> Tuple[bool, str]:
         """
-        local ok, err = kong.service.set_upstream("service.prod")
-        if not ok then
-        kong.log.err(err)
-        return
-        end
-        :param host: 
-        :returns `true` on success, or `nil` if no upstream entities
-        where found
-        returns An error message describing the error if there was
-        one.
+
+            Sets the desired Upstream entity to handle the load-balancing step for
+            this request. Using this method is equivalent to creating a Service with a
+            `host` property equal to that of an Upstream entity (in which case, the
+            request would be proxied to one of the Targets associated with that
+            Upstream).
+            The `host` argument should receive a string equal to that of one of the
+            Upstream entities currently configured.
+
+        Phases:
+            access
+
+        Example:
+            ok, err = kong.service.set_upstream("service.prod")
+
+            if not ok:
+
+                kong.log.err(err)
+
+            return
+
+        :parameter host: 
+        :type host: str
+
+        :return: `true` on success, or `nil` if no upstream entities
+            where found
+
+        :rtype: bool
+        :return: An error message describing the error if there was
+            one.
+
+        :rtype: str
         """
         pass
 

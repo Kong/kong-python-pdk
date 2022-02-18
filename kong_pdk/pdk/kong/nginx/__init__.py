@@ -18,50 +18,71 @@ class nginx():
     @staticmethod
     def get_ctx(k: str) -> Any:
         """
-        
-        :param k: key for the ctx data
-        :returns the per-request context data in ngx.ctx
+
+            get a key-value pair from Kong's per-request context
+
+        :parameter k: key for the ctx data
+        :type k: str
+
+        :return: the per-request context data in ngx.ctx
+
+        :rtype: Any
         """
         pass
 
     @staticmethod
     def get_subsystem() -> str:
         """
-        
-        :returns the subsystem name
+
+        :return: the subsystem name
+
+        :rtype: str
         """
         pass
 
     @staticmethod
     def get_tls1_version_str() -> str:
         """
-        
-        :returns the TLSv1 version string
+
+        :return: the TLSv1 version string
+
+        :rtype: str
         """
         pass
 
     @staticmethod
     def get_var() -> str:
         """
-        
-        :returns the NGINX version string
+
+        :return: the NGINX version string
+
+        :rtype: str
         """
         pass
 
     @staticmethod
     def req_start_time() -> number:
         """
-        
-        :returns req_start_time
+
+            get the current request's start timestamp
+
+        :return: req_start_time
+
+        :rtype: number
         """
         pass
 
     @staticmethod
     def set_ctx(k: str, any: str) -> None:
         """
-        
-        :param k: key for the ctx data
-        :param any: value for the ctx data
+
+            set a key-value pair in Kong's per-request context
+
+        :parameter k: key for the ctx data
+        :type k: str
+        :parameter any: value for the ctx data
+        :type any: str
+
         """
         pass
 

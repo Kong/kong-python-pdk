@@ -21,6 +21,8 @@ jobs:
           python-version: "3.8"
       - name: flake8 Lint
         uses: py-actions/flake8@v2
+        with:
+          exclude: "docs"
   build:
 
     runs-on: ubuntu-latest

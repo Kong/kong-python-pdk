@@ -16,18 +16,29 @@ class shared():
     @staticmethod
     def get(k: str) -> Any:
         """
-        
-        :param k: key for the ctx data
-        :returns the per-request context data in ngx.ctx
+
+            get a key-value pair from Kong's shared memory
+
+        :parameter k: key for the ctx data
+        :type k: str
+
+        :return: the per-request context data in ngx.ctx
+
+        :rtype: Any
         """
         pass
 
     @staticmethod
     def set(k: str, v: str) -> None:
         """
-        
-        :param k: key for the ctx data
-        :param v: value for the ctx data
+
+            set a key-value pair in Kong's shared memory
+
+        :parameter k: key for the ctx data
+        :type k: str
+        :parameter v: value for the ctx data
+        :type v: str
+
         """
         pass
 
