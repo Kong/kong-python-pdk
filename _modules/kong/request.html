@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong.request &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../kong.html">kong</a> &raquo;</li>
+      <li>kong.request</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for kong.request</h1><div class="highlight"><pre>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT</span>
+<span class="c1"># Original source path: kong/pdk/request.lua</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="c1"># XXX</span>
+<span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
+
+
+<div class="viewcode-block" id="request"><a class="viewcode-back" href="../../kong.html#kong.request.request">[docs]</a><span class="k">class</span> <span class="nc">request</span><span class="p">():</span>
+
+
+<div class="viewcode-block" id="request.get_body"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_body">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_body</span><span class="p">(</span><span class="n">mimetype</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">max_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the request data as a key/value table.</span>
+<span class="sd">            A high-level convenience function.</span>
+<span class="sd">            The body is parsed with the most appropriate format:</span>
+<span class="sd">            * If `mimetype` is specified, it decodes the body with the requested</span>
+<span class="sd">              content type (if supported). This takes precedence over any content type</span>
+<span class="sd">              present in the request.</span>
+<span class="sd">              The optional argument `mimetype` can be one of the following strings:</span>
+<span class="sd">                * `application/x-www-form-urlencoded`</span>
+<span class="sd">                * `application/json`</span>
+<span class="sd">                * `multipart/form-data`</span>
+<span class="sd">            Whether `mimetype` is specified or a request content type is otherwise</span>
+<span class="sd">            present in the request, each content type behaves as follows:</span>
+<span class="sd">            * If the request content type is `application/x-www-form-urlencoded`:</span>
+<span class="sd">              * Returns the body as form-encoded.</span>
+<span class="sd">            * If the request content type is `multipart/form-data`:</span>
+<span class="sd">              * Decodes the body as multipart form data</span>
+<span class="sd">                (same as `multipart(kong.request.get_raw_body(),</span>
+<span class="sd">                kong.request.get_header(&quot;Content-Type&quot;)):get_all()` ).</span>
+<span class="sd">            * If the request content type is `application/json`:</span>
+<span class="sd">              * Decodes the body as JSON</span>
+<span class="sd">                (same as `json.decode(kong.request.get_raw_body())`).</span>
+<span class="sd">              * JSON types are converted to matching Lua types.</span>
+<span class="sd">            * If the request contains none of the above and the `mimetype` argument is</span>
+<span class="sd">              not set, returns `nil` and an error message indicating the</span>
+<span class="sd">              body could not be parsed.</span>
+<span class="sd">            The optional argument `max_args` can be used to set a limit on the number</span>
+<span class="sd">            of form arguments parsed for `application/x-www-form-urlencoded` payloads.</span>
+<span class="sd">            The third return value is string containing the mimetype used to parsed</span>
+<span class="sd">            the body (as per the `mimetype` argument), allowing the caller to identify</span>
+<span class="sd">            what MIME type the body was parsed as.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, response, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            body, err, mimetype = kong.request.get_body()</span>
+
+<span class="sd">            body.name # &quot;John Doe&quot;</span>
+
+<span class="sd">            body.age  # &quot;42&quot;</span>
+
+<span class="sd">        :parameter mimetype: The MIME type.</span>
+<span class="sd">        :type mimetype: str</span>
+<span class="sd">        :parameter max_args: Sets a limit on the maximum number of parsed</span>
+<span class="sd">            arguments.</span>
+<span class="sd">        :type max_args: number</span>
+
+<span class="sd">        :return: A table representation of the body.</span>
+
+<span class="sd">        :rtype: table</span>
+<span class="sd">        :return: An error message.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: mimetype The MIME type used.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_forwarded_host"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_host">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_forwarded_host</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the host component of the request&#39;s URL or the value of the &quot;host&quot;</span>
+<span class="sd">            header. Unlike `kong.request.get_host()`, this function also considers</span>
+<span class="sd">            `X-Forwarded-Host` if it comes from a trusted source. The returned value</span>
+<span class="sd">            is normalized to lowercase.</span>
+<span class="sd">            Whether this function considers `X-Forwarded-Host` or not depends on</span>
+<span class="sd">            several Kong configuration parameters:</span>
+<span class="sd">            * [trusted\_ips](https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips)</span>
+<span class="sd">            * [real\_ip\_header](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header)</span>
+<span class="sd">            * [real\_ip\_recursive](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive)</span>
+<span class="sd">            **Note**: Kong does not offer support for the Forwarded HTTP Extension</span>
+<span class="sd">            (RFC 7239) since it is not supported by ngx_http_realip_module.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.request.get_forwarded_host() # &quot;example.com&quot;</span>
+
+<span class="sd">        :return: The forwarded host.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_forwarded_path"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_path">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_forwarded_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the path component of the request&#39;s URL, but also considers</span>
+<span class="sd">            `X-Forwarded-Path` if it comes from a trusted source. The value</span>
+<span class="sd">            is returned as a Lua string.</span>
+<span class="sd">            Whether this function considers `X-Forwarded-Path` or not depends on</span>
+<span class="sd">            several Kong configuration parameters:</span>
+<span class="sd">            * [trusted\_ips](https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips)</span>
+<span class="sd">            * [real\_ip\_header](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header)</span>
+<span class="sd">            * [real\_ip\_recursive](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive)</span>
+<span class="sd">            **Note**: Kong does not do any normalization on the request path.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.request.get_forwarded_path() # /path</span>
+
+<span class="sd">        :return: The forwarded path.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_forwarded_port"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_port">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_forwarded_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the port component of the request&#39;s URL, but also considers</span>
+<span class="sd">            `X-Forwarded-Host` if it comes from a trusted source. The value</span>
+<span class="sd">            is returned as a Lua number.</span>
+<span class="sd">            Whether this function considers `X-Forwarded-Proto` or not depends on</span>
+<span class="sd">            several Kong configuration parameters:</span>
+<span class="sd">            * [trusted\_ips](https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips)</span>
+<span class="sd">            * [real\_ip\_header](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header)</span>
+<span class="sd">            * [real\_ip\_recursive](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive)</span>
+<span class="sd">            **Note**: Kong does not offer support for the Forwarded HTTP Extension</span>
+<span class="sd">            (RFC 7239) since it is not supported by ngx_http_realip_module.</span>
+<span class="sd">            When running Kong behind the L4 port mapping (or forwarding), you can also</span>
+<span class="sd">            configure:</span>
+<span class="sd">            * [port\_maps](https://docs.konghq.com/gateway/latest/reference/configuration/#port_maps)</span>
+<span class="sd">            The `port_maps` configuration parameter enables this function to return the</span>
+<span class="sd">            port to which the port Kong is listening to is mapped to (in case they differ).</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.request.get_forwarded_port() # 1234</span>
+
+<span class="sd">        :return: The forwarded port.</span>
+
+<span class="sd">        :rtype: number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_forwarded_prefix"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_prefix">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_forwarded_prefix</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the prefix path component of the request&#39;s URL that Kong stripped</span>
+<span class="sd">            before proxying to upstream. It also checks if `X-Forwarded-Prefix` comes</span>
+<span class="sd">            from a trusted source, and uses it as-is when given. The value is returned</span>
+<span class="sd">            as a Lua string.</span>
+<span class="sd">            If a trusted `X-Forwarded-Prefix` is not passed, this function must be</span>
+<span class="sd">            called after Kong has run its router (`access` phase),</span>
+<span class="sd">            as the Kong router may strip the prefix of the request path. That stripped</span>
+<span class="sd">            path becomes the return value of this function, unless there is already</span>
+<span class="sd">            a trusted `X-Forwarded-Prefix` header in the request.</span>
+<span class="sd">            Whether this function considers `X-Forwarded-Prefix` or not depends on</span>
+<span class="sd">            several Kong configuration parameters:</span>
+<span class="sd">            * [trusted\_ips](https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips)</span>
+<span class="sd">            * [real\_ip\_header](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header)</span>
+<span class="sd">            * [real\_ip\_recursive](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive)</span>
+<span class="sd">            **Note**: Kong does not do any normalization on the request path prefix.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.request.get_forwarded_prefix() # /prefix</span>
+
+<span class="sd">        :return: The forwarded path prefix or `nil` if the prefix was</span>
+<span class="sd">            not stripped.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_forwarded_scheme"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_scheme">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_forwarded_scheme</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the scheme component of the request&#39;s URL, but also considers</span>
+<span class="sd">            `X-Forwarded-Proto` if it comes from a trusted source. The returned</span>
+<span class="sd">            value is normalized to lowercase.</span>
+<span class="sd">            Whether this function considers `X-Forwarded-Proto` or not depends on</span>
+<span class="sd">            several Kong configuration parameters:</span>
+<span class="sd">            * [trusted\_ips](https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips)</span>
+<span class="sd">            * [real\_ip\_header](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header)</span>
+<span class="sd">            * [real\_ip\_recursive](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive)</span>
+<span class="sd">            **Note**: Kong does not offer support for the Forwarded HTTP Extension</span>
+<span class="sd">            (RFC 7239) since it is not supported by ngx_http_realip_module.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.request.get_forwarded_scheme() # &quot;https&quot;</span>
+
+<span class="sd">        :return: The forwarded scheme.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_header"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_header">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the value of the specified request header.</span>
+<span class="sd">            The returned value is either a `string`, or can be `nil` if a header with</span>
+<span class="sd">            `name` was not found in the request. If a header with the same name is</span>
+<span class="sd">            present multiple times in the request, this function returns the value</span>
+<span class="sd">            of the first occurrence of this header.</span>
+<span class="sd">            Header names in are case-insensitive and are normalized to lowercase, and</span>
+<span class="sd">            dashes (`-`) can be written as underscores (`_`); that is, the header</span>
+<span class="sd">            `X-Custom-Header` can also be retrieved as `x_custom_header`.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request with the following headers:</span>
+
+<span class="sd">            # Host: foo.com</span>
+
+<span class="sd">            # X-Custom-Header: bla</span>
+
+<span class="sd">            # X-Another: foo bar</span>
+
+<span class="sd">            # X-Another: baz</span>
+
+<span class="sd">            kong.request.get_header(&quot;Host&quot;)            # &quot;foo.com&quot;</span>
+
+<span class="sd">            kong.request.get_header(&quot;x-custom-header&quot;) # &quot;bla&quot;</span>
+
+<span class="sd">            kong.request.get_header(&quot;X-Another&quot;)       # &quot;foo bar&quot;</span>
+
+<span class="sd">        :parameter name: the name of the header to be returned</span>
+<span class="sd">        :type name: str</span>
+
+<span class="sd">        :return: the value of the header or nil if not present</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_headers"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_headers">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="n">max_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns a Lua table holding the request headers. Keys are header names.</span>
+<span class="sd">            Values are either a string with the header value, or an array of strings</span>
+<span class="sd">            if a header was sent multiple times. Header names in this table are</span>
+<span class="sd">            case-insensitive and are normalized to lowercase, and dashes (`-`) can be</span>
+<span class="sd">            written as underscores (`_`); that is, the header `X-Custom-Header` can</span>
+<span class="sd">            also be retrieved as `x_custom_header`.</span>
+<span class="sd">            By default, this function returns up to **100** headers. The optional</span>
+<span class="sd">            `max_headers` argument can be specified to customize this limit, but must</span>
+<span class="sd">            be greater than **1** and not greater than **1000**.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request with the following headers:</span>
+
+<span class="sd">            # Host: foo.com</span>
+
+<span class="sd">            # X-Custom-Header: bla</span>
+
+<span class="sd">            # X-Another: foo bar</span>
+
+<span class="sd">            # X-Another: baz</span>
+
+<span class="sd">            headers = kong.request.get_headers()</span>
+
+<span class="sd">            headers.host            # &quot;foo.com&quot;</span>
+
+<span class="sd">            headers.x_custom_header # &quot;bla&quot;</span>
+
+<span class="sd">            headers.x_another[1]    # &quot;foo bar&quot;</span>
+
+<span class="sd">            headers[&quot;X-Another&quot;][2] # &quot;baz&quot;</span>
+
+<span class="sd">        :parameter max_headers: Sets a limit on the maximum number of</span>
+<span class="sd">            parsed headers.</span>
+<span class="sd">        :type max_headers: number</span>
+
+<span class="sd">        :return: The request headers in table form.</span>
+
+<span class="sd">        :rtype: table</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_host"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_host">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_host</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the host component of the request&#39;s URL, or the value of the</span>
+<span class="sd">            &quot;Host&quot; header. The returned value is normalized to lowercase form.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request to https://example.com:1234/v1/movies</span>
+
+<span class="sd">            kong.request.get_host() # &quot;example.com&quot;</span>
+
+<span class="sd">        :return: The hostname.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_http_version"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_http_version">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_http_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the HTTP version used by the client in the request as a Lua</span>
+<span class="sd">            number, returning values such as `1`, `1.1`, `2.0`, or `nil` for</span>
+<span class="sd">            unrecognized values.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.request.get_http_version() # 1.1</span>
+
+<span class="sd">        :return: The HTTP version as a Lua number.</span>
+
+<span class="sd">        :rtype: number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_method"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_method">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_method</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the HTTP method of the request. The value is normalized to</span>
+<span class="sd">            uppercase.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.request.get_method() # &quot;GET&quot;</span>
+
+<span class="sd">        :return: The request method.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_path"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_path">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the path component of the request&#39;s URL. It is not normalized in</span>
+<span class="sd">            any way and does not include the query string.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request to https://example.com:1234/v1/movies?movie=foo</span>
+
+<span class="sd">            kong.request.get_path() # &quot;/v1/movies&quot;</span>
+
+<span class="sd">        :return: The path.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_path_with_query"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_path_with_query">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_path_with_query</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the path, including the query string if any. No</span>
+<span class="sd">            transformations or normalizations are done.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request to https://example.com:1234/v1/movies?movie=foo</span>
+
+<span class="sd">            kong.request.get_path_with_query() # &quot;/v1/movies?movie=foo&quot;</span>
+
+<span class="sd">        :return: The path with the query string.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_port"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_port">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the port component of the request&#39;s URL. The value is returned</span>
+<span class="sd">            as a Lua number.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            certificate, rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request to https://example.com:1234/v1/movies</span>
+
+<span class="sd">            kong.request.get_port() # 1234</span>
+
+<span class="sd">        :return: The port.</span>
+
+<span class="sd">        :rtype: number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_query"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_query">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_query</span><span class="p">(</span><span class="n">max_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the table of query arguments obtained from the query string. Keys</span>
+<span class="sd">            are query argument names. Values are either a string with the argument</span>
+<span class="sd">            value, a boolean `true` if an argument was not given a value, or an array</span>
+<span class="sd">            if an argument was given in the query string multiple times. Keys and</span>
+<span class="sd">            values are unescaped according to URL-encoded escaping rules.</span>
+<span class="sd">            Note that a query string `?foo&amp;bar` translates to two boolean `true`</span>
+<span class="sd">            arguments, and `?foo=&amp;bar=` translates to two string arguments containing</span>
+<span class="sd">            empty strings.</span>
+<span class="sd">            By default, this function returns up to **100** arguments. The optional</span>
+<span class="sd">            `max_args` argument can be specified to customize this limit, but must be</span>
+<span class="sd">            greater than **1** and not greater than **1000**.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request GET /test?foo=hello%20world&amp;bar=baz&amp;zzz&amp;blo=&amp;bar=bla&amp;bar</span>
+
+<span class="sd">            for k, v in pairs(kong.request.get_query()) do</span>
+
+<span class="sd">            kong.log.inspect(k, v)# Will print</span>
+
+<span class="sd">            # &quot;foo&quot; &quot;hello world&quot;</span>
+
+<span class="sd">            # &quot;bar&quot; {&quot;baz&quot;, &quot;bla&quot;, true}</span>
+
+<span class="sd">            # &quot;zzz&quot; true</span>
+
+<span class="sd">            # &quot;blo&quot; &quot;&quot;</span>
+
+<span class="sd">        :parameter max_args: Sets a limit on the maximum number of parsed</span>
+<span class="sd">            arguments.</span>
+<span class="sd">        :type max_args: number</span>
+
+<span class="sd">        :return: A table representation of the query string.</span>
+
+<span class="sd">        :rtype: table</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_query_arg"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_query_arg">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_query_arg</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the value of the specified argument, obtained from the query</span>
+<span class="sd">            arguments of the current request.</span>
+<span class="sd">            The returned value is either a `string`, a boolean `true` if an</span>
+<span class="sd">            argument was not given a value, or `nil` if no argument with `name` was</span>
+<span class="sd">            found.</span>
+<span class="sd">            If an argument with the same name is present multiple times in the</span>
+<span class="sd">            query string, this function returns the value of the first occurrence.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request GET /test?foo=hello%20world&amp;bar=baz&amp;zzz&amp;blo=&amp;bar=bla&amp;bar</span>
+
+<span class="sd">            kong.request.get_query_arg(&quot;foo&quot;) # &quot;hello world&quot;</span>
+
+<span class="sd">            kong.request.get_query_arg(&quot;bar&quot;) # &quot;baz&quot;</span>
+
+<span class="sd">            kong.request.get_query_arg(&quot;zzz&quot;) # true</span>
+
+<span class="sd">            kong.request.get_query_arg(&quot;blo&quot;) # &quot;&quot;</span>
+
+<span class="sd">        :return: The value of the argument.</span>
+
+<span class="sd">        :rtype: Any</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_raw_body"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the plain request body.</span>
+<span class="sd">            If the body has no size (empty), this function returns an empty string.</span>
+<span class="sd">            If the size of the body is greater than the Nginx buffer size (set by</span>
+<span class="sd">            `client_body_buffer_size`), this function fails and returns an error</span>
+<span class="sd">            message explaining this limitation.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, response, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a body with payload &quot;Hello, Earth!&quot;:</span>
+
+<span class="sd">            kong.request.get_raw_body():gsub(&quot;Earth&quot;, &quot;Mars&quot;) # &quot;Hello, Mars!&quot;</span>
+
+<span class="sd">        :return: The plain request body.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_raw_query"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_query">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_raw_query</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the query component of the request&#39;s URL. It is not normalized in</span>
+<span class="sd">            any way (not even URL-decoding of special characters) and does not</span>
+<span class="sd">            include the leading `?` character.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request to https://example.com/foo?msg=hello%20world&amp;bla=&amp;bar</span>
+
+<span class="sd">            kong.request.get_raw_query() # &quot;msg=hello%20world&amp;bla=&amp;bar&quot;</span>
+
+<span class="sd">        :return: The query component of the request&#39;s URL.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_scheme"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_scheme">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_scheme</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the scheme component of the request&#39;s URL. The returned value is</span>
+<span class="sd">            normalized to lowercase form.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request to https://example.com:1234/v1/movies</span>
+
+<span class="sd">            kong.request.get_scheme() # &quot;https&quot;</span>
+
+<span class="sd">        :return: A string like `&quot;http&quot;` or `&quot;https&quot;`.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+    <span class="k">pass</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

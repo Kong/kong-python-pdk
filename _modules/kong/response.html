@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong.response &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../kong.html">kong</a> &raquo;</li>
+      <li>kong.response</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for kong.response</h1><div class="highlight"><pre>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT</span>
+<span class="c1"># Original source path: kong/pdk/response.lua</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="c1"># XXX</span>
+<span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
+
+
+<div class="viewcode-block" id="response"><a class="viewcode-back" href="../../kong.html#kong.response.response">[docs]</a><span class="k">class</span> <span class="nc">response</span><span class="p">():</span>
+
+
+<div class="viewcode-block" id="response.add_header"><a class="viewcode-back" href="../../kong.html#kong.response.response.add_header">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Adds a response header with the given value. Unlike</span>
+<span class="sd">            `kong.response.set_header()`, this function does not remove any existing</span>
+<span class="sd">            header with the same name. Instead, another header with the same name is</span>
+<span class="sd">            added to the response. If no header with this name already exists on</span>
+<span class="sd">            the response, then it is added with the given value, similarly to</span>
+<span class="sd">            `kong.response.set_header().`</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.response.add_header(&quot;Cache-Control&quot;, &quot;no-cache&quot;)</span>
+
+<span class="sd">            kong.response.add_header(&quot;Cache-Control&quot;, &quot;no-store&quot;)</span>
+
+<span class="sd">        :parameter name: The header name.</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :parameter value: The header value.</span>
+<span class="sd">        :type value: Any</span>
+
+<span class="sd">        :return: throws an error on invalid input.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.clear_header"><a class="viewcode-back" href="../../kong.html#kong.response.response.clear_header">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">clear_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Removes all occurrences of the specified header in the response sent to</span>
+<span class="sd">            the client.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.response.set_header(&quot;X-Foo&quot;, &quot;foo&quot;)</span>
+
+<span class="sd">            kong.response.add_header(&quot;X-Foo&quot;, &quot;bar&quot;)</span>
+
+<span class="sd">            kong.response.clear_header(&quot;X-Foo&quot;)</span>
+
+<span class="sd">            # from here onwards, no X-Foo headers will exist in the response</span>
+
+<span class="sd">        :parameter name: The name of the header to be cleared</span>
+<span class="sd">        :type name: str</span>
+
+<span class="sd">        :return: throws an error on invalid input.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.error"><a class="viewcode-back" href="../../kong.html#kong.response.response.error">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">table</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            This function interrupts the current processing and produces an error</span>
+<span class="sd">            response.</span>
+<span class="sd">            It is recommended to use this function in conjunction with the `return`</span>
+<span class="sd">            operator, to better reflect its meaning:</span>
+<span class="sd">            ```lua</span>
+<span class="sd">            return kong.response.error(500, &quot;Error&quot;, {[&quot;Content-Type&quot;] = &quot;text/html&quot;})</span>
+<span class="sd">            ```</span>
+<span class="sd">            1. The `status` argument sets the status code of the response that</span>
+<span class="sd">            is seen by the client. The status code must an error code, that is,</span>
+<span class="sd">            greater than 399.</span>
+<span class="sd">            2. The optional `message` argument sets the message describing</span>
+<span class="sd">            the error, which is written in the body.</span>
+<span class="sd">            3. The optional `headers` argument can be a table specifying response</span>
+<span class="sd">            headers to send. If specified, its behavior is similar to</span>
+<span class="sd">            `kong.response.set_headers()`.</span>
+<span class="sd">              This method sends the response formatted in JSON, XML, HTML or plaintext.</span>
+<span class="sd">              The actual format is determined using one of the following options, in</span>
+<span class="sd">              this order:</span>
+<span class="sd">              - Manually specified in the `headers` argument using the `Content-Type`</span>
+<span class="sd">              header.</span>
+<span class="sd">              - Conforming to the `Accept` header from the request.</span>
+<span class="sd">              - If there is no setting in the `Content-Type` or `Accept` header, the</span>
+<span class="sd">              response defaults to JSON format. Also see the `Content-Length`</span>
+<span class="sd">              header in the produced response for convenience.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            return kong.response.error(403, &quot;Access Forbidden&quot;, {</span>
+
+<span class="sd">            [&quot;Content-Type&quot;] = &quot;text/plain&quot;,</span>
+
+<span class="sd">            [&quot;WWW-Authenticate&quot;] = &quot;Basic&quot;</span>
+
+<span class="sd">            })</span>
+
+<span class="sd">            # -</span>
+
+<span class="sd">            return kong.response.error(403, &quot;Access Forbidden&quot;)</span>
+
+<span class="sd">            # -</span>
+
+<span class="sd">            return kong.response.error(403)</span>
+
+<span class="sd">        :parameter status: The status to be used (&gt;399).</span>
+<span class="sd">        :type status: number</span>
+<span class="sd">        :parameter message: The error message to be used.</span>
+<span class="sd">        :type message: str</span>
+<span class="sd">        :parameter headers: The headers to be used.</span>
+<span class="sd">        :type headers: table</span>
+
+<span class="sd">        :return: throws an error on invalid input.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.exit"><a class="viewcode-back" href="../../kong.html#kong.response.response.exit">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">table</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            This function interrupts the current processing and produces a response.</span>
+<span class="sd">            It is typical to see plugins using it to produce a response before Kong</span>
+<span class="sd">            has a chance to proxy the request (e.g. an authentication plugin rejecting</span>
+<span class="sd">            a request, or a caching plugin serving a cached response).</span>
+<span class="sd">            It is recommended to use this function in conjunction with the `return`</span>
+<span class="sd">            operator, to better reflect its meaning:</span>
+<span class="sd">            ```lua</span>
+<span class="sd">            return kong.response.exit(200, &quot;Success&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            Calling `kong.response.exit()` interrupts the execution flow of</span>
+<span class="sd">            plugins in the current phase. Subsequent phases will still be invoked.</span>
+<span class="sd">            For example, if a plugin calls `kong.response.exit()` in the `access`</span>
+<span class="sd">            phase, no other plugin is executed in that phase, but the</span>
+<span class="sd">            `header_filter`, `body_filter`, and `log` phases are still executed,</span>
+<span class="sd">            along with their plugins. Plugins should be programmed defensively</span>
+<span class="sd">            against cases when a request is **not** proxied to the Service, but</span>
+<span class="sd">            instead is produced by Kong itself.</span>
+<span class="sd">            1. The first argument `status` sets the status code of the response that</span>
+<span class="sd">            is seen by the client.</span>
+<span class="sd">               In L4 proxy mode, the `status` code provided is primarily for logging</span>
+<span class="sd">               and statistical purposes, and is not visible to the client directly.</span>
+<span class="sd">               In this mode, only the following status codes are supported:</span>
+<span class="sd">               * 200 - OK</span>
+<span class="sd">               * 400 - Bad request</span>
+<span class="sd">               * 403 - Forbidden</span>
+<span class="sd">               * 500 - Internal server error</span>
+<span class="sd">               * 502 - Bad gateway</span>
+<span class="sd">               * 503 - Service unavailable</span>
+<span class="sd">            2. The second, optional, `body` argument sets the response body. If it is</span>
+<span class="sd">               a string, no special processing is done, and the body is sent</span>
+<span class="sd">               as-is.  It is the caller&#39;s responsibility to set the appropriate</span>
+<span class="sd">               `Content-Type` header via the third argument.</span>
+<span class="sd">               As a convenience, `body` can be specified as a table. In that case,</span>
+<span class="sd">               the `body` is JSON-encoded and has the `application/json` Content-Type</span>
+<span class="sd">               header set.</span>
+<span class="sd">               On gRPC, we cannot send the `body` with this function, so</span>
+<span class="sd">               it sends `&quot;body&quot;` in the `grpc-message` header instead.</span>
+<span class="sd">               * If the body is a table, it looks for the `message` field in the body,</span>
+<span class="sd">               and uses that as a `grpc-message` header.</span>
+<span class="sd">               * If you specify `application/grpc` in the `Content-Type` header, the</span>
+<span class="sd">               body is sent without needing the `grpc-message` header.</span>
+<span class="sd">               In L4 proxy mode, `body` can only be `nil` or a string. Automatic JSON</span>
+<span class="sd">               encoding is not available. When `body` is provided, depending on the</span>
+<span class="sd">               value of `status`, the following happens:</span>
+<span class="sd">               * When `status` is 500, 502 or 503, then `body` is logged in the Kong</span>
+<span class="sd">               error log file.</span>
+<span class="sd">               * When the `status` is anything else, `body` is sent back to the L4 client.</span>
+<span class="sd">            3. The third, optional, `headers` argument can be a table specifying</span>
+<span class="sd">               response headers to send. If specified, its behavior is similar to</span>
+<span class="sd">               `kong.response.set_headers()`. This argument is ignored in L4 proxy mode.</span>
+<span class="sd">            Unless manually specified, this method automatically sets the</span>
+<span class="sd">            `Content-Length` header in the produced response for convenience.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            preread, rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            return kong.response.exit(403, &quot;Access Forbidden&quot;, {</span>
+
+<span class="sd">            [&quot;Content-Type&quot;] = &quot;text/plain&quot;,</span>
+
+<span class="sd">            [&quot;WWW-Authenticate&quot;] = &quot;Basic&quot;</span>
+
+<span class="sd">            })</span>
+
+<span class="sd">            # -</span>
+
+<span class="sd">            return kong.response.exit(403, [[{&quot;message&quot;:&quot;Access Forbidden&quot;}]], {</span>
+
+<span class="sd">            [&quot;Content-Type&quot;] = &quot;application/json&quot;,</span>
+
+<span class="sd">            [&quot;WWW-Authenticate&quot;] = &quot;Basic&quot;</span>
+
+<span class="sd">            })</span>
+
+<span class="sd">            # -</span>
+
+<span class="sd">            return kong.response.exit(403, { message = &quot;Access Forbidden&quot; }, {</span>
+
+<span class="sd">            [&quot;WWW-Authenticate&quot;] = &quot;Basic&quot;</span>
+
+<span class="sd">            })</span>
+
+<span class="sd">            # -</span>
+
+<span class="sd">            # In L4 proxy mode</span>
+
+<span class="sd">            return kong.response.exit(200, &quot;Success&quot;)</span>
+
+<span class="sd">        :parameter status: The status to be used.</span>
+<span class="sd">        :type status: number</span>
+<span class="sd">        :parameter body: The body to be used.</span>
+<span class="sd">        :type body: Any</span>
+<span class="sd">        :parameter headers: The headers to be used.</span>
+<span class="sd">        :type headers: table</span>
+
+<span class="sd">        :return: throws an error on invalid input.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.get_header"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_header">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the value of the specified response header, as would be seen by</span>
+<span class="sd">            the client once received.</span>
+<span class="sd">            The list of headers returned by this function can consist of both response</span>
+<span class="sd">            headers from the proxied Service _and_ headers added by Kong (e.g. via</span>
+<span class="sd">            `kong.response.add_header()`).</span>
+<span class="sd">            The return value is either a `string`, or can be `nil` if a header with</span>
+<span class="sd">            `name` is not found in the response. If a header with the same name is</span>
+<span class="sd">            present multiple times in the request, this function returns the value</span>
+<span class="sd">            of the first occurrence of this header.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a response with the following headers:</span>
+
+<span class="sd">            # X-Custom-Header: bla</span>
+
+<span class="sd">            # X-Another: foo bar</span>
+
+<span class="sd">            # X-Another: baz</span>
+
+<span class="sd">            kong.response.get_header(&quot;x-custom-header&quot;) # &quot;bla&quot;</span>
+
+<span class="sd">            kong.response.get_header(&quot;X-Another&quot;)       # &quot;foo bar&quot;</span>
+
+<span class="sd">            kong.response.get_header(&quot;X-None&quot;)          # nil</span>
+
+<span class="sd">        :parameter name: The name of the header.</span>
+<span class="sd">            Header names are case-insensitive and dashes (`-`) can be written as</span>
+<span class="sd">            underscores (`_`). For example, the header `X-Custom-Header` can also be</span>
+<span class="sd">            retrieved as `x_custom_header`.</span>
+<span class="sd">        :type name: str</span>
+
+<span class="sd">        :return: The value of the header.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.get_headers"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_headers">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="n">max_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns a Lua table holding the response headers. Keys are header names.</span>
+<span class="sd">            Values are either a string with the header value, or an array of strings</span>
+<span class="sd">            if a header was sent multiple times. Header names in this table are</span>
+<span class="sd">            case-insensitive and are normalized to lowercase, and dashes (`-`) can be</span>
+<span class="sd">            written as underscores (`_`). For example, the header `X-Custom-Header` can</span>
+<span class="sd">            also be retrieved as `x_custom_header`.</span>
+<span class="sd">            A response initially has no headers. Headers are added when a plugin</span>
+<span class="sd">            short-circuits the proxying by producing a header</span>
+<span class="sd">            (e.g. an authentication plugin rejecting a request), or if the request has</span>
+<span class="sd">            been proxied, and one of the latter execution phases is currently running.</span>
+<span class="sd">            Unlike `kong.service.response.get_headers()`, this function returns *all*</span>
+<span class="sd">            headers as the client would see them upon reception, including headers</span>
+<span class="sd">            added by Kong itself.</span>
+<span class="sd">            By default, this function returns up to **100** headers. The optional</span>
+<span class="sd">            `max_headers` argument can be specified to customize this limit, but must</span>
+<span class="sd">            be greater than **1** and equal to or less than **1000**.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given an response from the Service with the following headers:</span>
+
+<span class="sd">            # X-Custom-Header: bla</span>
+
+<span class="sd">            # X-Another: foo bar</span>
+
+<span class="sd">            # X-Another: baz</span>
+
+<span class="sd">            headers = kong.response.get_headers()</span>
+
+<span class="sd">            headers.x_custom_header # &quot;bla&quot;</span>
+
+<span class="sd">            headers.x_another[1]    # &quot;foo bar&quot;</span>
+
+<span class="sd">            headers[&quot;X-Another&quot;][2] # &quot;baz&quot;</span>
+
+<span class="sd">        :parameter max_headers: Limits the number of headers parsed.</span>
+<span class="sd">        :type max_headers: number</span>
+
+<span class="sd">        :return: headers A table representation of the headers in the</span>
+<span class="sd">            response.</span>
+
+<span class="sd">        :rtype: table</span>
+<span class="sd">        :return: err If more headers than `max_headers` were present,</span>
+<span class="sd">            returns a string with the error `&quot;truncated&quot;`.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.get_raw_body"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the full body when the last chunk has been read.</span>
+<span class="sd">            Calling this function starts buffering the body in</span>
+<span class="sd">            an internal request context variable, and sets the current</span>
+<span class="sd">            chunk (`ngx.arg[1]`) to `nil` when the chunk is not the</span>
+<span class="sd">            last one. When it reads the last chunk, the function returns the full</span>
+<span class="sd">            buffered body.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            body_filter`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            body = kong.response.get_raw_body()</span>
+
+<span class="sd">            if body:</span>
+
+<span class="sd">                body = transform(body)</span>
+
+<span class="sd">            kong.response.set_raw_body(body)</span>
+
+<span class="sd">        :return: body The full body when the last chunk has been read,</span>
+<span class="sd">            otherwise returns `nil`.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.get_source"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_source">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_source</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            This function helps determine where the current response originated</span>
+<span class="sd">            from. Since Kong is a reverse proxy, it can short-circuit a request and</span>
+<span class="sd">            produce a response of its own, or the response can come from the proxied</span>
+<span class="sd">            Service.</span>
+<span class="sd">            Returns a string with three possible values:</span>
+<span class="sd">            * `&quot;exit&quot;` is returned when, at some point during the processing of the</span>
+<span class="sd">              request, there has been a call to `kong.response.exit()`. This happens</span>
+<span class="sd">              when the request was short-circuited by a plugin or by Kong</span>
+<span class="sd">              itself (e.g. invalid credentials).</span>
+<span class="sd">            * `&quot;error&quot;` is returned when an error has happened while processing the</span>
+<span class="sd">              request. For example, a timeout while connecting to the upstream</span>
+<span class="sd">              service.</span>
+<span class="sd">            * `&quot;service&quot;` is returned when the response was originated by successfully</span>
+<span class="sd">              contacting the proxied Service.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            if kong.response.get_source() == &quot;service&quot;:</span>
+
+<span class="sd">                kong.log(&quot;The response comes from the Service&quot;)</span>
+
+<span class="sd">            elseif kong.response.get_source() == &quot;error&quot;:</span>
+
+<span class="sd">                kong.log(&quot;There was an error while processing the request&quot;)</span>
+
+<span class="sd">            elseif kong.response.get_source() == &quot;exit&quot;:</span>
+
+<span class="sd">                kong.log(&quot;There was an early exit while processing the request&quot;)</span>
+
+<span class="sd">        :return: The source.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.get_status"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_status">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the HTTP status code currently set for the downstream response (as</span>
+<span class="sd">            a Lua number).</span>
+<span class="sd">            If the request was proxied (as per `kong.response.get_source()`), the</span>
+<span class="sd">            return value is the response from the Service (identical to</span>
+<span class="sd">            `kong.service.response.get_status()`).</span>
+<span class="sd">            If the request was _not_ proxied and the response was produced by Kong</span>
+<span class="sd">            itself (i.e. via `kong.response.exit()`), the return value is</span>
+<span class="sd">            returned as-is.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.response.get_status() # 200</span>
+
+<span class="sd">        :return: status The HTTP status code currently set for the</span>
+<span class="sd">            downstream response.</span>
+
+<span class="sd">        :rtype: number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.set_header"><a class="viewcode-back" href="../../kong.html#kong.response.response.set_header">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets a response header with the given value. This function overrides any</span>
+<span class="sd">            existing header with the same name.</span>
+<span class="sd">            Note: Underscores in header names are automatically transformed into dashes</span>
+<span class="sd">            by default. If you want to deactivate this behavior, set the</span>
+<span class="sd">            `lua_transform_underscores_in_response_headers` Nginx config option to `off`.</span>
+<span class="sd">            This setting can be set in the Kong Config file:</span>
+<span class="sd">                nginx_http_lua_transform_underscores_in_response_headers = off</span>
+<span class="sd">            Be aware that changing this setting might break any plugins that</span>
+<span class="sd">            rely on the automatic underscore conversion.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.response.set_header(&quot;X-Foo&quot;, &quot;value&quot;)</span>
+
+<span class="sd">        :parameter name: The name of the header</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :parameter value: The new value for the header.</span>
+<span class="sd">        :type value: Any</span>
+
+<span class="sd">        :return: throws an error on invalid input.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.set_headers"><a class="viewcode-back" href="../../kong.html#kong.response.response.set_headers">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the headers for the response. Unlike `kong.response.set_header()`,</span>
+<span class="sd">            the `headers` argument must be a table in which each key is a string</span>
+<span class="sd">            corresponding to a header&#39;s name, and each value is a string, or an</span>
+<span class="sd">            array of strings.</span>
+<span class="sd">            The resulting headers are produced in lexicographical order. The order of</span>
+<span class="sd">            entries with the same name (when values are given as an array) is</span>
+<span class="sd">            retained.</span>
+<span class="sd">            This function overrides any existing header bearing the same name as those</span>
+<span class="sd">            specified in the `headers` argument. Other headers remain unchanged.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.response.set_headers({</span>
+
+<span class="sd">            [&quot;Bla&quot;] = &quot;boo&quot;,</span>
+
+<span class="sd">            [&quot;X-Foo&quot;] = &quot;foo3&quot;,</span>
+
+<span class="sd">            [&quot;Cache-Control&quot;] = { &quot;no-store&quot;, &quot;no-cache&quot; }</span>
+
+<span class="sd">            })</span>
+
+<span class="sd">            # Will add the following headers to the response, in this order:</span>
+
+<span class="sd">            # X-Bar: bar1</span>
+
+<span class="sd">            # Bla: boo</span>
+
+<span class="sd">            # Cache-Control: no-store</span>
+
+<span class="sd">            # Cache-Control: no-cache</span>
+
+<span class="sd">            # X-Foo: foo3</span>
+
+<span class="sd">        :parameter headers: </span>
+<span class="sd">        :type headers: table</span>
+
+<span class="sd">        :return: throws an error on invalid input.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.set_raw_body"><a class="viewcode-back" href="../../kong.html#kong.response.response.set_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_raw_body</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the body of the response.</span>
+<span class="sd">            The `body` argument must be a string and is not processed in any way.</span>
+<span class="sd">            This function can&#39;t change the `Content-Length` header if one was</span>
+<span class="sd">            added. If you decide to use this function, the `Content-Length` header</span>
+<span class="sd">            should also be cleared, for example in the `header_filter` phase.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            body_filter`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.response.set_raw_body(&quot;Hello, world!&quot;)</span>
+
+<span class="sd">            # or</span>
+
+<span class="sd">            body = kong.response.get_raw_body()</span>
+
+<span class="sd">            if body:</span>
+
+<span class="sd">                body = transform(body)</span>
+
+<span class="sd">            kong.response.set_raw_body(body)</span>
+
+<span class="sd">        :parameter body: The raw body.</span>
+<span class="sd">        :type body: str</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="response.set_status"><a class="viewcode-back" href="../../kong.html#kong.response.response.set_status">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Allows changing the downstream response HTTP status code before sending it</span>
+<span class="sd">            to the client.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.response.set_status(404)</span>
+
+<span class="sd">        :parameter status: The new status.</span>
+<span class="sd">        :type status: number</span>
+
+<span class="sd">        :return: throws an error on invalid input.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+    <span class="k">pass</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

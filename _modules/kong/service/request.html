@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong.service.request &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../kong.html">kong</a> &raquo;</li>
+          <li><a href="../service.html">kong.service</a> &raquo;</li>
+      <li>kong.service.request</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for kong.service.request</h1><div class="highlight"><pre>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT</span>
+<span class="c1"># Original source path: kong/pdk/service/request.lua</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="c1"># XXX</span>
+<span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
+
+
+<div class="viewcode-block" id="request"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request">[docs]</a><span class="k">class</span> <span class="nc">request</span><span class="p">():</span>
+
+
+<div class="viewcode-block" id="request.add_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.add_header">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Adds a request header with the given value to the request to the Service. Unlike</span>
+<span class="sd">            `kong.service.request.set_header()`, this function doesn&#39;t remove any existing</span>
+<span class="sd">            headers with the same name. Instead, several occurrences of the header will be</span>
+<span class="sd">            present in the request. The order in which headers are added is retained.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.add_header(&quot;Cache-Control&quot;, &quot;no-cache&quot;)</span>
+
+<span class="sd">            kong.service.request.add_header(&quot;Cache-Control&quot;, &quot;no-store&quot;)</span>
+
+<span class="sd">        :parameter header: The header name. Example: &quot;Cache-Control&quot;.</span>
+<span class="sd">        :type header: str</span>
+<span class="sd">        :parameter value: The header value. Example: &quot;no-cache&quot;.</span>
+<span class="sd">        :type value: Any</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.clear_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.clear_header">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">clear_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Removes all occurrences of the specified header from the request to the Service.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.set_header(&quot;X-Foo&quot;, &quot;foo&quot;)</span>
+
+<span class="sd">            kong.service.request.add_header(&quot;X-Foo&quot;, &quot;bar&quot;)</span>
+
+<span class="sd">            kong.service.request.clear_header(&quot;X-Foo&quot;)</span>
+
+<span class="sd">            # from here onwards, no X-Foo headers will exist in the request</span>
+
+<span class="sd">        :parameter header: The header name. Example: &quot;X-Foo&quot;.</span>
+<span class="sd">        :type header: str</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+<span class="sd">            The function does not throw an error if no header was removed.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.disable_tls"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.disable_tls">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">disable_tls</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Disables the TLS handshake to upstream for [ngx\_stream\_proxy\_module](https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html).</span>
+<span class="sd">            This overrides the [proxy\_ssl](https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_ssl) directive, effectively setting it to `off`</span>
+<span class="sd">            for the current stream session.</span>
+<span class="sd">            Once this function has been called, it is not possible to re-enable TLS handshake for the current session.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            preread`, balancer`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            ok, err = kong.service.request.disable_tls()</span>
+
+<span class="sd">            if not ok:</span>
+
+<span class="sd">                # do something with error</span>
+
+<span class="sd">        :return: `true` if the operation succeeded, `nil` if an error occurred.</span>
+
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        :return: An error message describing the error if there was one.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.enable_buffering"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.enable_buffering">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">enable_buffering</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Enables buffered proxying, which allows plugins to access Service body and</span>
+<span class="sd">            response headers at the same time.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.enable_buffering()</span>
+
+<span class="sd">        :return: </span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.set_body"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_body">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_body</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">table</span><span class="p">,</span> <span class="n">mimetype</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the body of the request to the Service. Unlike</span>
+<span class="sd">            `kong.service.request.set_raw_body()`, the `args` argument must be a table, and</span>
+<span class="sd">            is encoded with a MIME type.  The encoding MIME type can be specified in</span>
+<span class="sd">            the optional `mimetype` argument, or if left unspecified, is chosen based</span>
+<span class="sd">            on the `Content-Type` header of the client&#39;s request.</span>
+<span class="sd">            Behavior based on MIME type in the `Content-Type` header:</span>
+<span class="sd">            * `application/x-www-form-urlencoded`: Encodes the arguments as</span>
+<span class="sd">              form-encoded. Keys are produced in lexicographical</span>
+<span class="sd">              order. The order of entries within the same key (when values are</span>
+<span class="sd">              given as an array) is retained. Any string values given are URL-encoded.</span>
+<span class="sd">            * `multipart/form-data`: Encodes the arguments as multipart form data.</span>
+<span class="sd">            * `application/json`: Encodes the arguments as JSON (same as</span>
+<span class="sd">              `kong.service.request.set_raw_body(json.encode(args))`). Lua types are</span>
+<span class="sd">              converted to matching JSON types.</span>
+<span class="sd">            If the MIME type is none of the above, this function returns `nil` and</span>
+<span class="sd">            an error message indicating the body could not be encoded.</span>
+<span class="sd">            If the `mimetype` argument is specified, the `Content-Type` header is</span>
+<span class="sd">            set accordingly in the request to the Service.</span>
+<span class="sd">            If further control of the body generation is needed, a raw body can be given as</span>
+<span class="sd">            a string with `kong.service.request.set_raw_body()`.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.set_header(&quot;application/json&quot;)</span>
+
+<span class="sd">            ok, err = kong.service.request.set_body({</span>
+
+<span class="sd">            name = &quot;John Doe&quot;,</span>
+
+<span class="sd">            age = 42,</span>
+
+<span class="sd">            numbers = {1, 2, 3}</span>
+
+<span class="sd">            })</span>
+
+<span class="sd">            # Produces the following JSON body:</span>
+
+<span class="sd">            # { &quot;name&quot;: &quot;John Doe&quot;, &quot;age&quot;: 42, &quot;numbers&quot;:[1, 2, 3] }</span>
+
+<span class="sd">            ok, err = kong.service.request.set_body({</span>
+
+<span class="sd">            foo = &quot;hello world&quot;,</span>
+
+<span class="sd">            bar = {&quot;baz&quot;, &quot;bla&quot;, true},</span>
+
+<span class="sd">            zzz = true,</span>
+
+<span class="sd">            blo = &quot;&quot;</span>
+
+<span class="sd">            }, &quot;application/x-www-form-urlencoded&quot;)</span>
+
+<span class="sd">            # Produces the following body:</span>
+
+<span class="sd">            # bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world&amp;zzz</span>
+
+<span class="sd">        :parameter args: A table with data to be converted to the appropriate format</span>
+<span class="sd">            and stored in the body.</span>
+<span class="sd">        :type args: table</span>
+<span class="sd">        :parameter mimetype: can be one of:</span>
+<span class="sd">        :type mimetype: str</span>
+
+<span class="sd">        :return: `true` on success, `nil` otherwise.</span>
+
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        :return: `nil` on success, an error message in case of error.</span>
+<span class="sd">            Throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.set_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_header">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets a header in the request to the Service with the given value. Any existing header</span>
+<span class="sd">            with the same name will be overridden.</span>
+<span class="sd">            If the `header` argument is `&quot;host&quot;` (case-insensitive), then this also</span>
+<span class="sd">            sets the SNI of the request to the Service.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`, balancer`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.set_header(&quot;X-Foo&quot;, &quot;value&quot;)</span>
+
+<span class="sd">        :parameter header: The header name. Example: &quot;X-Foo&quot;.</span>
+<span class="sd">        :type header: str</span>
+<span class="sd">        :parameter value: The header value. Example: &quot;hello world&quot;.</span>
+<span class="sd">        :type value: Any</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.set_headers"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_headers">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the headers of the request to the Service. Unlike</span>
+<span class="sd">            `kong.service.request.set_header()`, the `headers` argument must be a table in</span>
+<span class="sd">            which each key is a string (corresponding to a header&#39;s name), and each value</span>
+<span class="sd">            is a string, or an array of strings.</span>
+<span class="sd">            The resulting headers are produced in lexicographical order. The order of</span>
+<span class="sd">            entries with the same name (when values are given as an array) is retained.</span>
+<span class="sd">            This function overrides any existing header bearing the same name as those</span>
+<span class="sd">            specified in the `headers` argument. Other headers remain unchanged.</span>
+<span class="sd">            If the `&quot;Host&quot;` header is set (case-insensitive), then this also sets</span>
+<span class="sd">            the SNI of the request to the Service.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.set_header(&quot;X-Foo&quot;, &quot;foo1&quot;)</span>
+
+<span class="sd">            kong.service.request.add_header(&quot;X-Foo&quot;, &quot;foo2&quot;)</span>
+
+<span class="sd">            kong.service.request.set_header(&quot;X-Bar&quot;, &quot;bar1&quot;)</span>
+
+<span class="sd">            kong.service.request.set_headers({</span>
+
+<span class="sd">            [&quot;X-Foo&quot;] = &quot;foo3&quot;,</span>
+
+<span class="sd">            [&quot;Cache-Control&quot;] = { &quot;no-store&quot;, &quot;no-cache&quot; },</span>
+
+<span class="sd">            [&quot;Bla&quot;] = &quot;boo&quot;</span>
+
+<span class="sd">            })</span>
+
+<span class="sd">            # Will add the following headers to the request, in this order:</span>
+
+<span class="sd">            # X-Bar: bar1</span>
+
+<span class="sd">            # Bla: boo</span>
+
+<span class="sd">            # Cache-Control: no-store</span>
+
+<span class="sd">            # Cache-Control: no-cache</span>
+
+<span class="sd">            # X-Foo: foo3</span>
+
+<span class="sd">        :parameter headers: A table where each key is a string containing a header name</span>
+<span class="sd">            and each value is either a string or an array of strings.</span>
+<span class="sd">        :type headers: table</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.set_method"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_method">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_method</span><span class="p">(</span><span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the HTTP method for the request to the service.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.set_method(&quot;DELETE&quot;)</span>
+
+<span class="sd">        :parameter method: The method string, which must be in all</span>
+<span class="sd">            uppercase. Supported values are: `&quot;GET&quot;`, `&quot;HEAD&quot;`, `&quot;PUT&quot;`, `&quot;POST&quot;`,</span>
+<span class="sd">            `&quot;DELETE&quot;`, `&quot;OPTIONS&quot;`, `&quot;MKCOL&quot;`, `&quot;COPY&quot;`, `&quot;MOVE&quot;`, `&quot;PROPFIND&quot;`,</span>
+<span class="sd">            `&quot;PROPPATCH&quot;`, `&quot;LOCK&quot;`, `&quot;UNLOCK&quot;`, `&quot;PATCH&quot;`, or `&quot;TRACE&quot;`.</span>
+<span class="sd">        :type method: str</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.set_path"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_path">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the path component for the request to the service.</span>
+<span class="sd">            The input accepts any valid *normalized* URI (including UTF-8 characters)</span>
+<span class="sd">            and this API will perform necessary escaping according to the RFC</span>
+<span class="sd">            to make the request valid.</span>
+<span class="sd">            Input should **not** include the query string.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.set_path(&quot;/v2/movies&quot;)</span>
+
+<span class="sd">        :parameter path: The path string. Special characters and UTF-8</span>
+<span class="sd">            characters are allowed, for example: `&quot;/v2/movies&quot;` or `&quot;/foo/😀&quot;`.</span>
+<span class="sd">        :type path: str</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.set_query"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_query">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_query</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Set the query string of the request to the Service.</span>
+<span class="sd">            Unlike `kong.service.request.set_raw_query()`, the `query` argument must be a</span>
+<span class="sd">            table in which each key is a string (corresponding to an argument&#39;s name), and</span>
+<span class="sd">            each value is either a boolean, a string, or an array of strings or booleans.</span>
+<span class="sd">            Additionally, all string values will be URL-encoded.</span>
+<span class="sd">            The resulting query string contains keys in their lexicographical order. The</span>
+<span class="sd">            order of entries within the same key (when values are given as an array) is</span>
+<span class="sd">            retained.</span>
+<span class="sd">            If further control of the query string generation is needed, a raw query</span>
+<span class="sd">            string can be given as a string with `kong.service.request.set_raw_query()`.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.set_query({</span>
+
+<span class="sd">            foo = &quot;hello world&quot;,</span>
+
+<span class="sd">            bar = {&quot;baz&quot;, &quot;bla&quot;, true},</span>
+
+<span class="sd">            zzz = true,</span>
+
+<span class="sd">            blo = &quot;&quot;</span>
+
+<span class="sd">            })</span>
+
+<span class="sd">            # Produces the following query string:</span>
+
+<span class="sd">            # bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world&amp;zzz</span>
+
+<span class="sd">        :parameter args: A table where each key is a string (corresponding to an</span>
+<span class="sd">            argument name), and each value is either a boolean, a string, or an array of</span>
+<span class="sd">            strings or booleans. Any string values given are URL-encoded.</span>
+<span class="sd">        :type args: table</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.set_raw_body"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_raw_body</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the body of the request to the Service.</span>
+<span class="sd">            The `body` argument must be a string and will not be processed in any way.</span>
+<span class="sd">            This function also sets the `Content-Length` header appropriately. To set an</span>
+<span class="sd">            empty body, you can provide an empty string (`&quot;&quot;`) to this function.</span>
+<span class="sd">            For a higher-level function to set the body based on the request content type,</span>
+<span class="sd">            see `kong.service.request.set_body()`.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.set_raw_body(&quot;Hello, world!&quot;)</span>
+
+<span class="sd">        :parameter body: The raw body.</span>
+<span class="sd">        :type body: str</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.set_raw_query"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_raw_query">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_raw_query</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the query string of the request to the Service. The `query` argument is a</span>
+<span class="sd">            string (without the leading `?` character), and is not processed in any</span>
+<span class="sd">            way.</span>
+<span class="sd">            For a higher-level function to set the query string from a Lua table of</span>
+<span class="sd">            arguments, see `kong.service.request.set_query()`.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite`, access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.set_raw_query(&quot;zzz&amp;bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world&quot;)</span>
+
+<span class="sd">        :parameter query: The raw querystring. Example:</span>
+<span class="sd">            `&quot;foo=bar&amp;bla&amp;baz=hello%20world&quot;`.</span>
+<span class="sd">        :type query: str</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.set_scheme"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_scheme">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_scheme</span><span class="p">(</span><span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the protocol to use when proxying the request to the Service.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            access`</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.request.set_scheme(&quot;https&quot;)</span>
+
+<span class="sd">        :parameter scheme: The scheme to be used. Supported values are `&quot;http&quot;` or `&quot;https&quot;`.</span>
+<span class="sd">        :type scheme: str</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+    <span class="k">pass</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

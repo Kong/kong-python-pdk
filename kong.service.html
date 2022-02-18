@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong.service package &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">kong.service package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-kong.service.request">kong.service.request module</a></li>
+<li><a class="reference internal" href="#module-kong.service.response">kong.service.response module</a></li>
+<li><a class="reference internal" href="#module-kong.service">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>kong.service package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/kong.service.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="kong-service-package">
+<h1>kong.service package<a class="headerlink" href="#kong-service-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-kong.service.request">
+<span id="kong-service-request-module"></span><h2>kong.service.request module<a class="headerlink" href="#module-kong.service.request" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.service.request.request">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.service.request.</span></span><span class="sig-name descname"><span class="pre">request</span></span><a class="reference internal" href="_modules/kong/service/request.html#request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.add_header">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.add_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.add_header" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Adds a request header with the given value to the request to the Service. Unlike
+<cite>kong.service.request.set_header()</cite>, this function doesn’t remove any existing
+headers with the same name. Instead, several occurrences of the header will be
+present in the request. The order in which headers are added is retained.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.add_header(“Cache-Control”, “no-cache”)</p>
+<p>kong.service.request.add_header(“Cache-Control”, “no-store”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header</strong> (<em>str</em>) – The header name. Example: “Cache-Control”.</p></li>
+<li><p><strong>value</strong> (<em>Any</em>) – The header value. Example: “no-cache”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.clear_header">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clear_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.clear_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.clear_header" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Removes all occurrences of the specified header from the request to the Service.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo”)</p>
+<p>kong.service.request.add_header(“X-Foo”, “bar”)</p>
+<p>kong.service.request.clear_header(“X-Foo”)</p>
+<p># from here onwards, no X-Foo headers will exist in the request</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>header</strong> (<em>str</em>) – The header name. Example: “X-Foo”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.
+The function does not throw an error if no header was removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.disable_tls">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disable_tls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.disable_tls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.disable_tls" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Disables the TLS handshake to upstream for [ngx_stream_proxy_module](<a class="reference external" href="https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html">https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html</a>).
+This overrides the [proxy_ssl](<a class="reference external" href="https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_ssl">https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_ssl</a>) directive, effectively setting it to <cite>off</cite>
+for the current stream session.
+Once this function has been called, it is not possible to re-enable TLS handshake for the current session.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>preread`, balancer`</p>
+</dd>
+<dt>Example:</dt><dd><p>ok, err = kong.service.request.disable_tls()</p>
+<p>if not ok:</p>
+<blockquote>
+<div><p># do something with error</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>true</cite> if the operation succeeded, <cite>nil</cite> if an error occurred.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An error message describing the error if there was one.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.enable_buffering">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_buffering</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.enable_buffering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.enable_buffering" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Enables buffered proxying, which allows plugins to access Service body and
+response headers at the same time.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.enable_buffering()</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.set_body">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_body" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the body of the request to the Service. Unlike
+<cite>kong.service.request.set_raw_body()</cite>, the <cite>args</cite> argument must be a table, and
+is encoded with a MIME type.  The encoding MIME type can be specified in
+the optional <cite>mimetype</cite> argument, or if left unspecified, is chosen based
+on the <cite>Content-Type</cite> header of the client’s request.
+Behavior based on MIME type in the <cite>Content-Type</cite> header:
+* <cite>application/x-www-form-urlencoded</cite>: Encodes the arguments as</p>
+<blockquote>
+<div><p>form-encoded. Keys are produced in lexicographical
+order. The order of entries within the same key (when values are
+given as an array) is retained. Any string values given are URL-encoded.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>multipart/form-data</cite>: Encodes the arguments as multipart form data.</p></li>
+<li><p><cite>application/json</cite>: Encodes the arguments as JSON (same as
+<cite>kong.service.request.set_raw_body(json.encode(args))</cite>). Lua types are
+converted to matching JSON types.</p></li>
+</ul>
+<p>If the MIME type is none of the above, this function returns <cite>nil</cite> and
+an error message indicating the body could not be encoded.
+If the <cite>mimetype</cite> argument is specified, the <cite>Content-Type</cite> header is
+set accordingly in the request to the Service.
+If further control of the body generation is needed, a raw body can be given as
+a string with <cite>kong.service.request.set_raw_body()</cite>.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.set_header(“application/json”)</p>
+<p>ok, err = kong.service.request.set_body({</p>
+<p>name = “John Doe”,</p>
+<p>age = 42,</p>
+<p>numbers = {1, 2, 3}</p>
+<p>})</p>
+<p># Produces the following JSON body:</p>
+<p># { “name”: “John Doe”, “age”: 42, “numbers”:[1, 2, 3] }</p>
+<p>ok, err = kong.service.request.set_body({</p>
+<p>foo = “hello world”,</p>
+<p>bar = {“baz”, “bla”, true},</p>
+<p>zzz = true,</p>
+<p>blo = “”</p>
+<p>}, “application/x-www-form-urlencoded”)</p>
+<p># Produces the following body:</p>
+<p># bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world&amp;zzz</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>table</em>) – A table with data to be converted to the appropriate format
+and stored in the body.</p></li>
+<li><p><strong>mimetype</strong> (<em>str</em>) – can be one of:</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>true</cite> on success, <cite>nil</cite> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>nil</cite> on success, an error message in case of error.
+Throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.set_header">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_header" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets a header in the request to the Service with the given value. Any existing header
+with the same name will be overridden.
+If the <cite>header</cite> argument is <cite>“host”</cite> (case-insensitive), then this also
+sets the SNI of the request to the Service.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “value”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header</strong> (<em>str</em>) – The header name. Example: “X-Foo”.</p></li>
+<li><p><strong>value</strong> (<em>Any</em>) – The header value. Example: “hello world”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.set_headers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_headers" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the headers of the request to the Service. Unlike
+<cite>kong.service.request.set_header()</cite>, the <cite>headers</cite> argument must be a table in
+which each key is a string (corresponding to a header’s name), and each value
+is a string, or an array of strings.
+The resulting headers are produced in lexicographical order. The order of
+entries with the same name (when values are given as an array) is retained.
+This function overrides any existing header bearing the same name as those
+specified in the <cite>headers</cite> argument. Other headers remain unchanged.
+If the <cite>“Host”</cite> header is set (case-insensitive), then this also sets
+the SNI of the request to the Service.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo1”)</p>
+<p>kong.service.request.add_header(“X-Foo”, “foo2”)</p>
+<p>kong.service.request.set_header(“X-Bar”, “bar1”)</p>
+<p>kong.service.request.set_headers({</p>
+<p>[“X-Foo”] = “foo3”,</p>
+<p>[“Cache-Control”] = { “no-store”, “no-cache” },</p>
+<p>[“Bla”] = “boo”</p>
+<p>})</p>
+<p># Will add the following headers to the request, in this order:</p>
+<p># X-Bar: bar1</p>
+<p># Bla: boo</p>
+<p># Cache-Control: no-store</p>
+<p># Cache-Control: no-cache</p>
+<p># X-Foo: foo3</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>headers</strong> (<em>table</em>) – A table where each key is a string containing a header name
+and each value is either a string or an array of strings.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.set_method">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_method" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the HTTP method for the request to the service.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_method(“DELETE”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>method</strong> (<em>str</em>) – The method string, which must be in all
+uppercase. Supported values are: <cite>“GET”</cite>, <cite>“HEAD”</cite>, <cite>“PUT”</cite>, <cite>“POST”</cite>,
+<cite>“DELETE”</cite>, <cite>“OPTIONS”</cite>, <cite>“MKCOL”</cite>, <cite>“COPY”</cite>, <cite>“MOVE”</cite>, <cite>“PROPFIND”</cite>,
+<cite>“PROPPATCH”</cite>, <cite>“LOCK”</cite>, <cite>“UNLOCK”</cite>, <cite>“PATCH”</cite>, or <cite>“TRACE”</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.set_path">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_path" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the path component for the request to the service.
+The input accepts any valid <em>normalized</em> URI (including UTF-8 characters)
+and this API will perform necessary escaping according to the RFC
+to make the request valid.
+Input should <strong>not</strong> include the query string.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_path(“/v2/movies”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The path string. Special characters and UTF-8
+characters are allowed, for example: <cite>“/v2/movies”</cite> or <cite>“/foo/😀”</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.set_query">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_query" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Set the query string of the request to the Service.
+Unlike <cite>kong.service.request.set_raw_query()</cite>, the <cite>query</cite> argument must be a
+table in which each key is a string (corresponding to an argument’s name), and
+each value is either a boolean, a string, or an array of strings or booleans.
+Additionally, all string values will be URL-encoded.
+The resulting query string contains keys in their lexicographical order. The
+order of entries within the same key (when values are given as an array) is
+retained.
+If further control of the query string generation is needed, a raw query
+string can be given as a string with <cite>kong.service.request.set_raw_query()</cite>.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_query({</p>
+<p>foo = “hello world”,</p>
+<p>bar = {“baz”, “bla”, true},</p>
+<p>zzz = true,</p>
+<p>blo = “”</p>
+<p>})</p>
+<p># Produces the following query string:</p>
+<p># bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world&amp;zzz</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>table</em>) – A table where each key is a string (corresponding to an
+argument name), and each value is either a boolean, a string, or an array of
+strings or booleans. Any string values given are URL-encoded.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.set_raw_body">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_raw_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_raw_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_raw_body" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the body of the request to the Service.
+The <cite>body</cite> argument must be a string and will not be processed in any way.
+This function also sets the <cite>Content-Length</cite> header appropriately. To set an
+empty body, you can provide an empty string (<cite>“”</cite>) to this function.
+For a higher-level function to set the body based on the request content type,
+see <cite>kong.service.request.set_body()</cite>.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_raw_body(“Hello, world!”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<em>str</em>) – The raw body.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.set_raw_query">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_raw_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_raw_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_raw_query" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the query string of the request to the Service. The <cite>query</cite> argument is a
+string (without the leading <cite>?</cite> character), and is not processed in any
+way.
+For a higher-level function to set the query string from a Lua table of
+arguments, see <cite>kong.service.request.set_query()</cite>.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_raw_query(“zzz&amp;bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>query</strong> (<em>str</em>) – The raw querystring. Example:
+<cite>“foo=bar&amp;bla&amp;baz=hello%20world”</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.request.request.set_scheme">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_scheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scheme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_scheme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_scheme" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the protocol to use when proxying the request to the Service.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_scheme(“https”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scheme</strong> (<em>str</em>) – The scheme to be used. Supported values are <cite>“http”</cite> or <cite>“https”</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kong.service.response">
+<span id="kong-service-response-module"></span><h2>kong.service.response module<a class="headerlink" href="#module-kong.service.response" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.service.response.response">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.service.response.</span></span><span class="sig-name descname"><span class="pre">response</span></span><a class="reference internal" href="_modules/kong/service/response.html#response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.response.response.get_body">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_body" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the decoded buffered body.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
+<p># or <cite>access</cite> phase prior calling this function.</p>
+<p>body = kong.service.response.get_body()</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mimetype</strong> (<em>str</em>) – The MIME type of the response (if known).</p></li>
+<li><p><strong>max_args</strong> (<em>number</em>) – Sets a limit on the maximum number of (what?)
+that can be parsed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The raw buffered body</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.response.response.get_header">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_header" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the value of the specified response header.
+Unlike <cite>kong.response.get_header()</cite>, this function only returns a header
+if it is present in the response from the Service (ignoring headers added by Kong
+itself).</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p># Given a response with the following headers:</p>
+<p># X-Custom-Header: bla</p>
+<p># X-Another: foo bar</p>
+<p># X-Another: baz</p>
+<p>kong.log.inspect(kong.service.response.get_header(“x-custom-header”)) # “bla”</p>
+<p>kong.log.inspect(kong.service.response.get_header(“X-Another”))       # “foo bar”</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The name of the header.
+Header names in are case-insensitive and are normalized to lowercase, and
+dashes (<cite>-</cite>) can be written as underscores (<cite>_</cite>); that is, the header
+<cite>X-Custom-Header</cite> can also be retrieved as <cite>x_custom_header</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the header, or <cite>nil</cite> if a header with
+<cite>name</cite> is not found in the response. If a header with the same name is present
+multiple times in the response, this function returns the value of the
+first occurrence of this header.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.response.response.get_headers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.table</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_headers" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns a Lua table holding the headers from the Service response. Keys are
+header names. Values are either a string with the header value, or an array of
+strings if a header was sent multiple times. Header names in this table are
+case-insensitive and dashes (<cite>-</cite>) can be written as underscores (<cite>_</cite>); that is,
+the header <cite>X-Custom-Header</cite> can also be retrieved as <cite>x_custom_header</cite>.
+Unlike <cite>kong.response.get_headers()</cite>, this function only returns headers that
+are present in the response from the Service (ignoring headers added by Kong itself).
+If the request is not proxied to a Service (e.g. an authentication plugin rejected
+a request and produced an HTTP 401 response), then the returned <cite>headers</cite> value
+might be <cite>nil</cite>, since no response from the Service has been received.
+By default, this function returns up to <strong>100</strong> headers. The optional
+<cite>max_headers</cite> argument can be specified to customize this limit, but must be
+greater than <strong>1</strong> and not greater than <strong>1000</strong>.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p># Given a response with the following headers:</p>
+<p># X-Custom-Header: bla</p>
+<p># X-Another: foo bar</p>
+<p># X-Another: baz</p>
+<p>headers = kong.service.response.get_headers()</p>
+<p>if headers:</p>
+<blockquote>
+<div><p>kong.log.inspect(headers.x_custom_header) # “bla”</p>
+</div></blockquote>
+<p>kong.log.inspect(headers.x_another[1])    # “foo bar”</p>
+<p>kong.log.inspect(headers[“X-Another”][2]) # “baz”</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_headers</strong> (<em>number</em>) – Sets a limit on the maximum number of
+headers that can be parsed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response headers in table form.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>table</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If more headers than <cite>max_headers</cite> are present, returns
+a string with the error <cite>“truncated”</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.response.response.get_raw_body">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_raw_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_raw_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_raw_body" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the raw buffered body.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
+<p># or <cite>access</cite> phase prior calling this function.</p>
+<p>body = kong.service.response.get_raw_body()</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The raw buffered body.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.response.response.get_status">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.service.response.number</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_status" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the HTTP status code of the response from the Service as a Lua number.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.log.inspect(kong.service.response.get_status()) # 418</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The status code from the response from the Service, or <cite>nil</cite>
+if the request was not proxied (that is, if <cite>kong.response.get_source()</cite> returned
+anything other than <cite>“service”</cite>).</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>number</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kong.service">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.service" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.service.service">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.service.</span></span><span class="sig-name descname"><span class="pre">service</span></span><a class="reference internal" href="_modules/kong/service.html#service"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.service.service.request">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request</span></span><a class="headerlink" href="#kong.service.service.request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.add_header">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.add_header" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Adds a request header with the given value to the request to the Service. Unlike
+<cite>kong.service.request.set_header()</cite>, this function doesn’t remove any existing
+headers with the same name. Instead, several occurrences of the header will be
+present in the request. The order in which headers are added is retained.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.add_header(“Cache-Control”, “no-cache”)</p>
+<p>kong.service.request.add_header(“Cache-Control”, “no-store”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header</strong> (<em>str</em>) – The header name. Example: “Cache-Control”.</p></li>
+<li><p><strong>value</strong> (<em>Any</em>) – The header value. Example: “no-cache”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.clear_header">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clear_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.clear_header" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Removes all occurrences of the specified header from the request to the Service.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo”)</p>
+<p>kong.service.request.add_header(“X-Foo”, “bar”)</p>
+<p>kong.service.request.clear_header(“X-Foo”)</p>
+<p># from here onwards, no X-Foo headers will exist in the request</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>header</strong> (<em>str</em>) – The header name. Example: “X-Foo”.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.
+The function does not throw an error if no header was removed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.disable_tls">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disable_tls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.service.service.request.disable_tls" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Disables the TLS handshake to upstream for [ngx_stream_proxy_module](<a class="reference external" href="https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html">https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html</a>).
+This overrides the [proxy_ssl](<a class="reference external" href="https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_ssl">https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_ssl</a>) directive, effectively setting it to <cite>off</cite>
+for the current stream session.
+Once this function has been called, it is not possible to re-enable TLS handshake for the current session.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>preread`, balancer`</p>
+</dd>
+<dt>Example:</dt><dd><p>ok, err = kong.service.request.disable_tls()</p>
+<p>if not ok:</p>
+<blockquote>
+<div><p># do something with error</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>true</cite> if the operation succeeded, <cite>nil</cite> if an error occurred.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An error message describing the error if there was one.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.enable_buffering">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">enable_buffering</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.enable_buffering" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Enables buffered proxying, which allows plugins to access Service body and
+response headers at the same time.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.enable_buffering()</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.set_body">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.service.service.request.set_body" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the body of the request to the Service. Unlike
+<cite>kong.service.request.set_raw_body()</cite>, the <cite>args</cite> argument must be a table, and
+is encoded with a MIME type.  The encoding MIME type can be specified in
+the optional <cite>mimetype</cite> argument, or if left unspecified, is chosen based
+on the <cite>Content-Type</cite> header of the client’s request.
+Behavior based on MIME type in the <cite>Content-Type</cite> header:
+* <cite>application/x-www-form-urlencoded</cite>: Encodes the arguments as</p>
+<blockquote>
+<div><p>form-encoded. Keys are produced in lexicographical
+order. The order of entries within the same key (when values are
+given as an array) is retained. Any string values given are URL-encoded.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>multipart/form-data</cite>: Encodes the arguments as multipart form data.</p></li>
+<li><p><cite>application/json</cite>: Encodes the arguments as JSON (same as
+<cite>kong.service.request.set_raw_body(json.encode(args))</cite>). Lua types are
+converted to matching JSON types.</p></li>
+</ul>
+<p>If the MIME type is none of the above, this function returns <cite>nil</cite> and
+an error message indicating the body could not be encoded.
+If the <cite>mimetype</cite> argument is specified, the <cite>Content-Type</cite> header is
+set accordingly in the request to the Service.
+If further control of the body generation is needed, a raw body can be given as
+a string with <cite>kong.service.request.set_raw_body()</cite>.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.set_header(“application/json”)</p>
+<p>ok, err = kong.service.request.set_body({</p>
+<p>name = “John Doe”,</p>
+<p>age = 42,</p>
+<p>numbers = {1, 2, 3}</p>
+<p>})</p>
+<p># Produces the following JSON body:</p>
+<p># { “name”: “John Doe”, “age”: 42, “numbers”:[1, 2, 3] }</p>
+<p>ok, err = kong.service.request.set_body({</p>
+<p>foo = “hello world”,</p>
+<p>bar = {“baz”, “bla”, true},</p>
+<p>zzz = true,</p>
+<p>blo = “”</p>
+<p>}, “application/x-www-form-urlencoded”)</p>
+<p># Produces the following body:</p>
+<p># bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world&amp;zzz</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>table</em>) – A table with data to be converted to the appropriate format
+and stored in the body.</p></li>
+<li><p><strong>mimetype</strong> (<em>str</em>) – can be one of:</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>true</cite> on success, <cite>nil</cite> otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>nil</cite> on success, an error message in case of error.
+Throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.set_header">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_header" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets a header in the request to the Service with the given value. Any existing header
+with the same name will be overridden.
+If the <cite>header</cite> argument is <cite>“host”</cite> (case-insensitive), then this also
+sets the SNI of the request to the Service.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “value”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>header</strong> (<em>str</em>) – The header name. Example: “X-Foo”.</p></li>
+<li><p><strong>value</strong> (<em>Any</em>) – The header value. Example: “hello world”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.set_headers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_headers" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the headers of the request to the Service. Unlike
+<cite>kong.service.request.set_header()</cite>, the <cite>headers</cite> argument must be a table in
+which each key is a string (corresponding to a header’s name), and each value
+is a string, or an array of strings.
+The resulting headers are produced in lexicographical order. The order of
+entries with the same name (when values are given as an array) is retained.
+This function overrides any existing header bearing the same name as those
+specified in the <cite>headers</cite> argument. Other headers remain unchanged.
+If the <cite>“Host”</cite> header is set (case-insensitive), then this also sets
+the SNI of the request to the Service.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo1”)</p>
+<p>kong.service.request.add_header(“X-Foo”, “foo2”)</p>
+<p>kong.service.request.set_header(“X-Bar”, “bar1”)</p>
+<p>kong.service.request.set_headers({</p>
+<p>[“X-Foo”] = “foo3”,</p>
+<p>[“Cache-Control”] = { “no-store”, “no-cache” },</p>
+<p>[“Bla”] = “boo”</p>
+<p>})</p>
+<p># Will add the following headers to the request, in this order:</p>
+<p># X-Bar: bar1</p>
+<p># Bla: boo</p>
+<p># Cache-Control: no-store</p>
+<p># Cache-Control: no-cache</p>
+<p># X-Foo: foo3</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>headers</strong> (<em>table</em>) – A table where each key is a string containing a header name
+and each value is either a string or an array of strings.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.set_method">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_method" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the HTTP method for the request to the service.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_method(“DELETE”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>method</strong> (<em>str</em>) – The method string, which must be in all
+uppercase. Supported values are: <cite>“GET”</cite>, <cite>“HEAD”</cite>, <cite>“PUT”</cite>, <cite>“POST”</cite>,
+<cite>“DELETE”</cite>, <cite>“OPTIONS”</cite>, <cite>“MKCOL”</cite>, <cite>“COPY”</cite>, <cite>“MOVE”</cite>, <cite>“PROPFIND”</cite>,
+<cite>“PROPPATCH”</cite>, <cite>“LOCK”</cite>, <cite>“UNLOCK”</cite>, <cite>“PATCH”</cite>, or <cite>“TRACE”</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.set_path">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_path" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the path component for the request to the service.
+The input accepts any valid <em>normalized</em> URI (including UTF-8 characters)
+and this API will perform necessary escaping according to the RFC
+to make the request valid.
+Input should <strong>not</strong> include the query string.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_path(“/v2/movies”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The path string. Special characters and UTF-8
+characters are allowed, for example: <cite>“/v2/movies”</cite> or <cite>“/foo/😀”</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.set_query">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_query" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Set the query string of the request to the Service.
+Unlike <cite>kong.service.request.set_raw_query()</cite>, the <cite>query</cite> argument must be a
+table in which each key is a string (corresponding to an argument’s name), and
+each value is either a boolean, a string, or an array of strings or booleans.
+Additionally, all string values will be URL-encoded.
+The resulting query string contains keys in their lexicographical order. The
+order of entries within the same key (when values are given as an array) is
+retained.
+If further control of the query string generation is needed, a raw query
+string can be given as a string with <cite>kong.service.request.set_raw_query()</cite>.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_query({</p>
+<p>foo = “hello world”,</p>
+<p>bar = {“baz”, “bla”, true},</p>
+<p>zzz = true,</p>
+<p>blo = “”</p>
+<p>})</p>
+<p># Produces the following query string:</p>
+<p># bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world&amp;zzz</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> (<em>table</em>) – A table where each key is a string (corresponding to an
+argument name), and each value is either a boolean, a string, or an array of
+strings or booleans. Any string values given are URL-encoded.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.set_raw_body">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_raw_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_raw_body" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the body of the request to the Service.
+The <cite>body</cite> argument must be a string and will not be processed in any way.
+This function also sets the <cite>Content-Length</cite> header appropriately. To set an
+empty body, you can provide an empty string (<cite>“”</cite>) to this function.
+For a higher-level function to set the body based on the request content type,
+see <cite>kong.service.request.set_body()</cite>.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_raw_body(“Hello, world!”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>body</strong> (<em>str</em>) – The raw body.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.set_raw_query">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_raw_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_raw_query" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the query string of the request to the Service. The <cite>query</cite> argument is a
+string (without the leading <cite>?</cite> character), and is not processed in any
+way.
+For a higher-level function to set the query string from a Lua table of
+arguments, see <cite>kong.service.request.set_query()</cite>.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_raw_query(“zzz&amp;bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>query</strong> (<em>str</em>) – The raw querystring. Example:
+<cite>“foo=bar&amp;bla&amp;baz=hello%20world”</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.request.set_scheme">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_scheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scheme</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_scheme" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the protocol to use when proxying the request to the Service.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>access`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.request.set_scheme(“https”)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scheme</strong> (<em>str</em>) – The scheme to be used. Supported values are <cite>“http”</cite> or <cite>“https”</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>throws an error on invalid inputs.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.service.service.response">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">response</span></span><a class="headerlink" href="#kong.service.service.response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.response.get_body">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#kong.service.service.response.get_body" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the decoded buffered body.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
+<p># or <cite>access</cite> phase prior calling this function.</p>
+<p>body = kong.service.response.get_body()</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mimetype</strong> (<em>str</em>) – The MIME type of the response (if known).</p></li>
+<li><p><strong>max_args</strong> (<em>number</em>) – Sets a limit on the maximum number of (what?)
+that can be parsed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The raw buffered body</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.response.get_header">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#kong.service.service.response.get_header" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the value of the specified response header.
+Unlike <cite>kong.response.get_header()</cite>, this function only returns a header
+if it is present in the response from the Service (ignoring headers added by Kong
+itself).</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p># Given a response with the following headers:</p>
+<p># X-Custom-Header: bla</p>
+<p># X-Another: foo bar</p>
+<p># X-Another: baz</p>
+<p>kong.log.inspect(kong.service.response.get_header(“x-custom-header”)) # “bla”</p>
+<p>kong.log.inspect(kong.service.response.get_header(“X-Another”))       # “foo bar”</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – The name of the header.
+Header names in are case-insensitive and are normalized to lowercase, and
+dashes (<cite>-</cite>) can be written as underscores (<cite>_</cite>); that is, the header
+<cite>X-Custom-Header</cite> can also be retrieved as <cite>x_custom_header</cite>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The value of the header, or <cite>nil</cite> if a header with
+<cite>name</cite> is not found in the response. If a header with the same name is present
+multiple times in the response, this function returns the value of the
+first occurrence of this header.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.response.get_headers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.table</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.service.service.response.get_headers" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns a Lua table holding the headers from the Service response. Keys are
+header names. Values are either a string with the header value, or an array of
+strings if a header was sent multiple times. Header names in this table are
+case-insensitive and dashes (<cite>-</cite>) can be written as underscores (<cite>_</cite>); that is,
+the header <cite>X-Custom-Header</cite> can also be retrieved as <cite>x_custom_header</cite>.
+Unlike <cite>kong.response.get_headers()</cite>, this function only returns headers that
+are present in the response from the Service (ignoring headers added by Kong itself).
+If the request is not proxied to a Service (e.g. an authentication plugin rejected
+a request and produced an HTTP 401 response), then the returned <cite>headers</cite> value
+might be <cite>nil</cite>, since no response from the Service has been received.
+By default, this function returns up to <strong>100</strong> headers. The optional
+<cite>max_headers</cite> argument can be specified to customize this limit, but must be
+greater than <strong>1</strong> and not greater than <strong>1000</strong>.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p># Given a response with the following headers:</p>
+<p># X-Custom-Header: bla</p>
+<p># X-Another: foo bar</p>
+<p># X-Another: baz</p>
+<p>headers = kong.service.response.get_headers()</p>
+<p>if headers:</p>
+<blockquote>
+<div><p>kong.log.inspect(headers.x_custom_header) # “bla”</p>
+</div></blockquote>
+<p>kong.log.inspect(headers.x_another[1])    # “foo bar”</p>
+<p>kong.log.inspect(headers[“X-Another”][2]) # “baz”</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>max_headers</strong> (<em>number</em>) – Sets a limit on the maximum number of
+headers that can be parsed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The response headers in table form.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>table</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If more headers than <cite>max_headers</cite> are present, returns
+a string with the error <cite>“truncated”</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.response.get_raw_body">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_raw_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#kong.service.service.response.get_raw_body" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the raw buffered body.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
+<p># or <cite>access</cite> phase prior calling this function.</p>
+<p>body = kong.service.response.get_raw_body()</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The raw buffered body.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.response.get_status">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.service.response.number</span></span></span><a class="headerlink" href="#kong.service.service.response.get_status" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the HTTP status code of the response from the Service as a Lua number.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.log.inspect(kong.service.response.get_status()) # 418</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The status code from the response from the Service, or <cite>nil</cite>
+if the request was not proxied (that is, if <cite>kong.response.get_source()</cite> returned
+anything other than <cite>“service”</cite>).</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>number</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.set_target">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.number</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service.html#service.set_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service.set_target" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the host and port on which to connect to for proxying the request.
+Using this method is equivalent to ask Kong to not run the load-balancing
+phase for this request, and consider it manually overridden.
+Load-balancing components such as retries and health-checks will also be
+ignored for this request.
+The <cite>host</cite> argument expects a string containing the IP address of the
+upstream server (IPv4/IPv6), and the <cite>port</cite> argument must contain a number
+representing the port on which to connect to.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>access</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.service.set_target(“service.local”, 443)</p>
+<p>kong.service.set_target(“192.168.130.1”, 80)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> (<em>str</em>) – </p></li>
+<li><p><strong>port</strong> (<em>number</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.set_tls_verify">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_tls_verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">on</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service.html#service.set_tls_verify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service.set_tls_verify" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets whether TLS verification is enabled while handshaking with the Service.
+The <cite>on</cite> argument is a boolean flag, where <cite>true</cite> means upstream verification
+is enabled and <cite>false</cite> disables it.
+This call affects only the current request. If the trusted certificate store is
+not set already (via [proxy_ssl_trusted_certificate](<a class="reference external" href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_trusted_certificate">https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_trusted_certificate</a>)
+or [kong.service.set_upstream_ssl_trusted_store](#kongserviceset_upstream_ssl_trusted_store)),
+then TLS verification will always fail with “unable to get local issuer certificate” error.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+</dd>
+<dt>Example:</dt><dd><p>ok, err = kong.service.set_tls_verify(true)</p>
+<p>if not ok:</p>
+<blockquote>
+<div><p># do something with error</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>on</strong> (<em>bool</em>) – Whether to enable TLS certificate verification for the current request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>true</cite> if the operation succeeded, <cite>nil</cite> if an error occurred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An error message describing the error if there was one</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.set_tls_verify_depth">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_tls_verify_depth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.number</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service.html#service.set_tls_verify_depth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service.set_tls_verify_depth" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the maximum depth of verification when validating upstream server’s TLS certificate.
+This call affects only the current request. For the depth to be actually used the verification
+has to be enabled with either the [proxy_ssl_verify](<a class="reference external" href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_verify">https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ssl_verify</a>)
+directive or using the [kong.service.set_tls_verify](#kongserviceset_tls_verify) function.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+</dd>
+<dt>Example:</dt><dd><p>ok, err = kong.service.set_tls_verify_depth(3)</p>
+<p>if not ok:</p>
+<blockquote>
+<div><p># do something with error</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>depth</strong> (<em>number</em>) – Depth to use when validating. Must be non-negative</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>true</cite> if the operation succeeded, <cite>nil</cite> if an error occurred</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An error message describing the error if there was one</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.service.service.set_upstream">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_upstream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service.html#service.set_upstream"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service.set_upstream" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the desired Upstream entity to handle the load-balancing step for
+this request. Using this method is equivalent to creating a Service with a
+<cite>host</cite> property equal to that of an Upstream entity (in which case, the
+request would be proxied to one of the Targets associated with that
+Upstream).
+The <cite>host</cite> argument should receive a string equal to that of one of the
+Upstream entities currently configured.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>access</p>
+</dd>
+<dt>Example:</dt><dd><p>ok, err = kong.service.set_upstream(“service.prod”)</p>
+<p>if not ok:</p>
+<blockquote>
+<div><p>kong.log.err(err)</p>
+</div></blockquote>
+<p>return</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>host</strong> (<em>str</em>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>true</cite> on success, or <cite>nil</cite> if no upstream entities
+where found</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An error message describing the error if there was
+one.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

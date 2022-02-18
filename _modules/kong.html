@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>kong</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for kong</h1><div class="highlight"><pre>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT</span>
+<span class="c1"># Original source path: kong/pdk.lua</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="c1"># XXX</span>
+<span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
+
+<span class="kn">from</span> <span class="nn">.client</span> <span class="kn">import</span> <span class="n">client</span> <span class="k">as</span> <span class="n">cls_client</span>
+<span class="kn">from</span> <span class="nn">.cluster</span> <span class="kn">import</span> <span class="n">cluster</span> <span class="k">as</span> <span class="n">cls_cluster</span>
+<span class="kn">from</span> <span class="nn">.ctx</span> <span class="kn">import</span> <span class="n">ctx</span> <span class="k">as</span> <span class="n">cls_ctx</span>
+<span class="kn">from</span> <span class="nn">.ip</span> <span class="kn">import</span> <span class="n">ip</span> <span class="k">as</span> <span class="n">cls_ip</span>
+<span class="kn">from</span> <span class="nn">.log</span> <span class="kn">import</span> <span class="n">log</span> <span class="k">as</span> <span class="n">cls_log</span>
+<span class="kn">from</span> <span class="nn">.nginx</span> <span class="kn">import</span> <span class="n">nginx</span> <span class="k">as</span> <span class="n">cls_nginx</span>
+<span class="kn">from</span> <span class="nn">.node</span> <span class="kn">import</span> <span class="n">node</span> <span class="k">as</span> <span class="n">cls_node</span>
+<span class="kn">from</span> <span class="nn">.request</span> <span class="kn">import</span> <span class="n">request</span> <span class="k">as</span> <span class="n">cls_request</span>
+<span class="kn">from</span> <span class="nn">.response</span> <span class="kn">import</span> <span class="n">response</span> <span class="k">as</span> <span class="n">cls_response</span>
+<span class="kn">from</span> <span class="nn">.router</span> <span class="kn">import</span> <span class="n">router</span> <span class="k">as</span> <span class="n">cls_router</span>
+<span class="kn">from</span> <span class="nn">.service</span> <span class="kn">import</span> <span class="n">service</span> <span class="k">as</span> <span class="n">cls_service</span>
+<span class="kn">from</span> <span class="nn">.vault</span> <span class="kn">import</span> <span class="n">vault</span> <span class="k">as</span> <span class="n">cls_vault</span>
+
+<div class="viewcode-block" id="kong"><a class="viewcode-back" href="../kong.html#kong.kong">[docs]</a><span class="k">class</span> <span class="nc">kong</span><span class="p">():</span>
+
+    <span class="n">client</span> <span class="o">=</span> <span class="n">cls_client</span>
+    <span class="n">cluster</span> <span class="o">=</span> <span class="n">cls_cluster</span>
+    <span class="n">ctx</span> <span class="o">=</span> <span class="n">cls_ctx</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">cls_ip</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">cls_log</span>
+    <span class="n">nginx</span> <span class="o">=</span> <span class="n">cls_nginx</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="n">cls_node</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="n">cls_request</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">cls_response</span>
+    <span class="n">router</span> <span class="o">=</span> <span class="n">cls_router</span>
+    <span class="n">service</span> <span class="o">=</span> <span class="n">cls_service</span>
+    <span class="n">vault</span> <span class="o">=</span> <span class="n">cls_vault</span>
+
+    <span class="k">pass</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

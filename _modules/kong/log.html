@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong.log &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../kong.html">kong</a> &raquo;</li>
+      <li>kong.log</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for kong.log</h1><div class="highlight"><pre>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT</span>
+<span class="c1"># Original source path: kong/pdk/log.lua</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="c1"># XXX</span>
+<span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
+
+
+<div class="viewcode-block" id="log"><a class="viewcode-back" href="../../kong.html#kong.log.log">[docs]</a><span class="k">class</span> <span class="nc">log</span><span class="p">():</span>
+
+
+<div class="viewcode-block" id="log.alert"><a class="viewcode-back" href="../../kong.html#kong.log.log.alert">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">alert</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Similar to `kong.log()`, but the produced log has the severity given by</span>
+<span class="sd">            `&lt;level&gt;`, instead of `notice`. The supported levels are:</span>
+<span class="sd">            * `kong.log.alert()`</span>
+<span class="sd">            * `kong.log.crit()`</span>
+<span class="sd">            * `kong.log.err()`</span>
+<span class="sd">            * `kong.log.warn()`</span>
+<span class="sd">            * `kong.log.notice()`</span>
+<span class="sd">            * `kong.log.info()`</span>
+<span class="sd">            * `kong.log.debug()`</span>
+<span class="sd">            Logs have the same format as that of `kong.log()`. For</span>
+<span class="sd">            example, the following call:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">             kong.log.err(&quot;hello &quot;, &quot;world&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            would, within the core, produce a log line similar to:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+<span class="sd">            If invoked from within a plugin (for example, `key-auth`) it would include the</span>
+<span class="sd">            namespace prefix:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 [key-auth] hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            init_worker, certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.log.warn(&quot;something require attention&quot;)</span>
+
+<span class="sd">            kong.log.err(&quot;something failed: &quot;, err)</span>
+
+<span class="sd">            kong.log.alert(&quot;something requires immediate action&quot;)</span>
+
+<span class="sd">        :parameter *args: All params will be concatenated and stringified before being sent to the log.</span>
+<span class="sd">        :type *args: Any</span>
+
+<span class="sd">        :return: Throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log.crit"><a class="viewcode-back" href="../../kong.html#kong.log.log.crit">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">crit</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Similar to `kong.log()`, but the produced log has the severity given by</span>
+<span class="sd">            `&lt;level&gt;`, instead of `notice`. The supported levels are:</span>
+<span class="sd">            * `kong.log.alert()`</span>
+<span class="sd">            * `kong.log.crit()`</span>
+<span class="sd">            * `kong.log.err()`</span>
+<span class="sd">            * `kong.log.warn()`</span>
+<span class="sd">            * `kong.log.notice()`</span>
+<span class="sd">            * `kong.log.info()`</span>
+<span class="sd">            * `kong.log.debug()`</span>
+<span class="sd">            Logs have the same format as that of `kong.log()`. For</span>
+<span class="sd">            example, the following call:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">             kong.log.err(&quot;hello &quot;, &quot;world&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            would, within the core, produce a log line similar to:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+<span class="sd">            If invoked from within a plugin (for example, `key-auth`) it would include the</span>
+<span class="sd">            namespace prefix:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 [key-auth] hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            init_worker, certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.log.warn(&quot;something require attention&quot;)</span>
+
+<span class="sd">            kong.log.err(&quot;something failed: &quot;, err)</span>
+
+<span class="sd">            kong.log.alert(&quot;something requires immediate action&quot;)</span>
+
+<span class="sd">        :parameter *args: All params will be concatenated and stringified before being sent to the log.</span>
+<span class="sd">        :type *args: Any</span>
+
+<span class="sd">        :return: Throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log.debug"><a class="viewcode-back" href="../../kong.html#kong.log.log.debug">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Similar to `kong.log()`, but the produced log has the severity given by</span>
+<span class="sd">            `&lt;level&gt;`, instead of `notice`. The supported levels are:</span>
+<span class="sd">            * `kong.log.alert()`</span>
+<span class="sd">            * `kong.log.crit()`</span>
+<span class="sd">            * `kong.log.err()`</span>
+<span class="sd">            * `kong.log.warn()`</span>
+<span class="sd">            * `kong.log.notice()`</span>
+<span class="sd">            * `kong.log.info()`</span>
+<span class="sd">            * `kong.log.debug()`</span>
+<span class="sd">            Logs have the same format as that of `kong.log()`. For</span>
+<span class="sd">            example, the following call:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">             kong.log.err(&quot;hello &quot;, &quot;world&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            would, within the core, produce a log line similar to:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+<span class="sd">            If invoked from within a plugin (for example, `key-auth`) it would include the</span>
+<span class="sd">            namespace prefix:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 [key-auth] hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            init_worker, certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.log.warn(&quot;something require attention&quot;)</span>
+
+<span class="sd">            kong.log.err(&quot;something failed: &quot;, err)</span>
+
+<span class="sd">            kong.log.alert(&quot;something requires immediate action&quot;)</span>
+
+<span class="sd">        :parameter *args: All params will be concatenated and stringified before being sent to the log.</span>
+<span class="sd">        :type *args: Any</span>
+
+<span class="sd">        :return: Throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log.deprecation"><a class="viewcode-back" href="../../kong.html#kong.log.log.deprecation">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">deprecation</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Arguments given to this function can be of any type, but table arguments</span>
+<span class="sd">            are converted to strings via `tostring` (thus potentially calling a</span>
+<span class="sd">            table&#39;s `__tostring` metamethod if set). When the last argument is a table,</span>
+<span class="sd">            it is considered as a deprecation metadata. The table can include the</span>
+<span class="sd">            following properties:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">            {</span>
+<span class="sd">              after = &quot;2.5.0&quot;,   -- deprecated after Kong version 2.5.0 (defaults to `nil`)</span>
+<span class="sd">              removal = &quot;3.0.0&quot;, -- about to be removed with Kong version 3.0.0 (defaults to `nil`)</span>
+<span class="sd">              trace = true,      -- writes stack trace along with the deprecation message (defaults to `nil`)</span>
+<span class="sd">            }</span>
+<span class="sd">            ```</span>
+<span class="sd">            For example, the following call:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">            kong.log.deprecation(&quot;hello &quot;, &quot;world&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            would, within the core, produce a log line similar to:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [warn] 25932#0: *1 [kong] some_file.lua:54 hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+<span class="sd">            If invoked from within a plugin (for example, `key-auth`) it would include the</span>
+<span class="sd">            namespace prefix:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [warn] 25932#0: *1 [kong] some_file.lua:54 [key-auth] hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+<span class="sd">            And with metatable, the following call:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">            kong.log.deprecation(&quot;hello &quot;, &quot;world&quot;, { after = &quot;2.5.0&quot;, removal = &quot;3.0.0&quot; })</span>
+<span class="sd">            ```</span>
+<span class="sd">            would, within the core, produce a log line similar to:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [warn] 25932#0: *1 [kong] some_file.lua:54 hello world (deprecated after 2.5.0, scheduled for removal in 3.0.0), client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            init_worker, certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.log.deprecation(&quot;hello &quot;, &quot;world&quot;)</span>
+
+<span class="sd">            kong.log.deprecation(&quot;hello &quot;, &quot;world&quot;, { after = &quot;2.5.0&quot; })</span>
+
+<span class="sd">            kong.log.deprecation(&quot;hello &quot;, &quot;world&quot;, { removal = &quot;3.0.0&quot; })</span>
+
+<span class="sd">            kong.log.deprecation(&quot;hello &quot;, &quot;world&quot;, { after = &quot;2.5.0&quot;, removal = &quot;3.0.0&quot; })</span>
+
+<span class="sd">            kong.log.deprecation(&quot;hello &quot;, &quot;world&quot;, { trace = true })</span>
+
+<span class="sd">        :parameter *args: all params will be concatenated and stringified before being sent to the log</span>
+<span class="sd">            (if the last param is a table, it is considered as a deprecation metadata)</span>
+<span class="sd">        :type *args: Any</span>
+
+<span class="sd">        :return: throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log.err"><a class="viewcode-back" href="../../kong.html#kong.log.log.err">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">err</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Similar to `kong.log()`, but the produced log has the severity given by</span>
+<span class="sd">            `&lt;level&gt;`, instead of `notice`. The supported levels are:</span>
+<span class="sd">            * `kong.log.alert()`</span>
+<span class="sd">            * `kong.log.crit()`</span>
+<span class="sd">            * `kong.log.err()`</span>
+<span class="sd">            * `kong.log.warn()`</span>
+<span class="sd">            * `kong.log.notice()`</span>
+<span class="sd">            * `kong.log.info()`</span>
+<span class="sd">            * `kong.log.debug()`</span>
+<span class="sd">            Logs have the same format as that of `kong.log()`. For</span>
+<span class="sd">            example, the following call:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">             kong.log.err(&quot;hello &quot;, &quot;world&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            would, within the core, produce a log line similar to:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+<span class="sd">            If invoked from within a plugin (for example, `key-auth`) it would include the</span>
+<span class="sd">            namespace prefix:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 [key-auth] hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            init_worker, certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.log.warn(&quot;something require attention&quot;)</span>
+
+<span class="sd">            kong.log.err(&quot;something failed: &quot;, err)</span>
+
+<span class="sd">            kong.log.alert(&quot;something requires immediate action&quot;)</span>
+
+<span class="sd">        :parameter *args: All params will be concatenated and stringified before being sent to the log.</span>
+<span class="sd">        :type *args: Any</span>
+
+<span class="sd">        :return: Throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log.info"><a class="viewcode-back" href="../../kong.html#kong.log.log.info">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Similar to `kong.log()`, but the produced log has the severity given by</span>
+<span class="sd">            `&lt;level&gt;`, instead of `notice`. The supported levels are:</span>
+<span class="sd">            * `kong.log.alert()`</span>
+<span class="sd">            * `kong.log.crit()`</span>
+<span class="sd">            * `kong.log.err()`</span>
+<span class="sd">            * `kong.log.warn()`</span>
+<span class="sd">            * `kong.log.notice()`</span>
+<span class="sd">            * `kong.log.info()`</span>
+<span class="sd">            * `kong.log.debug()`</span>
+<span class="sd">            Logs have the same format as that of `kong.log()`. For</span>
+<span class="sd">            example, the following call:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">             kong.log.err(&quot;hello &quot;, &quot;world&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            would, within the core, produce a log line similar to:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+<span class="sd">            If invoked from within a plugin (for example, `key-auth`) it would include the</span>
+<span class="sd">            namespace prefix:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 [key-auth] hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            init_worker, certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.log.warn(&quot;something require attention&quot;)</span>
+
+<span class="sd">            kong.log.err(&quot;something failed: &quot;, err)</span>
+
+<span class="sd">            kong.log.alert(&quot;something requires immediate action&quot;)</span>
+
+<span class="sd">        :parameter *args: All params will be concatenated and stringified before being sent to the log.</span>
+<span class="sd">        :type *args: Any</span>
+
+<span class="sd">        :return: Throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log.notice"><a class="viewcode-back" href="../../kong.html#kong.log.log.notice">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">notice</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Similar to `kong.log()`, but the produced log has the severity given by</span>
+<span class="sd">            `&lt;level&gt;`, instead of `notice`. The supported levels are:</span>
+<span class="sd">            * `kong.log.alert()`</span>
+<span class="sd">            * `kong.log.crit()`</span>
+<span class="sd">            * `kong.log.err()`</span>
+<span class="sd">            * `kong.log.warn()`</span>
+<span class="sd">            * `kong.log.notice()`</span>
+<span class="sd">            * `kong.log.info()`</span>
+<span class="sd">            * `kong.log.debug()`</span>
+<span class="sd">            Logs have the same format as that of `kong.log()`. For</span>
+<span class="sd">            example, the following call:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">             kong.log.err(&quot;hello &quot;, &quot;world&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            would, within the core, produce a log line similar to:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+<span class="sd">            If invoked from within a plugin (for example, `key-auth`) it would include the</span>
+<span class="sd">            namespace prefix:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 [key-auth] hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            init_worker, certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.log.warn(&quot;something require attention&quot;)</span>
+
+<span class="sd">            kong.log.err(&quot;something failed: &quot;, err)</span>
+
+<span class="sd">            kong.log.alert(&quot;something requires immediate action&quot;)</span>
+
+<span class="sd">        :parameter *args: All params will be concatenated and stringified before being sent to the log.</span>
+<span class="sd">        :type *args: Any</span>
+
+<span class="sd">        :return: Throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log.serialize"><a class="viewcode-back" href="../../kong.html#kong.log.log.serialize">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log.set_serialize_value"><a class="viewcode-back" href="../../kong.html#kong.log.log.set_serialize_value">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_serialize_value</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets a value to be used on the `serialize` custom table.</span>
+<span class="sd">            Logging plugins use the output of `kong.log.serialize()` as a base for their logs.</span>
+<span class="sd">            This function lets you customize the log output.</span>
+<span class="sd">            It can be used to replace existing values in the output, or to delete</span>
+<span class="sd">            existing values by passing `nil`.</span>
+<span class="sd">            **Note:** The type-checking of the `value` parameter can take some time, so</span>
+<span class="sd">            it is deferred to the `serialize()` call, which happens in the log</span>
+<span class="sd">            phase in most real-usage cases.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Adds a new value to the serialized table</span>
+
+<span class="sd">            kong.log.set_serialize_value(&quot;my_new_value&quot;, 1)</span>
+
+<span class="sd">            assert(kong.log.serialize().my_new_value == 1)</span>
+
+<span class="sd">            # Value can be a table</span>
+
+<span class="sd">            kong.log.set_serialize_value(&quot;my&quot;, { new = { value = 2 } })</span>
+
+<span class="sd">            assert(kong.log.serialize().my.new.value == 2)</span>
+
+<span class="sd">            # It is possible to change an existing serialized value</span>
+
+<span class="sd">            kong.log.set_serialize_value(&quot;my_new_value&quot;, 3)</span>
+
+<span class="sd">            assert(kong.log.serialize().my_new_value == 3)</span>
+
+<span class="sd">            # Unset an existing value by setting it to nil</span>
+
+<span class="sd">            kong.log.set_serialize_value(&quot;my_new_value&quot;, nil)</span>
+
+<span class="sd">            assert(kong.log.serialize().my_new_value == nil)</span>
+
+<span class="sd">            # Dots in the key are interpreted as table accesses</span>
+
+<span class="sd">            kong.log.set_serialize_value(&quot;my.new.value&quot;, 4)</span>
+
+<span class="sd">            assert(kong.log.serialize().my.new_value == 4)</span>
+
+<span class="sd">        :parameter key: The name of the field.</span>
+<span class="sd">        :type key: str</span>
+<span class="sd">        :parameter value: Value to be set. When a table is used, its keys must be numbers, strings, or booleans, and its values can be numbers, strings, or other tables like itself, recursively.</span>
+<span class="sd">        :type value: Any</span>
+<span class="sd">        :parameter options: Can contain two entries: options.mode can be `set` (the default, always sets), `add` (only add if entry does not already exist) and `replace` (only change value if it already exists).</span>
+<span class="sd">        :type options: table</span>
+
+<span class="sd">        :return: The request information table.</span>
+
+<span class="sd">        :rtype: table</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="log.warn"><a class="viewcode-back" href="../../kong.html#kong.log.log.warn">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">warn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Similar to `kong.log()`, but the produced log has the severity given by</span>
+<span class="sd">            `&lt;level&gt;`, instead of `notice`. The supported levels are:</span>
+<span class="sd">            * `kong.log.alert()`</span>
+<span class="sd">            * `kong.log.crit()`</span>
+<span class="sd">            * `kong.log.err()`</span>
+<span class="sd">            * `kong.log.warn()`</span>
+<span class="sd">            * `kong.log.notice()`</span>
+<span class="sd">            * `kong.log.info()`</span>
+<span class="sd">            * `kong.log.debug()`</span>
+<span class="sd">            Logs have the same format as that of `kong.log()`. For</span>
+<span class="sd">            example, the following call:</span>
+<span class="sd">            ``` lua</span>
+<span class="sd">             kong.log.err(&quot;hello &quot;, &quot;world&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            would, within the core, produce a log line similar to:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+<span class="sd">            If invoked from within a plugin (for example, `key-auth`) it would include the</span>
+<span class="sd">            namespace prefix:</span>
+<span class="sd">            ``` plain</span>
+<span class="sd">            2017/07/09 19:36:25 [error] 25932#0: *1 [kong] some_file.lua:54 [key-auth] hello world, client: 127.0.0.1, server: localhost, request: &quot;GET /log HTTP/1.1&quot;, host: &quot;localhost&quot;</span>
+<span class="sd">            ```</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            init_worker, certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.log.warn(&quot;something require attention&quot;)</span>
+
+<span class="sd">            kong.log.err(&quot;something failed: &quot;, err)</span>
+
+<span class="sd">            kong.log.alert(&quot;something requires immediate action&quot;)</span>
+
+<span class="sd">        :parameter *args: All params will be concatenated and stringified before being sent to the log.</span>
+<span class="sd">        :type *args: Any</span>
+
+<span class="sd">        :return: Throws an error on invalid inputs.</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+    <span class="k">pass</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong.client &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+          <li><a href="../kong.html">kong</a> &raquo;</li>
+      <li>kong.client</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for kong.client</h1><div class="highlight"><pre>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT</span>
+<span class="c1"># Original source path: kong/pdk/client.lua</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="c1"># XXX</span>
+<span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
+
+<span class="kn">from</span> <span class="nn">.tls</span> <span class="kn">import</span> <span class="n">tls</span> <span class="k">as</span> <span class="n">cls_tls</span>
+
+<div class="viewcode-block" id="client"><a class="viewcode-back" href="../../kong.client.html#kong.client.client">[docs]</a><span class="k">class</span> <span class="nc">client</span><span class="p">():</span>
+
+    <span class="n">tls</span> <span class="o">=</span> <span class="n">cls_tls</span>
+
+<div class="viewcode-block" id="client.authenticate"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.authenticate">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="n">consumer</span><span class="p">:</span> <span class="n">table</span><span class="p">,</span> <span class="n">credential</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the authenticated consumer and/or credential for the current request.</span>
+<span class="sd">            While both `consumer` and `credential` can be `nil`,</span>
+<span class="sd">            at least one of them must exist. Otherwise, this function will throw an</span>
+<span class="sd">            error.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            access</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # assuming `credential` and `consumer` have been set by some authentication code</span>
+
+<span class="sd">            kong.client.authenticate(consumer, credentials)</span>
+
+<span class="sd">        :parameter consumer: The consumer to set. If no</span>
+<span class="sd">            value is provided, then any existing value will be cleared.</span>
+<span class="sd">        :type consumer: table</span>
+<span class="sd">        :parameter credential: The credential to set. If</span>
+<span class="sd">            no value is provided, then any existing value will be cleared.</span>
+<span class="sd">        :type credential: table</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="client.get_consumer"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_consumer">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_consumer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the `consumer` entity of the currently authenticated consumer.</span>
+<span class="sd">            If not set yet, it returns `nil`.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            consumer = kong.client.get_consumer()</span>
+
+<span class="sd">            if consumer:</span>
+
+<span class="sd">                consumer_id = consumer.id</span>
+
+<span class="sd">            else:</span>
+
+<span class="sd">                # request not authenticated yet, or a credential</span>
+
+<span class="sd">            # without a consumer (external auth)</span>
+
+<span class="sd">        :return: The authenticated consumer entity.</span>
+
+<span class="sd">        :rtype: table</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="client.get_credential"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_credential">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_credential</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the credentials of the currently authenticated consumer.</span>
+<span class="sd">            If not set yet, it returns `nil`.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            credential = kong.client.get_credential()</span>
+
+<span class="sd">            if credential:</span>
+
+<span class="sd">                consumer_id = credential.consumer_id</span>
+
+<span class="sd">            else:</span>
+
+<span class="sd">                # request not authenticated yet</span>
+
+<span class="sd">        :return: The authenticated credential.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="client.get_forwarded_ip"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_forwarded_ip">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_forwarded_ip</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the remote address of the client making the request. Unlike</span>
+<span class="sd">            `kong.client.get_ip`, this function will consider forwarded addresses in</span>
+<span class="sd">            cases when a load balancer is in front of Kong. Whether this function</span>
+<span class="sd">            returns a forwarded address or not depends on several Kong configuration</span>
+<span class="sd">            parameters:</span>
+<span class="sd">            * [trusted\_ips](https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips)</span>
+<span class="sd">            * [real\_ip\_header](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header)</span>
+<span class="sd">            * [real\_ip\_recursive](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive)</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a client with IP 127.0.0.1 making connection through</span>
+
+<span class="sd">            # a load balancer with IP 10.0.0.1 to Kong answering the request for</span>
+
+<span class="sd">            # https://username:password@example.com:1234/v1/movies</span>
+
+<span class="sd">            kong.client.get_forwarded_ip() # &quot;127.0.0.1&quot;</span>
+
+<span class="sd">            # Note: This example assumes that 10.0.0.1 is one of the trusted IPs, and that</span>
+
+<span class="sd">            # the load balancer adds the right headers matching with the configuration</span>
+
+<span class="sd">            # of `real_ip_header`, e.g. `proxy_protocol`.</span>
+
+<span class="sd">        :return: The remote IP address of the client making the request,</span>
+<span class="sd">            considering forwarded addresses.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="client.get_forwarded_port"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_forwarded_port">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_forwarded_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the remote port of the client making the request. Unlike</span>
+<span class="sd">            `kong.client.get_port`, this function will consider forwarded ports in cases</span>
+<span class="sd">            when a load balancer is in front of Kong. Whether this function returns a</span>
+<span class="sd">            forwarded port or not depends on several Kong configuration parameters:</span>
+<span class="sd">            * [trusted\_ips](https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips)</span>
+<span class="sd">            * [real\_ip\_header](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header)</span>
+<span class="sd">            * [real\_ip\_recursive](https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive)</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # [client]:40000 &lt;-&gt; 80:[balancer]:30000 &lt;-&gt; 80:[kong]:20000 &lt;-&gt; 80:[service]</span>
+
+<span class="sd">            kong.client.get_forwarded_port() # 40000</span>
+
+<span class="sd">            # Note: This example assumes that [balancer] is one of the trusted IPs, and that</span>
+
+<span class="sd">            # the load balancer adds the right headers matching with the configuration</span>
+
+<span class="sd">            # of `real_ip_header`, e.g. `proxy_protocol`.</span>
+
+<span class="sd">        :return: The remote client port, considering forwarded ports.</span>
+
+<span class="sd">        :rtype: number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="client.get_ip"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_ip">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_ip</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the remote address of the client making the request. This module</span>
+<span class="sd">            **always** returns the address of the client directly connecting to Kong.</span>
+<span class="sd">            That is, in cases when a load balancer is in front of Kong, this function</span>
+<span class="sd">            returns the load balancer&#39;s address, and **not** that of the</span>
+<span class="sd">            downstream client.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a client with IP 127.0.0.1 making connection through</span>
+
+<span class="sd">            # a load balancer with IP 10.0.0.1 to Kong answering the request for</span>
+
+<span class="sd">            # https://example.com:1234/v1/movies</span>
+
+<span class="sd">            kong.client.get_ip() # &quot;10.0.0.1&quot;</span>
+
+<span class="sd">        :return: The remote IP address of the client making the request.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="client.get_port"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_port">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the remote port of the client making the request. This</span>
+<span class="sd">            **always** returns the port of the client directly connecting to Kong. That</span>
+<span class="sd">            is, in cases when a load balancer is in front of Kong, this function</span>
+<span class="sd">            returns the load balancer&#39;s port, and **not** that of the downstream client.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            certificate, rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # [client]:40000 &lt;-&gt; 80:[balancer]:30000 &lt;-&gt; 80:[kong]:20000 &lt;-&gt; 80:[service]</span>
+
+<span class="sd">            kong.client.get_port() # 30000</span>
+
+<span class="sd">        :return: The remote client port.</span>
+
+<span class="sd">        :rtype: number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="client.get_protocol"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_protocol">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_protocol</span><span class="p">(</span><span class="n">allow_terminated</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">err</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the protocol matched by the current route (`&quot;http&quot;`, `&quot;https&quot;`, `&quot;tcp&quot;` or</span>
+<span class="sd">            `&quot;tls&quot;`), or `nil`, if no route has been matched, which can happen when dealing with</span>
+<span class="sd">            erroneous requests.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.client.get_protocol() # &quot;http&quot;</span>
+
+<span class="sd">        :parameter allow_terminated: If set, the `X-Forwarded-Proto` header is checked when checking for HTTPS.</span>
+<span class="sd">        :type allow_terminated: bool</span>
+
+<span class="sd">        :return: Can be one of `&quot;http&quot;`, `&quot;https&quot;`, `&quot;tcp&quot;`, `&quot;tls&quot;` or `nil`.</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: `nil` if successful, or an error message if it fails.</span>
+
+<span class="sd">        :rtype: err</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="client.load_consumer"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.load_consumer">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load_consumer</span><span class="p">(</span><span class="n">consumer_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">search_by_username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="n">err</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the consumer from the datastore.</span>
+<span class="sd">            Looks up the consumer by ID, and can optionally do a second search by name.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            consumer_id = &quot;john_doe&quot;</span>
+
+<span class="sd">            consumer = kong.client.load_consumer(consumer_id, true)</span>
+
+<span class="sd">        :parameter consumer_id: The consumer ID to look up.</span>
+<span class="sd">        :type consumer_id: str</span>
+<span class="sd">        :parameter search_by_username: If truthy,</span>
+<span class="sd">            and if the consumer is not found by ID,</span>
+<span class="sd">            then a second search by username will be performed.</span>
+<span class="sd">        :type search_by_username: bool</span>
+
+<span class="sd">        :return: Consumer entity or `nil`.</span>
+
+<span class="sd">        :rtype: table</span>
+<span class="sd">        :return: `nil` if successful, or an error message if it fails.</span>
+
+<span class="sd">        :rtype: err</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+    <span class="k">pass</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

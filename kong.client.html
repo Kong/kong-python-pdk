@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong.client package &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">kong.client package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-kong.client.tls">kong.client.tls module</a></li>
+<li><a class="reference internal" href="#module-kong.client">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>kong.client package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/kong.client.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="kong-client-package">
+<h1>kong.client package<a class="headerlink" href="#kong-client-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-kong.client.tls">
+<span id="kong-client-tls-module"></span><h2>kong.client.tls module<a class="headerlink" href="#module-kong.client.tls" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.client.tls.tls">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.client.tls.</span></span><span class="sig-name descname"><span class="pre">tls</span></span><a class="reference internal" href="_modules/kong/client/tls.html#tls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.tls.tls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.tls.tls.disable_session_reuse">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disable_session_reuse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/client/tls.html#tls.disable_session_reuse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.tls.tls.disable_session_reuse" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Prevents the TLS session for the current connection from being reused
+by disabling the session ticket and session ID for the current TLS connection.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>certificate</p>
+</dd>
+<dt>Example:</dt><dd><p>res, err = kong.client.tls.disable_session_reuse()</p>
+<p>if not res:</p>
+<blockquote>
+<div><p># do something with err</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>true</cite> if successful, <cite>nil</cite> if it fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>nil</cite> if successful, or an error message if it fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>err</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.tls.tls.get_full_client_certificate_chain">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_full_client_certificate_chain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/client/tls.html#tls.get_full_client_certificate_chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.tls.tls.get_full_client_certificate_chain" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the PEM encoded downstream client certificate chain with the
+client certificate at the top and intermediate certificates
+(if any) at the bottom.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite, access, balancer, header_filter, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p>cert, err = kong.client.get_full_client_certificate_chain()</p>
+<p>if err:</p>
+<blockquote>
+<div><p># do something with errif not cert:</p>
+<p># client did not complete mTLS# do something with cert</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a PEM-encoded client certificate if the mTLS
+handshake was completed, or <cite>nil</cite> if an error occurred or the client did
+not present its certificate.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>nil</cite> if successful, or an error message if it fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>err</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.tls.tls.request_client_certificate">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_client_certificate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/client/tls.html#tls.request_client_certificate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.tls.tls.request_client_certificate" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Requests the client to present its client-side certificate to initiate mutual
+TLS authentication between server and client.
+This function <em>requests</em>, but does not <em>require</em> the client to start
+the mTLS process. The TLS handshake can still complete even if the client
+doesn’t present a client certificate. However, in that case, it becomes a
+TLS connection instead of an mTLS connection, as there is no mutual
+authentication.
+To find out whether the client honored the request, use
+<cite>get_full_client_certificate_chain</cite> in later phases.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>certificate</p>
+</dd>
+<dt>Example:</dt><dd><p>res, err = kong.client.tls.request_client_certificate()</p>
+<p>if not res:</p>
+<blockquote>
+<div><p># do something with err</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>true</cite> if request is received, or <cite>nil</cite> if
+request fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>nil</cite> if the handshake is successful, or an error
+message if it fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>err</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.tls.tls.set_client_verify">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_client_verify</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/client/tls.html#tls.set_client_verify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.tls.tls.set_client_verify" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Overrides the client’s verification result generated by the log serializer.
+By default, the <cite>request.tls.client_verify</cite> field inside the log
+generated by Kong’s log serializer is the same as the
+[$ssl_client_verify](<a class="reference external" href="https://nginx.org/en/docs/http/ngx_http_ssl_module.html#var_ssl_client_verify">https://nginx.org/en/docs/http/ngx_http_ssl_module.html#var_ssl_client_verify</a>)
+Nginx variable.
+Only <cite>“SUCCESS”</cite>, <cite>“NONE”</cite>, or <cite>“FAILED:&lt;reason&gt;”</cite> are accepted values.
+This function does not return anything on success, and throws a Lua error
+in case of a failure.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite, access, balancer</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.client.tls.set_client_verify(“FAILED:unknown CA”)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kong.client">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.client" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.client.client">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.client.</span></span><span class="sig-name descname"><span class="pre">client</span></span><a class="reference internal" href="_modules/kong/client.html#client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.authenticate">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">authenticate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.client.table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">credential</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.client.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.authenticate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.authenticate" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Sets the authenticated consumer and/or credential for the current request.
+While both <cite>consumer</cite> and <cite>credential</cite> can be <cite>nil</cite>,
+at least one of them must exist. Otherwise, this function will throw an
+error.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>access</p>
+</dd>
+<dt>Example:</dt><dd><p># assuming <cite>credential</cite> and <cite>consumer</cite> have been set by some authentication code</p>
+<p>kong.client.authenticate(consumer, credentials)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>consumer</strong> (<em>table</em>) – The consumer to set. If no
+value is provided, then any existing value will be cleared.</p></li>
+<li><p><strong>credential</strong> (<em>table</em>) – The credential to set. If
+no value is provided, then any existing value will be cleared.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.get_consumer">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_consumer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.client.table</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_consumer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_consumer" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the <cite>consumer</cite> entity of the currently authenticated consumer.
+If not set yet, it returns <cite>nil</cite>.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>access, header_filter, response, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p>consumer = kong.client.get_consumer()</p>
+<p>if consumer:</p>
+<blockquote>
+<div><p>consumer_id = consumer.id</p>
+</div></blockquote>
+<p>else:</p>
+<blockquote>
+<div><p># request not authenticated yet, or a credential</p>
+</div></blockquote>
+<p># without a consumer (external auth)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The authenticated consumer entity.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.get_credential">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_credential</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_credential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_credential" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the credentials of the currently authenticated consumer.
+If not set yet, it returns <cite>nil</cite>.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>access, header_filter, response, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p>credential = kong.client.get_credential()</p>
+<p>if credential:</p>
+<blockquote>
+<div><p>consumer_id = credential.consumer_id</p>
+</div></blockquote>
+<p>else:</p>
+<blockquote>
+<div><p># request not authenticated yet</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The authenticated credential.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.get_forwarded_ip">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_forwarded_ip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_forwarded_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_forwarded_ip" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the remote address of the client making the request. Unlike
+<cite>kong.client.get_ip</cite>, this function will consider forwarded addresses in
+cases when a load balancer is in front of Kong. Whether this function
+returns a forwarded address or not depends on several Kong configuration
+parameters:
+* [trusted_ips](<a class="reference external" href="https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips">https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips</a>)
+* [real_ip_header](<a class="reference external" href="https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header">https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header</a>)
+* [real_ip_recursive](<a class="reference external" href="https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive">https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive</a>)</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>certificate, rewrite, access, header_filter, response, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p># Given a client with IP 127.0.0.1 making connection through</p>
+<p># a load balancer with IP 10.0.0.1 to Kong answering the request for</p>
+<p># <a class="reference external" href="https://username:password&#64;example.com:1234/v1/movies">https://username:password&#64;example.com:1234/v1/movies</a></p>
+<p>kong.client.get_forwarded_ip() # “127.0.0.1”</p>
+<p># Note: This example assumes that 10.0.0.1 is one of the trusted IPs, and that</p>
+<p># the load balancer adds the right headers matching with the configuration</p>
+<p># of <cite>real_ip_header</cite>, e.g. <cite>proxy_protocol</cite>.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The remote IP address of the client making the request,
+considering forwarded addresses.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.get_forwarded_port">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_forwarded_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.client.number</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_forwarded_port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_forwarded_port" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the remote port of the client making the request. Unlike
+<cite>kong.client.get_port</cite>, this function will consider forwarded ports in cases
+when a load balancer is in front of Kong. Whether this function returns a
+forwarded port or not depends on several Kong configuration parameters:
+* [trusted_ips](<a class="reference external" href="https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips">https://docs.konghq.com/gateway/latest/reference/configuration/#trusted_ips</a>)
+* [real_ip_header](<a class="reference external" href="https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header">https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_header</a>)
+* [real_ip_recursive](<a class="reference external" href="https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive">https://docs.konghq.com/gateway/latest/reference/configuration/#real_ip_recursive</a>)</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>certificate, rewrite, access, header_filter, response, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p># [client]:40000 &lt;-&gt; 80:[balancer]:30000 &lt;-&gt; 80:[kong]:20000 &lt;-&gt; 80:[service]</p>
+<p>kong.client.get_forwarded_port() # 40000</p>
+<p># Note: This example assumes that [balancer] is one of the trusted IPs, and that</p>
+<p># the load balancer adds the right headers matching with the configuration</p>
+<p># of <cite>real_ip_header</cite>, e.g. <cite>proxy_protocol</cite>.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The remote client port, considering forwarded ports.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.get_ip">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_ip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_ip" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the remote address of the client making the request. This module
+<strong>always</strong> returns the address of the client directly connecting to Kong.
+That is, in cases when a load balancer is in front of Kong, this function
+returns the load balancer’s address, and <strong>not</strong> that of the
+downstream client.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>certificate, rewrite, access, header_filter, response, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p># Given a client with IP 127.0.0.1 making connection through</p>
+<p># a load balancer with IP 10.0.0.1 to Kong answering the request for</p>
+<p># <a class="reference external" href="https://example.com:1234/v1/movies">https://example.com:1234/v1/movies</a></p>
+<p>kong.client.get_ip() # “10.0.0.1”</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The remote IP address of the client making the request.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.get_port">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.client.number</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_port" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the remote port of the client making the request. This
+<strong>always</strong> returns the port of the client directly connecting to Kong. That
+is, in cases when a load balancer is in front of Kong, this function
+returns the load balancer’s port, and <strong>not</strong> that of the downstream client.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>certificate, rewrite, access, header_filter, response, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p># [client]:40000 &lt;-&gt; 80:[balancer]:30000 &lt;-&gt; 80:[kong]:20000 &lt;-&gt; 80:[service]</p>
+<p>kong.client.get_port() # 30000</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The remote client port.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.get_protocol">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">allow_terminated</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_protocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_protocol" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the protocol matched by the current route (<cite>“http”</cite>, <cite>“https”</cite>, <cite>“tcp”</cite> or
+<cite>“tls”</cite>), or <cite>nil</cite>, if no route has been matched, which can happen when dealing with
+erroneous requests.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>access, header_filter, response, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.client.get_protocol() # “http”</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>allow_terminated</strong> (<em>bool</em>) – If set, the <cite>X-Forwarded-Proto</cite> header is checked when checking for HTTPS.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Can be one of <cite>“http”</cite>, <cite>“https”</cite>, <cite>“tcp”</cite>, <cite>“tls”</cite> or <cite>nil</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>nil</cite> if successful, or an error message if it fails.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>err</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.load_consumer">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_consumer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.client.table</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/client.html#client.load_consumer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.load_consumer" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the consumer from the datastore.
+Looks up the consumer by ID, and can optionally do a second search by name.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>access, header_filter, response, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p>consumer_id = “john_doe”</p>
+<p>consumer = kong.client.load_consumer(consumer_id, true)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>consumer_id</strong> (<em>str</em>) – The consumer ID to look up.</p></li>
+<li><p><strong>search_by_username</strong> (<em>bool</em>) – If truthy,
+and if the consumer is not found by ID,
+then a second search by username will be performed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Consumer entity or <cite>nil</cite>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>table</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>nil</cite> if successful, or an error message if it fails.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>err</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.client.client.tls">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tls</span></span><a class="headerlink" href="#kong.client.client.tls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.tls.disable_session_reuse">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">disable_session_reuse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.client.client.tls.disable_session_reuse" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Prevents the TLS session for the current connection from being reused
+by disabling the session ticket and session ID for the current TLS connection.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>certificate</p>
+</dd>
+<dt>Example:</dt><dd><p>res, err = kong.client.tls.disable_session_reuse()</p>
+<p>if not res:</p>
+<blockquote>
+<div><p># do something with err</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>true</cite> if successful, <cite>nil</cite> if it fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>nil</cite> if successful, or an error message if it fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>err</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.tls.get_full_client_certificate_chain">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_full_client_certificate_chain</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.client.client.tls.get_full_client_certificate_chain" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the PEM encoded downstream client certificate chain with the
+client certificate at the top and intermediate certificates
+(if any) at the bottom.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite, access, balancer, header_filter, body_filter, log</p>
+</dd>
+<dt>Example:</dt><dd><p>cert, err = kong.client.get_full_client_certificate_chain()</p>
+<p>if err:</p>
+<blockquote>
+<div><p># do something with errif not cert:</p>
+<p># client did not complete mTLS# do something with cert</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a PEM-encoded client certificate if the mTLS
+handshake was completed, or <cite>nil</cite> if an error occurred or the client did
+not present its certificate.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>nil</cite> if successful, or an error message if it fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>err</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.tls.request_client_certificate">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_client_certificate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.client.client.tls.request_client_certificate" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Requests the client to present its client-side certificate to initiate mutual
+TLS authentication between server and client.
+This function <em>requests</em>, but does not <em>require</em> the client to start
+the mTLS process. The TLS handshake can still complete even if the client
+doesn’t present a client certificate. However, in that case, it becomes a
+TLS connection instead of an mTLS connection, as there is no mutual
+authentication.
+To find out whether the client honored the request, use
+<cite>get_full_client_certificate_chain</cite> in later phases.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>certificate</p>
+</dd>
+<dt>Example:</dt><dd><p>res, err = kong.client.tls.request_client_certificate()</p>
+<p>if not res:</p>
+<blockquote>
+<div><p># do something with err</p>
+</div></blockquote>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>true</cite> if request is received, or <cite>nil</cite> if
+request fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns <cite>nil</cite> if the handshake is successful, or an error
+message if it fails.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>err</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.client.client.tls.set_client_verify">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_client_verify</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.client.client.tls.set_client_verify" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Overrides the client’s verification result generated by the log serializer.
+By default, the <cite>request.tls.client_verify</cite> field inside the log
+generated by Kong’s log serializer is the same as the
+[$ssl_client_verify](<a class="reference external" href="https://nginx.org/en/docs/http/ngx_http_ssl_module.html#var_ssl_client_verify">https://nginx.org/en/docs/http/ngx_http_ssl_module.html#var_ssl_client_verify</a>)
+Nginx variable.
+Only <cite>“SUCCESS”</cite>, <cite>“NONE”</cite>, or <cite>“FAILED:&lt;reason&gt;”</cite> are accepted values.
+This function does not return anything on success, and throws a Lua error
+in case of a failure.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Phases:</dt><dd><p>rewrite, access, balancer</p>
+</dd>
+<dt>Example:</dt><dd><p>kong.client.tls.set_client_verify(“FAILED:unknown CA”)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
