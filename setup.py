@@ -18,7 +18,7 @@ try:
     CHANGELOG = open(os.path.join(here, 'CHANGELOG.md')).read()
 except:  # noqa: E722 do not use bare 'except
     CHANGELOG = ""
-VERSION = imp.load_source('version', os.path.join(here, '%s/const.py' % PACKAGE_NAME)).__version__
+VERSION = "%.2f" % imp.load_source('version', os.path.join(here, '%s/const.py' % PACKAGE_NAME)).__version__
 
 packages = [
     'kong_pdk',
