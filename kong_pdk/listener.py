@@ -15,7 +15,7 @@ else:
 from gevent import socket as gsocket, sleep as gsleep, spawn as gspawn
 from gevent.server import StreamServer as gStreamServer
 
-from .exception import PluginServerException
+from .exception import PDKException, PluginServerException
 
 cmdre = re.compile("([a-z])([A-Z])")
 
@@ -68,7 +68,7 @@ class Server(object):
                 ret = getattr(self.ps, cmd_r)(*args)
                 self.logger.debug("rpc: #%d return: %s" % (msgid, ret))
                 write_response(fd, msgid, ret)
-            except PluginServerException as ex:
+            except (PluginServerException, PDKException) as ex:
                 self.logger.warn("rpc: #%d error: %s" % (msgid, str(ex)))
                 write_error(fd, msgid, str(ex))
             except Exception as ex:
