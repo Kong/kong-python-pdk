@@ -54,7 +54,7 @@ class Server(object):
         # can't use socket.makefile here, since it returns a blocking IO
         # msgpack.Unpacker only expects read() but no other semantics to exist
         sockf = WrapSocket(fd)
-        unpacker = msgpack.Unpacker(sockf, raw=True)
+        unpacker = msgpack.Unpacker(sockf)
 
         for _, msgid, method, args in unpacker:
             ns, cmd = method.split(".")

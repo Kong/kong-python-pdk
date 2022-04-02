@@ -513,7 +513,7 @@ class request():
 
     # this function's return type is modified mannually as body can be arbitrary binary string
     @staticmethod
-    def get_raw_body() -> Union[str, bytes]:
+    def get_raw_body() -> bytes:
         """
 
             Returns the plain request body.
