@@ -337,9 +337,10 @@ class response():
         :rtype: str
         """
         pass
-
+    
+    # this function's return type is modified mannually as body can be arbitrary binary string
     @staticmethod
-    def get_raw_body() -> str:
+    def get_raw_body() -> bytes:
         """
 
             Returns the full body when the last chunk has been read.
