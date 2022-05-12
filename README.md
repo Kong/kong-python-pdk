@@ -20,7 +20,7 @@ pip3 install kong-pdk
 ## Usage
 
 ```
-usage: kong-pluginserver [-h] [-p prefix] [-v] [--version] [--socket-name SOCKET_NAME] [--listen-queue-size LISTEN_QUEUE_SIZE]
+usage: kong-python-pluginserver [-h] [-p prefix] [-v] [--version] [--socket-name SOCKET_NAME] [--listen-queue-size LISTEN_QUEUE_SIZE]
                          [--no-lua-style] [-m | -g] -d directory [--dump-plugin-info name] [--dump-all-plugins]
 
 Kong Python Plugin Server.
