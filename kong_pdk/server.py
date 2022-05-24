@@ -262,9 +262,9 @@ class PluginServer(object):
         del(self.instances[iid])
 
         return {
-            "Name": ins['name'],
+            "Name": ins.name,
             "Id": iid,
-            "Config": ins['config'],
+            "Config": ins.config,
         }
 
     @locked_by("e_lock")
