@@ -56,9 +56,8 @@ class Module(object):
         self.version = None
 
         for attr in ('version', 'priority'):
-            au = attr.upper()
-            if hasattr(mod, au):
-                setattr(self, attr, getattr(mod, au))
+            if hasattr(mod, attr):
+                setattr(self, attr, getattr(mod, attr))
 
         if hasattr(mod, "Schema"):
             self.schema = mod.Schema
