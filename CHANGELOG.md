@@ -2,6 +2,16 @@
 ## [Unreleased]
 
 
+<a name="0.3.1"></a>
+## [0.3.1] - 2022-06-12
+### bug fixes
+- plugin closure syntax correction ([#64](https://github.com/Kong/kong-python-pdk/issues/64)) [920cc26](https://github.com/Kong/kong-python-pdk/commit/920cc26acb84ac357411a5d1d7232a6a540fb9f3)
+- removing upper() to allow matching of attributes ([#69](https://github.com/Kong/kong-python-pdk/issues/69)) [1997a6c](https://github.com/Kong/kong-python-pdk/commit/1997a6c9991a6bc21d96d1a7f3c0141a43e01248)
+- [#50](https://github.com/Kong/kong-python-pdk/issues/50): return type of get_raw_bodys should be binary string [59ab367](https://github.com/Kong/kong-python-pdk/commit/59ab367c47a3fb56e85c90674d66749dcd4ab937)
+- catch error from PDK methods ([#53](https://github.com/Kong/kong-python-pdk/issues/53)) [7f82677](https://github.com/Kong/kong-python-pdk/commit/7f82677de3560c23c6c95bfaccaba6cd302aa571)
+- [#50](https://github.com/Kong/kong-python-pdk/issues/50): return type should support binary string [fdb2c9b](https://github.com/Kong/kong-python-pdk/commit/fdb2c9b51d3081cb605af056c3c49e2048061b4e)
+
+
 <a name="0.3.0"></a>
 ## [0.3.0] - 2022-02-17
 ### bug fixes
@@ -94,7 +104,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.0...HEAD
+[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.1...HEAD
+[0.3.1]: https://github.com/Kong/kong-python-pdk/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/Kong/kong-python-pdk/compare/0.2.7...0.3.0
 [0.2.7]: https://github.com/Kong/kong-python-pdk/compare/0.2.6...0.2.7
 [0.2.6]: https://github.com/Kong/kong-python-pdk/compare/0.2.5...0.2.6
