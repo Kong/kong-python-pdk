@@ -2,7 +2,7 @@
 
 new_v=$1
 if [[ -z $1 ]]; then
-    echo "Usage: $0 version"
+    echo "Usage: $0 <version>"
     exit 1
 fi
 
