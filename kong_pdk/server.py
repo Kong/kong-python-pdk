@@ -204,6 +204,7 @@ class PluginServer(object):
             "Name": name,
             "Phases": plugin.phases,
             "Priority": plugin.priority,
+            "Version": plugin.version,
             "Schema": {
                 "name": name,
                 "fields": [{
