@@ -13,7 +13,9 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -62,7 +64,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.nginx</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/nginx.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -91,6 +93,32 @@
 <span class="sd">        :return: the per-request context data in ngx.ctx</span>
 
 <span class="sd">        :rtype: Any</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="nginx.get_statistics"><a class="viewcode-back" href="../../kong.nginx.html#kong.nginx.nginx.get_statistics">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_statistics</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns various connection and request metrics exposed by</span>
+<span class="sd">            Nginx, similar to those reported by the</span>
+<span class="sd">            [ngx_http_stub_status_module](https://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).</span>
+<span class="sd">            The following fields are included in the returned table:</span>
+<span class="sd">            * `connections_active` - the current number of active client connections including `connections_waiting`.</span>
+<span class="sd">            * `connections_reading` - the current number of connections where nginx is reading the request header.</span>
+<span class="sd">            * `connections_writing` - the current number of connections where nginx is writing the response back to the client.</span>
+<span class="sd">            * `connections_waiting` - the current number of idle client connections waiting for a request.</span>
+<span class="sd">            * `connections_accepted` - the total number of accepted client connections.</span>
+<span class="sd">            * `connections_handled` - the total number of handled connections. Same as `connections_accepted` unless some resource limits have been reached</span>
+<span class="sd">              (for example, the [`worker_connections`](https://nginx.org/en/docs/ngx_core_module.html#worker_connections) limit).</span>
+<span class="sd">            * `total_requests` - the total number of client requests.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            nginx_statistics = kong.nginx.get_statistics()</span>
+
+<span class="sd">        :return: Nginx connections and requests statistics</span>
+
+<span class="sd">        :rtype: table</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 

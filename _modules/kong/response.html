@@ -13,7 +13,9 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -62,7 +64,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.response</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/response.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -403,7 +405,7 @@
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="response.get_raw_body"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the full body when the last chunk has been read.</span>
@@ -428,7 +430,7 @@
 <span class="sd">        :return: body The full body when the last chunk has been read,</span>
 <span class="sd">            otherwise returns `nil`.</span>
 
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
@@ -512,6 +514,7 @@
 <span class="sd">                nginx_http_lua_transform_underscores_in_response_headers = off</span>
 <span class="sd">            Be aware that changing this setting might break any plugins that</span>
 <span class="sd">            rely on the automatic underscore conversion.</span>
+<span class="sd">            You cannot set Transfer-Encoding header with this function. It will be ignored.</span>
 
 <span class="sd">        Phases:</span>
 <span class="sd">            rewrite, access, header_filter, response, admin_api</span>
@@ -543,6 +546,7 @@
 <span class="sd">            retained.</span>
 <span class="sd">            This function overrides any existing header bearing the same name as those</span>
 <span class="sd">            specified in the `headers` argument. Other headers remain unchanged.</span>
+<span class="sd">            You cannot set Transfer-Encoding header with this function. It will be ignored.</span>
 
 <span class="sd">        Phases:</span>
 <span class="sd">            rewrite, access, header_filter, response, admin_api</span>
@@ -580,7 +584,7 @@
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="response.set_raw_body"><a class="viewcode-back" href="../../kong.html#kong.response.response.set_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">set_raw_body</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">set_raw_body</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the body of the response.</span>
@@ -606,7 +610,7 @@
 <span class="sd">            kong.response.set_raw_body(body)</span>
 
 <span class="sd">        :parameter body: The raw body.</span>
-<span class="sd">        :type body: str</span>
+<span class="sd">        :type body: bytes</span>
 
 <span class="sd">        :return: throws an error on invalid inputs.</span>
 

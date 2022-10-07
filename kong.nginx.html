@@ -14,7 +14,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -39,8 +41,32 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">kong.nginx package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-kong.nginx.shared">kong.nginx.shared module</a></li>
-<li><a class="reference internal" href="#module-kong.nginx">Module contents</a></li>
+<li><a class="reference internal" href="#module-kong.nginx.shared">kong.nginx.shared module</a><ul>
+<li><a class="reference internal" href="#kong.nginx.shared.shared"><code class="docutils literal notranslate"><span class="pre">shared</span></code></a><ul>
+<li><a class="reference internal" href="#kong.nginx.shared.shared.get"><code class="docutils literal notranslate"><span class="pre">shared.get()</span></code></a></li>
+<li><a class="reference internal" href="#kong.nginx.shared.shared.set"><code class="docutils literal notranslate"><span class="pre">shared.set()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-kong.nginx">Module contents</a><ul>
+<li><a class="reference internal" href="#kong.nginx.nginx"><code class="docutils literal notranslate"><span class="pre">nginx</span></code></a><ul>
+<li><a class="reference internal" href="#kong.nginx.nginx.get_ctx"><code class="docutils literal notranslate"><span class="pre">nginx.get_ctx()</span></code></a></li>
+<li><a class="reference internal" href="#kong.nginx.nginx.get_statistics"><code class="docutils literal notranslate"><span class="pre">nginx.get_statistics()</span></code></a></li>
+<li><a class="reference internal" href="#kong.nginx.nginx.get_subsystem"><code class="docutils literal notranslate"><span class="pre">nginx.get_subsystem()</span></code></a></li>
+<li><a class="reference internal" href="#kong.nginx.nginx.get_tls1_version_str"><code class="docutils literal notranslate"><span class="pre">nginx.get_tls1_version_str()</span></code></a></li>
+<li><a class="reference internal" href="#kong.nginx.nginx.get_var"><code class="docutils literal notranslate"><span class="pre">nginx.get_var()</span></code></a></li>
+<li><a class="reference internal" href="#kong.nginx.nginx.req_start_time"><code class="docutils literal notranslate"><span class="pre">nginx.req_start_time()</span></code></a></li>
+<li><a class="reference internal" href="#kong.nginx.nginx.set_ctx"><code class="docutils literal notranslate"><span class="pre">nginx.set_ctx()</span></code></a></li>
+<li><a class="reference internal" href="#kong.nginx.nginx.shared"><code class="docutils literal notranslate"><span class="pre">nginx.shared</span></code></a><ul>
+<li><a class="reference internal" href="#kong.nginx.nginx.shared.get"><code class="docutils literal notranslate"><span class="pre">nginx.shared.get()</span></code></a></li>
+<li><a class="reference internal" href="#kong.nginx.nginx.shared.set"><code class="docutils literal notranslate"><span class="pre">nginx.shared.set()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -70,12 +96,12 @@
            <div itemprop="articleBody">
              
   <section id="kong-nginx-package">
-<h1>kong.nginx package<a class="headerlink" href="#kong-nginx-package" title="Permalink to this headline">¶</a></h1>
+<h1>kong.nginx package<a class="headerlink" href="#kong-nginx-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-kong.nginx.shared">
-<span id="kong-nginx-shared-module"></span><h2>kong.nginx.shared module<a class="headerlink" href="#module-kong.nginx.shared" title="Permalink to this headline">¶</a></h2>
+<span id="kong-nginx-shared-module"></span><h2>kong.nginx.shared module<a class="headerlink" href="#module-kong.nginx.shared" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.nginx.shared.shared">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.nginx.shared.</span></span><span class="sig-name descname"><span class="pre">shared</span></span><a class="reference internal" href="_modules/kong/nginx/shared.html#shared"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.shared.shared" title="Permalink to this definition">¶</a></dt>
@@ -119,7 +145,7 @@
 
 </section>
 <section id="module-kong.nginx">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.nginx" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.nginx" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.nginx.nginx">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.nginx.</span></span><span class="sig-name descname"><span class="pre">nginx</span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx" title="Permalink to this definition">¶</a></dt>
@@ -139,6 +165,41 @@
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.nginx.nginx.get_statistics">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_statistics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">table</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_statistics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_statistics" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns various connection and request metrics exposed by
+Nginx, similar to those reported by the
+[ngx_http_stub_status_module](<a class="reference external" href="https://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data">https://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data</a>).
+The following fields are included in the returned table:
+* <cite>connections_active</cite> - the current number of active client connections including <cite>connections_waiting</cite>.
+* <cite>connections_reading</cite> - the current number of connections where nginx is reading the request header.
+* <cite>connections_writing</cite> - the current number of connections where nginx is writing the response back to the client.
+* <cite>connections_waiting</cite> - the current number of idle client connections waiting for a request.
+* <cite>connections_accepted</cite> - the total number of accepted client connections.
+* <cite>connections_handled</cite> - the total number of handled connections. Same as <cite>connections_accepted</cite> unless some resource limits have been reached</p>
+<blockquote>
+<div><p>(for example, the [<cite>worker_connections</cite>](<a class="reference external" href="https://nginx.org/en/docs/ngx_core_module.html#worker_connections">https://nginx.org/en/docs/ngx_core_module.html#worker_connections</a>) limit).</p>
+</div></blockquote>
+<ul class="simple">
+<li><p><cite>total_requests</cite> - the total number of client requests.</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Example:</dt><dd><p>nginx_statistics = kong.nginx.get_statistics()</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Nginx connections and requests statistics</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>table</p>
 </dd>
 </dl>
 </dd></dl>
@@ -184,7 +245,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.req_start_time">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">req_start_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.nginx.number</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.req_start_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.req_start_time" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">req_start_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">number</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.req_start_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.req_start_time" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>get the current request’s start timestamp</p>
 </div></blockquote>

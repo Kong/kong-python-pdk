@@ -14,7 +14,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -65,7 +67,7 @@
            <div itemprop="articleBody">
              
   <section id="kong">
-<h1>kong<a class="headerlink" href="#kong" title="Permalink to this headline">¶</a></h1>
+<h1>kong<a class="headerlink" href="#kong" title="Permalink to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="kong.html">kong package</a><ul>
@@ -98,15 +100,126 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="kong.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.cluster">kong.cluster module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.ip">kong.ip module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.log">kong.log module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.node">kong.node module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.request">kong.request module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.response">kong.response module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.router">kong.router module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.vault">kong.vault module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.cluster">kong.cluster module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.cluster.cluster"><code class="docutils literal notranslate"><span class="pre">cluster</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.cluster.cluster.get_id"><code class="docutils literal notranslate"><span class="pre">cluster.get_id()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.ip">kong.ip module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.ip.ip"><code class="docutils literal notranslate"><span class="pre">ip</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.ip.ip.is_trusted"><code class="docutils literal notranslate"><span class="pre">ip.is_trusted()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.log">kong.log module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.log.log"><code class="docutils literal notranslate"><span class="pre">log</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.alert"><code class="docutils literal notranslate"><span class="pre">log.alert()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.crit"><code class="docutils literal notranslate"><span class="pre">log.crit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.debug"><code class="docutils literal notranslate"><span class="pre">log.debug()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.deprecation"><code class="docutils literal notranslate"><span class="pre">log.deprecation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.err"><code class="docutils literal notranslate"><span class="pre">log.err()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.info"><code class="docutils literal notranslate"><span class="pre">log.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.notice"><code class="docutils literal notranslate"><span class="pre">log.notice()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.serialize"><code class="docutils literal notranslate"><span class="pre">log.serialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.set_serialize_value"><code class="docutils literal notranslate"><span class="pre">log.set_serialize_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.log.log.warn"><code class="docutils literal notranslate"><span class="pre">log.warn()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.node">kong.node module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.node.node"><code class="docutils literal notranslate"><span class="pre">node</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.node.node.get_hostname"><code class="docutils literal notranslate"><span class="pre">node.get_hostname()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.node.node.get_id"><code class="docutils literal notranslate"><span class="pre">node.get_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.node.node.get_memory_stats"><code class="docutils literal notranslate"><span class="pre">node.get_memory_stats()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.request">kong.request module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.request.request"><code class="docutils literal notranslate"><span class="pre">request</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_body"><code class="docutils literal notranslate"><span class="pre">request.get_body()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_forwarded_host"><code class="docutils literal notranslate"><span class="pre">request.get_forwarded_host()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_forwarded_path"><code class="docutils literal notranslate"><span class="pre">request.get_forwarded_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_forwarded_port"><code class="docutils literal notranslate"><span class="pre">request.get_forwarded_port()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_forwarded_prefix"><code class="docutils literal notranslate"><span class="pre">request.get_forwarded_prefix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_forwarded_scheme"><code class="docutils literal notranslate"><span class="pre">request.get_forwarded_scheme()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_header"><code class="docutils literal notranslate"><span class="pre">request.get_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_headers"><code class="docutils literal notranslate"><span class="pre">request.get_headers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_host"><code class="docutils literal notranslate"><span class="pre">request.get_host()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_http_version"><code class="docutils literal notranslate"><span class="pre">request.get_http_version()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_method"><code class="docutils literal notranslate"><span class="pre">request.get_method()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_path"><code class="docutils literal notranslate"><span class="pre">request.get_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_path_with_query"><code class="docutils literal notranslate"><span class="pre">request.get_path_with_query()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_port"><code class="docutils literal notranslate"><span class="pre">request.get_port()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_query"><code class="docutils literal notranslate"><span class="pre">request.get_query()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_query_arg"><code class="docutils literal notranslate"><span class="pre">request.get_query_arg()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_raw_body"><code class="docutils literal notranslate"><span class="pre">request.get_raw_body()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_raw_path"><code class="docutils literal notranslate"><span class="pre">request.get_raw_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_raw_query"><code class="docutils literal notranslate"><span class="pre">request.get_raw_query()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_scheme"><code class="docutils literal notranslate"><span class="pre">request.get_scheme()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.request.request.get_start_time"><code class="docutils literal notranslate"><span class="pre">request.get_start_time()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.response">kong.response module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.response.response"><code class="docutils literal notranslate"><span class="pre">response</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.add_header"><code class="docutils literal notranslate"><span class="pre">response.add_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.clear_header"><code class="docutils literal notranslate"><span class="pre">response.clear_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.error"><code class="docutils literal notranslate"><span class="pre">response.error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.exit"><code class="docutils literal notranslate"><span class="pre">response.exit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.get_header"><code class="docutils literal notranslate"><span class="pre">response.get_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.get_headers"><code class="docutils literal notranslate"><span class="pre">response.get_headers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.get_raw_body"><code class="docutils literal notranslate"><span class="pre">response.get_raw_body()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.get_source"><code class="docutils literal notranslate"><span class="pre">response.get_source()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.get_status"><code class="docutils literal notranslate"><span class="pre">response.get_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.set_header"><code class="docutils literal notranslate"><span class="pre">response.set_header()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.set_headers"><code class="docutils literal notranslate"><span class="pre">response.set_headers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.set_raw_body"><code class="docutils literal notranslate"><span class="pre">response.set_raw_body()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.response.response.set_status"><code class="docutils literal notranslate"><span class="pre">response.set_status()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.router">kong.router module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.router.router"><code class="docutils literal notranslate"><span class="pre">router</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.router.router.get_route"><code class="docutils literal notranslate"><span class="pre">router.get_route()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.router.router.get_service"><code class="docutils literal notranslate"><span class="pre">router.get_service()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.vault">kong.vault module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.vault.vault"><code class="docutils literal notranslate"><span class="pre">vault</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.get"><code class="docutils literal notranslate"><span class="pre">vault.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.is_reference"><code class="docutils literal notranslate"><span class="pre">vault.is_reference()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.parse_reference"><code class="docutils literal notranslate"><span class="pre">vault.parse_reference()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.kong"><code class="docutils literal notranslate"><span class="pre">kong</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.client"><code class="docutils literal notranslate"><span class="pre">kong.client</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.cluster"><code class="docutils literal notranslate"><span class="pre">kong.cluster</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.ctx"><code class="docutils literal notranslate"><span class="pre">kong.ctx</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.ip"><code class="docutils literal notranslate"><span class="pre">kong.ip</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.log"><code class="docutils literal notranslate"><span class="pre">kong.log</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.nginx"><code class="docutils literal notranslate"><span class="pre">kong.nginx</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.node"><code class="docutils literal notranslate"><span class="pre">kong.node</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.request"><code class="docutils literal notranslate"><span class="pre">kong.request</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.response"><code class="docutils literal notranslate"><span class="pre">kong.response</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.router"><code class="docutils literal notranslate"><span class="pre">kong.router</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.service"><code class="docutils literal notranslate"><span class="pre">kong.service</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.vault"><code class="docutils literal notranslate"><span class="pre">kong.vault</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

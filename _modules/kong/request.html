@@ -13,7 +13,9 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -62,7 +64,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.request</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/request.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -440,18 +442,25 @@
     <span class="k">def</span> <span class="nf">get_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">            Returns the path component of the request&#39;s URL. It is not normalized in</span>
-<span class="sd">            any way and does not include the query string.</span>
+<span class="sd">            Returns the normalized path component of the request&#39;s URL. The return</span>
+<span class="sd">            value is the same as `kong.request.get_raw_path()` but normalized according</span>
+<span class="sd">            to RFC 3986 section 6:</span>
+<span class="sd">            * Percent-encoded values of unreserved characters are decoded (`%20`</span>
+<span class="sd">              becomes ` `).</span>
+<span class="sd">            * Percent-encoded values of reserved characters have their hexidecimal</span>
+<span class="sd">              value uppercased (`%2f` becomes `%2F`).</span>
+<span class="sd">            * Relative path elements (`/.` and `/..`) are dereferenced.</span>
+<span class="sd">            * Duplicate slashes are consolidated (`//` becomes `/`).</span>
 
 <span class="sd">        Phases:</span>
 <span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            # Given a request to https://example.com:1234/v1/movies?movie=foo</span>
+<span class="sd">            # Given a request to https://example.com/t/Abc%20123%C3%B8%2f/parent/..//test/./</span>
 
-<span class="sd">            kong.request.get_path() # &quot;/v1/movies&quot;</span>
+<span class="sd">            kong.request.get_path() # &quot;/t/Abc 123ø%2F/test/&quot;</span>
 
-<span class="sd">        :return: The path.</span>
+<span class="sd">        :return: the path</span>
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -576,7 +585,7 @@
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="request.get_raw_body"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the plain request body.</span>
@@ -594,6 +603,32 @@
 <span class="sd">            kong.request.get_raw_body():gsub(&quot;Earth&quot;, &quot;Mars&quot;) # &quot;Hello, Mars!&quot;</span>
 
 <span class="sd">        :return: The plain request body.</span>
+
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_raw_path"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_path">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_raw_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the path component of the request&#39;s URL. It is not normalized in</span>
+<span class="sd">            any way and does not include the query string.</span>
+<span class="sd">            **NOTE:** Using the raw path to perform string comparision during request</span>
+<span class="sd">            handling (such as in routing, ACL/authorization checks, setting rate-limit</span>
+<span class="sd">            keys, etc) is widely regarded as insecure, as it can leave plugin code</span>
+<span class="sd">            vulnerable to path traversal attacks. Prefer `kong.request.get_path()` for</span>
+<span class="sd">            such use cases.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            # Given a request to https://example.com/t/Abc%20123%C3%B8%2f/parent/..//test/./?movie=foo</span>
+
+<span class="sd">            kong.request.get_raw_path() # &quot;/t/Abc%20123%C3%B8%2f/parent/..//test/./&quot;</span>
+
+<span class="sd">        :return: The path.</span>
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -639,6 +674,24 @@
 <span class="sd">        :return: A string like `&quot;http&quot;` or `&quot;https&quot;`.</span>
 
 <span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="request.get_start_time"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_start_time">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_start_time</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the request start time, in Unix epoch milliseconds.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.request.get_start_time() # 1649960273000</span>
+
+<span class="sd">        :return: The timestamp</span>
+
+<span class="sd">        :rtype: number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 

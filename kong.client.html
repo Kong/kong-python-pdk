@@ -14,7 +14,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -39,8 +41,38 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">kong.client package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-kong.client.tls">kong.client.tls module</a></li>
-<li><a class="reference internal" href="#module-kong.client">Module contents</a></li>
+<li><a class="reference internal" href="#module-kong.client.tls">kong.client.tls module</a><ul>
+<li><a class="reference internal" href="#kong.client.tls.tls"><code class="docutils literal notranslate"><span class="pre">tls</span></code></a><ul>
+<li><a class="reference internal" href="#kong.client.tls.tls.disable_session_reuse"><code class="docutils literal notranslate"><span class="pre">tls.disable_session_reuse()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.tls.tls.get_full_client_certificate_chain"><code class="docutils literal notranslate"><span class="pre">tls.get_full_client_certificate_chain()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.tls.tls.request_client_certificate"><code class="docutils literal notranslate"><span class="pre">tls.request_client_certificate()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.tls.tls.set_client_verify"><code class="docutils literal notranslate"><span class="pre">tls.set_client_verify()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-kong.client">Module contents</a><ul>
+<li><a class="reference internal" href="#kong.client.client"><code class="docutils literal notranslate"><span class="pre">client</span></code></a><ul>
+<li><a class="reference internal" href="#kong.client.client.authenticate"><code class="docutils literal notranslate"><span class="pre">client.authenticate()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.get_consumer"><code class="docutils literal notranslate"><span class="pre">client.get_consumer()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.get_credential"><code class="docutils literal notranslate"><span class="pre">client.get_credential()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.get_forwarded_ip"><code class="docutils literal notranslate"><span class="pre">client.get_forwarded_ip()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.get_forwarded_port"><code class="docutils literal notranslate"><span class="pre">client.get_forwarded_port()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.get_ip"><code class="docutils literal notranslate"><span class="pre">client.get_ip()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.get_port"><code class="docutils literal notranslate"><span class="pre">client.get_port()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.get_protocol"><code class="docutils literal notranslate"><span class="pre">client.get_protocol()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.load_consumer"><code class="docutils literal notranslate"><span class="pre">client.load_consumer()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.tls"><code class="docutils literal notranslate"><span class="pre">client.tls</span></code></a><ul>
+<li><a class="reference internal" href="#kong.client.client.tls.disable_session_reuse"><code class="docutils literal notranslate"><span class="pre">client.tls.disable_session_reuse()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.tls.get_full_client_certificate_chain"><code class="docutils literal notranslate"><span class="pre">client.tls.get_full_client_certificate_chain()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.tls.request_client_certificate"><code class="docutils literal notranslate"><span class="pre">client.tls.request_client_certificate()</span></code></a></li>
+<li><a class="reference internal" href="#kong.client.client.tls.set_client_verify"><code class="docutils literal notranslate"><span class="pre">client.tls.set_client_verify()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -70,12 +102,12 @@
            <div itemprop="articleBody">
              
   <section id="kong-client-package">
-<h1>kong.client package<a class="headerlink" href="#kong-client-package" title="Permalink to this headline">¶</a></h1>
+<h1>kong.client package<a class="headerlink" href="#kong-client-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-kong.client.tls">
-<span id="kong-client-tls-module"></span><h2>kong.client.tls module<a class="headerlink" href="#module-kong.client.tls" title="Permalink to this headline">¶</a></h2>
+<span id="kong-client-tls-module"></span><h2>kong.client.tls module<a class="headerlink" href="#module-kong.client.tls" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.client.tls.tls">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.client.tls.</span></span><span class="sig-name descname"><span class="pre">tls</span></span><a class="reference internal" href="_modules/kong/client/tls.html#tls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.tls.tls" title="Permalink to this definition">¶</a></dt>
@@ -217,14 +249,14 @@ in case of a failure.</p>
 
 </section>
 <section id="module-kong.client">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.client" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.client" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.client.client">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.client.</span></span><span class="sig-name descname"><span class="pre">client</span></span><a class="reference internal" href="_modules/kong/client.html#client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.client.client.authenticate">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">authenticate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.client.table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">credential</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.client.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.authenticate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.authenticate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">authenticate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">credential</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.authenticate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.authenticate" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Sets the authenticated consumer and/or credential for the current request.
 While both <cite>consumer</cite> and <cite>credential</cite> can be <cite>nil</cite>,
@@ -252,7 +284,7 @@ no value is provided, then any existing value will be cleared.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.client.client.get_consumer">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_consumer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.client.table</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_consumer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_consumer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_consumer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">table</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_consumer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_consumer" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the <cite>consumer</cite> entity of the currently authenticated consumer.
 If not set yet, it returns <cite>nil</cite>.</p>
@@ -351,7 +383,7 @@ considering forwarded addresses.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.client.client.get_forwarded_port">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_forwarded_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.client.number</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_forwarded_port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_forwarded_port" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_forwarded_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">number</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_forwarded_port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_forwarded_port" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the remote port of the client making the request. Unlike
 <cite>kong.client.get_port</cite>, this function will consider forwarded ports in cases
@@ -412,7 +444,7 @@ downstream client.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.client.client.get_port">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.client.number</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_port" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_port</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">number</span></span></span><a class="reference internal" href="_modules/kong/client.html#client.get_port"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.get_port" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the remote port of the client making the request. This
 <strong>always</strong> returns the port of the client directly connecting to Kong. That
@@ -471,7 +503,7 @@ erroneous requests.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.client.client.load_consumer">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_consumer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.client.table</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/client.html#client.load_consumer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.load_consumer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_consumer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">consumer_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_by_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">table</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/client.html#client.load_consumer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.client.load_consumer" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the consumer from the datastore.
 Looks up the consumer by ID, and can optionally do a second search by name.</p>

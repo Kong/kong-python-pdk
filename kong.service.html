@@ -14,7 +14,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -39,9 +41,70 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">kong.service package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-kong.service.request">kong.service.request module</a></li>
-<li><a class="reference internal" href="#module-kong.service.response">kong.service.response module</a></li>
-<li><a class="reference internal" href="#module-kong.service">Module contents</a></li>
+<li><a class="reference internal" href="#module-kong.service.request">kong.service.request module</a><ul>
+<li><a class="reference internal" href="#kong.service.request.request"><code class="docutils literal notranslate"><span class="pre">request</span></code></a><ul>
+<li><a class="reference internal" href="#kong.service.request.request.add_header"><code class="docutils literal notranslate"><span class="pre">request.add_header()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.clear_header"><code class="docutils literal notranslate"><span class="pre">request.clear_header()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.disable_tls"><code class="docutils literal notranslate"><span class="pre">request.disable_tls()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.enable_buffering"><code class="docutils literal notranslate"><span class="pre">request.enable_buffering()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.set_body"><code class="docutils literal notranslate"><span class="pre">request.set_body()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.set_header"><code class="docutils literal notranslate"><span class="pre">request.set_header()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.set_headers"><code class="docutils literal notranslate"><span class="pre">request.set_headers()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.set_method"><code class="docutils literal notranslate"><span class="pre">request.set_method()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.set_path"><code class="docutils literal notranslate"><span class="pre">request.set_path()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.set_query"><code class="docutils literal notranslate"><span class="pre">request.set_query()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.set_raw_body"><code class="docutils literal notranslate"><span class="pre">request.set_raw_body()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.set_raw_query"><code class="docutils literal notranslate"><span class="pre">request.set_raw_query()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.request.request.set_scheme"><code class="docutils literal notranslate"><span class="pre">request.set_scheme()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-kong.service.response">kong.service.response module</a><ul>
+<li><a class="reference internal" href="#kong.service.response.response"><code class="docutils literal notranslate"><span class="pre">response</span></code></a><ul>
+<li><a class="reference internal" href="#kong.service.response.response.get_body"><code class="docutils literal notranslate"><span class="pre">response.get_body()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.response.response.get_header"><code class="docutils literal notranslate"><span class="pre">response.get_header()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.response.response.get_headers"><code class="docutils literal notranslate"><span class="pre">response.get_headers()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.response.response.get_raw_body"><code class="docutils literal notranslate"><span class="pre">response.get_raw_body()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.response.response.get_status"><code class="docutils literal notranslate"><span class="pre">response.get_status()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-kong.service">Module contents</a><ul>
+<li><a class="reference internal" href="#kong.service.service"><code class="docutils literal notranslate"><span class="pre">service</span></code></a><ul>
+<li><a class="reference internal" href="#kong.service.service.request"><code class="docutils literal notranslate"><span class="pre">service.request</span></code></a><ul>
+<li><a class="reference internal" href="#kong.service.service.request.add_header"><code class="docutils literal notranslate"><span class="pre">service.request.add_header()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.clear_header"><code class="docutils literal notranslate"><span class="pre">service.request.clear_header()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.disable_tls"><code class="docutils literal notranslate"><span class="pre">service.request.disable_tls()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.enable_buffering"><code class="docutils literal notranslate"><span class="pre">service.request.enable_buffering()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.set_body"><code class="docutils literal notranslate"><span class="pre">service.request.set_body()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.set_header"><code class="docutils literal notranslate"><span class="pre">service.request.set_header()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.set_headers"><code class="docutils literal notranslate"><span class="pre">service.request.set_headers()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.set_method"><code class="docutils literal notranslate"><span class="pre">service.request.set_method()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.set_path"><code class="docutils literal notranslate"><span class="pre">service.request.set_path()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.set_query"><code class="docutils literal notranslate"><span class="pre">service.request.set_query()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.set_raw_body"><code class="docutils literal notranslate"><span class="pre">service.request.set_raw_body()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.set_raw_query"><code class="docutils literal notranslate"><span class="pre">service.request.set_raw_query()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.request.set_scheme"><code class="docutils literal notranslate"><span class="pre">service.request.set_scheme()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kong.service.service.response"><code class="docutils literal notranslate"><span class="pre">service.response</span></code></a><ul>
+<li><a class="reference internal" href="#kong.service.service.response.get_body"><code class="docutils literal notranslate"><span class="pre">service.response.get_body()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.response.get_header"><code class="docutils literal notranslate"><span class="pre">service.response.get_header()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.response.get_headers"><code class="docutils literal notranslate"><span class="pre">service.response.get_headers()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.response.get_raw_body"><code class="docutils literal notranslate"><span class="pre">service.response.get_raw_body()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.response.get_status"><code class="docutils literal notranslate"><span class="pre">service.response.get_status()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#kong.service.service.set_target"><code class="docutils literal notranslate"><span class="pre">service.set_target()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.set_tls_verify"><code class="docutils literal notranslate"><span class="pre">service.set_tls_verify()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.set_tls_verify_depth"><code class="docutils literal notranslate"><span class="pre">service.set_tls_verify_depth()</span></code></a></li>
+<li><a class="reference internal" href="#kong.service.service.set_upstream"><code class="docutils literal notranslate"><span class="pre">service.set_upstream()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -71,12 +134,12 @@
            <div itemprop="articleBody">
              
   <section id="kong-service-package">
-<h1>kong.service package<a class="headerlink" href="#kong-service-package" title="Permalink to this headline">¶</a></h1>
+<h1>kong.service package<a class="headerlink" href="#kong-service-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-kong.service.request">
-<span id="kong-service-request-module"></span><h2>kong.service.request module<a class="headerlink" href="#module-kong.service.request" title="Permalink to this headline">¶</a></h2>
+<span id="kong-service-request-module"></span><h2>kong.service.request module<a class="headerlink" href="#module-kong.service.request" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.service.request.request">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.service.request.</span></span><span class="sig-name descname"><span class="pre">request</span></span><a class="reference internal" href="_modules/kong/service/request.html#request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request" title="Permalink to this definition">¶</a></dt>
@@ -202,7 +265,7 @@ response headers at the same time.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.request.request.set_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_body" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_body" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Sets the body of the request to the Service. Unlike
 <cite>kong.service.request.set_raw_body()</cite>, the <cite>args</cite> argument must be a table, and
@@ -307,7 +370,7 @@ sets the SNI of the request to the Service.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.request.request.set_headers">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_headers" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_headers" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Sets the headers of the request to the Service. Unlike
 <cite>kong.service.request.set_header()</cite>, the <cite>headers</cite> argument must be a table in
@@ -413,7 +476,7 @@ characters are allowed, for example: <cite>“/v2/movies”</cite> or <cite>“/
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.request.request.set_query">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_query" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service/request.html#request.set_query"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.request.request.set_query" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Set the query string of the request to the Service.
 Unlike <cite>kong.service.request.set_raw_query()</cite>, the <cite>query</cite> argument must be a
@@ -543,14 +606,14 @@ arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 
 </section>
 <section id="module-kong.service.response">
-<span id="kong-service-response-module"></span><h2>kong.service.response module<a class="headerlink" href="#module-kong.service.response" title="Permalink to this headline">¶</a></h2>
+<span id="kong-service-response-module"></span><h2>kong.service.response module<a class="headerlink" href="#module-kong.service.response" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.service.response.response">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.service.response.</span></span><span class="sig-name descname"><span class="pre">response</span></span><a class="reference internal" href="_modules/kong/service/response.html#response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.response.response.get_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_body" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_body" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the decoded buffered body.</p>
 </div></blockquote>
@@ -620,7 +683,7 @@ first occurrence of this header.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.response.response.get_headers">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.table</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_headers" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">table</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_headers" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns a Lua table holding the headers from the Service response. Keys are
 header names. Values are either a string with the header value, or an array of
@@ -675,7 +738,7 @@ a string with the error <cite>“truncated”</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.response.response.get_raw_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_raw_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_raw_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_raw_body" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_raw_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_raw_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_raw_body" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the raw buffered body.</p>
 </div></blockquote>
@@ -692,14 +755,14 @@ a string with the error <cite>“truncated”</cite>.</p>
 <dd class="field-odd"><p>The raw buffered body.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p>bytes</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.response.response.get_status">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.service.response.number</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_status" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">number</span></span></span><a class="reference internal" href="_modules/kong/service/response.html#response.get_status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.response.response.get_status" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the HTTP status code of the response from the Service as a Lua number.</p>
 </div></blockquote>
@@ -725,7 +788,7 @@ anything other than <cite>“service”</cite>).</p>
 
 </section>
 <section id="module-kong.service">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.service" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.service" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.service.service">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.service.</span></span><span class="sig-name descname"><span class="pre">service</span></span><a class="reference internal" href="_modules/kong/service.html#service"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service" title="Permalink to this definition">¶</a></dt>
@@ -855,7 +918,7 @@ response headers at the same time.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.service.request.set_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.service.service.request.set_body" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.service.service.request.set_body" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Sets the body of the request to the Service. Unlike
 <cite>kong.service.request.set_raw_body()</cite>, the <cite>args</cite> argument must be a table, and
@@ -960,7 +1023,7 @@ sets the SNI of the request to the Service.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.service.request.set_headers">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_headers" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_headers" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Sets the headers of the request to the Service. Unlike
 <cite>kong.service.request.set_header()</cite>, the <cite>headers</cite> argument must be a table in
@@ -1066,7 +1129,7 @@ characters are allowed, for example: <cite>“/v2/movies”</cite> or <cite>“/
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.service.request.set_query">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.request.table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_query" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.service.service.request.set_query" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Set the query string of the request to the Service.
 Unlike <cite>kong.service.request.set_raw_query()</cite>, the <cite>query</cite> argument must be a
@@ -1200,7 +1263,7 @@ arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.service.response.get_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#kong.service.service.response.get_body" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mimetype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#kong.service.service.response.get_body" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the decoded buffered body.</p>
 </div></blockquote>
@@ -1270,7 +1333,7 @@ first occurrence of this header.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.service.response.get_headers">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">kong.service.response.table</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.service.service.response.get_headers" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">number</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">table</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.service.service.response.get_headers" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns a Lua table holding the headers from the Service response. Keys are
 header names. Values are either a string with the header value, or an array of
@@ -1325,7 +1388,7 @@ a string with the error <cite>“truncated”</cite>.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.service.response.get_raw_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_raw_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#kong.service.service.response.get_raw_body" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_raw_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#kong.service.service.response.get_raw_body" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the raw buffered body.</p>
 </div></blockquote>
@@ -1342,14 +1405,14 @@ a string with the error <cite>“truncated”</cite>.</p>
 <dd class="field-odd"><p>The raw buffered body.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>str</p>
+<dd class="field-even"><p>bytes</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.service.response.get_status">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">kong.service.response.number</span></span></span><a class="headerlink" href="#kong.service.service.response.get_status" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">number</span></span></span><a class="headerlink" href="#kong.service.service.response.get_status" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns the HTTP status code of the response from the Service as a Lua number.</p>
 </div></blockquote>
@@ -1375,16 +1438,15 @@ anything other than <cite>“service”</cite>).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.service.set_target">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.number</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service.html#service.set_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service.set_target" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_target</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/service.html#service.set_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service.set_target" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Sets the host and port on which to connect to for proxying the request.
 Using this method is equivalent to ask Kong to not run the load-balancing
 phase for this request, and consider it manually overridden.
 Load-balancing components such as retries and health-checks will also be
 ignored for this request.
-The <cite>host</cite> argument expects a string containing the IP address of the
-upstream server (IPv4/IPv6), and the <cite>port</cite> argument must contain a number
-representing the port on which to connect to.</p>
+The <cite>host</cite> argument expects the hostname or IP address of the upstream 
+server, and the <cite>port</cite> expects a port number.</p>
 </div></blockquote>
 <dl>
 <dt>Phases:</dt><dd><p>access</p>
@@ -1446,7 +1508,7 @@ then TLS verification will always fail with “unable to get local issuer certif
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.service.service.set_tls_verify_depth">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_tls_verify_depth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">kong.service.number</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service.html#service.set_tls_verify_depth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service.set_tls_verify_depth" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_tls_verify_depth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/service.html#service.set_tls_verify_depth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.service.service.set_tls_verify_depth" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Sets the maximum depth of verification when validating upstream server’s TLS certificate.
 This call affects only the current request. For the depth to be actually used the verification
@@ -1491,7 +1553,7 @@ this request. Using this method is equivalent to creating a Service with a
 <cite>host</cite> property equal to that of an Upstream entity (in which case, the
 request would be proxied to one of the Targets associated with that
 Upstream).
-The <cite>host</cite> argument should receive a string equal to that of one of the
+The <cite>host</cite> argument should receive a string equal to the name of one of the
 Upstream entities currently configured.</p>
 </div></blockquote>
 <dl>
