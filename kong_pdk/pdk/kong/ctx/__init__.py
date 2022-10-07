@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT
 # Original source path: kong/pdk/ctx.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
