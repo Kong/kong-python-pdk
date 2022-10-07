@@ -22,7 +22,7 @@ jobs:
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
-          exclude: "docs"
+          exclude: "docs,kong_pdk/pdk/kong"
   build:
 
     runs-on: ubuntu-latest

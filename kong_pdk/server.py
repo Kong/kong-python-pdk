@@ -46,7 +46,7 @@ def locked_by(lock_name):
                 r = fn(*args, **kwargs)
             except Exception as ex:
                 lock.release()
-                raise(ex)
+                raise ex
             lock.release()
             return r
         return wrapper
@@ -141,7 +141,7 @@ class PluginServer(object):
                 instance = self.instances[iid]
                 if instance.is_expired(ttl):
                     self.logger.debug("cleanup instance #%d of %s" % (iid, instance.name))
-                    del(self.instances[iid])
+                    del self.instances[iid]
             self.i_lock.release()
 
     def cleanup(self):
@@ -260,7 +260,7 @@ class PluginServer(object):
 
         ins = self.instances[iid]
         ins.close_cb()
-        del(self.instances[iid])
+        del self.instances[iid]
 
         return {
             "Name": ins.name,
