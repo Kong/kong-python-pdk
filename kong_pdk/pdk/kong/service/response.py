@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT
 # Original source path: kong/pdk/service/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -135,7 +135,6 @@ class response():
         """
         pass
 
-    # this function's return type is modified mannually as body can be arbitrary binary string
     @staticmethod
     def get_raw_body() -> bytes:
         """
@@ -154,7 +153,7 @@ class response():
 
         :return: The raw buffered body.
 
-        :rtype: str
+        :rtype: bytes
         """
         pass
 

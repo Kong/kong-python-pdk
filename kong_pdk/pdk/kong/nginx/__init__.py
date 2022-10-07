@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT
 # Original source path: kong/pdk/nginx.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -27,6 +27,32 @@ class nginx():
         :return: the per-request context data in ngx.ctx
 
         :rtype: Any
+        """
+        pass
+
+    @staticmethod
+    def get_statistics() -> table:
+        """
+
+            Returns various connection and request metrics exposed by
+            Nginx, similar to those reported by the
+            [ngx_http_stub_status_module](https://nginx.org/en/docs/http/ngx_http_stub_status_module.html#data).
+            The following fields are included in the returned table:
+            * `connections_active` - the current number of active client connections including `connections_waiting`.
+            * `connections_reading` - the current number of connections where nginx is reading the request header.
+            * `connections_writing` - the current number of connections where nginx is writing the response back to the client.
+            * `connections_waiting` - the current number of idle client connections waiting for a request.
+            * `connections_accepted` - the total number of accepted client connections.
+            * `connections_handled` - the total number of handled connections. Same as `connections_accepted` unless some resource limits have been reached
+              (for example, the [`worker_connections`](https://nginx.org/en/docs/ngx_core_module.html#worker_connections) limit).
+            * `total_requests` - the total number of client requests.
+
+        Example:
+            nginx_statistics = kong.nginx.get_statistics()
+
+        :return: Nginx connections and requests statistics
+
+        :rtype: table
         """
         pass
 

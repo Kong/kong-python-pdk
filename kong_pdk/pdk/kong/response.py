@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 2.7.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT
 # Original source path: kong/pdk/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -134,7 +134,7 @@ class response():
         pass
 
     @staticmethod
-    def exit(status: number, body: Optional[Any], headers: Optional[table]) -> None:
+    def exit(status: number, body: Optional[bytes], headers: Optional[table]) -> None:
         """
 
             This function interrupts the current processing and produces a response.
@@ -229,7 +229,7 @@ class response():
         :parameter status: The status to be used.
         :type status: number
         :parameter body: The body to be used.
-        :type body: Any
+        :type body: bytes
         :parameter headers: The headers to be used.
         :type headers: table
 
@@ -337,8 +337,7 @@ class response():
         :rtype: str
         """
         pass
-    
-    # this function's return type is modified mannually as body can be arbitrary binary string
+
     @staticmethod
     def get_raw_body() -> bytes:
         """
@@ -365,7 +364,7 @@ class response():
         :return: body The full body when the last chunk has been read,
             otherwise returns `nil`.
 
-        :rtype: str
+        :rtype: bytes
         """
         pass
 
@@ -449,6 +448,7 @@ class response():
                 nginx_http_lua_transform_underscores_in_response_headers = off
             Be aware that changing this setting might break any plugins that
             rely on the automatic underscore conversion.
+            You cannot set Transfer-Encoding header with this function. It will be ignored.
 
         Phases:
             rewrite, access, header_filter, response, admin_api
@@ -480,6 +480,7 @@ class response():
             retained.
             This function overrides any existing header bearing the same name as those
             specified in the `headers` argument. Other headers remain unchanged.
+            You cannot set Transfer-Encoding header with this function. It will be ignored.
 
         Phases:
             rewrite, access, header_filter, response, admin_api
@@ -517,7 +518,7 @@ class response():
         pass
 
     @staticmethod
-    def set_raw_body(body: str) -> None:
+    def set_raw_body(body: bytes) -> None:
         """
 
             Sets the body of the response.
@@ -543,7 +544,7 @@ class response():
             kong.response.set_raw_body(body)
 
         :parameter body: The raw body.
-        :type body: str
+        :type body: bytes
 
         :return: throws an error on invalid inputs.
 
