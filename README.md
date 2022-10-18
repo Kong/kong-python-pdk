@@ -9,7 +9,7 @@ Requires Kong >= 2.3.0.
 
 ## Documentation
 
-See in [Kong Docs](https://docs.konghq.com/gateway-oss/latest/external-plugins/#developing-python-plugins)
+See in [Kong Docs](https://docs.konghq.com/gateway/latest/plugin-development/pluginserver/python/)
 
 ## Install the plugin server
 
