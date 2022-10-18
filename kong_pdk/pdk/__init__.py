@@ -1,4 +1,3 @@
-from telnetlib import theNULL
 from ..exception import PDKException
 
 class FakeClasses(object):
@@ -15,6 +14,7 @@ class FakeClasses(object):
 
     def __getattr__(self, k):
         return FakeClasses(self.prefix + "." + k, self.call)
+
 
 # those methods never return, instead, they exit from current request immediately
 non_return_methods = set((
@@ -35,7 +35,7 @@ def rpc_of(ch, lua_style):
         if lua_style:
             return data, err
         if err:
-            raise PDKException("exception from %s: %s" %(m, err))
+            raise PDKException("exception from %s: %s" % (m, err))
         return data
     return f
 
