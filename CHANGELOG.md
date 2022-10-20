@@ -2,8 +2,14 @@
 ## [Unreleased]
 
 
+<a name="0.3.2"></a>
+## [0.3.2] - 2022-10-07
+### bug fixes
+- add version field in PluginInfo rpc ([#79](https://github.com/Kong/kong-python-pdk/issues/79)) [132f31d](https://github.com/Kong/kong-python-pdk/commit/132f31d526ff3589ac9b93dc079adb18359519cd)
+
+
 <a name="0.3.1"></a>
-## [0.3.1] - 2022-06-12
+## [0.3.1] - 2022-06-13
 ### bug fixes
 - plugin closure syntax correction ([#64](https://github.com/Kong/kong-python-pdk/issues/64)) [920cc26](https://github.com/Kong/kong-python-pdk/commit/920cc26acb84ac357411a5d1d7232a6a540fb9f3)
 - removing upper() to allow matching of attributes ([#69](https://github.com/Kong/kong-python-pdk/issues/69)) [1997a6c](https://github.com/Kong/kong-python-pdk/commit/1997a6c9991a6bc21d96d1a7f3c0141a43e01248)
@@ -104,7 +110,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.1...HEAD
+[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.2...HEAD
+[0.3.2]: https://github.com/Kong/kong-python-pdk/compare/0.3.1...0.3.2
 [0.3.1]: https://github.com/Kong/kong-python-pdk/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/Kong/kong-python-pdk/compare/0.2.7...0.3.0
 [0.2.7]: https://github.com/Kong/kong-python-pdk/compare/0.2.6...0.2.7
