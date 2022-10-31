@@ -15,6 +15,7 @@ priority = 0
 sudo apt install ttf-mscorefonts-installer
 sudo apt install font-manager
 sudo fc-cache -f -v
+python3 -m pip install Pillow
 '''
 
 class Plugin(object):
