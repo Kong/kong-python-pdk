@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
 # Original source path: kong/pdk/service.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -58,7 +58,7 @@ class service():
             then TLS verification will always fail with "unable to get local issuer certificate" error.
 
         Phases:
-            rewrite`, access`, balancer`
+            rewrite, access, balancer, preread
 
         Example:
             ok, err = kong.service.set_tls_verify(true)
@@ -89,7 +89,7 @@ class service():
             directive or using the [kong.service.set_tls_verify](#kongserviceset_tls_verify) function.
 
         Phases:
-            rewrite`, access`, balancer`
+            rewrite, access, balancer, preread
 
         Example:
             ok, err = kong.service.set_tls_verify_depth(3)

@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
 # Original source path: kong/pdk/client/tls.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -71,7 +71,7 @@ class tls():
         pass
 
     @staticmethod
-    def request_client_certificate() -> Tuple[bool, err]:
+    def request_client_certificate(ca_certs: Optional[cdata]) -> Tuple[bool, err]:
         """
 
             Requests the client to present its client-side certificate to initiate mutual
@@ -83,23 +83,49 @@ class tls():
             authentication.
             To find out whether the client honored the request, use
             `get_full_client_certificate_chain` in later phases.
+            The `ca_certs` argument is the optional CA certificate chain opaque pointer,
+            which can be created by the [parse_pem_cert](https://github.com/openresty/lua-resty-core/blob/master/lib/ngx/ssl.md#parse_pem_cert)
+            or [resty.opensslx509.chain](https://github.com/fffonion/lua-resty-openssl#restyopensslx509chain)
+            The Distinguished Name (DN) list hints of the CA certificates will be sent to clients.
+            If omitted, will not send any DN list to clients.
 
         Phases:
             certificate
 
         Example:
-            res, err = kong.client.tls.request_client_certificate()
+            x509_lib = require "resty.openssl.x509"
+
+            chain_lib = require "resty.openssl.x509.chain"
+
+            res, err
+
+            chain = chain_lib.new()
+
+            # err check
+
+            x509, err = x509_lib.new(pem_cert, "PEM")
+
+            # err check
+
+            res, err = chain:add(x509)
+
+            # err check
+
+            # `chain.ctx` is the raw data of the chain, i.e. `STACK_OF(X509) *`
+
+            res, err = kong.client.tls.request_client_certificate(chain.ctx)
 
             if not res:
 
                 # do something with err
 
-        :return: Returns `true` if request is received, or `nil` if
-            request fails.
+        :parameter ca_certs: The CA certificate chain opaque pointer
+        :type ca_certs: cdata
+
+        :return: Returns `true` if successful, or `nil` if it fails.
 
         :rtype: bool
-        :return: Returns `nil` if the handshake is successful, or an error
-            message if it fails.
+        :return: Returns `nil` if successful, or an error message if it fails.
 
         :rtype: err
         """

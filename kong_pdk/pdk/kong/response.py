@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
 # Original source path: kong/pdk/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -101,7 +101,7 @@ class response():
               header in the produced response for convenience.
 
         Phases:
-            rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)
+            rewrite, access, admin_api, header_filter, only, if, body, is, nil
 
         Example:
             return kong.response.error(403, "Access Forbidden", {
@@ -191,7 +191,7 @@ class response():
             `Content-Length` header in the produced response for convenience.
 
         Phases:
-            preread, rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)
+            preread, rewrite, access, admin_api, header_filter, only, if, body, is, nil
 
         Example:
             return kong.response.exit(403, "Access Forbidden", {
@@ -339,36 +339,6 @@ class response():
         pass
 
     @staticmethod
-    def get_raw_body() -> bytes:
-        """
-
-            Returns the full body when the last chunk has been read.
-            Calling this function starts buffering the body in
-            an internal request context variable, and sets the current
-            chunk (`ngx.arg[1]`) to `nil` when the chunk is not the
-            last one. When it reads the last chunk, the function returns the full
-            buffered body.
-
-        Phases:
-            body_filter`
-
-        Example:
-            body = kong.response.get_raw_body()
-
-            if body:
-
-                body = transform(body)
-
-            kong.response.set_raw_body(body)
-
-        :return: body The full body when the last chunk has been read,
-            otherwise returns `nil`.
-
-        :rtype: bytes
-        """
-        pass
-
-    @staticmethod
     def get_source() -> str:
         """
 
@@ -512,41 +482,6 @@ class response():
         :type headers: table
 
         :return: throws an error on invalid input.
-
-        :rtype: None
-        """
-        pass
-
-    @staticmethod
-    def set_raw_body(body: bytes) -> None:
-        """
-
-            Sets the body of the response.
-            The `body` argument must be a string and is not processed in any way.
-            This function can't change the `Content-Length` header if one was
-            added. If you decide to use this function, the `Content-Length` header
-            should also be cleared, for example in the `header_filter` phase.
-
-        Phases:
-            body_filter`
-
-        Example:
-            kong.response.set_raw_body("Hello, world!")
-
-            # or
-
-            body = kong.response.get_raw_body()
-
-            if body:
-
-                body = transform(body)
-
-            kong.response.set_raw_body(body)
-
-        :parameter body: The raw body.
-        :type body: bytes
-
-        :return: throws an error on invalid inputs.
 
         :rtype: None
         """

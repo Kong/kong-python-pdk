@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
 # Original source path: kong/pdk/service/request.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -23,7 +23,7 @@ class request():
             present in the request. The order in which headers are added is retained.
 
         Phases:
-            rewrite`, access`
+            rewrite, access
 
         Example:
             kong.service.request.add_header("Cache-Control", "no-cache")
@@ -48,7 +48,7 @@ class request():
             Removes all occurrences of the specified header from the request to the Service.
 
         Phases:
-            rewrite`, access`
+            rewrite, access
 
         Example:
             kong.service.request.set_header("X-Foo", "foo")
@@ -79,7 +79,7 @@ class request():
             Once this function has been called, it is not possible to re-enable TLS handshake for the current session.
 
         Phases:
-            preread`, balancer`
+            preread, balancer
 
         Example:
             ok, err = kong.service.request.disable_tls()
@@ -105,7 +105,7 @@ class request():
             response headers at the same time.
 
         Phases:
-            rewrite`, access`
+            rewrite, access
 
         Example:
             kong.service.request.enable_buffering()
@@ -142,7 +142,7 @@ class request():
             a string with `kong.service.request.set_raw_body()`.
 
         Phases:
-            rewrite`, access`
+            rewrite, access
 
         Example:
             kong.service.set_header("application/json")
@@ -203,7 +203,7 @@ class request():
             sets the SNI of the request to the Service.
 
         Phases:
-            rewrite`, access`, balancer`
+            rewrite, access, balancer
 
         Example:
             kong.service.request.set_header("X-Foo", "value")
@@ -235,7 +235,7 @@ class request():
             the SNI of the request to the Service.
 
         Phases:
-            rewrite`, access`
+            rewrite, access
 
         Example:
             kong.service.request.set_header("X-Foo", "foo1")
@@ -283,7 +283,7 @@ class request():
             Sets the HTTP method for the request to the service.
 
         Phases:
-            rewrite`, access`
+            rewrite, access
 
         Example:
             kong.service.request.set_method("DELETE")
@@ -311,7 +311,7 @@ class request():
             Input should **not** include the query string.
 
         Phases:
-            access`
+            access
 
         Example:
             kong.service.request.set_path("/v2/movies")
@@ -342,7 +342,7 @@ class request():
             string can be given as a string with `kong.service.request.set_raw_query()`.
 
         Phases:
-            rewrite`, access`
+            rewrite, access
 
         Example:
             kong.service.request.set_query({
@@ -384,7 +384,7 @@ class request():
             see `kong.service.request.set_body()`.
 
         Phases:
-            rewrite`, access`
+            rewrite, access
 
         Example:
             kong.service.request.set_raw_body("Hello, world!")
@@ -409,7 +409,7 @@ class request():
             arguments, see `kong.service.request.set_query()`.
 
         Phases:
-            rewrite`, access`
+            rewrite, access
 
         Example:
             kong.service.request.set_raw_query("zzz&bar=baz&bar=bla&bar&blo=&foo=hello%20world")
@@ -431,7 +431,7 @@ class request():
             Sets the protocol to use when proxying the request to the Service.
 
         Phases:
-            access`
+            access
 
         Example:
             kong.service.request.set_scheme("https")
