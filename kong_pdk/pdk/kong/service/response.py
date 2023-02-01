@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
 # Original source path: kong/pdk/service/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -20,7 +20,7 @@ class response():
             Returns the decoded buffered body.
 
         Phases:
-            header_filter`, body_filter`, log`
+            header_filter, body_filter, log
 
         Example:
             # Plugin needs to call kong.service.request.enable_buffering() on `rewrite`
@@ -51,7 +51,7 @@ class response():
             itself).
 
         Phases:
-            header_filter`, body_filter`, log`
+            header_filter, body_filter, log
 
         Example:
             # Given a response with the following headers:
@@ -100,7 +100,7 @@ class response():
             greater than **1** and not greater than **1000**.
 
         Phases:
-            header_filter`, body_filter`, log`
+            header_filter, body_filter, log
 
         Example:
             # Given a response with the following headers:
@@ -142,7 +142,7 @@ class response():
             Returns the raw buffered body.
 
         Phases:
-            header_filter`, body_filter`, log`
+            header_filter, body_filter, log
 
         Example:
             # Plugin needs to call kong.service.request.enable_buffering() on `rewrite`
@@ -164,7 +164,7 @@ class response():
             Returns the HTTP status code of the response from the Service as a Lua number.
 
         Phases:
-            header_filter`, body_filter`, log`
+            header_filter, body_filter, log
 
         Example:
             kong.log.inspect(kong.service.response.get_status()) # 418
