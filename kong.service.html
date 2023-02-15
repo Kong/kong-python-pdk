@@ -154,7 +154,7 @@ headers with the same name. Instead, several occurrences of the header will be
 present in the request. The order in which headers are added is retained.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.add_header(“Cache-Control”, “no-cache”)</p>
 <p>kong.service.request.add_header(“Cache-Control”, “no-store”)</p>
@@ -183,7 +183,7 @@ present in the request. The order in which headers are added is retained.</p>
 <div><p>Removes all occurrences of the specified header from the request to the Service.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo”)</p>
 <p>kong.service.request.add_header(“X-Foo”, “bar”)</p>
@@ -215,7 +215,7 @@ for the current stream session.
 Once this function has been called, it is not possible to re-enable TLS handshake for the current session.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>preread`, balancer`</p>
+<dt>Phases:</dt><dd><p>preread, balancer</p>
 </dd>
 <dt>Example:</dt><dd><p>ok, err = kong.service.request.disable_tls()</p>
 <p>if not ok:</p>
@@ -248,7 +248,7 @@ Once this function has been called, it is not possible to re-enable TLS handshak
 response headers at the same time.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.enable_buffering()</p>
 </dd>
@@ -293,7 +293,7 @@ If further control of the body generation is needed, a raw body can be given as
 a string with <cite>kong.service.request.set_raw_body()</cite>.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.set_header(“application/json”)</p>
 <p>ok, err = kong.service.request.set_body({</p>
@@ -347,7 +347,7 @@ If the <cite>header</cite> argument is <cite>“host”</cite> (case-insensitive
 sets the SNI of the request to the Service.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+<dt>Phases:</dt><dd><p>rewrite, access, balancer</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “value”)</p>
 </dd>
@@ -384,7 +384,7 @@ If the <cite>“Host”</cite> header is set (case-insensitive), then this also 
 the SNI of the request to the Service.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo1”)</p>
 <p>kong.service.request.add_header(“X-Foo”, “foo2”)</p>
@@ -423,7 +423,7 @@ and each value is either a string or an array of strings.</p>
 <div><p>Sets the HTTP method for the request to the service.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_method(“DELETE”)</p>
 </dd>
@@ -455,7 +455,7 @@ to make the request valid.
 Input should <strong>not</strong> include the query string.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>access`</p>
+<dt>Phases:</dt><dd><p>access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_path(“/v2/movies”)</p>
 </dd>
@@ -490,7 +490,7 @@ If further control of the query string generation is needed, a raw query
 string can be given as a string with <cite>kong.service.request.set_raw_query()</cite>.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_query({</p>
 <p>foo = “hello world”,</p>
@@ -529,7 +529,7 @@ For a higher-level function to set the body based on the request content type,
 see <cite>kong.service.request.set_body()</cite>.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_raw_body(“Hello, world!”)</p>
 </dd>
@@ -558,7 +558,7 @@ For a higher-level function to set the query string from a Lua table of
 arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_raw_query(“zzz&amp;bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world”)</p>
 </dd>
@@ -584,7 +584,7 @@ arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 <div><p>Sets the protocol to use when proxying the request to the Service.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>access`</p>
+<dt>Phases:</dt><dd><p>access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_scheme(“https”)</p>
 </dd>
@@ -618,7 +618,7 @@ arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 <div><p>Returns the decoded buffered body.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
 <p># or <cite>access</cite> phase prior calling this function.</p>
@@ -652,7 +652,7 @@ if it is present in the response from the Service (ignoring headers added by Kon
 itself).</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Given a response with the following headers:</p>
 <p># X-Custom-Header: bla</p>
@@ -700,7 +700,7 @@ By default, this function returns up to <strong>100</strong> headers. The option
 greater than <strong>1</strong> and not greater than <strong>1000</strong>.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Given a response with the following headers:</p>
 <p># X-Custom-Header: bla</p>
@@ -743,7 +743,7 @@ a string with the error <cite>“truncated”</cite>.</p>
 <div><p>Returns the raw buffered body.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
 <p># or <cite>access</cite> phase prior calling this function.</p>
@@ -767,7 +767,7 @@ a string with the error <cite>“truncated”</cite>.</p>
 <div><p>Returns the HTTP status code of the response from the Service as a Lua number.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.log.inspect(kong.service.response.get_status()) # 418</p>
 </dd>
@@ -807,7 +807,7 @@ headers with the same name. Instead, several occurrences of the header will be
 present in the request. The order in which headers are added is retained.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.add_header(“Cache-Control”, “no-cache”)</p>
 <p>kong.service.request.add_header(“Cache-Control”, “no-store”)</p>
@@ -836,7 +836,7 @@ present in the request. The order in which headers are added is retained.</p>
 <div><p>Removes all occurrences of the specified header from the request to the Service.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo”)</p>
 <p>kong.service.request.add_header(“X-Foo”, “bar”)</p>
@@ -868,7 +868,7 @@ for the current stream session.
 Once this function has been called, it is not possible to re-enable TLS handshake for the current session.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>preread`, balancer`</p>
+<dt>Phases:</dt><dd><p>preread, balancer</p>
 </dd>
 <dt>Example:</dt><dd><p>ok, err = kong.service.request.disable_tls()</p>
 <p>if not ok:</p>
@@ -901,7 +901,7 @@ Once this function has been called, it is not possible to re-enable TLS handshak
 response headers at the same time.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.enable_buffering()</p>
 </dd>
@@ -946,7 +946,7 @@ If further control of the body generation is needed, a raw body can be given as
 a string with <cite>kong.service.request.set_raw_body()</cite>.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.set_header(“application/json”)</p>
 <p>ok, err = kong.service.request.set_body({</p>
@@ -1000,7 +1000,7 @@ If the <cite>header</cite> argument is <cite>“host”</cite> (case-insensitive
 sets the SNI of the request to the Service.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+<dt>Phases:</dt><dd><p>rewrite, access, balancer</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “value”)</p>
 </dd>
@@ -1037,7 +1037,7 @@ If the <cite>“Host”</cite> header is set (case-insensitive), then this also 
 the SNI of the request to the Service.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo1”)</p>
 <p>kong.service.request.add_header(“X-Foo”, “foo2”)</p>
@@ -1076,7 +1076,7 @@ and each value is either a string or an array of strings.</p>
 <div><p>Sets the HTTP method for the request to the service.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_method(“DELETE”)</p>
 </dd>
@@ -1108,7 +1108,7 @@ to make the request valid.
 Input should <strong>not</strong> include the query string.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>access`</p>
+<dt>Phases:</dt><dd><p>access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_path(“/v2/movies”)</p>
 </dd>
@@ -1143,7 +1143,7 @@ If further control of the query string generation is needed, a raw query
 string can be given as a string with <cite>kong.service.request.set_raw_query()</cite>.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_query({</p>
 <p>foo = “hello world”,</p>
@@ -1182,7 +1182,7 @@ For a higher-level function to set the body based on the request content type,
 see <cite>kong.service.request.set_body()</cite>.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_raw_body(“Hello, world!”)</p>
 </dd>
@@ -1211,7 +1211,7 @@ For a higher-level function to set the query string from a Lua table of
 arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_raw_query(“zzz&amp;bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world”)</p>
 </dd>
@@ -1237,7 +1237,7 @@ arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 <div><p>Sets the protocol to use when proxying the request to the Service.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>access`</p>
+<dt>Phases:</dt><dd><p>access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_scheme(“https”)</p>
 </dd>
@@ -1268,7 +1268,7 @@ arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 <div><p>Returns the decoded buffered body.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
 <p># or <cite>access</cite> phase prior calling this function.</p>
@@ -1302,7 +1302,7 @@ if it is present in the response from the Service (ignoring headers added by Kon
 itself).</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Given a response with the following headers:</p>
 <p># X-Custom-Header: bla</p>
@@ -1350,7 +1350,7 @@ By default, this function returns up to <strong>100</strong> headers. The option
 greater than <strong>1</strong> and not greater than <strong>1000</strong>.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Given a response with the following headers:</p>
 <p># X-Custom-Header: bla</p>
@@ -1393,7 +1393,7 @@ a string with the error <cite>“truncated”</cite>.</p>
 <div><p>Returns the raw buffered body.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
 <p># or <cite>access</cite> phase prior calling this function.</p>
@@ -1417,7 +1417,7 @@ a string with the error <cite>“truncated”</cite>.</p>
 <div><p>Returns the HTTP status code of the response from the Service as a Lua number.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.log.inspect(kong.service.response.get_status()) # 418</p>
 </dd>
@@ -1478,7 +1478,7 @@ or [kong.service.set_upstream_ssl_trusted_store](#kongserviceset_upstream_ssl_tr
 then TLS verification will always fail with “unable to get local issuer certificate” error.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+<dt>Phases:</dt><dd><p>rewrite, access, balancer, preread</p>
 </dd>
 <dt>Example:</dt><dd><p>ok, err = kong.service.set_tls_verify(true)</p>
 <p>if not ok:</p>
@@ -1516,7 +1516,7 @@ has to be enabled with either the [proxy_ssl_verify](<a class="reference externa
 directive or using the [kong.service.set_tls_verify](#kongserviceset_tls_verify) function.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+<dt>Phases:</dt><dd><p>rewrite, access, balancer, preread</p>
 </dd>
 <dt>Example:</dt><dd><p>ok, err = kong.service.set_tls_verify_depth(3)</p>
 <p>if not ok:</p>

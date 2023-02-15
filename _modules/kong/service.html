@@ -64,7 +64,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.service</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/service.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -124,7 +124,7 @@
 <span class="sd">            then TLS verification will always fail with &quot;unable to get local issuer certificate&quot; error.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`, balancer`</span>
+<span class="sd">            rewrite, access, balancer, preread</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            ok, err = kong.service.set_tls_verify(true)</span>
@@ -155,7 +155,7 @@
 <span class="sd">            directive or using the [kong.service.set_tls_verify](#kongserviceset_tls_verify) function.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`, balancer`</span>
+<span class="sd">            rewrite, access, balancer, preread</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            ok, err = kong.service.set_tls_verify_depth(3)</span>

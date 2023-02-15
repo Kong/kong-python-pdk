@@ -184,7 +184,7 @@ not present its certificate.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.client.tls.tls.request_client_certificate">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_client_certificate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/client/tls.html#tls.request_client_certificate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.tls.tls.request_client_certificate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_client_certificate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ca_certs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/client/tls.html#tls.request_client_certificate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.client.tls.tls.request_client_certificate" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Requests the client to present its client-side certificate to initiate mutual
 TLS authentication between server and client.
@@ -194,12 +194,27 @@ doesn’t present a client certificate. However, in that case, it becomes a
 TLS connection instead of an mTLS connection, as there is no mutual
 authentication.
 To find out whether the client honored the request, use
-<cite>get_full_client_certificate_chain</cite> in later phases.</p>
+<cite>get_full_client_certificate_chain</cite> in later phases.
+The <cite>ca_certs</cite> argument is the optional CA certificate chain opaque pointer,
+which can be created by the [parse_pem_cert](<a class="reference external" href="https://github.com/openresty/lua-resty-core/blob/master/lib/ngx/ssl.md#parse_pem_cert">https://github.com/openresty/lua-resty-core/blob/master/lib/ngx/ssl.md#parse_pem_cert</a>)
+or [resty.opensslx509.chain](<a class="reference external" href="https://github.com/fffonion/lua-resty-openssl#restyopensslx509chain">https://github.com/fffonion/lua-resty-openssl#restyopensslx509chain</a>)
+The Distinguished Name (DN) list hints of the CA certificates will be sent to clients.
+If omitted, will not send any DN list to clients.</p>
 </div></blockquote>
 <dl>
 <dt>Phases:</dt><dd><p>certificate</p>
 </dd>
-<dt>Example:</dt><dd><p>res, err = kong.client.tls.request_client_certificate()</p>
+<dt>Example:</dt><dd><p>x509_lib = require “resty.openssl.x509”</p>
+<p>chain_lib = require “resty.openssl.x509.chain”</p>
+<p>res, err</p>
+<p>chain = chain_lib.new()</p>
+<p># err check</p>
+<p>x509, err = x509_lib.new(pem_cert, “PEM”)</p>
+<p># err check</p>
+<p>res, err = chain:add(x509)</p>
+<p># err check</p>
+<p># <cite>chain.ctx</cite> is the raw data of the chain, i.e. <cite>STACK_OF(X509) *</cite></p>
+<p>res, err = kong.client.tls.request_client_certificate(chain.ctx)</p>
 <p>if not res:</p>
 <blockquote>
 <div><p># do something with err</p>
@@ -207,19 +222,20 @@ To find out whether the client honored the request, use
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Returns <cite>true</cite> if request is received, or <cite>nil</cite> if
-request fails.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ca_certs</strong> (<em>cdata</em>) – The CA certificate chain opaque pointer</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns <cite>true</cite> if successful, or <cite>nil</cite> if it fails.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Returns <cite>nil</cite> if the handshake is successful, or an error
-message if it fails.</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>err</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns <cite>nil</cite> if successful, or an error message if it fails.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>err</p>
 </dd>
 </dl>
 </dd></dl>
@@ -615,7 +631,7 @@ not present its certificate.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.client.client.tls.request_client_certificate">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_client_certificate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.client.client.tls.request_client_certificate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_client_certificate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ca_certs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.client.client.tls.request_client_certificate" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Requests the client to present its client-side certificate to initiate mutual
 TLS authentication between server and client.
@@ -625,12 +641,27 @@ doesn’t present a client certificate. However, in that case, it becomes a
 TLS connection instead of an mTLS connection, as there is no mutual
 authentication.
 To find out whether the client honored the request, use
-<cite>get_full_client_certificate_chain</cite> in later phases.</p>
+<cite>get_full_client_certificate_chain</cite> in later phases.
+The <cite>ca_certs</cite> argument is the optional CA certificate chain opaque pointer,
+which can be created by the [parse_pem_cert](<a class="reference external" href="https://github.com/openresty/lua-resty-core/blob/master/lib/ngx/ssl.md#parse_pem_cert">https://github.com/openresty/lua-resty-core/blob/master/lib/ngx/ssl.md#parse_pem_cert</a>)
+or [resty.opensslx509.chain](<a class="reference external" href="https://github.com/fffonion/lua-resty-openssl#restyopensslx509chain">https://github.com/fffonion/lua-resty-openssl#restyopensslx509chain</a>)
+The Distinguished Name (DN) list hints of the CA certificates will be sent to clients.
+If omitted, will not send any DN list to clients.</p>
 </div></blockquote>
 <dl>
 <dt>Phases:</dt><dd><p>certificate</p>
 </dd>
-<dt>Example:</dt><dd><p>res, err = kong.client.tls.request_client_certificate()</p>
+<dt>Example:</dt><dd><p>x509_lib = require “resty.openssl.x509”</p>
+<p>chain_lib = require “resty.openssl.x509.chain”</p>
+<p>res, err</p>
+<p>chain = chain_lib.new()</p>
+<p># err check</p>
+<p>x509, err = x509_lib.new(pem_cert, “PEM”)</p>
+<p># err check</p>
+<p>res, err = chain:add(x509)</p>
+<p># err check</p>
+<p># <cite>chain.ctx</cite> is the raw data of the chain, i.e. <cite>STACK_OF(X509) *</cite></p>
+<p>res, err = kong.client.tls.request_client_certificate(chain.ctx)</p>
 <p>if not res:</p>
 <blockquote>
 <div><p># do something with err</p>
@@ -638,19 +669,20 @@ To find out whether the client honored the request, use
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Returns <cite>true</cite> if request is received, or <cite>nil</cite> if
-request fails.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ca_certs</strong> (<em>cdata</em>) – The CA certificate chain opaque pointer</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns <cite>true</cite> if successful, or <cite>nil</cite> if it fails.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Returns <cite>nil</cite> if the handshake is successful, or an error
-message if it fails.</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>err</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns <cite>nil</cite> if successful, or an error message if it fails.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>err</p>
 </dd>
 </dl>
 </dd></dl>

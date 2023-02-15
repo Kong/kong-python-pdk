@@ -64,7 +64,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.response</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/response.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -167,7 +167,7 @@
 <span class="sd">              header in the produced response for convenience.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)</span>
+<span class="sd">            rewrite, access, admin_api, header_filter, only, if, body, is, nil</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            return kong.response.error(403, &quot;Access Forbidden&quot;, {</span>
@@ -200,7 +200,7 @@
         <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="response.exit"><a class="viewcode-back" href="../../kong.html#kong.response.response.exit">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">table</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">table</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            This function interrupts the current processing and produces a response.</span>
@@ -257,7 +257,7 @@
 <span class="sd">            `Content-Length` header in the produced response for convenience.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            preread, rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)</span>
+<span class="sd">            preread, rewrite, access, admin_api, header_filter, only, if, body, is, nil</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            return kong.response.exit(403, &quot;Access Forbidden&quot;, {</span>
@@ -295,7 +295,7 @@
 <span class="sd">        :parameter status: The status to be used.</span>
 <span class="sd">        :type status: number</span>
 <span class="sd">        :parameter body: The body to be used.</span>
-<span class="sd">        :type body: Any</span>
+<span class="sd">        :type body: bytes</span>
 <span class="sd">        :parameter headers: The headers to be used.</span>
 <span class="sd">        :type headers: table</span>
 
@@ -401,36 +401,6 @@
 <span class="sd">            returns a string with the error `&quot;truncated&quot;`.</span>
 
 <span class="sd">        :rtype: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
-
-<div class="viewcode-block" id="response.get_raw_body"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">            Returns the full body when the last chunk has been read.</span>
-<span class="sd">            Calling this function starts buffering the body in</span>
-<span class="sd">            an internal request context variable, and sets the current</span>
-<span class="sd">            chunk (`ngx.arg[1]`) to `nil` when the chunk is not the</span>
-<span class="sd">            last one. When it reads the last chunk, the function returns the full</span>
-<span class="sd">            buffered body.</span>
-
-<span class="sd">        Phases:</span>
-<span class="sd">            body_filter`</span>
-
-<span class="sd">        Example:</span>
-<span class="sd">            body = kong.response.get_raw_body()</span>
-
-<span class="sd">            if body:</span>
-
-<span class="sd">                body = transform(body)</span>
-
-<span class="sd">            kong.response.set_raw_body(body)</span>
-
-<span class="sd">        :return: body The full body when the last chunk has been read,</span>
-<span class="sd">            otherwise returns `nil`.</span>
-
-<span class="sd">        :rtype: bytes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
@@ -578,41 +548,6 @@
 <span class="sd">        :type headers: table</span>
 
 <span class="sd">        :return: throws an error on invalid input.</span>
-
-<span class="sd">        :rtype: None</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
-
-<div class="viewcode-block" id="response.set_raw_body"><a class="viewcode-back" href="../../kong.html#kong.response.response.set_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">set_raw_body</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">            Sets the body of the response.</span>
-<span class="sd">            The `body` argument must be a string and is not processed in any way.</span>
-<span class="sd">            This function can&#39;t change the `Content-Length` header if one was</span>
-<span class="sd">            added. If you decide to use this function, the `Content-Length` header</span>
-<span class="sd">            should also be cleared, for example in the `header_filter` phase.</span>
-
-<span class="sd">        Phases:</span>
-<span class="sd">            body_filter`</span>
-
-<span class="sd">        Example:</span>
-<span class="sd">            kong.response.set_raw_body(&quot;Hello, world!&quot;)</span>
-
-<span class="sd">            # or</span>
-
-<span class="sd">            body = kong.response.get_raw_body()</span>
-
-<span class="sd">            if body:</span>
-
-<span class="sd">                body = transform(body)</span>
-
-<span class="sd">            kong.response.set_raw_body(body)</span>
-
-<span class="sd">        :parameter body: The raw body.</span>
-<span class="sd">        :type body: bytes</span>
-
-<span class="sd">        :return: throws an error on invalid inputs.</span>
 
 <span class="sd">        :rtype: None</span>
 <span class="sd">        &quot;&quot;&quot;</span>

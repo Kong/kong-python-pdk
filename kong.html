@@ -104,6 +104,7 @@
 <li><a class="reference internal" href="#kong.request.request.get_raw_query"><code class="docutils literal notranslate"><span class="pre">request.get_raw_query()</span></code></a></li>
 <li><a class="reference internal" href="#kong.request.request.get_scheme"><code class="docutils literal notranslate"><span class="pre">request.get_scheme()</span></code></a></li>
 <li><a class="reference internal" href="#kong.request.request.get_start_time"><code class="docutils literal notranslate"><span class="pre">request.get_start_time()</span></code></a></li>
+<li><a class="reference internal" href="#kong.request.request.get_uri_captures"><code class="docutils literal notranslate"><span class="pre">request.get_uri_captures()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -116,12 +117,10 @@
 <li><a class="reference internal" href="#kong.response.response.exit"><code class="docutils literal notranslate"><span class="pre">response.exit()</span></code></a></li>
 <li><a class="reference internal" href="#kong.response.response.get_header"><code class="docutils literal notranslate"><span class="pre">response.get_header()</span></code></a></li>
 <li><a class="reference internal" href="#kong.response.response.get_headers"><code class="docutils literal notranslate"><span class="pre">response.get_headers()</span></code></a></li>
-<li><a class="reference internal" href="#kong.response.response.get_raw_body"><code class="docutils literal notranslate"><span class="pre">response.get_raw_body()</span></code></a></li>
 <li><a class="reference internal" href="#kong.response.response.get_source"><code class="docutils literal notranslate"><span class="pre">response.get_source()</span></code></a></li>
 <li><a class="reference internal" href="#kong.response.response.get_status"><code class="docutils literal notranslate"><span class="pre">response.get_status()</span></code></a></li>
 <li><a class="reference internal" href="#kong.response.response.set_header"><code class="docutils literal notranslate"><span class="pre">response.set_header()</span></code></a></li>
 <li><a class="reference internal" href="#kong.response.response.set_headers"><code class="docutils literal notranslate"><span class="pre">response.set_headers()</span></code></a></li>
-<li><a class="reference internal" href="#kong.response.response.set_raw_body"><code class="docutils literal notranslate"><span class="pre">response.set_raw_body()</span></code></a></li>
 <li><a class="reference internal" href="#kong.response.response.set_status"><code class="docutils literal notranslate"><span class="pre">response.set_status()</span></code></a></li>
 </ul>
 </li>
@@ -237,6 +236,7 @@
 <li><a class="reference internal" href="#kong.kong.request.get_raw_query"><code class="docutils literal notranslate"><span class="pre">kong.request.get_raw_query()</span></code></a></li>
 <li><a class="reference internal" href="#kong.kong.request.get_scheme"><code class="docutils literal notranslate"><span class="pre">kong.request.get_scheme()</span></code></a></li>
 <li><a class="reference internal" href="#kong.kong.request.get_start_time"><code class="docutils literal notranslate"><span class="pre">kong.request.get_start_time()</span></code></a></li>
+<li><a class="reference internal" href="#kong.kong.request.get_uri_captures"><code class="docutils literal notranslate"><span class="pre">kong.request.get_uri_captures()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#kong.kong.response"><code class="docutils literal notranslate"><span class="pre">kong.response</span></code></a><ul>
@@ -246,12 +246,10 @@
 <li><a class="reference internal" href="#kong.kong.response.exit"><code class="docutils literal notranslate"><span class="pre">kong.response.exit()</span></code></a></li>
 <li><a class="reference internal" href="#kong.kong.response.get_header"><code class="docutils literal notranslate"><span class="pre">kong.response.get_header()</span></code></a></li>
 <li><a class="reference internal" href="#kong.kong.response.get_headers"><code class="docutils literal notranslate"><span class="pre">kong.response.get_headers()</span></code></a></li>
-<li><a class="reference internal" href="#kong.kong.response.get_raw_body"><code class="docutils literal notranslate"><span class="pre">kong.response.get_raw_body()</span></code></a></li>
 <li><a class="reference internal" href="#kong.kong.response.get_source"><code class="docutils literal notranslate"><span class="pre">kong.response.get_source()</span></code></a></li>
 <li><a class="reference internal" href="#kong.kong.response.get_status"><code class="docutils literal notranslate"><span class="pre">kong.response.get_status()</span></code></a></li>
 <li><a class="reference internal" href="#kong.kong.response.set_header"><code class="docutils literal notranslate"><span class="pre">kong.response.set_header()</span></code></a></li>
 <li><a class="reference internal" href="#kong.kong.response.set_headers"><code class="docutils literal notranslate"><span class="pre">kong.response.set_headers()</span></code></a></li>
-<li><a class="reference internal" href="#kong.kong.response.set_raw_body"><code class="docutils literal notranslate"><span class="pre">kong.response.set_raw_body()</span></code></a></li>
 <li><a class="reference internal" href="#kong.kong.response.set_status"><code class="docutils literal notranslate"><span class="pre">kong.response.set_status()</span></code></a></li>
 </ul>
 </li>
@@ -1866,6 +1864,31 @@ normalized to lowercase form.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.request.request.get_uri_captures">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_uri_captures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">table</span></span></span><a class="reference internal" href="_modules/kong/request.html#request.get_uri_captures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.request.request.get_uri_captures" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the URI captures matched by the router.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite, access, header_filter, response, body_filter, log, admin_api</p>
+</dd>
+<dt>Example:</dt><dd><p>captures = kong.request.get_uri_captures()</p>
+<p>for idx, value in ipairs(captures.unnamed) do</p>
+<p># do what you want to capturesfor name, value in pairs(captures.named) do</p>
+<p># do what you want to captures</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tables containing unamed and named captures.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>table</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -1970,7 +1993,7 @@ header in the produced response for convenience.</p>
 </div></blockquote>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)</p>
+<dt>Phases:</dt><dd><p>rewrite, access, admin_api, header_filter, only, if, body, is, nil</p>
 </dd>
 <dt>Example:</dt><dd><p>return kong.response.error(403, “Access Forbidden”, {</p>
 <p>[“Content-Type”] = “text/plain”,</p>
@@ -2001,7 +2024,7 @@ header in the produced response for convenience.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.response.response.exit">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">table</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/response.html#response.exit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.response.response.exit" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">table</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/response.html#response.exit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.response.response.exit" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>This function interrupts the current processing and produces a response.
 It is typical to see plugins using it to produce a response before Kong
@@ -2061,7 +2084,7 @@ response headers to send. If specified, its behavior is similar to
 <cite>Content-Length</cite> header in the produced response for convenience.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>preread, rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)</p>
+<dt>Phases:</dt><dd><p>preread, rewrite, access, admin_api, header_filter, only, if, body, is, nil</p>
 </dd>
 <dt>Example:</dt><dd><p>return kong.response.exit(403, “Access Forbidden”, {</p>
 <p>[“Content-Type”] = “text/plain”,</p>
@@ -2085,7 +2108,7 @@ response headers to send. If specified, its behavior is similar to
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>status</strong> (<em>number</em>) – The status to be used.</p></li>
-<li><p><strong>body</strong> (<em>Any</em>) – The body to be used.</p></li>
+<li><p><strong>body</strong> (<em>bytes</em>) – The body to be used.</p></li>
 <li><p><strong>headers</strong> (<em>table</em>) – The headers to be used.</p></li>
 </ul>
 </dd>
@@ -2191,39 +2214,6 @@ returns a string with the error <cite>“truncated”</cite>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="kong.response.response.get_raw_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_raw_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="_modules/kong/response.html#response.get_raw_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.response.response.get_raw_body" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Returns the full body when the last chunk has been read.
-Calling this function starts buffering the body in
-an internal request context variable, and sets the current
-chunk (<cite>ngx.arg[1]</cite>) to <cite>nil</cite> when the chunk is not the
-last one. When it reads the last chunk, the function returns the full
-buffered body.</p>
-</div></blockquote>
-<dl>
-<dt>Phases:</dt><dd><p>body_filter`</p>
-</dd>
-<dt>Example:</dt><dd><p>body = kong.response.get_raw_body()</p>
-<p>if body:</p>
-<blockquote>
-<div><p>body = transform(body)</p>
-</div></blockquote>
-<p>kong.response.set_raw_body(body)</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>body The full body when the last chunk has been read,
-otherwise returns <cite>nil</cite>.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>bytes</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2384,42 +2374,6 @@ You cannot set Transfer-Encoding header with this function. It will be ignored.<
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>throws an error on invalid input.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="kong.response.response.set_raw_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_raw_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/response.html#response.set_raw_body"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.response.response.set_raw_body" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Sets the body of the response.
-The <cite>body</cite> argument must be a string and is not processed in any way.
-This function can’t change the <cite>Content-Length</cite> header if one was
-added. If you decide to use this function, the <cite>Content-Length</cite> header
-should also be cleared, for example in the <cite>header_filter</cite> phase.</p>
-</div></blockquote>
-<dl>
-<dt>Phases:</dt><dd><p>body_filter`</p>
-</dd>
-<dt>Example:</dt><dd><p>kong.response.set_raw_body(“Hello, world!”)</p>
-<p># or</p>
-<p>body = kong.response.get_raw_body()</p>
-<p>if body:</p>
-<blockquote>
-<div><p>body = transform(body)</p>
-</div></blockquote>
-<p>kong.response.set_raw_body(body)</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>body</strong> (<em>bytes</em>) – The raw body.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>throws an error on invalid inputs.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>None</p>
@@ -3003,7 +2957,7 @@ not present its certificate.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.kong.client.tls.request_client_certificate">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_client_certificate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.kong.client.tls.request_client_certificate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">request_client_certificate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ca_certs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.kong.client.tls.request_client_certificate" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Requests the client to present its client-side certificate to initiate mutual
 TLS authentication between server and client.
@@ -3013,12 +2967,27 @@ doesn’t present a client certificate. However, in that case, it becomes a
 TLS connection instead of an mTLS connection, as there is no mutual
 authentication.
 To find out whether the client honored the request, use
-<cite>get_full_client_certificate_chain</cite> in later phases.</p>
+<cite>get_full_client_certificate_chain</cite> in later phases.
+The <cite>ca_certs</cite> argument is the optional CA certificate chain opaque pointer,
+which can be created by the [parse_pem_cert](<a class="reference external" href="https://github.com/openresty/lua-resty-core/blob/master/lib/ngx/ssl.md#parse_pem_cert">https://github.com/openresty/lua-resty-core/blob/master/lib/ngx/ssl.md#parse_pem_cert</a>)
+or [resty.opensslx509.chain](<a class="reference external" href="https://github.com/fffonion/lua-resty-openssl#restyopensslx509chain">https://github.com/fffonion/lua-resty-openssl#restyopensslx509chain</a>)
+The Distinguished Name (DN) list hints of the CA certificates will be sent to clients.
+If omitted, will not send any DN list to clients.</p>
 </div></blockquote>
 <dl>
 <dt>Phases:</dt><dd><p>certificate</p>
 </dd>
-<dt>Example:</dt><dd><p>res, err = kong.client.tls.request_client_certificate()</p>
+<dt>Example:</dt><dd><p>x509_lib = require “resty.openssl.x509”</p>
+<p>chain_lib = require “resty.openssl.x509.chain”</p>
+<p>res, err</p>
+<p>chain = chain_lib.new()</p>
+<p># err check</p>
+<p>x509, err = x509_lib.new(pem_cert, “PEM”)</p>
+<p># err check</p>
+<p>res, err = chain:add(x509)</p>
+<p># err check</p>
+<p># <cite>chain.ctx</cite> is the raw data of the chain, i.e. <cite>STACK_OF(X509) *</cite></p>
+<p>res, err = kong.client.tls.request_client_certificate(chain.ctx)</p>
 <p>if not res:</p>
 <blockquote>
 <div><p># do something with err</p>
@@ -3026,19 +2995,20 @@ To find out whether the client honored the request, use
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Returns <cite>true</cite> if request is received, or <cite>nil</cite> if
-request fails.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ca_certs</strong> (<em>cdata</em>) – The CA certificate chain opaque pointer</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>bool</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns <cite>true</cite> if successful, or <cite>nil</cite> if it fails.</p>
 </dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Returns <cite>nil</cite> if the handshake is successful, or an error
-message if it fails.</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>err</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns <cite>nil</cite> if successful, or an error message if it fails.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>err</p>
 </dd>
 </dl>
 </dd></dl>
@@ -4677,6 +4647,31 @@ normalized to lowercase form.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.kong.request.get_uri_captures">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_uri_captures</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">table</span></span></span><a class="headerlink" href="#kong.kong.request.get_uri_captures" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Returns the URI captures matched by the router.</p>
+</div></blockquote>
+<dl>
+<dt>Phases:</dt><dd><p>rewrite, access, header_filter, response, body_filter, log, admin_api</p>
+</dd>
+<dt>Example:</dt><dd><p>captures = kong.request.get_uri_captures()</p>
+<p>for idx, value in ipairs(captures.unnamed) do</p>
+<p># do what you want to capturesfor name, value in pairs(captures.named) do</p>
+<p># do what you want to captures</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>tables containing unamed and named captures.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>table</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -4778,7 +4773,7 @@ header in the produced response for convenience.</p>
 </div></blockquote>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)</p>
+<dt>Phases:</dt><dd><p>rewrite, access, admin_api, header_filter, only, if, body, is, nil</p>
 </dd>
 <dt>Example:</dt><dd><p>return kong.response.error(403, “Access Forbidden”, {</p>
 <p>[“Content-Type”] = “text/plain”,</p>
@@ -4809,7 +4804,7 @@ header in the produced response for convenience.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.kong.response.exit">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">table</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.kong.response.exit" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">exit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">table</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.kong.response.exit" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>This function interrupts the current processing and produces a response.
 It is typical to see plugins using it to produce a response before Kong
@@ -4869,7 +4864,7 @@ response headers to send. If specified, its behavior is similar to
 <cite>Content-Length</cite> header in the produced response for convenience.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>preread, rewrite, access, admin_api, header_filter, (only, if, body`, is, nil)</p>
+<dt>Phases:</dt><dd><p>preread, rewrite, access, admin_api, header_filter, only, if, body, is, nil</p>
 </dd>
 <dt>Example:</dt><dd><p>return kong.response.exit(403, “Access Forbidden”, {</p>
 <p>[“Content-Type”] = “text/plain”,</p>
@@ -4893,7 +4888,7 @@ response headers to send. If specified, its behavior is similar to
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>status</strong> (<em>number</em>) – The status to be used.</p></li>
-<li><p><strong>body</strong> (<em>Any</em>) – The body to be used.</p></li>
+<li><p><strong>body</strong> (<em>bytes</em>) – The body to be used.</p></li>
 <li><p><strong>headers</strong> (<em>table</em>) – The headers to be used.</p></li>
 </ul>
 </dd>
@@ -4999,39 +4994,6 @@ returns a string with the error <cite>“truncated”</cite>.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="kong.kong.response.get_raw_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_raw_body</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#kong.kong.response.get_raw_body" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Returns the full body when the last chunk has been read.
-Calling this function starts buffering the body in
-an internal request context variable, and sets the current
-chunk (<cite>ngx.arg[1]</cite>) to <cite>nil</cite> when the chunk is not the
-last one. When it reads the last chunk, the function returns the full
-buffered body.</p>
-</div></blockquote>
-<dl>
-<dt>Phases:</dt><dd><p>body_filter`</p>
-</dd>
-<dt>Example:</dt><dd><p>body = kong.response.get_raw_body()</p>
-<p>if body:</p>
-<blockquote>
-<div><p>body = transform(body)</p>
-</div></blockquote>
-<p>kong.response.set_raw_body(body)</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>body The full body when the last chunk has been read,
-otherwise returns <cite>nil</cite>.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>bytes</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5200,42 +5162,6 @@ You cannot set Transfer-Encoding header with this function. It will be ignored.<
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="kong.kong.response.set_raw_body">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_raw_body</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.kong.response.set_raw_body" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Sets the body of the response.
-The <cite>body</cite> argument must be a string and is not processed in any way.
-This function can’t change the <cite>Content-Length</cite> header if one was
-added. If you decide to use this function, the <cite>Content-Length</cite> header
-should also be cleared, for example in the <cite>header_filter</cite> phase.</p>
-</div></blockquote>
-<dl>
-<dt>Phases:</dt><dd><p>body_filter`</p>
-</dd>
-<dt>Example:</dt><dd><p>kong.response.set_raw_body(“Hello, world!”)</p>
-<p># or</p>
-<p>body = kong.response.get_raw_body()</p>
-<p>if body:</p>
-<blockquote>
-<div><p>body = transform(body)</p>
-</div></blockquote>
-<p>kong.response.set_raw_body(body)</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>body</strong> (<em>bytes</em>) – The raw body.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>throws an error on invalid inputs.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="kong.kong.response.set_status">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">number</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.kong.response.set_status" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
@@ -5341,7 +5267,7 @@ headers with the same name. Instead, several occurrences of the header will be
 present in the request. The order in which headers are added is retained.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.add_header(“Cache-Control”, “no-cache”)</p>
 <p>kong.service.request.add_header(“Cache-Control”, “no-store”)</p>
@@ -5370,7 +5296,7 @@ present in the request. The order in which headers are added is retained.</p>
 <div><p>Removes all occurrences of the specified header from the request to the Service.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo”)</p>
 <p>kong.service.request.add_header(“X-Foo”, “bar”)</p>
@@ -5402,7 +5328,7 @@ for the current stream session.
 Once this function has been called, it is not possible to re-enable TLS handshake for the current session.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>preread`, balancer`</p>
+<dt>Phases:</dt><dd><p>preread, balancer</p>
 </dd>
 <dt>Example:</dt><dd><p>ok, err = kong.service.request.disable_tls()</p>
 <p>if not ok:</p>
@@ -5435,7 +5361,7 @@ Once this function has been called, it is not possible to re-enable TLS handshak
 response headers at the same time.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.enable_buffering()</p>
 </dd>
@@ -5480,7 +5406,7 @@ If further control of the body generation is needed, a raw body can be given as
 a string with <cite>kong.service.request.set_raw_body()</cite>.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.set_header(“application/json”)</p>
 <p>ok, err = kong.service.request.set_body({</p>
@@ -5534,7 +5460,7 @@ If the <cite>header</cite> argument is <cite>“host”</cite> (case-insensitive
 sets the SNI of the request to the Service.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+<dt>Phases:</dt><dd><p>rewrite, access, balancer</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “value”)</p>
 </dd>
@@ -5571,7 +5497,7 @@ If the <cite>“Host”</cite> header is set (case-insensitive), then this also 
 the SNI of the request to the Service.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_header(“X-Foo”, “foo1”)</p>
 <p>kong.service.request.add_header(“X-Foo”, “foo2”)</p>
@@ -5610,7 +5536,7 @@ and each value is either a string or an array of strings.</p>
 <div><p>Sets the HTTP method for the request to the service.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_method(“DELETE”)</p>
 </dd>
@@ -5642,7 +5568,7 @@ to make the request valid.
 Input should <strong>not</strong> include the query string.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>access`</p>
+<dt>Phases:</dt><dd><p>access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_path(“/v2/movies”)</p>
 </dd>
@@ -5677,7 +5603,7 @@ If further control of the query string generation is needed, a raw query
 string can be given as a string with <cite>kong.service.request.set_raw_query()</cite>.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_query({</p>
 <p>foo = “hello world”,</p>
@@ -5716,7 +5642,7 @@ For a higher-level function to set the body based on the request content type,
 see <cite>kong.service.request.set_body()</cite>.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_raw_body(“Hello, world!”)</p>
 </dd>
@@ -5745,7 +5671,7 @@ For a higher-level function to set the query string from a Lua table of
 arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>rewrite`, access`</p>
+<dt>Phases:</dt><dd><p>rewrite, access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_raw_query(“zzz&amp;bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world”)</p>
 </dd>
@@ -5771,7 +5697,7 @@ arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 <div><p>Sets the protocol to use when proxying the request to the Service.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>access`</p>
+<dt>Phases:</dt><dd><p>access</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.service.request.set_scheme(“https”)</p>
 </dd>
@@ -5802,7 +5728,7 @@ arguments, see <cite>kong.service.request.set_query()</cite>.</p>
 <div><p>Returns the decoded buffered body.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
 <p># or <cite>access</cite> phase prior calling this function.</p>
@@ -5836,7 +5762,7 @@ if it is present in the response from the Service (ignoring headers added by Kon
 itself).</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Given a response with the following headers:</p>
 <p># X-Custom-Header: bla</p>
@@ -5884,7 +5810,7 @@ By default, this function returns up to <strong>100</strong> headers. The option
 greater than <strong>1</strong> and not greater than <strong>1000</strong>.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Given a response with the following headers:</p>
 <p># X-Custom-Header: bla</p>
@@ -5927,7 +5853,7 @@ a string with the error <cite>“truncated”</cite>.</p>
 <div><p>Returns the raw buffered body.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p># Plugin needs to call kong.service.request.enable_buffering() on <cite>rewrite</cite></p>
 <p># or <cite>access</cite> phase prior calling this function.</p>
@@ -5951,7 +5877,7 @@ a string with the error <cite>“truncated”</cite>.</p>
 <div><p>Returns the HTTP status code of the response from the Service as a Lua number.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>Phases:</dt><dd><p>header_filter`, body_filter`, log`</p>
+<dt>Phases:</dt><dd><p>header_filter, body_filter, log</p>
 </dd>
 <dt>Example:</dt><dd><p>kong.log.inspect(kong.service.response.get_status()) # 418</p>
 </dd>
@@ -6012,7 +5938,7 @@ or [kong.service.set_upstream_ssl_trusted_store](#kongserviceset_upstream_ssl_tr
 then TLS verification will always fail with “unable to get local issuer certificate” error.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+<dt>Phases:</dt><dd><p>rewrite, access, balancer, preread</p>
 </dd>
 <dt>Example:</dt><dd><p>ok, err = kong.service.set_tls_verify(true)</p>
 <p>if not ok:</p>
@@ -6050,7 +5976,7 @@ has to be enabled with either the [proxy_ssl_verify](<a class="reference externa
 directive or using the [kong.service.set_tls_verify](#kongserviceset_tls_verify) function.</p>
 </div></blockquote>
 <dl>
-<dt>Phases:</dt><dd><p>rewrite`, access`, balancer`</p>
+<dt>Phases:</dt><dd><p>rewrite, access, balancer, preread</p>
 </dd>
 <dt>Example:</dt><dd><p>ok, err = kong.service.set_tls_verify_depth(3)</p>
 <p>if not ok:</p>

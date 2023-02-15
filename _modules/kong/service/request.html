@@ -65,7 +65,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.service.request</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.1.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/service/request.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -90,7 +90,7 @@
 <span class="sd">            present in the request. The order in which headers are added is retained.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`</span>
+<span class="sd">            rewrite, access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.add_header(&quot;Cache-Control&quot;, &quot;no-cache&quot;)</span>
@@ -115,7 +115,7 @@
 <span class="sd">            Removes all occurrences of the specified header from the request to the Service.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`</span>
+<span class="sd">            rewrite, access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_header(&quot;X-Foo&quot;, &quot;foo&quot;)</span>
@@ -146,7 +146,7 @@
 <span class="sd">            Once this function has been called, it is not possible to re-enable TLS handshake for the current session.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            preread`, balancer`</span>
+<span class="sd">            preread, balancer</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            ok, err = kong.service.request.disable_tls()</span>
@@ -172,7 +172,7 @@
 <span class="sd">            response headers at the same time.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`</span>
+<span class="sd">            rewrite, access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.enable_buffering()</span>
@@ -209,7 +209,7 @@
 <span class="sd">            a string with `kong.service.request.set_raw_body()`.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`</span>
+<span class="sd">            rewrite, access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.set_header(&quot;application/json&quot;)</span>
@@ -270,7 +270,7 @@
 <span class="sd">            sets the SNI of the request to the Service.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`, balancer`</span>
+<span class="sd">            rewrite, access, balancer</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_header(&quot;X-Foo&quot;, &quot;value&quot;)</span>
@@ -302,7 +302,7 @@
 <span class="sd">            the SNI of the request to the Service.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`</span>
+<span class="sd">            rewrite, access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_header(&quot;X-Foo&quot;, &quot;foo1&quot;)</span>
@@ -350,7 +350,7 @@
 <span class="sd">            Sets the HTTP method for the request to the service.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`</span>
+<span class="sd">            rewrite, access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_method(&quot;DELETE&quot;)</span>
@@ -378,7 +378,7 @@
 <span class="sd">            Input should **not** include the query string.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            access`</span>
+<span class="sd">            access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_path(&quot;/v2/movies&quot;)</span>
@@ -409,7 +409,7 @@
 <span class="sd">            string can be given as a string with `kong.service.request.set_raw_query()`.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`</span>
+<span class="sd">            rewrite, access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_query({</span>
@@ -451,7 +451,7 @@
 <span class="sd">            see `kong.service.request.set_body()`.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`</span>
+<span class="sd">            rewrite, access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_raw_body(&quot;Hello, world!&quot;)</span>
@@ -476,7 +476,7 @@
 <span class="sd">            arguments, see `kong.service.request.set_query()`.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite`, access`</span>
+<span class="sd">            rewrite, access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_raw_query(&quot;zzz&amp;bar=baz&amp;bar=bla&amp;bar&amp;blo=&amp;foo=hello%20world&quot;)</span>
@@ -498,7 +498,7 @@
 <span class="sd">            Sets the protocol to use when proxying the request to the Service.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            access`</span>
+<span class="sd">            access</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_scheme(&quot;https&quot;)</span>
