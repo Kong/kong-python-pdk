@@ -80,7 +80,7 @@ class nginx():
     def get_var() -> str:
         """
 
-        :return: the NGINX version string
+        :return: the NGINX variable value
 
         :rtype: str
         """
