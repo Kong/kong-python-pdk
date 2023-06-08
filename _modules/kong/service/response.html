@@ -11,9 +11,6 @@
   <![endif]-->
   
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -26,11 +23,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> kong-pdk
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            kong-pdk
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,11 +52,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-          <li><a href="../../kong.html">kong</a> &raquo;</li>
-          <li><a href="../service.html">kong.service</a> &raquo;</li>
-      <li>kong.service.response</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../kong.html">kong</a></li>
+          <li class="breadcrumb-item"><a href="../service.html">kong.service</a></li>
+      <li class="breadcrumb-item active">kong.service.response</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -65,7 +66,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.service.response</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/service/response.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -82,7 +83,7 @@
 
 <div class="viewcode-block" id="response.get_body"><a class="viewcode-back" href="../../../kong.service.html#kong.service.response.response.get_body">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_body</span><span class="p">(</span><span class="n">mimetype</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">max_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the decoded buffered body.</span>
 
@@ -102,7 +103,7 @@
 <span class="sd">            that can be parsed.</span>
 <span class="sd">        :type max_args: number</span>
 
-<span class="sd">        :return: The raw buffered body</span>
+<span class="sd">        :return: The decoded buffered body</span>
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -110,7 +111,7 @@
 
 <div class="viewcode-block" id="response.get_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.response.response.get_header">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the value of the specified response header.</span>
 <span class="sd">            Unlike `kong.response.get_header()`, this function only returns a header</span>
@@ -150,7 +151,7 @@
 
 <div class="viewcode-block" id="response.get_headers"><a class="viewcode-back" href="../../../kong.service.html#kong.service.response.response.get_headers">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="n">max_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns a Lua table holding the headers from the Service response. Keys are</span>
 <span class="sd">            header names. Values are either a string with the header value, or an array of</span>
@@ -204,7 +205,7 @@
 
 <div class="viewcode-block" id="response.get_raw_body"><a class="viewcode-back" href="../../../kong.service.html#kong.service.response.response.get_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the raw buffered body.</span>
 
@@ -226,7 +227,7 @@
 
 <div class="viewcode-block" id="response.get_status"><a class="viewcode-back" href="../../../kong.service.html#kong.service.response.response.get_status">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the HTTP status code of the response from the Service as a Lua number.</span>
 
@@ -254,7 +255,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Kong.</p>
+    <p>&#169; Copyright 2023, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

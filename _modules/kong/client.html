@@ -11,9 +11,6 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +23,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> kong-pdk
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            kong-pdk
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,10 +52,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-          <li><a href="../kong.html">kong</a> &raquo;</li>
-      <li>kong.client</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../kong.html">kong</a></li>
+      <li class="breadcrumb-item active">kong.client</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -64,7 +65,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.client</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/client.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -83,7 +84,7 @@
 
 <div class="viewcode-block" id="client.authenticate"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.authenticate">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">authenticate</span><span class="p">(</span><span class="n">consumer</span><span class="p">:</span> <span class="n">table</span><span class="p">,</span> <span class="n">credential</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the authenticated consumer and/or credential for the current request.</span>
 <span class="sd">            While both `consumer` and `credential` can be `nil`,</span>
@@ -110,7 +111,7 @@
 
 <div class="viewcode-block" id="client.get_consumer"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_consumer">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_consumer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the `consumer` entity of the currently authenticated consumer.</span>
 <span class="sd">            If not set yet, it returns `nil`.</span>
@@ -139,7 +140,7 @@
 
 <div class="viewcode-block" id="client.get_credential"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_credential">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_credential</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the credentials of the currently authenticated consumer.</span>
 <span class="sd">            If not set yet, it returns `nil`.</span>
@@ -166,7 +167,7 @@
 
 <div class="viewcode-block" id="client.get_forwarded_ip"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_forwarded_ip">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_ip</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the remote address of the client making the request. Unlike</span>
 <span class="sd">            `kong.client.get_ip`, this function will consider forwarded addresses in</span>
@@ -204,7 +205,7 @@
 
 <div class="viewcode-block" id="client.get_forwarded_port"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_forwarded_port">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the remote port of the client making the request. Unlike</span>
 <span class="sd">            `kong.client.get_port`, this function will consider forwarded ports in cases</span>
@@ -236,7 +237,7 @@
 
 <div class="viewcode-block" id="client.get_ip"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_ip">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_ip</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the remote address of the client making the request. This module</span>
 <span class="sd">            **always** returns the address of the client directly connecting to Kong.</span>
@@ -264,7 +265,7 @@
 
 <div class="viewcode-block" id="client.get_port"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_port">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the remote port of the client making the request. This</span>
 <span class="sd">            **always** returns the port of the client directly connecting to Kong. That</span>
@@ -287,7 +288,7 @@
 
 <div class="viewcode-block" id="client.get_protocol"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.get_protocol">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_protocol</span><span class="p">(</span><span class="n">allow_terminated</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">err</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the protocol matched by the current route (`&quot;http&quot;`, `&quot;https&quot;`, `&quot;tcp&quot;` or</span>
 <span class="sd">            `&quot;tls&quot;`), or `nil`, if no route has been matched, which can happen when dealing with</span>
@@ -313,7 +314,7 @@
 
 <div class="viewcode-block" id="client.load_consumer"><a class="viewcode-back" href="../../kong.client.html#kong.client.client.load_consumer">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">load_consumer</span><span class="p">(</span><span class="n">consumer_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">search_by_username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="n">err</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the consumer from the datastore.</span>
 <span class="sd">            Looks up the consumer by ID, and can optionally do a second search by name.</span>
@@ -352,7 +353,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Kong.</p>
+    <p>&#169; Copyright 2023, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

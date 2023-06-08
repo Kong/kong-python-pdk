@@ -11,9 +11,6 @@
   <![endif]-->
   
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -26,11 +23,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> kong-pdk
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            kong-pdk
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,11 +52,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-          <li><a href="../../kong.html">kong</a> &raquo;</li>
-          <li><a href="../service.html">kong.service</a> &raquo;</li>
-      <li>kong.service.request</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../kong.html">kong</a></li>
+          <li class="breadcrumb-item"><a href="../service.html">kong.service</a></li>
+      <li class="breadcrumb-item active">kong.service.request</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -65,7 +66,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.service.request</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/service/request.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -82,7 +83,7 @@
 
 <div class="viewcode-block" id="request.add_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.add_header">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">add_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Adds a request header with the given value to the request to the Service. Unlike</span>
 <span class="sd">            `kong.service.request.set_header()`, this function doesn&#39;t remove any existing</span>
@@ -110,7 +111,7 @@
 
 <div class="viewcode-block" id="request.clear_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.clear_header">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">clear_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Removes all occurrences of the specified header from the request to the Service.</span>
 
@@ -138,7 +139,7 @@
 
 <div class="viewcode-block" id="request.disable_tls"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.disable_tls">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">disable_tls</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Disables the TLS handshake to upstream for [ngx\_stream\_proxy\_module](https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html).</span>
 <span class="sd">            This overrides the [proxy\_ssl](https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_ssl) directive, effectively setting it to `off`</span>
@@ -166,7 +167,7 @@
 
 <div class="viewcode-block" id="request.enable_buffering"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.enable_buffering">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">enable_buffering</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Enables buffered proxying, which allows plugins to access Service body and</span>
 <span class="sd">            response headers at the same time.</span>
@@ -185,7 +186,7 @@
 
 <div class="viewcode-block" id="request.set_body"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_body">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_body</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">table</span><span class="p">,</span> <span class="n">mimetype</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the body of the request to the Service. Unlike</span>
 <span class="sd">            `kong.service.request.set_raw_body()`, the `args` argument must be a table, and</span>
@@ -262,7 +263,7 @@
 
 <div class="viewcode-block" id="request.set_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_header">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets a header in the request to the Service with the given value. Any existing header</span>
 <span class="sd">            with the same name will be overridden.</span>
@@ -288,7 +289,7 @@
 
 <div class="viewcode-block" id="request.set_headers"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_headers">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the headers of the request to the Service. Unlike</span>
 <span class="sd">            `kong.service.request.set_header()`, the `headers` argument must be a table in</span>
@@ -345,7 +346,7 @@
 
 <div class="viewcode-block" id="request.set_method"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_method">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_method</span><span class="p">(</span><span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the HTTP method for the request to the service.</span>
 
@@ -369,7 +370,7 @@
 
 <div class="viewcode-block" id="request.set_path"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_path">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the path component for the request to the service.</span>
 <span class="sd">            The input accepts any valid *normalized* URI (including UTF-8 characters)</span>
@@ -395,7 +396,7 @@
 
 <div class="viewcode-block" id="request.set_query"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_query">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_query</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Set the query string of the request to the Service.</span>
 <span class="sd">            Unlike `kong.service.request.set_raw_query()`, the `query` argument must be a</span>
@@ -441,7 +442,7 @@
 
 <div class="viewcode-block" id="request.set_raw_body"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_raw_body</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the body of the request to the Service.</span>
 <span class="sd">            The `body` argument must be a string and will not be processed in any way.</span>
@@ -467,7 +468,7 @@
 
 <div class="viewcode-block" id="request.set_raw_query"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_raw_query">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_raw_query</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the query string of the request to the Service. The `query` argument is a</span>
 <span class="sd">            string (without the leading `?` character), and is not processed in any</span>
@@ -493,7 +494,7 @@
 
 <div class="viewcode-block" id="request.set_scheme"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_scheme">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_scheme</span><span class="p">(</span><span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the protocol to use when proxying the request to the Service.</span>
 
@@ -522,7 +523,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Kong.</p>
+    <p>&#169; Copyright 2023, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

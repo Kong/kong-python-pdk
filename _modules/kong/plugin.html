@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kong.ctx &mdash; kong-pdk  documentation</title>
+  <title>kong.plugin &mdash; kong-pdk  documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -55,7 +55,7 @@
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
           <li class="breadcrumb-item"><a href="../kong.html">kong</a></li>
-      <li class="breadcrumb-item active">kong.ctx</li>
+      <li class="breadcrumb-item active">kong.plugin</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -64,9 +64,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for kong.ctx</h1><div class="highlight"><pre>
+  <h1>Source code for kong.plugin</h1><div class="highlight"><pre>
 <span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
-<span class="c1"># Original source path: kong/pdk/ctx.lua</span>
+<span class="c1"># Original source path: kong/pdk/plugin.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
 
@@ -76,11 +76,27 @@
 <span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
 <span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
 
-<span class="kn">from</span> <span class="nn">.shared</span> <span class="kn">import</span> <span class="n">shared</span> <span class="k">as</span> <span class="n">cls_shared</span>
 
-<div class="viewcode-block" id="ctx"><a class="viewcode-back" href="../../kong.ctx.html#kong.ctx.ctx">[docs]</a><span class="k">class</span> <span class="nc">ctx</span><span class="p">():</span>
+<div class="viewcode-block" id="plugin"><a class="viewcode-back" href="../../kong.html#kong.plugin.plugin">[docs]</a><span class="k">class</span> <span class="nc">plugin</span><span class="p">():</span>
 
-    <span class="n">shared</span> <span class="o">=</span> <span class="n">cls_shared</span>
+
+<div class="viewcode-block" id="plugin.get_id"><a class="viewcode-back" href="../../kong.html#kong.plugin.plugin.get_id">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Returns the instance ID of the plugin.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            rewrite, access, header_filter, response, body_filter, log</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.request.get_id() # &quot;123e4567-e89b-12d3-a456-426614174000&quot;</span>
+
+<span class="sd">        :return: The ID of the running plugin</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
 
     <span class="k">pass</span></div>
 </pre></div>

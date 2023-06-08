@@ -11,9 +11,6 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +23,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> kong-pdk
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            kong-pdk
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,10 +52,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-          <li><a href="../kong.html">kong</a> &raquo;</li>
-      <li>kong.response</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../kong.html">kong</a></li>
+      <li class="breadcrumb-item active">kong.response</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -64,7 +65,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.response</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/response.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -81,7 +82,7 @@
 
 <div class="viewcode-block" id="response.add_header"><a class="viewcode-back" href="../../kong.html#kong.response.response.add_header">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">add_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Adds a response header with the given value. Unlike</span>
 <span class="sd">            `kong.response.set_header()`, this function does not remove any existing</span>
@@ -111,7 +112,7 @@
 
 <div class="viewcode-block" id="response.clear_header"><a class="viewcode-back" href="../../kong.html#kong.response.response.clear_header">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">clear_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Removes all occurrences of the specified header in the response sent to</span>
 <span class="sd">            the client.</span>
@@ -139,7 +140,7 @@
 
 <div class="viewcode-block" id="response.error"><a class="viewcode-back" href="../../kong.html#kong.response.response.error">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">error</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">table</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            This function interrupts the current processing and produces an error</span>
 <span class="sd">            response.</span>
@@ -201,7 +202,7 @@
 
 <div class="viewcode-block" id="response.exit"><a class="viewcode-back" href="../../kong.html#kong.response.response.exit">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">exit</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">table</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            This function interrupts the current processing and produces a response.</span>
 <span class="sd">            It is typical to see plugins using it to produce a response before Kong</span>
@@ -307,7 +308,7 @@
 
 <div class="viewcode-block" id="response.get_header"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_header">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the value of the specified response header, as would be seen by</span>
 <span class="sd">            the client once received.</span>
@@ -351,7 +352,7 @@
 
 <div class="viewcode-block" id="response.get_headers"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_headers">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="n">max_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns a Lua table holding the response headers. Keys are header names.</span>
 <span class="sd">            Values are either a string with the header value, or an array of strings</span>
@@ -366,9 +367,10 @@
 <span class="sd">            Unlike `kong.service.response.get_headers()`, this function returns *all*</span>
 <span class="sd">            headers as the client would see them upon reception, including headers</span>
 <span class="sd">            added by Kong itself.</span>
-<span class="sd">            By default, this function returns up to **100** headers. The optional</span>
-<span class="sd">            `max_headers` argument can be specified to customize this limit, but must</span>
-<span class="sd">            be greater than **1** and equal to or less than **1000**.</span>
+<span class="sd">            By default, this function returns up to **100** headers (or what has been</span>
+<span class="sd">            configured using `lua_max_resp_headers`). The optional `max_headers` argument</span>
+<span class="sd">            can be specified to customize this limit, but must be greater than **1** and</span>
+<span class="sd">            equal to or less than **1000**.</span>
 
 <span class="sd">        Phases:</span>
 <span class="sd">            header_filter, response, body_filter, log, admin_api</span>
@@ -406,7 +408,7 @@
 
 <div class="viewcode-block" id="response.get_source"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_source">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_source</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            This function helps determine where the current response originated</span>
 <span class="sd">            from. Since Kong is a reverse proxy, it can short-circuit a request and</span>
@@ -447,7 +449,7 @@
 
 <div class="viewcode-block" id="response.get_status"><a class="viewcode-back" href="../../kong.html#kong.response.response.get_status">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the HTTP status code currently set for the downstream response (as</span>
 <span class="sd">            a Lua number).</span>
@@ -473,7 +475,7 @@
 
 <div class="viewcode-block" id="response.set_header"><a class="viewcode-back" href="../../kong.html#kong.response.response.set_header">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets a response header with the given value. This function overrides any</span>
 <span class="sd">            existing header with the same name.</span>
@@ -505,7 +507,7 @@
 
 <div class="viewcode-block" id="response.set_headers"><a class="viewcode-back" href="../../kong.html#kong.response.response.set_headers">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the headers for the response. Unlike `kong.response.set_header()`,</span>
 <span class="sd">            the `headers` argument must be a table in which each key is a string</span>
@@ -555,7 +557,7 @@
 
 <div class="viewcode-block" id="response.set_status"><a class="viewcode-back" href="../../kong.html#kong.response.response.set_status">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="n">status</span><span class="p">:</span> <span class="n">number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Allows changing the downstream response HTTP status code before sending it</span>
 <span class="sd">            to the client.</span>
@@ -585,7 +587,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Kong.</p>
+    <p>&#169; Copyright 2023, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

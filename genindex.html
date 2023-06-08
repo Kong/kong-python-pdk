@@ -11,9 +11,6 @@
   <![endif]-->
   
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -26,11 +23,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> kong-pdk
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            kong-pdk
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,8 +52,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Index</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Index</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -69,8 +70,10 @@
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
  | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
+ | <a href="#J"><strong>J</strong></a>
  | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
@@ -79,6 +82,7 @@
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
@@ -160,6 +164,24 @@
         <li><a href="kong.html#kong.log.log.debug">(kong.log.log static method)</a>
 </li>
       </ul></li>
+      <li><a href="kong.enterprise_edition.html#kong.enterprise_edition.enterprise_edition.jwe.decode">decode() (kong.enterprise_edition.enterprise_edition.jwe static method)</a>
+
+      <ul>
+        <li><a href="kong.enterprise_edition.html#kong.enterprise_edition.jwe.jwe.decode">(kong.enterprise_edition.jwe.jwe static method)</a>
+</li>
+        <li><a href="kong.html#kong.kong.enterprise_edition.jwe.decode">(kong.kong.enterprise_edition.jwe static method)</a>
+</li>
+      </ul></li>
+      <li><a href="kong.enterprise_edition.html#kong.enterprise_edition.enterprise_edition.jwe.decrypt">decrypt() (kong.enterprise_edition.enterprise_edition.jwe static method)</a>
+
+      <ul>
+        <li><a href="kong.enterprise_edition.html#kong.enterprise_edition.jwe.jwe.decrypt">(kong.enterprise_edition.jwe.jwe static method)</a>
+</li>
+        <li><a href="kong.html#kong.kong.enterprise_edition.jwe.decrypt">(kong.kong.enterprise_edition.jwe static method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="kong.html#kong.kong.log.deprecation">deprecation() (kong.kong.log static method)</a>
 
       <ul>
@@ -174,8 +196,6 @@
         <li><a href="kong.html#kong.kong.client.tls.disable_session_reuse">(kong.kong.client.tls static method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="kong.html#kong.kong.service.request.disable_tls">disable_tls() (kong.kong.service.request static method)</a>
 
       <ul>
@@ -198,14 +218,26 @@
         <li><a href="kong.service.html#kong.service.service.request.enable_buffering">(kong.service.service.request static method)</a>
 </li>
       </ul></li>
+      <li><a href="kong.enterprise_edition.html#kong.enterprise_edition.enterprise_edition.jwe.encrypt">encrypt() (kong.enterprise_edition.enterprise_edition.jwe static method)</a>
+
+      <ul>
+        <li><a href="kong.enterprise_edition.html#kong.enterprise_edition.jwe.jwe.encrypt">(kong.enterprise_edition.jwe.jwe static method)</a>
+</li>
+        <li><a href="kong.html#kong.kong.enterprise_edition.jwe.encrypt">(kong.kong.enterprise_edition.jwe static method)</a>
+</li>
+      </ul></li>
+      <li><a href="kong.enterprise_edition.html#kong.enterprise_edition.enterprise_edition">enterprise_edition (class in kong.enterprise_edition)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kong.enterprise_edition.html#kong.enterprise_edition.enterprise_edition.jwe">enterprise_edition.jwe (class in kong.enterprise_edition)</a>
+</li>
       <li><a href="kong.html#kong.kong.log.err">err() (kong.kong.log static method)</a>
 
       <ul>
         <li><a href="kong.html#kong.log.log.err">(kong.log.log static method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="kong.html#kong.kong.response.error">error() (kong.kong.response static method)</a>
 
       <ul>
@@ -216,6 +248,18 @@
 
       <ul>
         <li><a href="kong.html#kong.response.response.exit">(kong.response.response static method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kong.html#kong.kong.vault.flush">flush() (kong.kong.vault static method)</a>
+
+      <ul>
+        <li><a href="kong.html#kong.vault.vault.flush">(kong.vault.vault static method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -377,7 +421,11 @@
 </li>
         <li><a href="kong.html#kong.kong.node.get_id">(kong.kong.node static method)</a>
 </li>
+        <li><a href="kong.html#kong.kong.plugin.get_id">(kong.kong.plugin static method)</a>
+</li>
         <li><a href="kong.html#kong.node.node.get_id">(kong.node.node static method)</a>
+</li>
+        <li><a href="kong.html#kong.plugin.plugin.get_id">(kong.plugin.plugin static method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -567,6 +615,14 @@
   </ul></td>
 </tr></table>
 
+<h2 id="J">J</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kong.enterprise_edition.html#kong.enterprise_edition.jwe.jwe">jwe (class in kong.enterprise_edition.jwe)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -625,6 +681,24 @@
       <li><a href="kong.html#kong.kong.ctx.shared">kong.ctx.shared (class in kong)</a>
 </li>
       <li>
+    kong.enterprise_edition
+
+      <ul>
+        <li><a href="kong.enterprise_edition.html#module-kong.enterprise_edition">module</a>
+</li>
+      </ul></li>
+      <li><a href="kong.html#kong.kong.enterprise_edition">kong.enterprise_edition (class in kong)</a>
+</li>
+      <li>
+    kong.enterprise_edition.jwe
+
+      <ul>
+        <li><a href="kong.enterprise_edition.html#module-kong.enterprise_edition.jwe">module</a>
+</li>
+      </ul></li>
+      <li><a href="kong.html#kong.kong.enterprise_edition.jwe">kong.enterprise_edition.jwe (class in kong)</a>
+</li>
+      <li>
     kong.ip
 
       <ul>
@@ -649,10 +723,10 @@
         <li><a href="kong.nginx.html#module-kong.nginx">module</a>
 </li>
       </ul></li>
-      <li><a href="kong.html#kong.kong.nginx">kong.nginx (class in kong)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kong.html#kong.kong.nginx">kong.nginx (class in kong)</a>
+</li>
       <li>
     kong.nginx.shared
 
@@ -670,6 +744,15 @@
 </li>
       </ul></li>
       <li><a href="kong.html#kong.kong.node">kong.node (class in kong)</a>
+</li>
+      <li>
+    kong.plugin
+
+      <ul>
+        <li><a href="kong.html#module-kong.plugin">module</a>
+</li>
+      </ul></li>
+      <li><a href="kong.html#kong.kong.plugin">kong.plugin (class in kong)</a>
 </li>
       <li>
     kong.request
@@ -772,6 +855,10 @@
 </li>
         <li><a href="kong.ctx.html#module-kong.ctx.shared">kong.ctx.shared</a>
 </li>
+        <li><a href="kong.enterprise_edition.html#module-kong.enterprise_edition">kong.enterprise_edition</a>
+</li>
+        <li><a href="kong.enterprise_edition.html#module-kong.enterprise_edition.jwe">kong.enterprise_edition.jwe</a>
+</li>
         <li><a href="kong.html#module-kong.ip">kong.ip</a>
 </li>
         <li><a href="kong.html#module-kong.log">kong.log</a>
@@ -781,6 +868,8 @@
         <li><a href="kong.nginx.html#module-kong.nginx.shared">kong.nginx.shared</a>
 </li>
         <li><a href="kong.html#module-kong.node">kong.node</a>
+</li>
+        <li><a href="kong.html#module-kong.plugin">kong.plugin</a>
 </li>
         <li><a href="kong.html#module-kong.request">kong.request</a>
 </li>
@@ -829,6 +918,10 @@
         <li><a href="kong.html#kong.vault.vault.parse_reference">(kong.vault.vault static method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kong.html#kong.plugin.plugin">plugin (class in kong.plugin)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -1043,6 +1136,18 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="kong.client.html#kong.client.tls.tls">tls (class in kong.client.tls)</a>
 </li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="kong.html#kong.kong.vault.update">update() (kong.kong.vault static method)</a>
+
+      <ul>
+        <li><a href="kong.html#kong.vault.vault.update">(kong.vault.vault static method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong.enterprise_edition.jwe &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../kong.html">kong</a></li>
+          <li class="breadcrumb-item"><a href="../enterprise_edition.html">kong.enterprise_edition</a></li>
+      <li class="breadcrumb-item active">kong.enterprise_edition.jwe</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for kong.enterprise_edition.jwe</h1><div class="highlight"><pre>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
+<span class="c1"># Original source path: kong/pdk/enterprise_edition/jwe.lua</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="c1"># XXX</span>
+<span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
+<span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
+
+
+<div class="viewcode-block" id="jwe"><a class="viewcode-back" href="../../../kong.enterprise_edition.html#kong.enterprise_edition.jwe.jwe">[docs]</a><span class="k">class</span> <span class="nc">jwe</span><span class="p">():</span>
+
+
+<div class="viewcode-block" id="jwe.decode"><a class="viewcode-back" href="../../../kong.enterprise_edition.html#kong.enterprise_edition.jwe.jwe.decode">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            This function will return a table that looks like this:</span>
+<span class="sd">            ```</span>
+<span class="sd">            {</span>
+<span class="sd">              [1] = protected header (as it appears in token)</span>
+<span class="sd">              [2] = encrypted key (as it appears in token)</span>
+<span class="sd">              [3] = initialization vector (as it appears in token)</span>
+<span class="sd">              [4] = ciphertext (as it appears in token)</span>
+<span class="sd">              [5] = authentication tag (as it appears in token)</span>
+<span class="sd">              protected = protected key (base64url decoded and json decoded)</span>
+<span class="sd">              encrypted_key = encrypted key (base64url decoded)</span>
+<span class="sd">              iv = initialization vector (base64url decoded)</span>
+<span class="sd">              ciphertext = ciphertext (base64url decoded)</span>
+<span class="sd">              tag = authentication tag (base64url decoded)</span>
+<span class="sd">              aad = protected header (as it appears in token)</span>
+<span class="sd">            }</span>
+<span class="sd">            ```</span>
+<span class="sd">            The original input can be reconstructed with:</span>
+<span class="sd">            ```</span>
+<span class="sd">            local token = table.concat(&lt;decoded-table&gt;, &quot;.&quot;)</span>
+<span class="sd">            ```</span>
+<span class="sd">            If there is not exactly 5 parts in JWT token, or any decoding fails,</span>
+<span class="sd">            the error is returned.</span>
+<span class="sd">            @usage</span>
+<span class="sd">            local jwe = require &quot;kong.enterprise_edition.jwe&quot;</span>
+<span class="sd">            local jwt, err = jwe.decode(</span>
+<span class="sd">              &quot;eyJhbGciOiJFQ0RILUVTIiwiZW5jIjoiQTI1NkdDTSIsImFwdSI6Ik1lUFhUS2oyWFR1NUktYldUSFI2bXci&quot; ..</span>
+<span class="sd">              &quot;LCJhcHYiOiJmUHFoa2hfNkdjVFd1SG5YWFZBclVnIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi&quot; ..</span>
+<span class="sd">              &quot;LCJ4IjoiWWd3eF9NVXRLTW9NYUpNZXFhSjZjUFV1Z29oYkVVc0I1NndrRlpYRjVMNCIsInkiOiIxaEYzYzlR&quot; ..</span>
+<span class="sd">              &quot;VEhELVozam1vYUp2THZwTGJqcVNaSW9KNmd4X2YtUzAtZ21RIn19..4ZrIopIhLi3LeXyE.-Ke4ofA.MI5lT&quot; ..</span>
+<span class="sd">              &quot;kML5NIa-Twm-92F6Q&quot;)</span>
+<span class="sd">            if jwt then</span>
+<span class="sd">              print(jwt.protected.alg) -- outputs &quot;ECDH-ES&quot;</span>
+<span class="sd">            end</span>
+
+<span class="sd">        :parameter token: JWE encrypted JWT token</span>
+<span class="sd">        :type token: str</span>
+
+<span class="sd">        :return: A table containing JWT token parts decoded, or nil</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: Error message, or nil</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="jwe.decrypt"><a class="viewcode-back" href="../../../kong.enterprise_edition.html#kong.enterprise_edition.jwe.jwe.decrypt">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Supported keys (`key` argument):</span>
+<span class="sd">            * Supported key formats:</span>
+<span class="sd">              * `JWK` (given as a `string` or `table`)</span>
+<span class="sd">              * `PEM` (given as a `string`)</span>
+<span class="sd">              * `DER` (given as a `string`)</span>
+<span class="sd">            * Supported key types:</span>
+<span class="sd">              * `RSA`</span>
+<span class="sd">              * `EC`, supported curves:</span>
+<span class="sd">                * `P-256`</span>
+<span class="sd">                * `P-384`</span>
+<span class="sd">                * `P-521`</span>
+<span class="sd">            @usage</span>
+<span class="sd">            local jwe = require &quot;kong.enterprise_edition.jwe&quot;</span>
+<span class="sd">            local jwk = {</span>
+<span class="sd">              kty = &quot;EC&quot;,</span>
+<span class="sd">              crv = &quot;P-256&quot;,</span>
+<span class="sd">              use = &quot;enc&quot;,</span>
+<span class="sd">              x   = &quot;MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4&quot;,</span>
+<span class="sd">              y   = &quot;4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM&quot;,</span>
+<span class="sd">              d   = &quot;870MB6gfuTJ4HtUnUvYMyJpr5eUZNP4Bk43bVdj3eAE&quot;,</span>
+<span class="sd">            }</span>
+<span class="sd">            local plaintext, err = jwe.decrypt(jwk,</span>
+<span class="sd">              &quot;eyJhbGciOiJFQ0RILUVTIiwiZW5jIjoiQTI1NkdDTSIsImFwdSI6Ik1lUFhUS2oyWFR1NUktYldUSFI2bXci&quot; ..</span>
+<span class="sd">              &quot;LCJhcHYiOiJmUHFoa2hfNkdjVFd1SG5YWFZBclVnIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi&quot; ..</span>
+<span class="sd">              &quot;LCJ4IjoiWWd3eF9NVXRLTW9NYUpNZXFhSjZjUFV1Z29oYkVVc0I1NndrRlpYRjVMNCIsInkiOiIxaEYzYzlR&quot; ..</span>
+<span class="sd">              &quot;VEhELVozam1vYUp2THZwTGJqcVNaSW9KNmd4X2YtUzAtZ21RIn19..4ZrIopIhLi3LeXyE.-Ke4ofA.MI5lT&quot; ..</span>
+<span class="sd">              &quot;kML5NIa-Twm-92F6Q&quot;)</span>
+<span class="sd">            if plaintext then</span>
+<span class="sd">              print(plaintext) -- outputs &quot;hello&quot;</span>
+<span class="sd">            end</span>
+
+<span class="sd">        :parameter key: Private key</span>
+<span class="sd">        :type key: Any</span>
+<span class="sd">        :parameter token: JWE encrypted JWT token</span>
+<span class="sd">        :type token: str</span>
+
+<span class="sd">        :return: JWT token payload in plaintext, or nil</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: Error message, or nil</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="jwe.encrypt"><a class="viewcode-back" href="../../../kong.enterprise_edition.html#kong.enterprise_edition.jwe.jwe.encrypt">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span><span class="n">alg</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">enc</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">plaintext</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">table</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Supported algorithms (`alg` argument):</span>
+<span class="sd">            * `&quot;RSA-OAEP&quot;`</span>
+<span class="sd">            * `&quot;ECDH-ES&quot;`</span>
+<span class="sd">            Supported encryption algorithms (`enc` argument):</span>
+<span class="sd">            * `&quot;A256GCM&quot;`</span>
+<span class="sd">            Supported keys (`key` argument):</span>
+<span class="sd">            * Supported key formats:</span>
+<span class="sd">              * `JWK` (given as a `string` or `table`)</span>
+<span class="sd">              * `PEM` (given as a `string`)</span>
+<span class="sd">              * `DER` (given as a `string`)</span>
+<span class="sd">            * Supported key types:</span>
+<span class="sd">              * `RSA`</span>
+<span class="sd">              * `EC`, supported curves:</span>
+<span class="sd">                * `P-256`</span>
+<span class="sd">                * `P-384`</span>
+<span class="sd">                * `P-521`</span>
+<span class="sd">            Supported options (`options` argument):</span>
+<span class="sd">            * `{ zip = &quot;DEF&quot; }`: whether to deflate the plaintext before encrypting</span>
+<span class="sd">            * `{ apu = &lt;string|boolean&gt; }`: Agreement PartyUInfo header parameter</span>
+<span class="sd">            * `{ apv = &lt;string|boolean&gt; }`: Agreement PartyVInfo header parameter</span>
+<span class="sd">            The `apu` and `apv` can also be set to `false` to prevent them from</span>
+<span class="sd">            being auto-generated (sixteen random bytes) and added to ephemeral</span>
+<span class="sd">            public key.</span>
+<span class="sd">            @usage</span>
+<span class="sd">            local jwe = require &quot;kong.enterprise_edition.jwe&quot;</span>
+<span class="sd">            local jwk = {</span>
+<span class="sd">              kty = &quot;EC&quot;,</span>
+<span class="sd">              crv = &quot;P-256&quot;,</span>
+<span class="sd">              use = &quot;enc&quot;,</span>
+<span class="sd">              x   = &quot;MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4&quot;,</span>
+<span class="sd">              y   = &quot;4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM&quot;,</span>
+<span class="sd">            }</span>
+<span class="sd">            local token, err = jwe.encrypt(&quot;ECDH-ES&quot;, &quot;A256GCM&quot;, jwk, &quot;hello&quot;, {</span>
+<span class="sd">              zip = &quot;DEF,</span>
+<span class="sd">            })</span>
+<span class="sd">            if token then</span>
+<span class="sd">              print(token)</span>
+<span class="sd">            end</span>
+
+<span class="sd">        :parameter alg: Algorithm used for key management</span>
+<span class="sd">        :type alg: str</span>
+<span class="sd">        :parameter enc: Encryption algorithm used for content encryption</span>
+<span class="sd">        :type enc: str</span>
+<span class="sd">        :parameter key: Public key</span>
+<span class="sd">        :type key: Any</span>
+<span class="sd">        :parameter plaintext: Plaintext</span>
+<span class="sd">        :type plaintext: str</span>
+<span class="sd">        :parameter options: Options (optional), default: nil</span>
+<span class="sd">        :type options: table</span>
+
+<span class="sd">        :return: JWE encrypted JWT token, or nil</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :return: Error message, or nil</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+    <span class="k">pass</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

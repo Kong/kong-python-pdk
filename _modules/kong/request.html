@@ -11,9 +11,6 @@
   <![endif]-->
   
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -26,11 +23,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> kong-pdk
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            kong-pdk
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -51,10 +52,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../index.html">Module code</a> &raquo;</li>
-          <li><a href="../kong.html">kong</a> &raquo;</li>
-      <li>kong.request</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../kong.html">kong</a></li>
+      <li class="breadcrumb-item active">kong.request</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -64,7 +65,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.request</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/request.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
@@ -81,7 +82,7 @@
 
 <div class="viewcode-block" id="request.get_body"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_body">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_body</span><span class="p">(</span><span class="n">mimetype</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">max_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the request data as a key/value table.</span>
 <span class="sd">            A high-level convenience function.</span>
@@ -109,7 +110,8 @@
 <span class="sd">              not set, returns `nil` and an error message indicating the</span>
 <span class="sd">              body could not be parsed.</span>
 <span class="sd">            The optional argument `max_args` can be used to set a limit on the number</span>
-<span class="sd">            of form arguments parsed for `application/x-www-form-urlencoded` payloads.</span>
+<span class="sd">            of form arguments parsed for `application/x-www-form-urlencoded` payloads,</span>
+<span class="sd">            which is by default **100** (or what has been configured using `lua_max_post_args`).</span>
 <span class="sd">            The third return value is string containing the mimetype used to parsed</span>
 <span class="sd">            the body (as per the `mimetype` argument), allowing the caller to identify</span>
 <span class="sd">            what MIME type the body was parsed as.</span>
@@ -144,7 +146,7 @@
 
 <div class="viewcode-block" id="request.get_forwarded_host"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_host">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_host</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the host component of the request&#39;s URL or the value of the &quot;host&quot;</span>
 <span class="sd">            header. Unlike `kong.request.get_host()`, this function also considers</span>
@@ -172,7 +174,7 @@
 
 <div class="viewcode-block" id="request.get_forwarded_path"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_path">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the path component of the request&#39;s URL, but also considers</span>
 <span class="sd">            `X-Forwarded-Path` if it comes from a trusted source. The value</span>
@@ -198,7 +200,7 @@
 
 <div class="viewcode-block" id="request.get_forwarded_port"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_port">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the port component of the request&#39;s URL, but also considers</span>
 <span class="sd">            `X-Forwarded-Host` if it comes from a trusted source. The value</span>
@@ -230,7 +232,7 @@
 
 <div class="viewcode-block" id="request.get_forwarded_prefix"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_prefix">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_prefix</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the prefix path component of the request&#39;s URL that Kong stripped</span>
 <span class="sd">            before proxying to upstream. It also checks if `X-Forwarded-Prefix` comes</span>
@@ -263,7 +265,7 @@
 
 <div class="viewcode-block" id="request.get_forwarded_scheme"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_scheme">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_scheme</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the scheme component of the request&#39;s URL, but also considers</span>
 <span class="sd">            `X-Forwarded-Proto` if it comes from a trusted source. The returned</span>
@@ -290,7 +292,7 @@
 
 <div class="viewcode-block" id="request.get_header"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_header">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the value of the specified request header.</span>
 <span class="sd">            The returned value is either a `string`, or can be `nil` if a header with</span>
@@ -332,7 +334,7 @@
 
 <div class="viewcode-block" id="request.get_headers"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_headers">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="n">max_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns a Lua table holding the request headers. Keys are header names.</span>
 <span class="sd">            Values are either a string with the header value, or an array of strings</span>
@@ -340,9 +342,10 @@
 <span class="sd">            case-insensitive and are normalized to lowercase, and dashes (`-`) can be</span>
 <span class="sd">            written as underscores (`_`); that is, the header `X-Custom-Header` can</span>
 <span class="sd">            also be retrieved as `x_custom_header`.</span>
-<span class="sd">            By default, this function returns up to **100** headers. The optional</span>
-<span class="sd">            `max_headers` argument can be specified to customize this limit, but must</span>
-<span class="sd">            be greater than **1** and not greater than **1000**.</span>
+<span class="sd">            By default, this function returns up to **100** headers (or what has been</span>
+<span class="sd">            configured using `lua_max_req_headers`). The optional `max_headers` argument</span>
+<span class="sd">            can be specified to customize this limit, but must be greater than **1** and</span>
+<span class="sd">            not greater than **1000**.</span>
 
 <span class="sd">        Phases:</span>
 <span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
@@ -380,7 +383,7 @@
 
 <div class="viewcode-block" id="request.get_host"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_host">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_host</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the host component of the request&#39;s URL, or the value of the</span>
 <span class="sd">            &quot;Host&quot; header. The returned value is normalized to lowercase form.</span>
@@ -401,7 +404,7 @@
 
 <div class="viewcode-block" id="request.get_http_version"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_http_version">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_http_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the HTTP version used by the client in the request as a Lua</span>
 <span class="sd">            number, returning values such as `1`, `1.1`, `2.0`, or `nil` for</span>
@@ -421,7 +424,7 @@
 
 <div class="viewcode-block" id="request.get_method"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_method">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_method</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the HTTP method of the request. The value is normalized to</span>
 <span class="sd">            uppercase.</span>
@@ -440,7 +443,7 @@
 
 <div class="viewcode-block" id="request.get_path"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_path">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the normalized path component of the request&#39;s URL. The return</span>
 <span class="sd">            value is the same as `kong.request.get_raw_path()` but normalized according</span>
@@ -468,7 +471,7 @@
 
 <div class="viewcode-block" id="request.get_path_with_query"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_path_with_query">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_path_with_query</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the path, including the query string if any. No</span>
 <span class="sd">            transformations or normalizations are done.</span>
@@ -489,7 +492,7 @@
 
 <div class="viewcode-block" id="request.get_port"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_port">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the port component of the request&#39;s URL. The value is returned</span>
 <span class="sd">            as a Lua number.</span>
@@ -510,7 +513,7 @@
 
 <div class="viewcode-block" id="request.get_query"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_query">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_query</span><span class="p">(</span><span class="n">max_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the table of query arguments obtained from the query string. Keys</span>
 <span class="sd">            are query argument names. Values are either a string with the argument</span>
@@ -520,9 +523,10 @@
 <span class="sd">            Note that a query string `?foo&amp;bar` translates to two boolean `true`</span>
 <span class="sd">            arguments, and `?foo=&amp;bar=` translates to two string arguments containing</span>
 <span class="sd">            empty strings.</span>
-<span class="sd">            By default, this function returns up to **100** arguments. The optional</span>
-<span class="sd">            `max_args` argument can be specified to customize this limit, but must be</span>
-<span class="sd">            greater than **1** and not greater than **1000**.</span>
+<span class="sd">            By default, this function returns up to **100** arguments (or what has been</span>
+<span class="sd">            configured using `lua_max_uri_args`). The optional `max_args` argument can be</span>
+<span class="sd">            specified to customize this limit, but must be greater than **1** and not</span>
+<span class="sd">            greater than **1000**.</span>
 
 <span class="sd">        Phases:</span>
 <span class="sd">            rewrite, access, header_filter, response, body_filter, log, admin_api</span>
@@ -554,7 +558,7 @@
 
 <div class="viewcode-block" id="request.get_query_arg"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_query_arg">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_query_arg</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the value of the specified argument, obtained from the query</span>
 <span class="sd">            arguments of the current request.</span>
@@ -586,7 +590,7 @@
 
 <div class="viewcode-block" id="request.get_raw_body"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the plain request body.</span>
 <span class="sd">            If the body has no size (empty), this function returns an empty string.</span>
@@ -610,7 +614,7 @@
 
 <div class="viewcode-block" id="request.get_raw_path"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_path">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_raw_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the path component of the request&#39;s URL. It is not normalized in</span>
 <span class="sd">            any way and does not include the query string.</span>
@@ -636,7 +640,7 @@
 
 <div class="viewcode-block" id="request.get_raw_query"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_query">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_raw_query</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the query component of the request&#39;s URL. It is not normalized in</span>
 <span class="sd">            any way (not even URL-decoding of special characters) and does not</span>
@@ -658,7 +662,7 @@
 
 <div class="viewcode-block" id="request.get_scheme"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_scheme">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_scheme</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the scheme component of the request&#39;s URL. The returned value is</span>
 <span class="sd">            normalized to lowercase form.</span>
@@ -679,7 +683,7 @@
 
 <div class="viewcode-block" id="request.get_start_time"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_start_time">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_start_time</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the request start time, in Unix epoch milliseconds.</span>
 
@@ -697,7 +701,7 @@
 
 <div class="viewcode-block" id="request.get_uri_captures"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_uri_captures">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_uri_captures</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the URI captures matched by the router.</span>
 
@@ -729,7 +733,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Kong.</p>
+    <p>&#169; Copyright 2023, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

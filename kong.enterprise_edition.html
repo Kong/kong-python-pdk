@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>kong.enterprise_edition package &mdash; kong-pdk  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            kong-pdk
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">kong.enterprise_edition package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-kong.enterprise_edition.jwe">kong.enterprise_edition.jwe module</a><ul>
+<li><a class="reference internal" href="#kong.enterprise_edition.jwe.jwe"><code class="docutils literal notranslate"><span class="pre">jwe</span></code></a><ul>
+<li><a class="reference internal" href="#kong.enterprise_edition.jwe.jwe.decode"><code class="docutils literal notranslate"><span class="pre">jwe.decode()</span></code></a></li>
+<li><a class="reference internal" href="#kong.enterprise_edition.jwe.jwe.decrypt"><code class="docutils literal notranslate"><span class="pre">jwe.decrypt()</span></code></a></li>
+<li><a class="reference internal" href="#kong.enterprise_edition.jwe.jwe.encrypt"><code class="docutils literal notranslate"><span class="pre">jwe.encrypt()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-kong.enterprise_edition">Module contents</a><ul>
+<li><a class="reference internal" href="#kong.enterprise_edition.enterprise_edition"><code class="docutils literal notranslate"><span class="pre">enterprise_edition</span></code></a><ul>
+<li><a class="reference internal" href="#kong.enterprise_edition.enterprise_edition.jwe"><code class="docutils literal notranslate"><span class="pre">enterprise_edition.jwe</span></code></a><ul>
+<li><a class="reference internal" href="#kong.enterprise_edition.enterprise_edition.jwe.decode"><code class="docutils literal notranslate"><span class="pre">enterprise_edition.jwe.decode()</span></code></a></li>
+<li><a class="reference internal" href="#kong.enterprise_edition.enterprise_edition.jwe.decrypt"><code class="docutils literal notranslate"><span class="pre">enterprise_edition.jwe.decrypt()</span></code></a></li>
+<li><a class="reference internal" href="#kong.enterprise_edition.enterprise_edition.jwe.encrypt"><code class="docutils literal notranslate"><span class="pre">enterprise_edition.jwe.encrypt()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">kong-pdk</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">kong.enterprise_edition package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/kong.enterprise_edition.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="kong-enterprise-edition-package">
+<h1>kong.enterprise_edition package<a class="headerlink" href="#kong-enterprise-edition-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-kong.enterprise_edition.jwe">
+<span id="kong-enterprise-edition-jwe-module"></span><h2>kong.enterprise_edition.jwe module<a class="headerlink" href="#module-kong.enterprise_edition.jwe" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.enterprise_edition.jwe.jwe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.enterprise_edition.jwe.</span></span><span class="sig-name descname"><span class="pre">jwe</span></span><a class="reference internal" href="_modules/kong/enterprise_edition/jwe.html#jwe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.enterprise_edition.jwe.jwe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.enterprise_edition.jwe.jwe.decode">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/enterprise_edition/jwe.html#jwe.decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.enterprise_edition.jwe.jwe.decode" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function will return a table that looks like this:
+<a href="#id1"><span class="problematic" id="id2">``</span></a>`
+{</p>
+<blockquote>
+<div><p>[1] = protected header (as it appears in token)
+[2] = encrypted key (as it appears in token)
+[3] = initialization vector (as it appears in token)
+[4] = ciphertext (as it appears in token)
+[5] = authentication tag (as it appears in token)
+protected = protected key (base64url decoded and json decoded)
+encrypted_key = encrypted key (base64url decoded)
+iv = initialization vector (base64url decoded)
+ciphertext = ciphertext (base64url decoded)
+tag = authentication tag (base64url decoded)
+aad = protected header (as it appears in token)</p>
+</div></blockquote>
+<p>The original input can be reconstructed with:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">local</span> <span class="pre">token</span> <span class="pre">=</span> <span class="pre">table.concat(&lt;decoded-table&gt;,</span> <span class="pre">&quot;.&quot;)</span>
+<span class="pre">`</span></code>
+If there is not exactly 5 parts in JWT token, or any decoding fails,
+the error is returned.
+&#64;usage
+local jwe = require “kong.enterprise_edition.jwe”
+local jwt, err = jwe.decode(</p>
+<blockquote>
+<div><p>“eyJhbGciOiJFQ0RILUVTIiwiZW5jIjoiQTI1NkdDTSIsImFwdSI6Ik1lUFhUS2oyWFR1NUktYldUSFI2bXci” ..
+“LCJhcHYiOiJmUHFoa2hfNkdjVFd1SG5YWFZBclVnIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi” ..
+“LCJ4IjoiWWd3eF9NVXRLTW9NYUpNZXFhSjZjUFV1Z29oYkVVc0I1NndrRlpYRjVMNCIsInkiOiIxaEYzYzlR” ..
+“VEhELVozam1vYUp2THZwTGJqcVNaSW9KNmd4X2YtUzAtZ21RIn19..4ZrIopIhLi3LeXyE.-Ke4ofA.MI5lT” ..
+“kML5NIa-Twm-92F6Q”)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>if jwt then</dt><dd><p>print(jwt.protected.alg) – outputs “ECDH-ES”</p>
+</dd>
+</dl>
+<p>end</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>str</em>) – JWE encrypted JWT token</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A table containing JWT token parts decoded, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Error message, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.enterprise_edition.jwe.jwe.decrypt">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/enterprise_edition/jwe.html#jwe.decrypt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.enterprise_edition.jwe.jwe.decrypt" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Supported keys (<cite>key</cite> argument):
+* Supported key formats:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>JWK</cite> (given as a <cite>string</cite> or <cite>table</cite>)</p></li>
+<li><p><cite>PEM</cite> (given as a <cite>string</cite>)</p></li>
+<li><p><cite>DER</cite> (given as a <cite>string</cite>)</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p>Supported key types:
+* <cite>RSA</cite>
+* <cite>EC</cite>, supported curves:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>P-256</cite></p></li>
+<li><p><cite>P-384</cite></p></li>
+<li><p><cite>P-521</cite></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>&#64;usage
+local jwe = require “kong.enterprise_edition.jwe”
+local jwk = {</p>
+<blockquote>
+<div><p>kty = “EC”,
+crv = “P-256”,
+use = “enc”,
+x   = “MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4”,
+y   = “4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM”,
+d   = “870MB6gfuTJ4HtUnUvYMyJpr5eUZNP4Bk43bVdj3eAE”,</p>
+</div></blockquote>
+<p>}
+local plaintext, err = jwe.decrypt(jwk,</p>
+<blockquote>
+<div><p>“eyJhbGciOiJFQ0RILUVTIiwiZW5jIjoiQTI1NkdDTSIsImFwdSI6Ik1lUFhUS2oyWFR1NUktYldUSFI2bXci” ..
+“LCJhcHYiOiJmUHFoa2hfNkdjVFd1SG5YWFZBclVnIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi” ..
+“LCJ4IjoiWWd3eF9NVXRLTW9NYUpNZXFhSjZjUFV1Z29oYkVVc0I1NndrRlpYRjVMNCIsInkiOiIxaEYzYzlR” ..
+“VEhELVozam1vYUp2THZwTGJqcVNaSW9KNmd4X2YtUzAtZ21RIn19..4ZrIopIhLi3LeXyE.-Ke4ofA.MI5lT” ..
+“kML5NIa-Twm-92F6Q”)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>if plaintext then</dt><dd><p>print(plaintext) – outputs “hello”</p>
+</dd>
+</dl>
+<p>end</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>Any</em>) – Private key</p></li>
+<li><p><strong>token</strong> (<em>str</em>) – JWE encrypted JWT token</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JWT token payload in plaintext, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Error message, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.enterprise_edition.jwe.jwe.encrypt">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">encrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plaintext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/kong/enterprise_edition/jwe.html#jwe.encrypt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.enterprise_edition.jwe.jwe.encrypt" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Supported algorithms (<cite>alg</cite> argument):
+* <cite>“RSA-OAEP”</cite>
+* <cite>“ECDH-ES”</cite>
+Supported encryption algorithms (<cite>enc</cite> argument):
+* <cite>“A256GCM”</cite>
+Supported keys (<cite>key</cite> argument):
+* Supported key formats:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>JWK</cite> (given as a <cite>string</cite> or <cite>table</cite>)</p></li>
+<li><p><cite>PEM</cite> (given as a <cite>string</cite>)</p></li>
+<li><p><cite>DER</cite> (given as a <cite>string</cite>)</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p>Supported key types:
+* <cite>RSA</cite>
+* <cite>EC</cite>, supported curves:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>P-256</cite></p></li>
+<li><p><cite>P-384</cite></p></li>
+<li><p><cite>P-521</cite></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Supported options (<cite>options</cite> argument):
+* <cite>{ zip = “DEF” }</cite>: whether to deflate the plaintext before encrypting
+* <cite>{ apu = &lt;string|boolean&gt; }</cite>: Agreement PartyUInfo header parameter
+* <cite>{ apv = &lt;string|boolean&gt; }</cite>: Agreement PartyVInfo header parameter
+The <cite>apu</cite> and <cite>apv</cite> can also be set to <cite>false</cite> to prevent them from
+being auto-generated (sixteen random bytes) and added to ephemeral
+public key.
+&#64;usage
+local jwe = require “kong.enterprise_edition.jwe”
+local jwk = {</p>
+<blockquote>
+<div><p>kty = “EC”,
+crv = “P-256”,
+use = “enc”,
+x   = “MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4”,
+y   = “4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM”,</p>
+</div></blockquote>
+<p>}
+local token, err = jwe.encrypt(“ECDH-ES”, “A256GCM”, jwk, “hello”, {</p>
+<blockquote>
+<div><p>zip = “DEF,</p>
+</div></blockquote>
+<p>})
+if token then</p>
+<blockquote>
+<div><p>print(token)</p>
+</div></blockquote>
+<p>end</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alg</strong> (<em>str</em>) – Algorithm used for key management</p></li>
+<li><p><strong>enc</strong> (<em>str</em>) – Encryption algorithm used for content encryption</p></li>
+<li><p><strong>key</strong> (<em>Any</em>) – Public key</p></li>
+<li><p><strong>plaintext</strong> (<em>str</em>) – Plaintext</p></li>
+<li><p><strong>options</strong> (<em>table</em>) – Options (optional), default: nil</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JWE encrypted JWT token, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Error message, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-kong.enterprise_edition">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.enterprise_edition" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.enterprise_edition.enterprise_edition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.enterprise_edition.</span></span><span class="sig-name descname"><span class="pre">enterprise_edition</span></span><a class="reference internal" href="_modules/kong/enterprise_edition.html#enterprise_edition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.enterprise_edition.enterprise_edition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="kong.enterprise_edition.enterprise_edition.jwe">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jwe</span></span><a class="headerlink" href="#kong.enterprise_edition.enterprise_edition.jwe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.enterprise_edition.enterprise_edition.jwe.decode">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.enterprise_edition.enterprise_edition.jwe.decode" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>This function will return a table that looks like this:
+<a href="#id3"><span class="problematic" id="id4">``</span></a>`
+{</p>
+<blockquote>
+<div><p>[1] = protected header (as it appears in token)
+[2] = encrypted key (as it appears in token)
+[3] = initialization vector (as it appears in token)
+[4] = ciphertext (as it appears in token)
+[5] = authentication tag (as it appears in token)
+protected = protected key (base64url decoded and json decoded)
+encrypted_key = encrypted key (base64url decoded)
+iv = initialization vector (base64url decoded)
+ciphertext = ciphertext (base64url decoded)
+tag = authentication tag (base64url decoded)
+aad = protected header (as it appears in token)</p>
+</div></blockquote>
+<p>The original input can be reconstructed with:
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">local</span> <span class="pre">token</span> <span class="pre">=</span> <span class="pre">table.concat(&lt;decoded-table&gt;,</span> <span class="pre">&quot;.&quot;)</span>
+<span class="pre">`</span></code>
+If there is not exactly 5 parts in JWT token, or any decoding fails,
+the error is returned.
+&#64;usage
+local jwe = require “kong.enterprise_edition.jwe”
+local jwt, err = jwe.decode(</p>
+<blockquote>
+<div><p>“eyJhbGciOiJFQ0RILUVTIiwiZW5jIjoiQTI1NkdDTSIsImFwdSI6Ik1lUFhUS2oyWFR1NUktYldUSFI2bXci” ..
+“LCJhcHYiOiJmUHFoa2hfNkdjVFd1SG5YWFZBclVnIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi” ..
+“LCJ4IjoiWWd3eF9NVXRLTW9NYUpNZXFhSjZjUFV1Z29oYkVVc0I1NndrRlpYRjVMNCIsInkiOiIxaEYzYzlR” ..
+“VEhELVozam1vYUp2THZwTGJqcVNaSW9KNmd4X2YtUzAtZ21RIn19..4ZrIopIhLi3LeXyE.-Ke4ofA.MI5lT” ..
+“kML5NIa-Twm-92F6Q”)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>if jwt then</dt><dd><p>print(jwt.protected.alg) – outputs “ECDH-ES”</p>
+</dd>
+</dl>
+<p>end</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>str</em>) – JWE encrypted JWT token</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A table containing JWT token parts decoded, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Error message, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.enterprise_edition.enterprise_edition.jwe.decrypt">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">decrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.enterprise_edition.enterprise_edition.jwe.decrypt" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Supported keys (<cite>key</cite> argument):
+* Supported key formats:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>JWK</cite> (given as a <cite>string</cite> or <cite>table</cite>)</p></li>
+<li><p><cite>PEM</cite> (given as a <cite>string</cite>)</p></li>
+<li><p><cite>DER</cite> (given as a <cite>string</cite>)</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p>Supported key types:
+* <cite>RSA</cite>
+* <cite>EC</cite>, supported curves:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>P-256</cite></p></li>
+<li><p><cite>P-384</cite></p></li>
+<li><p><cite>P-521</cite></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>&#64;usage
+local jwe = require “kong.enterprise_edition.jwe”
+local jwk = {</p>
+<blockquote>
+<div><p>kty = “EC”,
+crv = “P-256”,
+use = “enc”,
+x   = “MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4”,
+y   = “4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM”,
+d   = “870MB6gfuTJ4HtUnUvYMyJpr5eUZNP4Bk43bVdj3eAE”,</p>
+</div></blockquote>
+<p>}
+local plaintext, err = jwe.decrypt(jwk,</p>
+<blockquote>
+<div><p>“eyJhbGciOiJFQ0RILUVTIiwiZW5jIjoiQTI1NkdDTSIsImFwdSI6Ik1lUFhUS2oyWFR1NUktYldUSFI2bXci” ..
+“LCJhcHYiOiJmUHFoa2hfNkdjVFd1SG5YWFZBclVnIiwiZXBrIjp7Imt0eSI6IkVDIiwiY3J2IjoiUC0yNTYi” ..
+“LCJ4IjoiWWd3eF9NVXRLTW9NYUpNZXFhSjZjUFV1Z29oYkVVc0I1NndrRlpYRjVMNCIsInkiOiIxaEYzYzlR” ..
+“VEhELVozam1vYUp2THZwTGJqcVNaSW9KNmd4X2YtUzAtZ21RIn19..4ZrIopIhLi3LeXyE.-Ke4ofA.MI5lT” ..
+“kML5NIa-Twm-92F6Q”)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>if plaintext then</dt><dd><p>print(plaintext) – outputs “hello”</p>
+</dd>
+</dl>
+<p>end</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>Any</em>) – Private key</p></li>
+<li><p><strong>token</strong> (<em>str</em>) – JWE encrypted JWT token</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JWT token payload in plaintext, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Error message, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kong.enterprise_edition.enterprise_edition.jwe.encrypt">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">encrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plaintext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">table</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kong.enterprise_edition.enterprise_edition.jwe.encrypt" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Supported algorithms (<cite>alg</cite> argument):
+* <cite>“RSA-OAEP”</cite>
+* <cite>“ECDH-ES”</cite>
+Supported encryption algorithms (<cite>enc</cite> argument):
+* <cite>“A256GCM”</cite>
+Supported keys (<cite>key</cite> argument):
+* Supported key formats:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>JWK</cite> (given as a <cite>string</cite> or <cite>table</cite>)</p></li>
+<li><p><cite>PEM</cite> (given as a <cite>string</cite>)</p></li>
+<li><p><cite>DER</cite> (given as a <cite>string</cite>)</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p>Supported key types:
+* <cite>RSA</cite>
+* <cite>EC</cite>, supported curves:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>P-256</cite></p></li>
+<li><p><cite>P-384</cite></p></li>
+<li><p><cite>P-521</cite></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Supported options (<cite>options</cite> argument):
+* <cite>{ zip = “DEF” }</cite>: whether to deflate the plaintext before encrypting
+* <cite>{ apu = &lt;string|boolean&gt; }</cite>: Agreement PartyUInfo header parameter
+* <cite>{ apv = &lt;string|boolean&gt; }</cite>: Agreement PartyVInfo header parameter
+The <cite>apu</cite> and <cite>apv</cite> can also be set to <cite>false</cite> to prevent them from
+being auto-generated (sixteen random bytes) and added to ephemeral
+public key.
+&#64;usage
+local jwe = require “kong.enterprise_edition.jwe”
+local jwk = {</p>
+<blockquote>
+<div><p>kty = “EC”,
+crv = “P-256”,
+use = “enc”,
+x   = “MKBCTNIcKUSDii11ySs3526iDZ8AiTo7Tu6KPAqv7D4”,
+y   = “4Etl6SRW2YiLUrN5vfvVHuhp7x8PxltmWWlbbM4IFyM”,</p>
+</div></blockquote>
+<p>}
+local token, err = jwe.encrypt(“ECDH-ES”, “A256GCM”, jwk, “hello”, {</p>
+<blockquote>
+<div><p>zip = “DEF,</p>
+</div></blockquote>
+<p>})
+if token then</p>
+<blockquote>
+<div><p>print(token)</p>
+</div></blockquote>
+<p>end</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alg</strong> (<em>str</em>) – Algorithm used for key management</p></li>
+<li><p><strong>enc</strong> (<em>str</em>) – Encryption algorithm used for content encryption</p></li>
+<li><p><strong>key</strong> (<em>Any</em>) – Public key</p></li>
+<li><p><strong>plaintext</strong> (<em>str</em>) – Plaintext</p></li>
+<li><p><strong>options</strong> (<em>table</em>) – Options (optional), default: nil</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JWE encrypted JWT token, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Error message, or nil</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Kong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
