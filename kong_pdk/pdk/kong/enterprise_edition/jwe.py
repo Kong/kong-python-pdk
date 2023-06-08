@@ -113,7 +113,7 @@ class jwe():
         pass
 
     @staticmethod
-    def encrypt(alg: str, enc: str, key: Any, plaintext: str, options: ?table) -> Tuple[str, str]:
+    def encrypt(alg: str, enc: str, key: Any, plaintext: str, options: Optional[table]) -> Tuple[str, str]:
         """
 
             Supported algorithms (`alg` argument):
@@ -164,7 +164,7 @@ class jwe():
         :parameter plaintext: Plaintext
         :type plaintext: str
         :parameter options: Options (optional), default: nil
-        :type options: ?table
+        :type options: table
 
         :return: JWE encrypted JWT token, or nil
 
