@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
 # Original source path: kong/pdk/service/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -35,7 +35,7 @@ class response():
             that can be parsed.
         :type max_args: number
 
-        :return: The raw buffered body
+        :return: The decoded buffered body
 
         :rtype: str
         """

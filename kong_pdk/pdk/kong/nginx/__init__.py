@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
 # Original source path: kong/pdk/nginx.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -80,7 +80,7 @@ class nginx():
     def get_var() -> str:
         """
 
-        :return: the NGINX version string
+        :return: get NGINX variable value
 
         :rtype: str
         """

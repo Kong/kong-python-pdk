@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
 # Original source path: kong/pdk/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -300,9 +300,10 @@ class response():
             Unlike `kong.service.response.get_headers()`, this function returns *all*
             headers as the client would see them upon reception, including headers
             added by Kong itself.
-            By default, this function returns up to **100** headers. The optional
-            `max_headers` argument can be specified to customize this limit, but must
-            be greater than **1** and equal to or less than **1000**.
+            By default, this function returns up to **100** headers (or what has been
+            configured using `lua_max_resp_headers`). The optional `max_headers` argument
+            can be specified to customize this limit, but must be greater than **1** and
+            equal to or less than **1000**.
 
         Phases:
             header_filter, response, body_filter, log, admin_api

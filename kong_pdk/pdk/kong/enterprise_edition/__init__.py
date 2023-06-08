@@ -1,5 +1,5 @@
 # AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
-# Original source path: kong/pdk/ctx.lua
+# Original source path: kong/pdk/enterprise_edition.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
 
@@ -9,10 +9,10 @@ table = TypeVar('table', List[Any], Mapping[str, Any])
 cdata = Any
 err = str
 
-from .shared import shared as cls_shared
+from .jwe import jwe as cls_jwe
 
-class ctx():
+class enterprise_edition():
 
-    shared = cls_shared
+    jwe = cls_jwe
 
     pass

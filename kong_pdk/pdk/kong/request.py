@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
 # Original source path: kong/pdk/request.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -43,7 +43,8 @@ class request():
               not set, returns `nil` and an error message indicating the
               body could not be parsed.
             The optional argument `max_args` can be used to set a limit on the number
-            of form arguments parsed for `application/x-www-form-urlencoded` payloads.
+            of form arguments parsed for `application/x-www-form-urlencoded` payloads,
+            which is by default **100** (or what has been configured using `lua_max_post_args`).
             The third return value is string containing the mimetype used to parsed
             the body (as per the `mimetype` argument), allowing the caller to identify
             what MIME type the body was parsed as.
@@ -274,9 +275,10 @@ class request():
             case-insensitive and are normalized to lowercase, and dashes (`-`) can be
             written as underscores (`_`); that is, the header `X-Custom-Header` can
             also be retrieved as `x_custom_header`.
-            By default, this function returns up to **100** headers. The optional
-            `max_headers` argument can be specified to customize this limit, but must
-            be greater than **1** and not greater than **1000**.
+            By default, this function returns up to **100** headers (or what has been
+            configured using `lua_max_req_headers`). The optional `max_headers` argument
+            can be specified to customize this limit, but must be greater than **1** and
+            not greater than **1000**.
 
         Phases:
             rewrite, access, header_filter, response, body_filter, log, admin_api
@@ -454,9 +456,10 @@ class request():
             Note that a query string `?foo&bar` translates to two boolean `true`
             arguments, and `?foo=&bar=` translates to two string arguments containing
             empty strings.
-            By default, this function returns up to **100** arguments. The optional
-            `max_args` argument can be specified to customize this limit, but must be
-            greater than **1** and not greater than **1000**.
+            By default, this function returns up to **100** arguments (or what has been
+            configured using `lua_max_uri_args`). The optional `max_args` argument can be
+            specified to customize this limit, but must be greater than **1** and not
+            greater than **1000**.
 
         Phases:
             rewrite, access, header_filter, response, body_filter, log, admin_api

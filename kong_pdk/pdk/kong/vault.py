@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
 # Original source path: kong/pdk/vault.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -12,6 +12,18 @@ err = str
 
 class vault():
 
+
+    @staticmethod
+    def flush() -> None:
+        """
+
+            Flushes vault config and the references LRU cache.
+
+        Example:
+            kong.vault.flush()
+
+        """
+        pass
 
     @staticmethod
     def get(reference: str) -> Tuple[str, str]:
@@ -92,6 +104,74 @@ class vault():
         :return: error message on failure, otherwise `nil`
 
         :rtype: str
+        """
+        pass
+
+    @staticmethod
+    def update(options: table) -> table:
+        """
+
+            Helper function for secret rotation based on TTLs. Currently experimental.
+
+        Example:
+            options = kong.vault.update({
+
+            cert = "# # -BEGIN CERTIFICATE# # -...",
+
+            key = "# # -BEGIN RSA PRIVATE KEY# # -...",
+
+            cert_alt = "# # -BEGIN CERTIFICATE# # -...",
+
+            key_alt = "# # -BEGIN EC PRIVATE KEY# # -...",
+
+            ["$refs"] = {
+
+            cert = "{vault://aws/cert}",
+
+            key = "{vault://aws/key}",
+
+            cert_alt = "{vault://aws/cert-alt}",
+
+            key_alt = "{vault://aws/key-alt}",
+
+            }
+
+            })
+
+            # or
+
+            options = {
+
+            cert = "# # -BEGIN CERTIFICATE# # -...",
+
+            key = "# # -BEGIN RSA PRIVATE KEY# # -...",
+
+            cert_alt = "# # -BEGIN CERTIFICATE# # -...",
+
+            key_alt = "# # -BEGIN EC PRIVATE KEY# # -...",
+
+            ["$refs"] = {
+
+            cert = "{vault://aws/cert}",
+
+            key = "{vault://aws/key}",
+
+            cert_alt = "{vault://aws/cert-alt}",
+
+            key_alt = "{vault://aws/key-alt}",
+
+            }
+
+            }
+
+            kong.vault.update(options)
+
+        :parameter options: options containing secrets and references (this function modifies the input options)
+        :type options: table
+
+        :return: options with updated secret values
+
+        :rtype: table
         """
         pass
 
