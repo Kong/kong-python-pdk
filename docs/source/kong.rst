@@ -9,6 +9,7 @@ Subpackages
 
    kong.client
    kong.ctx
+   kong.enterprise_edition
    kong.nginx
    kong.service
 
@@ -43,6 +44,14 @@ kong.node module
 ----------------
 
 .. automodule:: kong.node
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+kong.plugin module
+------------------
+
+.. automodule:: kong.plugin
    :members:
    :undoc-members:
    :show-inheritance:
