@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
 # Original source path: kong/pdk/node.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -94,6 +94,26 @@ class node():
 
             }
 
+            },
+
+            # if the `kong` uses dbless mode, the following will be present:
+
+            lmdb = {
+
+            map_size: "128.00 MiB",
+
+            used_size: "0.02 MiB",
+
+            last_used_page: 6,
+
+            last_txnid: 2,
+
+            max_readers: 126,
+
+            current_readers: 16
+
+            },
+
             }
 
             }
@@ -143,6 +163,24 @@ class node():
             }
 
             }
+
+            # if the `kong` uses dbless mode, the following will be present:
+
+            lmdb = {
+
+            map_size: "131072 KB",
+
+            used_size: "20.48 KB",
+
+            last_used_page: 6,
+
+            last_txnid: 2,
+
+            max_readers: 126,
+
+            current_readers: 16
+
+            },
 
             }
 

@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.2.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
 # Original source path: kong/pdk.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -12,10 +12,12 @@ err = str
 from .client import client as cls_client
 from .cluster import cluster as cls_cluster
 from .ctx import ctx as cls_ctx
+from .enterprise_edition import enterprise_edition as cls_enterprise_edition
 from .ip import ip as cls_ip
 from .log import log as cls_log
 from .nginx import nginx as cls_nginx
 from .node import node as cls_node
+from .plugin import plugin as cls_plugin
 from .request import request as cls_request
 from .response import response as cls_response
 from .router import router as cls_router
@@ -27,10 +29,12 @@ class kong():
     client = cls_client
     cluster = cls_cluster
     ctx = cls_ctx
+    enterprise_edition = cls_enterprise_edition
     ip = cls_ip
     log = cls_log
     nginx = cls_nginx
     node = cls_node
+    plugin = cls_plugin
     request = cls_request
     response = cls_response
     router = cls_router
