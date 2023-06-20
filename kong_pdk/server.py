@@ -36,6 +36,11 @@ entities = ('service', 'consumer', 'route', 'plugin', 'credential', 'memory_stat
 
 MSG_RET = 'ret'
 
+terminal_methods = set((
+    "kong.response.exit",
+    "kong.response.error",
+))
+
 def locked_by(lock_name):
     def f(fn):
         def wrapper(*args, **kwargs):
@@ -285,7 +290,6 @@ class PluginServer(object):
 
         if self.use_multiprocess:
             ch, child_ch = multiprocessing.Pipe(duplex=True)
-            self.events[eid] = ch
             self._process_pool.apply_async(
                 _handler_event_func,
                 (getattr(cls, phase), child_ch, self.lua_style, ),
@@ -293,7 +297,6 @@ class PluginServer(object):
         elif self.use_gevent:
             # plugin communites to Kong (RPC client) in a reverse way
             ch = gChannel()
-            self.events[eid] = ch
 
             gspawn(_handler_event_func,
                    getattr(cls, phase), ch, self.lua_style,
@@ -302,7 +305,6 @@ class PluginServer(object):
             ch = Queue()
             child_ch = Queue()
             ch.get, child_ch.get = child_ch.get, ch.get
-            self.events[eid] = ch
             t = threading.Thread(
                 target=_handler_event_func,
                 args=(getattr(cls, phase), child_ch, self.lua_style, ),
@@ -311,6 +313,9 @@ class PluginServer(object):
             t.start()
 
         r = ch.get()
+        if r != MSG_RET:
+            self.events[eid] = ch
+
         instance.reset_expire_ts()
 
         return {
@@ -337,7 +342,7 @@ class PluginServer(object):
 
         ret = ch.get()
 
-        if ret == MSG_RET:
+        if ret == MSG_RET or (isinstance(ret, dict) and ret.get("Method", None) in terminal_methods):
             del self.events[eid]
 
         return {
