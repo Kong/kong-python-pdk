@@ -24,6 +24,13 @@ non_return_methods = set((
 
 def rpc_of(ch, lua_style):
     def f(m, *a):
+        # sanitize non-serializable objects
+        if m == "kong.log" or m.startswith("kong.log."):
+            a = list(a)
+            for i in range(len(a)):
+                if type(a[i]) not in (str, int, list, dict):
+                    a[i] = str(a[i])
+
         ch.put({
             "Method": m,
             "Args": a,
