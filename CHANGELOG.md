@@ -2,8 +2,17 @@
 ## [Unreleased]
 
 
+<a name="0.3.5"></a>
+## [0.3.5] - 2023-06-20
+### bug fixes
+- delete message queue when they are not needed any more ([#122](https://github.com/Kong/kong-python-pdk/issues/122)) [ffeb2f2](https://github.com/Kong/kong-python-pdk/commit/ffeb2f2185a107f0e6547c4336905fe5dd01bfd0)
+
+
 <a name="0.3.4"></a>
 ## [0.3.4] - 2023-06-20
+### bug fixes
+- serialize error and disable strict_map_key to allow ([#117](https://github.com/Kong/kong-python-pdk/issues/117)) [25db61c](https://github.com/Kong/kong-python-pdk/commit/25db61cf650b5b8e86e2df066f6bd5282e7c8b48)
+
 
 <a name="0.3.2"></a>
 ## [0.3.2] - 2022-11-08
@@ -113,7 +122,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.4...HEAD
+[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.5...HEAD
+[0.3.5]: https://github.com/Kong/kong-python-pdk/compare/0.3.4...0.3.5
 [0.3.4]: https://github.com/Kong/kong-python-pdk/compare/0.3.2...0.3.4
 [0.3.2]: https://github.com/Kong/kong-python-pdk/compare/0.3.1...0.3.2
 [0.3.1]: https://github.com/Kong/kong-python-pdk/compare/0.3.0...0.3.1
