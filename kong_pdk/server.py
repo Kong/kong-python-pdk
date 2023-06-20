@@ -342,7 +342,7 @@ class PluginServer(object):
 
         ret = ch.get()
 
-        if ret == MSG_RET or ret.get("Method", None) in terminal_methods:
+        if ret == MSG_RET or (isinstance(ret, dict) and ret.get("Method", None) in terminal_methods):
             del self.events[eid]
 
         return {
