@@ -13,7 +13,7 @@ EXEBUNDLE = getattr(sys, 'frozen', False)
 LOCALE = locale.getdefaultlocale()[0]
 CODEPAGE = locale.getdefaultlocale()[1] or 'ascii'
 
-__version__ = 0.34
+__version__ = 0.35
 
 # https://github.com/soimort/you-get/you-get
 if getattr(sys, 'frozen', False):
