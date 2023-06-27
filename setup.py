@@ -28,6 +28,7 @@ packages = [
     'kong_pdk/pdk/kong/ctx',
     'kong_pdk/pdk/kong/nginx',
     'kong_pdk/pdk/kong/service',
+    'kong_pdk/pdk/kong/enterprise_edition',
 ]
 requires = ['gevent', 'msgpack']
 
