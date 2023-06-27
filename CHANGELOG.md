@@ -2,6 +2,12 @@
 ## [Unreleased]
 
 
+<a name="0.3.6"></a>
+## [0.3.6] - 2023-06-27
+### bug fixes
+- add missing file enterprise_edition [e8d7c86](https://github.com/Kong/kong-python-pdk/commit/e8d7c86a533c81e988308c7dd252d98544304a78)
+
+
 <a name="0.3.5"></a>
 ## [0.3.5] - 2023-06-20
 ### bug fixes
@@ -54,6 +60,7 @@
 <a name="0.2.5"></a>
 ## [0.2.5] - 2021-06-24
 ### bug fixes
+- listener to use msgpack.Unpacker iterrator [bed56c4](https://github.com/Kong/kong-python-pdk/commit/bed56c49160d1adb0e591f69b74337ced7820dba)
 - use .py file for type hint ([#13](https://github.com/Kong/kong-python-pdk/issues/13)) [1bf3820](https://github.com/Kong/kong-python-pdk/commit/1bf3820e316f73d6021897b5979af4826e9f34d6)
 
 
@@ -122,7 +129,8 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.5...HEAD
+[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.6...HEAD
+[0.3.6]: https://github.com/Kong/kong-python-pdk/compare/0.3.5...0.3.6
 [0.3.5]: https://github.com/Kong/kong-python-pdk/compare/0.3.4...0.3.5
 [0.3.4]: https://github.com/Kong/kong-python-pdk/compare/0.3.2...0.3.4
 [0.3.2]: https://github.com/Kong/kong-python-pdk/compare/0.3.1...0.3.2
