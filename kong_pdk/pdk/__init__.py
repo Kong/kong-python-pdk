@@ -35,14 +35,15 @@ def rpc_of(ch, lua_style):
             "Method": m,
             "Args": a,
         })
-        if m in non_return_methods:
-            return
 
+        # consume the response even for non-return methods
         data, err = ch.get()
         if lua_style:
             return data, err
         if err:
             raise PDKException("exception from %s: %s" % (m, err))
+        if m in non_return_methods:
+            return  # ignore whatever in the data.
         return data
     return f
 
