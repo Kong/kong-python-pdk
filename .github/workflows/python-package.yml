@@ -11,6 +11,7 @@ on:
 
 jobs:
   flake8-lint:
+    timeout-minutes: ${{ fromJSON(vars.GHA_DEFAULT_TIMEOUT) }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out source repository
@@ -24,6 +25,7 @@ jobs:
         with:
           exclude: "docs,kong_pdk/pdk/kong"
   build:
+    timeout-minutes: ${{ fromJSON(vars.GHA_DEFAULT_TIMEOUT) }}
 
     runs-on: ubuntu-latest
     strategy:
