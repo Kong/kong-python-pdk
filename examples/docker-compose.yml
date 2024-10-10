@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  kong:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kong
+    restart: always
+    environment:
+      - KONG_DATABASE=off
+      - KONG_DECLARATIVE_CONFIG=/opt/kong.yml
+      - KONG_ADMIN_ACCESS_LOG=/dev/stdout
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_ADMIN_ERROR_LOG=/dev/stderr
+      - KONG_PROXY_STREAM_ERROR_LOG=/dev/stderr
+      - KONG_PLUGINS=bundled,py-hello
+      - KONG_PLUGINSERVER_NAMES=py
+      - KONG_PLUGINSERVER_PY_SOCKET=/usr/local/kong/py-hello.sock
+      - KONG_PLUGINSERVER_PY_START_CMD=/opt/plugins/py-hello.py
+      - KONG_PLUGINSERVER_PY_QUERY_CMD=/opt/plugins/py-hello.py -d
+    volumes:
+      - ./plugins:/opt/plugins
+      - ./kong.yml:/opt/kong.yml
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "8001:8001"
+      - "8444:8444"
+    healthcheck:
+      test: ["CMD", "kong", "health"]
+      interval: 1s
+      timeout: 10s
+      retries: 3

@@ -1,0 +1,11 @@
+_format_version: "3.0"
+
+services:
+  - name: httpbin-svc
+    url: https://httpbin.org/anything
+    routes:
+      - name: example-route
+        paths:
+          - /any
+        plugins:
+          - name: py-hello
