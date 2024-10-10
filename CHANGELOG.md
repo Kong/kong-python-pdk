@@ -2,21 +2,11 @@
 ## [Unreleased]
 
 
-<a name="0.3.6"></a>
-## [0.3.6] - 2023-06-27
+<a name="0.4.0"></a>
+## [0.4.0] - 2024-10-10
 ### bug fixes
-- add missing file enterprise_edition [e8d7c86](https://github.com/Kong/kong-python-pdk/commit/e8d7c86a533c81e988308c7dd252d98544304a78)
-
-
-<a name="0.3.5"></a>
-## [0.3.5] - 2023-06-20
-### bug fixes
+- add missing file enterprise_edition [7b9d281](https://github.com/Kong/kong-python-pdk/commit/7b9d28196c8fc4718a6ad79f0164d243de57af8a)
 - delete message queue when they are not needed any more ([#122](https://github.com/Kong/kong-python-pdk/issues/122)) [ffeb2f2](https://github.com/Kong/kong-python-pdk/commit/ffeb2f2185a107f0e6547c4336905fe5dd01bfd0)
-
-
-<a name="0.3.4"></a>
-## [0.3.4] - 2023-06-20
-### bug fixes
 - serialize error and disable strict_map_key to allow ([#117](https://github.com/Kong/kong-python-pdk/issues/117)) [25db61c](https://github.com/Kong/kong-python-pdk/commit/25db61cf650b5b8e86e2df066f6bd5282e7c8b48)
 
 
@@ -49,17 +39,6 @@
 ### bug fixes
 - correctly pass schema in embedded server [099a498](https://github.com/Kong/kong-python-pdk/commit/099a4987d06602b094274ffd523300daa7985b5a)
 - no longer normalize hyphens in socket name in embedded server to keep consistent with what Kong expects [20c01da](https://github.com/Kong/kong-python-pdk/commit/20c01dae1f422e577ec107904f47a57e18788508)
-
-
-<a name="0.2.6"></a>
-## [0.2.6] - 2021-07-19
-### bug fixes
-- listener to use msgpack.Unpacker iterrator [bed56c4](https://github.com/Kong/kong-python-pdk/commit/bed56c49160d1adb0e591f69b74337ced7820dba)
-
-
-<a name="0.2.5"></a>
-## [0.2.5] - 2021-06-24
-### bug fixes
 - listener to use msgpack.Unpacker iterrator [bed56c4](https://github.com/Kong/kong-python-pdk/commit/bed56c49160d1adb0e591f69b74337ced7820dba)
 - use .py file for type hint ([#13](https://github.com/Kong/kong-python-pdk/issues/13)) [1bf3820](https://github.com/Kong/kong-python-pdk/commit/1bf3820e316f73d6021897b5979af4826e9f34d6)
 
@@ -129,16 +108,12 @@
 <a name="0.1.0"></a>
 ## 0.1.0 - 2020-01-03
 
-[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.3.6...HEAD
-[0.3.6]: https://github.com/Kong/kong-python-pdk/compare/0.3.5...0.3.6
-[0.3.5]: https://github.com/Kong/kong-python-pdk/compare/0.3.4...0.3.5
-[0.3.4]: https://github.com/Kong/kong-python-pdk/compare/0.3.2...0.3.4
+[Unreleased]: https://github.com/Kong/kong-python-pdk/compare/0.4.0...HEAD
+[0.4.0]: https://github.com/Kong/kong-python-pdk/compare/0.3.2...0.4.0
 [0.3.2]: https://github.com/Kong/kong-python-pdk/compare/0.3.1...0.3.2
 [0.3.1]: https://github.com/Kong/kong-python-pdk/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/Kong/kong-python-pdk/compare/0.2.7...0.3.0
-[0.2.7]: https://github.com/Kong/kong-python-pdk/compare/0.2.6...0.2.7
-[0.2.6]: https://github.com/Kong/kong-python-pdk/compare/0.2.5...0.2.6
-[0.2.5]: https://github.com/Kong/kong-python-pdk/compare/0.2.4...0.2.5
+[0.2.7]: https://github.com/Kong/kong-python-pdk/compare/0.2.4...0.2.7
 [0.2.4]: https://github.com/Kong/kong-python-pdk/compare/0.2.3...0.2.4
 [0.2.3]: https://github.com/Kong/kong-python-pdk/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/Kong/kong-python-pdk/compare/0.2.1...0.2.2
