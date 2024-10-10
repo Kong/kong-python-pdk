@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT
 # Original source path: kong/pdk/client/tls.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -51,7 +51,7 @@ class tls():
             rewrite, access, balancer, header_filter, body_filter, log
 
         Example:
-            cert, err = kong.client.get_full_client_certificate_chain()
+            cert, err = kong.client.tls.get_full_client_certificate_chain()
 
             if err:
 

@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT
 # Original source path: kong/pdk/plugin.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -23,7 +23,7 @@ class plugin():
             rewrite, access, header_filter, response, body_filter, log
 
         Example:
-            kong.request.get_id() # "123e4567-e89b-12d3-a456-426614174000"
+            kong.plugin.get_id() # "123e4567-e89b-12d3-a456-426614174000"
 
         :return: The ID of the running plugin
 

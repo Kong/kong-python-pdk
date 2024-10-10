@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT
 # Original source path: kong/pdk/request.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -14,7 +14,7 @@ class request():
 
 
     @staticmethod
-    def get_body(mimetype: Optional[str], max_args: Optional[number]) -> Tuple[table, str, str]:
+    def get_body(mimetype: Optional[str], max_args: Optional[number], max_allowed_file_size: Optional[number]) -> Tuple[table, str, str]:
         """
 
             Returns the request data as a key/value table.
@@ -62,8 +62,10 @@ class request():
         :parameter mimetype: The MIME type.
         :type mimetype: str
         :parameter max_args: Sets a limit on the maximum number of parsed
-            arguments.
         :type max_args: number
+        :parameter max_allowed_file_size: the max allowed file size to be read from
+            arguments.
+        :type max_allowed_file_size: number
 
         :return: A table representation of the body.
 
@@ -522,14 +524,17 @@ class request():
         pass
 
     @staticmethod
-    def get_raw_body() -> bytes:
+    def get_raw_body() -> Tuple[bytes, str]:
         """
 
             Returns the plain request body.
             If the body has no size (empty), this function returns an empty string.
             If the size of the body is greater than the Nginx buffer size (set by
             `client_body_buffer_size`), this function fails and returns an error
-            message explaining this limitation.
+            message explaining this limitation, unless `max_allowed_file_size`
+            is set and equal to 0 or larger than the body size buffered to disk.
+            Use of `max_allowed_file_size` requires Kong to read data from filesystem
+            and has performance implications.
 
         Phases:
             rewrite, access, response, admin_api
@@ -539,9 +544,13 @@ class request():
 
             kong.request.get_raw_body():gsub("Earth", "Mars") # "Hello, Mars!"
 
-        :return: The plain request body.
+        :return: The plain request body or nil if it does not fit into
+            the NGINX temporary buffer.
 
         :rtype: bytes
+        :return: An error message.
+
+        :rtype: str
         """
         pass
 

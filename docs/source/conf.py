@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'kong-pdk'
-copyright = '2023, Kong'
+copyright = '2024, Kong'
 author = 'Kong'
 
 

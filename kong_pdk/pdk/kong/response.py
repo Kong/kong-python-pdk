@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT
 # Original source path: kong/pdk/response.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -14,7 +14,7 @@ class response():
 
 
     @staticmethod
-    def add_header(name: str, value: Any) -> None:
+    def add_header(name: str, of: table) -> None:
         """
 
             Adds a response header with the given value. Unlike
@@ -34,8 +34,8 @@ class response():
 
         :parameter name: The header name.
         :type name: str
-        :parameter value: The header value.
-        :type value: Any
+        :parameter of: strings|string|number|boolean value The header value.
+        :type of: table
 
         :return: throws an error on invalid input.
 
@@ -407,7 +407,7 @@ class response():
         pass
 
     @staticmethod
-    def set_header(name: str, value: Any) -> None:
+    def set_header(name: str, of: table) -> None:
         """
 
             Sets a response header with the given value. This function overrides any
@@ -429,8 +429,8 @@ class response():
 
         :parameter name: The name of the header
         :type name: str
-        :parameter value: The new value for the header.
-        :type value: Any
+        :parameter of: strings|string|number|boolean value The new value for the header.
+        :type of: table
 
         :return: throws an error on invalid input.
 

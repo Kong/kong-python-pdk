@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT
 # Original source path: kong/pdk/client.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -19,7 +19,8 @@ class client():
     def authenticate(consumer: table, credential: table) -> None:
         """
 
-            Sets the authenticated consumer and/or credential for the current request.
+            Sets the authenticated consumer and/or credential as well
+            as the authenticated consumer-group for the current request.
             While both `consumer` and `credential` can be `nil`,
             at least one of them must exist. Otherwise, this function will throw an
             error.
@@ -38,6 +39,31 @@ class client():
         :parameter credential: The credential to set. If
             no value is provided, then any existing value will be cleared.
         :type credential: table
+
+        """
+        pass
+
+    @staticmethod
+    def authenticate_consumer_group_by_consumer_id(consumer_id: str) -> None:
+        """
+
+            If the consumer_id is neither a string nor nil, it throws an error.
+            If the consumer group has already been authenticated, it doesn't override the group.
+            The function performs a redis-SCAN-like lookup using a subset of the cache_key.
+            The consumer_group_mapping is sorted by group name for deterministic behavior,
+            but this might be changed in future releases.
+
+        Phases:
+            access
+
+        Example:
+            # assuming `consumer_id` is provided by some code
+
+            kong.client.authenticate_consumer_group_by_consumer_id(consumer_id)
+
+        :parameter consumer_id: The consumer id to use for setting the consumer group.
+            If no value is provided, the current consumer group is not changed.
+        :type consumer_id: str
 
         """
         pass
@@ -66,6 +92,45 @@ class client():
             # without a consumer (external auth)
 
         :return: The authenticated consumer entity.
+
+        :rtype: table
+        """
+        pass
+
+    @staticmethod
+    def get_consumer_group() -> table:
+        """
+
+            This function is deprecated in favor of `get_consumer_groups`.
+            Retrieves the authenticated consumer group for the current request.
+
+        Phases:
+            auth_and_later
+
+        Example:
+            group = kong.client.get_consumer_group()
+
+        :return: The authenticated consumer group. Returns `nil` if no
+            consumer group has been authenticated for the current request.
+
+        :rtype: table
+        """
+        pass
+
+    @staticmethod
+    def get_consumer_groups() -> table:
+        """
+
+            Retrieves the authenticated consumer groups for the current request.
+
+        Phases:
+            auth_and_later
+
+        Example:
+            groups = kong.client.get_consumer_groups()
+
+        :return: The authenticated consumer groups. Returns `nil` if no
+            consumer groups has been authenticated for the current request.
 
         :rtype: table
         """
@@ -273,6 +338,70 @@ class client():
         :return: `nil` if successful, or an error message if it fails.
 
         :rtype: err
+        """
+        pass
+
+    @staticmethod
+    def set_authenticated_consumer_group(group: table) -> None:
+        """
+
+            This function is deprecated in favor of `set_authenticated_consumer_groups`.
+            Explicitly sets the authenticated consumer group for the current request.
+            Throws an error if the `group` is neither a table nor `nil`.
+
+        Phases:
+            auth_and_later
+
+        Example:
+            # assuming `group` is provided by some code
+
+            kong.client.set_authenticated_consumer_group(group)
+
+        :parameter group: The consumer group to set. If no
+            value is provided, then any existing value will be cleared.
+            this value should be a table with metadata of the group like its `id` and `name`.
+        :type group: table
+
+        """
+        pass
+
+    @staticmethod
+    def set_authenticated_consumer_groups(groups: table) -> None:
+        """
+
+            Explicitly sets the authenticated consumer groups for the current request.
+            Throws an error if the `groups` parameter is neither a table nor `nil`.
+
+        Phases:
+            auth_and_later
+
+        Example:
+            kong.client.set_authenticated_consumer_groups({
+
+            {
+
+            id = "fed2bf38-10c4-404e-8d45-a2b0f521464d",
+
+            name = "my-group",
+
+            },
+
+            {
+
+            id = "736bb9d9-98f2-46d5-97fc-d7361d9488ee",
+
+            name = "my-other-group",
+
+            }
+
+            })
+
+        :parameter groups: The consumer groups to set. If no
+            value is provided, then any existing value will be cleared.
+            This value should be a sequence-like table of tables, with each item
+            having at least an `id` and a `name`.
+        :type groups: table
+
         """
         pass
 

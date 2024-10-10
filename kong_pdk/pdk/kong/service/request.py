@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT
 # Original source path: kong/pdk/service/request.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -14,7 +14,7 @@ class request():
 
 
     @staticmethod
-    def add_header(header: str, value: Any) -> None:
+    def add_header(header: str, of: table) -> None:
         """
 
             Adds a request header with the given value to the request to the Service. Unlike
@@ -32,8 +32,8 @@ class request():
 
         :parameter header: The header name. Example: "Cache-Control".
         :type header: str
-        :parameter value: The header value. Example: "no-cache".
-        :type value: Any
+        :parameter of: strings|string|number|boolean value The header value. Example: "no-cache".
+        :type of: table
 
         :return: throws an error on invalid inputs.
 
@@ -105,7 +105,7 @@ class request():
             response headers at the same time.
 
         Phases:
-            rewrite, access
+            rewrite, access, balancer
 
         Example:
             kong.service.request.enable_buffering()
@@ -142,7 +142,7 @@ class request():
             a string with `kong.service.request.set_raw_body()`.
 
         Phases:
-            rewrite, access
+            rewrite, access, balancer
 
         Example:
             kong.service.set_header("application/json")
@@ -194,7 +194,7 @@ class request():
         pass
 
     @staticmethod
-    def set_header(header: str, value: Any) -> None:
+    def set_header(header: str, of: table) -> None:
         """
 
             Sets a header in the request to the Service with the given value. Any existing header
@@ -210,8 +210,8 @@ class request():
 
         :parameter header: The header name. Example: "X-Foo".
         :type header: str
-        :parameter value: The header value. Example: "hello world".
-        :type value: Any
+        :parameter of: strings|string|boolean|number value The header value. Example: "hello world".
+        :type of: table
 
         :return: throws an error on invalid inputs.
 
@@ -311,7 +311,7 @@ class request():
             Input should **not** include the query string.
 
         Phases:
-            access
+            access, rewrite, balancer
 
         Example:
             kong.service.request.set_path("/v2/movies")
@@ -384,7 +384,7 @@ class request():
             see `kong.service.request.set_body()`.
 
         Phases:
-            rewrite, access
+            rewrite, access, balancer
 
         Example:
             kong.service.request.set_raw_body("Hello, world!")
@@ -431,7 +431,7 @@ class request():
             Sets the protocol to use when proxying the request to the Service.
 
         Phases:
-            access
+            access, rewrite, balancer
 
         Example:
             kong.service.request.set_scheme("https")
