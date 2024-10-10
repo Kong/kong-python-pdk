@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT
 # Original source path: kong/pdk/vault.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -17,7 +17,8 @@ class vault():
     def flush() -> None:
         """
 
-            Flushes vault config and the references LRU cache.
+            Flush vault LRU cache and start a timer to rotate secrets.
+            @local
 
         Example:
             kong.vault.flush()
@@ -43,6 +44,18 @@ class vault():
         :return: error message on failure, otherwise `nil`
 
         :rtype: str
+        """
+        pass
+
+    @staticmethod
+    def init_worker() -> None:
+        """
+
+            Initializes vault.
+            Registers event handlers (on non-dbless nodes) and starts a recurring secrets
+            rotation timer. Does nothing on control planes.
+            @local
+
         """
         pass
 
@@ -172,6 +185,16 @@ class vault():
         :return: options with updated secret values
 
         :rtype: table
+        """
+        pass
+
+    @staticmethod
+    def warmup() -> None:
+        """
+
+            Warmups vault caches from config.
+            @local
+
         """
         pass
 

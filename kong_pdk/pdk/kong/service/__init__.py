@@ -1,4 +1,4 @@
-# AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT
+# AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT
 # Original source path: kong/pdk/service.lua
 
 from typing import TypeVar, Any, Union, List, Mapping, Tuple, Optional
@@ -18,6 +18,26 @@ class service():
     response = cls_response
 
     @staticmethod
+    def set_retries(retries: number) -> None:
+        """
+
+            Sets the retries count for the current request. This will override the
+            default retries count set in the Upstream entity.
+            The `retries` argument expects an integer between 0 and 32767.
+
+        Phases:
+            access
+
+        Example:
+            kong.service.set_retries(233)
+
+        :parameter retries: 
+        :type retries: number
+
+        """
+        pass
+
+    @staticmethod
     def set_target(host: str, port: number) -> None:
         """
 
@@ -25,7 +45,8 @@ class service():
             Using this method is equivalent to ask Kong to not run the load-balancing
             phase for this request, and consider it manually overridden.
             Load-balancing components such as retries and health-checks will also be
-            ignored for this request.
+            ignored for this request. Use `kong.service.set_retries` to overwrite
+            retries count.
             The `host` argument expects the hostname or IP address of the upstream 
             server, and the `port` expects a port number.
 
@@ -41,6 +62,52 @@ class service():
         :type host: str
         :parameter port: 
         :type port: number
+
+        """
+        pass
+
+    @staticmethod
+    def set_target_retry_callback(retry_callback: function) -> None:
+        """
+
+            Sets the retry callback function when the target set by `service.set_target`
+            failed to connect. The callback function will be called with no argument and
+            must return `host`, `port` and `err` if any.
+
+        Phases:
+            access
+
+        Example:
+            kong.service.set_target_retry_callback(function() return "service.local", 443)
+
+        :parameter retry_callback: 
+        :type retry_callback: function
+
+        """
+        pass
+
+    @staticmethod
+    def set_timeouts(connect_timeout: number, write_timeout: number, read_timeout: number) -> None:
+        """
+
+            Sets the timeouts for the current request. This will override the
+            default timeouts set in the Upstream entity.
+            
+            The `connect_timeout`, `write_timeout`, and `read_timeout` arguments expect
+            an integer between 1 and 2147483646.
+
+        Phases:
+            access
+
+        Example:
+            kong.service.set_timeouts(233, 233, 233)
+
+        :parameter connect_timeout: 
+        :type connect_timeout: number
+        :parameter write_timeout: 
+        :type write_timeout: number
+        :parameter read_timeout: 
+        :type read_timeout: number
 
         """
         pass
