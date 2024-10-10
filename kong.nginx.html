@@ -1,19 +1,19 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>kong.nginx package &mdash; kong-pdk  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -97,19 +97,19 @@
            <div itemprop="articleBody">
              
   <section id="kong-nginx-package">
-<h1>kong.nginx package<a class="headerlink" href="#kong-nginx-package" title="Permalink to this heading">¶</a></h1>
+<h1>kong.nginx package<a class="headerlink" href="#kong-nginx-package" title="Link to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
 </section>
 <section id="module-kong.nginx.shared">
-<span id="kong-nginx-shared-module"></span><h2>kong.nginx.shared module<a class="headerlink" href="#module-kong.nginx.shared" title="Permalink to this heading">¶</a></h2>
+<span id="kong-nginx-shared-module"></span><h2>kong.nginx.shared module<a class="headerlink" href="#module-kong.nginx.shared" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.nginx.shared.shared">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.nginx.shared.</span></span><span class="sig-name descname"><span class="pre">shared</span></span><a class="reference internal" href="_modules/kong/nginx/shared.html#shared"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.shared.shared" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.nginx.shared.</span></span><span class="sig-name descname"><span class="pre">shared</span></span><a class="reference internal" href="_modules/kong/nginx/shared.html#shared"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.shared.shared" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.shared.shared.get">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/kong/nginx/shared.html#shared.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.shared.shared.get" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/kong/nginx/shared.html#shared.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.shared.shared.get" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>get a key-value pair from Kong’s shared memory</p>
 </div></blockquote>
@@ -128,7 +128,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.shared.shared.set">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/nginx/shared.html#shared.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.shared.shared.set" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/nginx/shared.html#shared.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.shared.shared.set" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>set a key-value pair in Kong’s shared memory</p>
 </div></blockquote>
@@ -146,14 +146,14 @@
 
 </section>
 <section id="module-kong.nginx">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.nginx" title="Permalink to this heading">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kong.nginx" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.nginx.nginx">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.nginx.</span></span><span class="sig-name descname"><span class="pre">nginx</span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kong.nginx.</span></span><span class="sig-name descname"><span class="pre">nginx</span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.get_ctx">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ctx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_ctx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_ctx" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ctx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_ctx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_ctx" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>get a key-value pair from Kong’s per-request context</p>
 </div></blockquote>
@@ -172,7 +172,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.get_statistics">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_statistics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">table</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_statistics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_statistics" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_statistics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">table</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_statistics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_statistics" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>Returns various connection and request metrics exposed by
 Nginx, similar to those reported by the
@@ -207,7 +207,7 @@ The following fields are included in the returned table:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.get_subsystem">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_subsystem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_subsystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_subsystem" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_subsystem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_subsystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_subsystem" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the subsystem name</p>
@@ -220,7 +220,7 @@ The following fields are included in the returned table:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.get_tls1_version_str">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_tls1_version_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_tls1_version_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_tls1_version_str" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_tls1_version_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_tls1_version_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_tls1_version_str" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the TLSv1 version string</p>
@@ -233,7 +233,7 @@ The following fields are included in the returned table:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.get_var">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_var" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_var</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.get_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.get_var" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>get NGINX variable value</p>
@@ -246,7 +246,7 @@ The following fields are included in the returned table:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.req_start_time">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">req_start_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">number</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.req_start_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.req_start_time" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">req_start_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">number</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.req_start_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.req_start_time" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>get the current request’s start timestamp</p>
 </div></blockquote>
@@ -262,7 +262,7 @@ The following fields are included in the returned table:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.set_ctx">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_ctx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">any</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.set_ctx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.set_ctx" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_ctx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">any</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/kong/nginx.html#nginx.set_ctx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kong.nginx.nginx.set_ctx" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>set a key-value pair in Kong’s per-request context</p>
 </div></blockquote>
@@ -278,11 +278,11 @@ The following fields are included in the returned table:
 
 <dl class="py class">
 <dt class="sig sig-object py" id="kong.nginx.nginx.shared">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shared</span></span><a class="headerlink" href="#kong.nginx.nginx.shared" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shared</span></span><a class="headerlink" href="#kong.nginx.nginx.shared" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.shared.get">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#kong.nginx.nginx.shared.get" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#kong.nginx.nginx.shared.get" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>get a key-value pair from Kong’s shared memory</p>
 </div></blockquote>
@@ -301,7 +301,7 @@ The following fields are included in the returned table:
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kong.nginx.nginx.shared.set">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.nginx.nginx.shared.set" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kong.nginx.nginx.shared.set" title="Link to this definition">¶</a></dt>
 <dd><blockquote>
 <div><p>set a key-value pair in Kong’s shared memory</p>
 </div></blockquote>
@@ -330,7 +330,7 @@ The following fields are included in the returned table:
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Kong.</p>
+    <p>&#169; Copyright 2024, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

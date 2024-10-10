@@ -1,18 +1,18 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>kong.client.tls &mdash; kong-pdk  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -66,22 +66,27 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.client.tls</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/client/tls.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="n">array</span> <span class="o">=</span> <span class="n">table</span>
 <span class="c1"># XXX</span>
 <span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
 <span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
 
 
-<div class="viewcode-block" id="tls"><a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls">[docs]</a><span class="k">class</span> <span class="nc">tls</span><span class="p">():</span>
+<div class="viewcode-block" id="tls">
+<a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls">[docs]</a>
+<span class="k">class</span> <span class="nc">tls</span><span class="p">():</span>
 
 
-<div class="viewcode-block" id="tls.disable_session_reuse"><a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls.disable_session_reuse">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="tls.disable_session_reuse">
+<a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls.disable_session_reuse">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">disable_session_reuse</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">err</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -107,7 +112,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="tls.get_full_client_certificate_chain"><a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls.get_full_client_certificate_chain">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="tls.get_full_client_certificate_chain">
+<a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls.get_full_client_certificate_chain">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_full_client_certificate_chain</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">err</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -119,7 +127,7 @@
 <span class="sd">            rewrite, access, balancer, header_filter, body_filter, log</span>
 
 <span class="sd">        Example:</span>
-<span class="sd">            cert, err = kong.client.get_full_client_certificate_chain()</span>
+<span class="sd">            cert, err = kong.client.tls.get_full_client_certificate_chain()</span>
 
 <span class="sd">            if err:</span>
 
@@ -138,7 +146,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="tls.request_client_certificate"><a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls.request_client_certificate">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="tls.request_client_certificate">
+<a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls.request_client_certificate">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">request_client_certificate</span><span class="p">(</span><span class="n">ca_certs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">cdata</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">err</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -199,7 +210,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="tls.set_client_verify"><a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls.set_client_verify">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="tls.set_client_verify">
+<a class="viewcode-back" href="../../../kong.client.html#kong.client.tls.tls.set_client_verify">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_client_verify</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -221,7 +235,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
+
     <span class="k">pass</span></div>
+
 </pre></div>
 
            </div>
@@ -231,7 +247,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Kong.</p>
+    <p>&#169; Copyright 2024, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

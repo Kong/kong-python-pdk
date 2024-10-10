@@ -1,18 +1,18 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>kong.request &mdash; kong-pdk  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -65,23 +65,28 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.request</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/request.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="n">array</span> <span class="o">=</span> <span class="n">table</span>
 <span class="c1"># XXX</span>
 <span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
 <span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
 
 
-<div class="viewcode-block" id="request"><a class="viewcode-back" href="../../kong.html#kong.request.request">[docs]</a><span class="k">class</span> <span class="nc">request</span><span class="p">():</span>
+<div class="viewcode-block" id="request">
+<a class="viewcode-back" href="../../kong.html#kong.request.request">[docs]</a>
+<span class="k">class</span> <span class="nc">request</span><span class="p">():</span>
 
 
-<div class="viewcode-block" id="request.get_body"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_body">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_body</span><span class="p">(</span><span class="n">mimetype</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">max_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="request.get_body">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_body">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_body</span><span class="p">(</span><span class="n">mimetype</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">max_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">],</span> <span class="n">max_allowed_file_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">table</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the request data as a key/value table.</span>
@@ -129,8 +134,10 @@
 <span class="sd">        :parameter mimetype: The MIME type.</span>
 <span class="sd">        :type mimetype: str</span>
 <span class="sd">        :parameter max_args: Sets a limit on the maximum number of parsed</span>
-<span class="sd">            arguments.</span>
 <span class="sd">        :type max_args: number</span>
+<span class="sd">        :parameter max_allowed_file_size: the max allowed file size to be read from</span>
+<span class="sd">            arguments.</span>
+<span class="sd">        :type max_allowed_file_size: number</span>
 
 <span class="sd">        :return: A table representation of the body.</span>
 
@@ -144,7 +151,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_forwarded_host"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_host">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_forwarded_host">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_host">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_host</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -172,7 +182,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_forwarded_path"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_path">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_forwarded_path">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_path">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -198,7 +211,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_forwarded_port"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_port">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_forwarded_port">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_port">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -230,7 +246,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_forwarded_prefix"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_prefix">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_forwarded_prefix">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_prefix">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_prefix</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -263,7 +282,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_forwarded_scheme"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_scheme">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_forwarded_scheme">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_forwarded_scheme">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_forwarded_scheme</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -290,7 +312,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_header"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_header">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_header">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_header">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -332,7 +357,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_headers"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_headers">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_headers">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_headers">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="n">max_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -381,7 +409,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_host"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_host">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_host">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_host">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_host</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -402,7 +433,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_http_version"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_http_version">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_http_version">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_http_version">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_http_version</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -422,7 +456,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_method"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_method">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_method">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_method">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_method</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -441,7 +478,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_path"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_path">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_path">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_path">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -469,7 +509,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_path_with_query"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_path_with_query">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_path_with_query">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_path_with_query">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_path_with_query</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -490,7 +533,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_port"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_port">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_port">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_port">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_port</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -511,7 +557,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_query"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_query">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_query">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_query">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_query</span><span class="p">(</span><span class="n">max_args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">number</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -556,7 +605,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_query_arg"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_query_arg">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_query_arg">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_query_arg">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_query_arg</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -588,15 +640,21 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_raw_body"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+
+<div class="viewcode-block" id="request.get_raw_body">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_body">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_raw_body</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Returns the plain request body.</span>
 <span class="sd">            If the body has no size (empty), this function returns an empty string.</span>
 <span class="sd">            If the size of the body is greater than the Nginx buffer size (set by</span>
 <span class="sd">            `client_body_buffer_size`), this function fails and returns an error</span>
-<span class="sd">            message explaining this limitation.</span>
+<span class="sd">            message explaining this limitation, unless `max_allowed_file_size`</span>
+<span class="sd">            is set and equal to 0 or larger than the body size buffered to disk.</span>
+<span class="sd">            Use of `max_allowed_file_size` requires Kong to read data from filesystem</span>
+<span class="sd">            and has performance implications.</span>
 
 <span class="sd">        Phases:</span>
 <span class="sd">            rewrite, access, response, admin_api</span>
@@ -606,13 +664,20 @@
 
 <span class="sd">            kong.request.get_raw_body():gsub(&quot;Earth&quot;, &quot;Mars&quot;) # &quot;Hello, Mars!&quot;</span>
 
-<span class="sd">        :return: The plain request body.</span>
+<span class="sd">        :return: The plain request body or nil if it does not fit into</span>
+<span class="sd">            the NGINX temporary buffer.</span>
 
 <span class="sd">        :rtype: bytes</span>
+<span class="sd">        :return: An error message.</span>
+
+<span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_raw_path"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_path">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_raw_path">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_path">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_raw_path</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -638,7 +703,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_raw_query"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_query">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_raw_query">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_raw_query">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_raw_query</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -660,7 +728,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_scheme"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_scheme">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_scheme">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_scheme">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_scheme</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -681,7 +752,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_start_time"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_start_time">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_start_time">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_start_time">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_start_time</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">number</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -699,7 +773,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.get_uri_captures"><a class="viewcode-back" href="../../kong.html#kong.request.request.get_uri_captures">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.get_uri_captures">
+<a class="viewcode-back" href="../../kong.html#kong.request.request.get_uri_captures">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_uri_captures</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">table</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -723,7 +800,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
+
     <span class="k">pass</span></div>
+
 </pre></div>
 
            </div>
@@ -733,7 +812,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Kong.</p>
+    <p>&#169; Copyright 2024, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

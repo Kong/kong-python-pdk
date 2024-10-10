@@ -1,18 +1,18 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>kong.service.request &mdash; kong-pdk  documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+      <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -66,23 +66,28 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.service.request</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/service/request.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="n">array</span> <span class="o">=</span> <span class="n">table</span>
 <span class="c1"># XXX</span>
 <span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
 <span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
 
 
-<div class="viewcode-block" id="request"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request">[docs]</a><span class="k">class</span> <span class="nc">request</span><span class="p">():</span>
+<div class="viewcode-block" id="request">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request">[docs]</a>
+<span class="k">class</span> <span class="nc">request</span><span class="p">():</span>
 
 
-<div class="viewcode-block" id="request.add_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.add_header">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">add_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="request.add_header">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.add_header">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">of</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Adds a request header with the given value to the request to the Service. Unlike</span>
@@ -100,8 +105,8 @@
 
 <span class="sd">        :parameter header: The header name. Example: &quot;Cache-Control&quot;.</span>
 <span class="sd">        :type header: str</span>
-<span class="sd">        :parameter value: The header value. Example: &quot;no-cache&quot;.</span>
-<span class="sd">        :type value: Any</span>
+<span class="sd">        :parameter of: strings|string|number|boolean value The header value. Example: &quot;no-cache&quot;.</span>
+<span class="sd">        :type of: table</span>
 
 <span class="sd">        :return: throws an error on invalid inputs.</span>
 
@@ -109,7 +114,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.clear_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.clear_header">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.clear_header">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.clear_header">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">clear_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -137,7 +145,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.disable_tls"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.disable_tls">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.disable_tls">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.disable_tls">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">disable_tls</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -165,7 +176,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.enable_buffering"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.enable_buffering">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.enable_buffering">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.enable_buffering">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">enable_buffering</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -173,7 +187,7 @@
 <span class="sd">            response headers at the same time.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite, access</span>
+<span class="sd">            rewrite, access, balancer</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.enable_buffering()</span>
@@ -184,7 +198,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.set_body"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_body">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.set_body">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_body">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_body</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">table</span><span class="p">,</span> <span class="n">mimetype</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -210,7 +227,7 @@
 <span class="sd">            a string with `kong.service.request.set_raw_body()`.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite, access</span>
+<span class="sd">            rewrite, access, balancer</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.set_header(&quot;application/json&quot;)</span>
@@ -261,8 +278,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.set_header"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_header">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="request.set_header">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_header">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">of</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets a header in the request to the Service with the given value. Any existing header</span>
@@ -278,8 +298,8 @@
 
 <span class="sd">        :parameter header: The header name. Example: &quot;X-Foo&quot;.</span>
 <span class="sd">        :type header: str</span>
-<span class="sd">        :parameter value: The header value. Example: &quot;hello world&quot;.</span>
-<span class="sd">        :type value: Any</span>
+<span class="sd">        :parameter of: strings|string|boolean|number value The header value. Example: &quot;hello world&quot;.</span>
+<span class="sd">        :type of: table</span>
 
 <span class="sd">        :return: throws an error on invalid inputs.</span>
 
@@ -287,7 +307,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.set_headers"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_headers">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.set_headers">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_headers">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_headers</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -344,7 +367,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.set_method"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_method">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.set_method">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_method">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_method</span><span class="p">(</span><span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -368,7 +394,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.set_path"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_path">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.set_path">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_path">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -379,7 +408,7 @@
 <span class="sd">            Input should **not** include the query string.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            access</span>
+<span class="sd">            access, rewrite, balancer</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_path(&quot;/v2/movies&quot;)</span>
@@ -394,7 +423,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.set_query"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_query">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.set_query">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_query">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_query</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -440,7 +472,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.set_raw_body"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_raw_body">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.set_raw_body">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_raw_body">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_raw_body</span><span class="p">(</span><span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -452,7 +487,7 @@
 <span class="sd">            see `kong.service.request.set_body()`.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            rewrite, access</span>
+<span class="sd">            rewrite, access, balancer</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_raw_body(&quot;Hello, world!&quot;)</span>
@@ -466,7 +501,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.set_raw_query"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_raw_query">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.set_raw_query">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_raw_query">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_raw_query</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -492,14 +530,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="request.set_scheme"><a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_scheme">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="request.set_scheme">
+<a class="viewcode-back" href="../../../kong.service.html#kong.service.request.request.set_scheme">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_scheme</span><span class="p">(</span><span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            Sets the protocol to use when proxying the request to the Service.</span>
 
 <span class="sd">        Phases:</span>
-<span class="sd">            access</span>
+<span class="sd">            access, rewrite, balancer</span>
 
 <span class="sd">        Example:</span>
 <span class="sd">            kong.service.request.set_scheme(&quot;https&quot;)</span>
@@ -513,7 +554,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
+
     <span class="k">pass</span></div>
+
 </pre></div>
 
            </div>
@@ -523,7 +566,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Kong.</p>
+    <p>&#169; Copyright 2024, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

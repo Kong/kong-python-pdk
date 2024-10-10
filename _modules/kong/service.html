@@ -1,18 +1,18 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>kong.service &mdash; kong-pdk  documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -65,13 +65,14 @@
            <div itemprop="articleBody">
              
   <h1>Source code for kong.service</h1><div class="highlight"><pre>
-<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.4.x, DO NOT EDIT</span>
+<span></span><span class="c1"># AUTO GENERATED BASED ON Kong 3.8.x, DO NOT EDIT</span>
 <span class="c1"># Original source path: kong/pdk/service.lua</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="n">number</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span>
+<span class="n">array</span> <span class="o">=</span> <span class="n">table</span>
 <span class="c1"># XXX</span>
 <span class="n">cdata</span> <span class="o">=</span> <span class="n">Any</span>
 <span class="n">err</span> <span class="o">=</span> <span class="nb">str</span>
@@ -79,12 +80,39 @@
 <span class="kn">from</span> <span class="nn">.request</span> <span class="kn">import</span> <span class="n">request</span> <span class="k">as</span> <span class="n">cls_request</span>
 <span class="kn">from</span> <span class="nn">.response</span> <span class="kn">import</span> <span class="n">response</span> <span class="k">as</span> <span class="n">cls_response</span>
 
-<div class="viewcode-block" id="service"><a class="viewcode-back" href="../../kong.service.html#kong.service.service">[docs]</a><span class="k">class</span> <span class="nc">service</span><span class="p">():</span>
+<div class="viewcode-block" id="service">
+<a class="viewcode-back" href="../../kong.service.html#kong.service.service">[docs]</a>
+<span class="k">class</span> <span class="nc">service</span><span class="p">():</span>
 
     <span class="n">request</span> <span class="o">=</span> <span class="n">cls_request</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">cls_response</span>
 
-<div class="viewcode-block" id="service.set_target"><a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_target">[docs]</a>    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="service.set_retries">
+<a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_retries">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_retries</span><span class="p">(</span><span class="n">retries</span><span class="p">:</span> <span class="n">number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the retries count for the current request. This will override the</span>
+<span class="sd">            default retries count set in the Upstream entity.</span>
+<span class="sd">            The `retries` argument expects an integer between 0 and 32767.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            access</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.set_retries(233)</span>
+
+<span class="sd">        :parameter retries: </span>
+<span class="sd">        :type retries: number</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="service.set_target">
+<a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_target">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_target</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="n">number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -92,7 +120,8 @@
 <span class="sd">            Using this method is equivalent to ask Kong to not run the load-balancing</span>
 <span class="sd">            phase for this request, and consider it manually overridden.</span>
 <span class="sd">            Load-balancing components such as retries and health-checks will also be</span>
-<span class="sd">            ignored for this request.</span>
+<span class="sd">            ignored for this request. Use `kong.service.set_retries` to overwrite</span>
+<span class="sd">            retries count.</span>
 <span class="sd">            The `host` argument expects the hostname or IP address of the upstream </span>
 <span class="sd">            server, and the `port` expects a port number.</span>
 
@@ -112,7 +141,39 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="service.set_tls_verify"><a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_tls_verify">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="service.set_timeouts">
+<a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_timeouts">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_timeouts</span><span class="p">(</span><span class="n">connect_timeout</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">write_timeout</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="n">read_timeout</span><span class="p">:</span> <span class="n">number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            Sets the timeouts for the current request. This will override the</span>
+<span class="sd">            default timeouts set in the Upstream entity.</span>
+<span class="sd">            </span>
+<span class="sd">            The `connect_timeout`, `write_timeout`, and `read_timeout` arguments expect</span>
+<span class="sd">            an integer between 1 and 2147483646.</span>
+
+<span class="sd">        Phases:</span>
+<span class="sd">            access</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            kong.service.set_timeouts(233, 233, 233)</span>
+
+<span class="sd">        :parameter connect_timeout: </span>
+<span class="sd">        :type connect_timeout: number</span>
+<span class="sd">        :parameter write_timeout: </span>
+<span class="sd">        :type write_timeout: number</span>
+<span class="sd">        :parameter read_timeout: </span>
+<span class="sd">        :type read_timeout: number</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="service.set_tls_verify">
+<a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_tls_verify">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_tls_verify</span><span class="p">(</span><span class="n">on</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -146,7 +207,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="service.set_tls_verify_depth"><a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_tls_verify_depth">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="service.set_tls_verify_depth">
+<a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_tls_verify_depth">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_tls_verify_depth</span><span class="p">(</span><span class="n">depth</span><span class="p">:</span> <span class="n">number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -177,7 +241,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="service.set_upstream"><a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_upstream">[docs]</a>    <span class="nd">@staticmethod</span>
+
+<div class="viewcode-block" id="service.set_upstream">
+<a class="viewcode-back" href="../../kong.service.html#kong.service.service.set_upstream">[docs]</a>
+    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_upstream</span><span class="p">(</span><span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -215,7 +282,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
+
     <span class="k">pass</span></div>
+
 </pre></div>
 
            </div>
@@ -225,7 +294,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Kong.</p>
+    <p>&#169; Copyright 2024, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

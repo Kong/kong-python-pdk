@@ -80,6 +80,14 @@ kong.router module
    :undoc-members:
    :show-inheritance:
 
+kong.telemetry module
+---------------------
+
+.. automodule:: kong.telemetry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 kong.vault module
 -----------------
 

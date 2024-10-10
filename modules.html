@@ -1,19 +1,19 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>kong &mdash; kong-pdk  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -68,7 +68,7 @@
            <div itemprop="articleBody">
              
   <section id="kong">
-<h1>kong<a class="headerlink" href="#kong" title="Permalink to this heading">¶</a></h1>
+<h1>kong<a class="headerlink" href="#kong" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="kong.html">kong package</a><ul>
@@ -206,13 +206,22 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.telemetry">kong.telemetry module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kong.html#kong.telemetry.telemetry"><code class="docutils literal notranslate"><span class="pre">telemetry</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.telemetry.telemetry.log"><code class="docutils literal notranslate"><span class="pre">telemetry.log()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="kong.html#module-kong.vault">kong.vault module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="kong.html#kong.vault.vault"><code class="docutils literal notranslate"><span class="pre">vault</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.flush"><code class="docutils literal notranslate"><span class="pre">vault.flush()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.get"><code class="docutils literal notranslate"><span class="pre">vault.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.init_worker"><code class="docutils literal notranslate"><span class="pre">vault.init_worker()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.is_reference"><code class="docutils literal notranslate"><span class="pre">vault.is_reference()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.parse_reference"><code class="docutils literal notranslate"><span class="pre">vault.parse_reference()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.update"><code class="docutils literal notranslate"><span class="pre">vault.update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.vault.vault.warmup"><code class="docutils literal notranslate"><span class="pre">vault.warmup()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -232,6 +241,7 @@
 <li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.response"><code class="docutils literal notranslate"><span class="pre">kong.response</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.router"><code class="docutils literal notranslate"><span class="pre">kong.router</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.service"><code class="docutils literal notranslate"><span class="pre">kong.service</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.telemetry"><code class="docutils literal notranslate"><span class="pre">kong.telemetry</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="kong.html#kong.kong.vault"><code class="docutils literal notranslate"><span class="pre">kong.vault</span></code></a></li>
 </ul>
 </li>
@@ -251,7 +261,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Kong.</p>
+    <p>&#169; Copyright 2024, Kong.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
