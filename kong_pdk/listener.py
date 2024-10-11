@@ -1,124 +1,119 @@
-import os
-import re
-import sys
-import time
-import traceback
-import threading
+import asyncio
 import msgpack
-
-from .const import PY3K
-if PY3K:
-    from socketserver import ThreadingMixIn, UnixStreamServer as sUnixStreamServer
-else:
-    from SocketServer import ThreadingMixIn, UnixStreamServer as sUnixStreamServer
-
-from gevent import socket as gsocket, sleep as gsleep, spawn as gspawn
-from gevent.server import StreamServer as gStreamServer
-
+import os
+import sys
+from concurrent.futures import ProcessPoolExecutor
+from functools import partial
 from .exception import PDKException, PluginServerException
 
-cmdre = re.compile("([a-z])([A-Z])")
-
-DEFAULT_SOCKET_NAME = "python_pluginserver.sock"
-
-def write_response(fd, msgid, response):
-    fd.send(msgpack.packb([
-        1,  # is response
-        msgid,
-        None,
-        response
-    ]))
-
-def write_error(fd, msgid, error):
-    fd.send(msgpack.packb([
-        1,  # is response
-        msgid,
-        error,
-        None
-    ]))
-
-
-class WrapSocket(object):
-    def __init__(self, socket):
-        self.socket = socket
-
-    def read(self, n):
-        return self.socket.recv(n)
-
-class Server(object):
-    def __init__(self, plugin_server):
+class AsyncPluginServer:
+    def __init__(self, plugin_server, use_multiprocess=False, max_workers=None):
         self.ps = plugin_server
         self.logger = plugin_server.logger
+        self.use_multiprocess = use_multiprocess
+        if use_multiprocess:
+            self.process_pool = ProcessPoolExecutor(max_workers=max_workers)
 
-    def handle(self, fd, address, *_):
-        # can't use socket.makefile here, since it returns a blocking IO
-        # msgpack.Unpacker only expects read() but no other semantics to exist
-        sockf = WrapSocket(fd)
-        unpacker = msgpack.Unpacker(sockf, strict_map_key=False)
+    async def handle_client(self, reader, writer):
+        unpacker = msgpack.Unpacker(strict_map_key=False)
 
-        for _, msgid, method, args in unpacker:
-            ns, cmd = method.split(".")
-            if ns != "plugin":
-                write_error(fd, msgid, "RPC for %s is not supported" % ns)
-                continue
-
-            cmd_r = cmd[0].lower() + cmdre.sub(lambda m: "%s_%s" % (m.group(1), m.group(2).lower()), cmd[1:])
+        while True:
             try:
-                self.logger.debug("rpc: #%d method: %s args: %s" % (msgid, method, args))
-                ret = getattr(self.ps, cmd_r)(*args)
-                self.logger.debug("rpc: #%d return: %s" % (msgid, ret))
-                write_response(fd, msgid, ret)
-            except (PluginServerException, PDKException) as ex:
-                self.logger.warn("rpc: #%d error: %s" % (msgid, str(ex)))
-                write_error(fd, msgid, str(ex))
-            except Exception as ex:
-                self.logger.error("rpc: #%d exception: %s" % (msgid, traceback.format_exc()))
-                write_error(fd, msgid, str(ex))
+                message = await reader.read(1024)
+                if not message:
+                    break
 
-class tUnixStreamServer(ThreadingMixIn, sUnixStreamServer):
-    pass
+                unpacker.feed(message)
+                for unpacked in unpacker:
+                    _, msgid, method, args = unpacked
+                    ns, cmd = method.split(".")
+                    
+                    if ns != "plugin":
+                        await self.write_error(writer, msgid, f"RPC for {ns} is not supported")
+                        continue
 
-def watchdog(sleep, logger):
+                    cmd_r = cmd[0].lower() + ''.join([c.lower() if c.islower() else f"_{c.lower()}" for c in cmd[1:]])
+                    
+                    try:
+                        self.logger.debug(f"rpc: #{msgid} method: {method} args: {args}")
+                        if self.use_multiprocess and cmd_r in ['handle_event', 'step', 'step_error']:
+                            # Use ProcessPoolExecutor for potentially CPU-bound operations
+                            loop = asyncio.get_running_loop()
+                            ret = await loop.run_in_executor(
+                                self.process_pool, 
+                                partial(getattr(self.ps, cmd_r), *args)
+                            )
+                        else:
+                            ret = await getattr(self.ps, cmd_r)(*args)
+                        self.logger.debug(f"rpc: #{msgid} return: {ret}")
+                        await self.write_response(writer, msgid, ret)
+                    except (PluginServerException, PDKException) as ex:
+                        self.logger.warn(f"rpc: #{msgid} error: {str(ex)}")
+                        await self.write_error(writer, msgid, str(ex))
+                    except MemoryError as ex:
+                        self.logger.error(f"rpc: #{msgid} exception: {str(ex)}")
+                        await self.write_error(writer, msgid, str(ex))
+
+            except asyncio.CancelledError:
+                break
+            except MemoryError as e:
+                self.logger.error(f"Error handling client: {str(e)}")
+                break
+
+        writer.close()
+        await writer.wait_closed()
+
+    async def write_response(self, writer, msgid, response):
+        writer.write(msgpack.packb([1, msgid, None, response]))
+        await writer.drain()
+
+    async def write_error(self, writer, msgid, error):
+        writer.write(msgpack.packb([1, msgid, error, None]))
+        await writer.drain()
+
+    def cleanup(self):
+        if self.use_multiprocess:
+            self.process_pool.shutdown(wait=True)
+
+async def start_async_server(plugin_server, socket_path, use_multiprocess=False, max_workers=None):
+    server = AsyncPluginServer(plugin_server, use_multiprocess, max_workers)
+    
+    # Remove the socket file if it already exists
+    try:
+        os.unlink(socket_path)
+    except OSError:
+        if os.path.exists(socket_path):
+            raise
+
+    # Start the server
+    unix_server = await asyncio.start_unix_server(server.handle_client, path=socket_path)
+
+    plugin_server.logger.info(f"Async server started at path {socket_path}")
+    plugin_server.logger.info(f"Multiprocessing: {'Enabled' if use_multiprocess else 'Disabled'}")
+
+    async with unix_server:
+        await unix_server.serve_forever()
+
+# Watchdog function to monitor parent process
+async def watchdog(plugin_server):
     while True:
         if os.getppid() == 1:  # parent dead, process adopted by init
-            logger.info("Kong exits, terminating...")
+            plugin_server.logger.info("Kong exits, terminating...")
             sys.exit()
-        sleep(1)
+        await asyncio.sleep(1)
 
-class UnixStreamServer(Server):
-    def __init__(self, pluginserver, path,
-                 sock_name=DEFAULT_SOCKET_NAME, use_gevent=True, listen_queue_size=4096):
-        Server.__init__(self, pluginserver)
-        self.path = os.path.join(path, sock_name)
-        self.use_gevent = use_gevent
-        self.listen_queue_size = listen_queue_size
-
-    def serve_forever(self):
-        if os.path.exists(self.path):
-            os.remove(self.path)
-
-        if self.use_gevent:
-            listener = gsocket.socket(gsocket.AF_UNIX, gsocket.SOCK_STREAM)
-            listener.bind(self.path)
-            listener.listen(self.listen_queue_size)
-
-            self.logger.info("server (gevent) started at path " + self.path)
-
-            gspawn(watchdog, gsleep, self.logger)
-
-            gStreamServer(listener, self.handle).serve_forever()
-        else:
-            import socket
-            self.logger.info("server started at path " + self.path)
-
-            t = threading.Thread(
-                target=watchdog,
-                args=(time.sleep, self.logger, ),
-            )
-            t.setDaemon(True)
-            t.start()
-            s = tUnixStreamServer(self.path, self.handle, bind_and_activate=False)
-            s.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
-            s.server_bind()
-            s.socket.listen(self.listen_queue_size)
-            s.serve_forever()
+# Main function to start the server and watchdog
+async def run_server(plugin_server, socket_path, use_multiprocess=False, max_workers=None):
+    # Start the watchdog
+    watchdog_task = asyncio.create_task(watchdog(plugin_server))
+    
+    # Start the server
+    server_task = asyncio.create_task(start_async_server(plugin_server, socket_path, use_multiprocess, max_workers))
+    
+    try:
+        # Wait for both tasks
+        await asyncio.gather(watchdog_task, server_task)
+    finally:
+        # Ensure cleanup is performed
+        if use_multiprocess:
+            server_task.result().cleanup()

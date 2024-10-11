@@ -1,3 +1,2 @@
-gevent
-msgpack
 setproctitle
+nest_asyncio
