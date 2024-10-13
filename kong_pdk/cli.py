@@ -31,10 +31,9 @@ def parse(dedicated=False):
     parser.add_argument('--no-lua-style', action='store_true', dest='no_lua_style', default=False,
                         help='turn off Lua-style "data, err" return values for PDK functions '
                              'and throw exception instead (default: %(default)s)')
-    mxg = parser.add_mutually_exclusive_group()
-    mxg.add_argument('-m', '--multiprocessing', dest='multiprocessing', action="store_true",
-                     help='enable multiprocessing (default: %(default)s)')
-    mxg.add_argument('-g', '--gevent', dest='gevent', action="store_true",
+    parser.add_argument('-n', '--num-workers', dest='num_workers', type=int, default=1,
+                     help='run multiple workers')
+    parser.add_argument('-g', '--gevent', dest='gevent', action="store_true",
                      help='enable gevent (default: %(default)s)')
 
     if not dedicated:
@@ -75,12 +74,12 @@ def start_server():
 
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
                       plugin_dir=args.directory,
-                      use_multiprocess=args.multiprocessing,
                       use_gevent=args.gevent,
                       lua_style=not args.no_lua_style)
     ss = UnixStreamServer(ps, prefix,
                           sock_name=args.socket_name,
                           use_gevent=args.gevent,
+                          num_workers=args.num_workers,
                           listen_queue_size=args.listen_queue_size)
     if args.dump_info:
         ret, err = ps.get_plugin_info(args.dump_info)
@@ -114,7 +113,6 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0, _schema=[])
     args = parse(dedicated=True)
 
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
-                      use_multiprocess=args.multiprocessing,
                       use_gevent=args.gevent,
                       name="%s version %s" % (name, _version or 'unknown'),
                       lua_style=not args.no_lua_style)
@@ -124,6 +122,7 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0, _schema=[])
     ss = UnixStreamServer(ps, args.prefix,
                           sock_name=socket_name,
                           use_gevent=args.gevent,
+                          num_workers=args.num_workers,
                           listen_queue_size=args.listen_queue_size)
 
     class mod(object):

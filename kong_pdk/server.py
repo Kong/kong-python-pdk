@@ -2,21 +2,10 @@ import os
 import time
 import json
 
-from .const import PY3K
-
 import threading
-if PY3K:
-    from queue import Queue
-else:
-    from Queue import Queue
+from queue import Queue
 
 import multiprocessing
-# patch connection API so it share with gevent.queue.Channel
-if PY3K:
-    from multiprocessing import connection
-    connection.Connection.get = connection.Connection.recv
-    connection.Connection.put = connection.Connection.send
-
 from gevent import sleep as gsleep, spawn as gspawn
 from gevent.lock import Semaphore as gSemaphore
 from gevent.queue import Channel as gChannel
@@ -70,10 +59,8 @@ def _multiprocessing_init(pool_name):
 
 class PluginServer(object):
     def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None,
-                 use_multiprocess=False, use_gevent=False, name=None, lua_style=True):
-        if use_multiprocess:
-            sem = multiprocessing.Semaphore
-        elif use_gevent:
+                 use_gevent=False, name=None, lua_style=True):
+        if use_gevent:
             sem = gSemaphore
         else:
             sem = threading.Semaphore
@@ -97,21 +84,9 @@ class PluginServer(object):
         if name:
             title = "%s \"%s\"" % (title, name)
 
-        self.use_multiprocess = use_multiprocess
         self.use_gevent = use_gevent
 
         self.lua_style = lua_style
-
-        if use_multiprocess:
-            if not PY3K:
-                raise NotImplementedError("multiprocessing mode is only supported in Python3")
-
-            self._process_pool = multiprocessing.Pool(
-                os.cpu_count(),
-                _multiprocessing_init,
-                (title, ),
-            )
-            self.logger.debug("plugin server is in multiprocessing mode")
 
         # start cleanup timer
         if use_gevent:
@@ -128,10 +103,7 @@ class PluginServer(object):
 
         if setproctitle:
             ppid = os.getppid()
-            if use_multiprocess:
-                setproctitle.setproctitle("%s: Manager (ppid: %d)" % (title, ppid))
-            else:
-                setproctitle.setproctitle("%s (ppid: %d)" % (title, ppid))
+            setproctitle.setproctitle("%s (ppid: %d)" % (title, ppid))
 
     def _clear_expired_plugins(self, ttl):
         while True:
@@ -288,13 +260,7 @@ class PluginServer(object):
         eid = self.event_id
         self.event_id = eid + 1
 
-        if self.use_multiprocess:
-            ch, child_ch = multiprocessing.Pipe(duplex=True)
-            self._process_pool.apply_async(
-                _handler_event_func,
-                (getattr(cls, phase), child_ch, self.lua_style, ),
-            )
-        elif self.use_gevent:
+        if self.use_gevent:
             # plugin communites to Kong (RPC client) in a reverse way
             ch = gChannel()
 

@@ -3,9 +3,9 @@ import re
 import sys
 import time
 import traceback
-import multiprocessing
+import setproctitle
 import msgpack
-from multiprocessing import Process, Queue
+from multiprocessing import Process
 
 from .const import PY3K
 if PY3K:
@@ -76,11 +76,17 @@ class Server(object):
                 write_error(fd, msgid, str(ex))
 
 def gevent_worker(server, sock):
+    current_title = setproctitle.getproctitle()
+    setproctitle.setproctitle(current_title + " (gevent worker)")
+
     while True:
         client, _ = sock.accept()
         gevent.spawn(server.handle, client, None)
 
 def standard_worker(server, sock):
+    current_title = setproctitle.getproctitle()
+    setproctitle.setproctitle(current_title + " (threaded worker)")
+
     while True:
         client, _ = sock.accept()
         server.handle(client, None)
@@ -99,7 +105,7 @@ class UnixStreamServer(Server):
         self.path = os.path.join(path, sock_name)
         self.use_gevent = use_gevent
         self.listen_queue_size = listen_queue_size
-        self.num_workers = 8
+        self.num_workers = num_workers
 
     def serve_forever(self):
         if os.path.exists(self.path):
