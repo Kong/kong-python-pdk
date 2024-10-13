@@ -27,8 +27,6 @@ def parse(dedicated=False):
     parser.add_argument('--no-lua-style', action='store_true', dest='no_lua_style', default=False,
                         help='turn off Lua-style "data, err" return values for PDK functions '
                              'and throw exception instead (default: %(default)s)')
-    parser.add_argument('--use-multiprocess', action='store_true', 
-                        help='Enable multiprocessing for CPU-bound tasks')
     parser.add_argument('--max-workers', type=int, default=None,
                         help='Maximum number of worker processes when multiprocessing is enabled')
 
@@ -69,7 +67,8 @@ def start_server():
 
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
                       plugin_dir=args.directory,
-                      lua_style=not args.no_lua_style)
+                      lua_style=not args.no_lua_style,
+                      max_workers=args.max_workers)
 
     if args.dump_info:
         ret = ps.get_plugin_info(args.dump_info)
@@ -89,9 +88,7 @@ def start_server():
     display_lua_style_notice(not args.no_lua_style, ps)
 
     try:
-        asyncio.run(start_async_server(ps, os.path.join(prefix, args.socket_name),
-                            use_multiprocess=args.use_multiprocess, 
-                            max_workers=args.max_workers))
+        asyncio.run(start_async_server(ps, os.path.join(prefix, args.socket_name)))
     except KeyboardInterrupt:
         ps.logger.info("polite exit requested, terminating...")
 
@@ -102,7 +99,8 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0, _schema=[])
 
     ps = PluginServer(loglevel=Logger.WARNING - args.verbose,
                       name=f"{name} version {_version or 'unknown'}",
-                      lua_style=not args.no_lua_style)
+                      lua_style=not args.no_lua_style,
+                      max_workers=args.max_workers)
     socket_name = args.socket_name
     if socket_name == "python_pluginserver.sock":
         socket_name = f"{name}.sock"
@@ -124,8 +122,6 @@ def start_dedicated_server(name, plugin, _version=None, _priority=0, _schema=[])
     display_lua_style_notice(not args.no_lua_style, ps)
 
     try:
-        asyncio.run(start_async_server(ps, os.path.join(args.prefix, socket_name),
-                            use_multiprocess=args.use_multiprocess, 
-                            max_workers=args.max_workers))
+        asyncio.run(start_async_server(ps, os.path.join(args.prefix, socket_name)))
     except KeyboardInterrupt:
         ps.logger.info("polite exit requested, terminating...")

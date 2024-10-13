@@ -2,17 +2,12 @@ import asyncio
 import msgpack
 import os
 import sys
-from concurrent.futures import ProcessPoolExecutor
-from functools import partial
 from .exception import PDKException, PluginServerException
 
 class AsyncPluginServer:
-    def __init__(self, plugin_server, use_multiprocess=False, max_workers=None):
+    def __init__(self, plugin_server):
         self.ps = plugin_server
         self.logger = plugin_server.logger
-        self.use_multiprocess = use_multiprocess
-        if use_multiprocess:
-            self.process_pool = ProcessPoolExecutor(max_workers=max_workers)
 
     async def handle_client(self, reader, writer):
         unpacker = msgpack.Unpacker(strict_map_key=False)
@@ -36,15 +31,7 @@ class AsyncPluginServer:
                     
                     try:
                         self.logger.debug(f"rpc: #{msgid} method: {method} args: {args}")
-                        if self.use_multiprocess and cmd_r in ['handle_event', 'step', 'step_error']:
-                            # Use ProcessPoolExecutor for potentially CPU-bound operations
-                            loop = asyncio.get_running_loop()
-                            ret = await loop.run_in_executor(
-                                self.process_pool, 
-                                partial(getattr(self.ps, cmd_r), *args)
-                            )
-                        else:
-                            ret = await getattr(self.ps, cmd_r)(*args)
+                        ret = await getattr(self.ps, cmd_r)(*args)
                         self.logger.debug(f"rpc: #{msgid} return: {ret}")
                         await self.write_response(writer, msgid, ret)
                     except (PluginServerException, PDKException) as ex:
@@ -70,13 +57,12 @@ class AsyncPluginServer:
     async def write_error(self, writer, msgid, error):
         writer.write(msgpack.packb([1, msgid, error, None]))
         await writer.drain()
-
+    
     def cleanup(self):
-        if self.use_multiprocess:
-            self.process_pool.shutdown(wait=True)
+        self.ps.cleanup()
 
-async def start_async_server(plugin_server, socket_path, use_multiprocess=False, max_workers=None):
-    server = AsyncPluginServer(plugin_server, use_multiprocess, max_workers)
+async def start_async_server(plugin_server, socket_path):
+    server = AsyncPluginServer(plugin_server)
     
     # Remove the socket file if it already exists
     try:
@@ -89,7 +75,6 @@ async def start_async_server(plugin_server, socket_path, use_multiprocess=False,
     unix_server = await asyncio.start_unix_server(server.handle_client, path=socket_path)
 
     plugin_server.logger.info(f"Async server started at path {socket_path}")
-    plugin_server.logger.info(f"Multiprocessing: {'Enabled' if use_multiprocess else 'Disabled'}")
 
     async with unix_server:
         await unix_server.serve_forever()
@@ -103,17 +88,16 @@ async def watchdog(plugin_server):
         await asyncio.sleep(1)
 
 # Main function to start the server and watchdog
-async def run_server(plugin_server, socket_path, use_multiprocess=False, max_workers=None):
+async def run_server(plugin_server, socket_path):
     # Start the watchdog
     watchdog_task = asyncio.create_task(watchdog(plugin_server))
     
     # Start the server
-    server_task = asyncio.create_task(start_async_server(plugin_server, socket_path, use_multiprocess, max_workers))
+    server_task = asyncio.create_task(start_async_server(plugin_server, socket_path))
     
     try:
         # Wait for both tasks
         await asyncio.gather(watchdog_task, server_task)
     finally:
         # Ensure cleanup is performed
-        if use_multiprocess:
-            server_task.result().cleanup()
+        server_task.result().cleanup()

@@ -2,6 +2,9 @@ import os
 import time
 import json
 import asyncio
+from concurrent.futures import ProcessPoolExecutor
+from functools import partial
+
 from .const import PY3K
 from .pdk import Kong
 from .module import Module
@@ -18,7 +21,7 @@ async def _handler_event_func(cls_phase, ch, lua_style):
     await ch.put(MSG_RET)
 
 class PluginServer:
-    def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None, name=None, lua_style=True):
+    def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None, name=None, lua_style=True, max_workers=None):
         self.plugin_dir = plugin_dir
         self.plugins = {}
         self.instances = {}
@@ -39,6 +42,13 @@ class PluginServer:
         self.event_id_lock = asyncio.Lock()
 
         self.logger.debug("plugin server is in asyncio mode")
+
+
+        self.process_pool = None
+        self.max_workers = max_workers
+        if self.max_workers and self.max_workers > 1:
+            self.logger.info(f"Multiprocessing: Enabled")
+            self.process_pool = ProcessPoolExecutor(max_workers=max_workers)
 
     async def _clear_expired_plugins(self, ttl):
         while True:
@@ -181,7 +191,17 @@ class PluginServer:
         self.event_id = eid + 1
 
         ch = asyncio.Queue()
-        asyncio.create_task(_handler_event_func(getattr(cls, phase), ch, self.lua_style))
+
+        if self.process_pool:
+            # Use ProcessPoolExecutor for potentially CPU-bound operations
+            loop = asyncio.get_running_loop()
+            co = loop.run_in_executor(
+                self.process_pool, 
+                _handler_event_func(getattr(cls, phase), ch, self.lua_style),
+            )
+            asyncio.create_task(await co)
+        else:
+            asyncio.create_task(_handler_event_func(getattr(cls, phase), ch, self.lua_style))
 
         await asyncio.sleep(0)
 
@@ -228,6 +248,10 @@ class PluginServer:
             "Data": ret,
             "EventId": eid,
         }
+    
+    def cleanup(self):
+        if self.process_pool:
+            self.process_pool.shutdown(wait=True)
 
 # Add these methods to maintain compatibility with the previous implementation
 for entity in entities:
