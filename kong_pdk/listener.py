@@ -3,16 +3,18 @@ import re
 import sys
 import time
 import traceback
-import threading
+import multiprocessing
 import msgpack
+from multiprocessing import Process, Queue
 
 from .const import PY3K
 if PY3K:
-    from socketserver import ThreadingMixIn, UnixStreamServer as sUnixStreamServer
+    from socketserver import UnixStreamServer as sUnixStreamServer
 else:
-    from SocketServer import ThreadingMixIn, UnixStreamServer as sUnixStreamServer
+    from SocketServer import UnixStreamServer as sUnixStreamServer
 
-from gevent import socket as gsocket, sleep as gsleep, spawn as gspawn
+import gevent
+from gevent import socket as gsocket, sleep as gsleep
 from gevent.server import StreamServer as gStreamServer
 
 from .exception import PDKException, PluginServerException
@@ -20,6 +22,7 @@ from .exception import PDKException, PluginServerException
 cmdre = re.compile("([a-z])([A-Z])")
 
 DEFAULT_SOCKET_NAME = "python_pluginserver.sock"
+DEFAULT_NUM_WORKERS = 4
 
 def write_response(fd, msgid, response):
     fd.send(msgpack.packb([
@@ -37,7 +40,6 @@ def write_error(fd, msgid, error):
         None
     ]))
 
-
 class WrapSocket(object):
     def __init__(self, socket):
         self.socket = socket
@@ -51,8 +53,6 @@ class Server(object):
         self.logger = plugin_server.logger
 
     def handle(self, fd, address, *_):
-        # can't use socket.makefile here, since it returns a blocking IO
-        # msgpack.Unpacker only expects read() but no other semantics to exist
         sockf = WrapSocket(fd)
         unpacker = msgpack.Unpacker(sockf, strict_map_key=False)
 
@@ -75,8 +75,15 @@ class Server(object):
                 self.logger.error("rpc: #%d exception: %s" % (msgid, traceback.format_exc()))
                 write_error(fd, msgid, str(ex))
 
-class tUnixStreamServer(ThreadingMixIn, sUnixStreamServer):
-    pass
+def gevent_worker(server, sock):
+    while True:
+        client, _ = sock.accept()
+        gevent.spawn(server.handle, client, None)
+
+def standard_worker(server, sock):
+    while True:
+        client, _ = sock.accept()
+        server.handle(client, None)
 
 def watchdog(sleep, logger):
     while True:
@@ -87,11 +94,12 @@ def watchdog(sleep, logger):
 
 class UnixStreamServer(Server):
     def __init__(self, pluginserver, path,
-                 sock_name=DEFAULT_SOCKET_NAME, use_gevent=True, listen_queue_size=4096):
+                 sock_name=DEFAULT_SOCKET_NAME, use_gevent=True, listen_queue_size=4096, num_workers=DEFAULT_NUM_WORKERS):
         Server.__init__(self, pluginserver)
         self.path = os.path.join(path, sock_name)
         self.use_gevent = use_gevent
         self.listen_queue_size = listen_queue_size
+        self.num_workers = 8
 
     def serve_forever(self):
         if os.path.exists(self.path):
@@ -102,23 +110,41 @@ class UnixStreamServer(Server):
             listener.bind(self.path)
             listener.listen(self.listen_queue_size)
 
-            self.logger.info("server (gevent) started at path " + self.path)
+            self.logger.info(f"server (gevent) started at path {self.path} with {self.num_workers} workers")
 
-            gspawn(watchdog, gsleep, self.logger)
+            gevent.spawn(watchdog, gsleep, self.logger)
 
-            gStreamServer(listener, self.handle).serve_forever()
+            workers = []
+            for _ in range(self.num_workers):
+                worker = Process(target=gevent_worker, args=(self, listener))
+                worker.daemon = True
+                worker.start()
+                workers.append(worker)
+
+            for worker in workers:
+                worker.join()
         else:
             import socket
-            self.logger.info("server started at path " + self.path)
+            self.logger.info(f"server started at path {self.path} with {self.num_workers} workers")
 
-            t = threading.Thread(
+            watchdog_process = Process(
                 target=watchdog,
-                args=(time.sleep, self.logger, ),
+                args=(time.sleep, self.logger,),
             )
-            t.setDaemon(True)
-            t.start()
-            s = tUnixStreamServer(self.path, self.handle, bind_and_activate=False)
+            watchdog_process.daemon = True
+            watchdog_process.start()
+
+            s = sUnixStreamServer(self.path, self.handle, bind_and_activate=False)
             s.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
             s.server_bind()
             s.socket.listen(self.listen_queue_size)
-            s.serve_forever()
+
+            workers = []
+            for _ in range(self.num_workers):
+                worker = Process(target=standard_worker, args=(self, s.socket))
+                worker.daemon = True
+                worker.start()
+                workers.append(worker)
+
+            for worker in workers:
+                worker.join()

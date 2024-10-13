@@ -176,7 +176,7 @@ class PluginServer(object):
         self.plugin_dir = dir
         return "ok"
 
-    @locked_by("i_lock")
+    #@locked_by("i_lock")
     def get_status(self, *_):
         plugin_status = {}
         for name in self.plugins:
@@ -222,7 +222,7 @@ class PluginServer(object):
         }
         return info
 
-    @locked_by("i_lock")
+    #@locked_by("i_lock")
     def start_instance(self, cfg):
         name = cfg['Name']
         if name not in self.plugins:
@@ -257,7 +257,7 @@ class PluginServer(object):
             "StartTime": ins.start_time,
         }
 
-    @locked_by("i_lock")
+    #@locked_by("i_lock")
     def close_instance(self, iid):
         if iid not in self.instances:
             # Note: Kong expect the error to start with "no plugin instance"
@@ -273,7 +273,7 @@ class PluginServer(object):
             "Config": ins.config,
         }
 
-    @locked_by("e_lock")
+    #@locked_by("e_lock")
     def handle_event(self, event):
         iid = event['InstanceId']
         if iid not in self.instances:
