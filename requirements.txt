@@ -1,2 +1,2 @@
 setproctitle
-nest_asyncio
+uvloop

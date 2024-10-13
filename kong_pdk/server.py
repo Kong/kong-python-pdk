@@ -5,11 +5,15 @@ import asyncio
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from functools import partial
 
-from .const import PY3K
 from .pdk import Kong
 from .module import Module
 from .exception import PluginServerException
 from .logger import Logger
+
+try:
+    import setproctitle
+except:  # noqa: E722 do not use bare 'except
+    setproctitle = None
 
 exts = ('.py', '.pyd', '.so')
 entities = ('service', 'consumer', 'route', 'plugin', 'credential', 'memory_stats')
@@ -19,6 +23,24 @@ MSG_RET = 'ret'
 async def _handler_event_func(cls_phase, ch, lua_style):
     await cls_phase(Kong(ch, lua_style).kong)
     await ch.put(MSG_RET)
+
+async def monitor_event_loop_lag():
+    loop = asyncio.get_event_loop()
+    start = loop.time()
+    sleep_interval = 1
+
+    while loop.is_running():
+        await asyncio.sleep(sleep_interval)
+        diff = loop.time() - start
+        lag = diff - sleep_interval
+        # send lag as a statsd metric
+        if lag > 1 or True:
+            tasks = asyncio.all_tasks(loop)
+            for task in tasks:
+                print(task._coro.cr_code.co_name)
+            #   if task._coro.cr_code.co_name != "monitor_event_loop_lag":
+            #       log.warn(f"event loop lag:{lag}, task: {task}")
+        start = loop.time()
 
 class PluginServer:
     def __init__(self, loglevel=Logger.WARNING, expire_ttl=60, plugin_dir=None, name=None, lua_style=True, max_workers=None):
@@ -43,13 +65,21 @@ class PluginServer:
 
         self.logger.debug("plugin server is in asyncio mode")
 
-
         self.process_pool = None
         self.max_workers = max_workers
         if self.max_workers and self.max_workers > 1:
             self.logger.info(f"Multiprocessing: Enabled")
             # self.process_pool = ProcessPoolExecutor(max_workers=max_workers)
             self.process_pool = ThreadPoolExecutor(max_workers=max_workers)
+
+        title = "Kong Python Plugin Server"
+        if name:
+            title = "%s \"%s\"" % (title, name)
+
+        if setproctitle:
+            ppid = os.getppid()
+            setproctitle.setproctitle("%s (ppid: %d)" % (title, ppid))
+
 
     async def _clear_expired_plugins(self, ttl):
         while True:

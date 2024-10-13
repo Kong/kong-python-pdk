@@ -90,6 +90,7 @@ async def watchdog(plugin_server):
             sys.exit()
         await asyncio.sleep(1)
 
+
 # Main function to start the server and watchdog
 async def run_server(plugin_server, socket_path):
     # Start the watchdog
