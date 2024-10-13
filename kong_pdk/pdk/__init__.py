@@ -10,9 +10,7 @@ class FakeClasses(object):
     def __call__(self, *a):
         loop = asyncio.get_event_loop()
         nest_asyncio.apply(loop)
-        print(">12312312")
         r = loop.run_until_complete(self.call(self.prefix, *a))
-        print(">ret ", r)
         return r
 
     # TODO
@@ -45,13 +43,12 @@ def rpc_of(ch, lua_style):
             "Args": a,
         })
 
-        print("put" , m, a)
         if m in non_return_methods:
             return
+    
+        await asyncio.sleep(0)
 
         data, err = await ch.get()
-
-        print("get" , data, " ",  err)
 
         if lua_style:
             return data, err

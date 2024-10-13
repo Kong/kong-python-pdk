@@ -183,14 +183,14 @@ class PluginServer:
         ch = asyncio.Queue()
         asyncio.create_task(_handler_event_func(getattr(cls, phase), ch, self.lua_style))
 
+        await asyncio.sleep(0)
+
         r = await ch.get()
         if r != MSG_RET:
             async with self.event_lock:
                 self.events[eid] = ch
     
         instance.reset_expire_ts()
-
-        print("hgere returnb")
 
         return {
             "Data": r,
@@ -204,7 +204,6 @@ class PluginServer:
         return await self._step(data, True)
 
     async def _step(self, data, is_error):
-        print(">>step")
         async with self.event_lock:
             eid = data['EventId']
             if eid not in self.events:
@@ -212,16 +211,14 @@ class PluginServer:
             dd = data.get('Data')
             queue = self.events[eid]
 
-        print(">> ", data, dd)
-
         if is_error:
             await queue.put((None, dd))
         else:
             await queue.put((dd, None))
+        
+        await asyncio.sleep(0)
 
         ret = await queue.get()
-
-        print(">> ret ", ret)
 
         if ret == MSG_RET or (isinstance(ret, dict) and ret.get("Method") in ("kong.response.exit", "kong.response.error")):
             async with self.event_lock:
