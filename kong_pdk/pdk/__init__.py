@@ -8,16 +8,18 @@ class FakeClasses(object):
         self.call = call
 
     def __call__(self, *a):
-        loop = asyncio.get_event_loop()
-        nest_asyncio.apply(loop)
-        r = loop.run_until_complete(self.call(self.prefix, *a))
-        return r
+        # loop = asyncio.get_event_loop()
+        # nest_asyncio.apply(loop)
+        # r = loop.run_until_complete(self.call(self.prefix, *a))
+        # return r
+        return self.call(self.prefix, *a)
 
     # TODO
     def __str__(self):
-        loop = asyncio.get_event_loop()
-        nest_asyncio.apply(loop)
-        return loop.run_until_complete(self.call(self.prefix))
+        # loop = asyncio.get_event_loop()
+        # nest_asyncio.apply(loop)
+        # return loop.run_until_complete(self.call(self.prefix))
+        return self.call(self.prefix)
 
     def __getattr__(self, k):
         return FakeClasses(self.prefix + "." + k, self.call)

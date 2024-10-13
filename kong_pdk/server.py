@@ -2,7 +2,7 @@ import os
 import time
 import json
 import asyncio
-from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from functools import partial
 
 from .const import PY3K
@@ -17,7 +17,7 @@ entities = ('service', 'consumer', 'route', 'plugin', 'credential', 'memory_stat
 MSG_RET = 'ret'
 
 async def _handler_event_func(cls_phase, ch, lua_style):
-    cls_phase(Kong(ch, lua_style).kong)
+    await cls_phase(Kong(ch, lua_style).kong)
     await ch.put(MSG_RET)
 
 class PluginServer:
@@ -48,7 +48,8 @@ class PluginServer:
         self.max_workers = max_workers
         if self.max_workers and self.max_workers > 1:
             self.logger.info(f"Multiprocessing: Enabled")
-            self.process_pool = ProcessPoolExecutor(max_workers=max_workers)
+            # self.process_pool = ProcessPoolExecutor(max_workers=max_workers)
+            self.process_pool = ThreadPoolExecutor(max_workers=max_workers)
 
     async def _clear_expired_plugins(self, ttl):
         while True:
@@ -194,12 +195,12 @@ class PluginServer:
 
         if self.process_pool:
             # Use ProcessPoolExecutor for potentially CPU-bound operations
-            loop = asyncio.get_running_loop()
-            co = loop.run_in_executor(
-                self.process_pool, 
-                _handler_event_func(getattr(cls, phase), ch, self.lua_style),
-            )
-            asyncio.create_task(await co)
+            # loop = asyncio.get_running_loop()
+            # co = loop.run_in_executor(
+            #     self.process_pool, 
+            #     _handler_event_func(getattr(cls, phase), ch, self.lua_style),
+            # )
+            asyncio.run_coroutine_threadsafe(_handler_event_func(getattr(cls, phase), ch, self.lua_style), self.process_pool)
         else:
             asyncio.create_task(_handler_event_func(getattr(cls, phase), ch, self.lua_style))
 
