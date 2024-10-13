@@ -1,5 +1,5 @@
 import asyncio
-import nest_asyncio
+#import nest_asyncio
 from ..exception import PDKException
 
 class FakeClasses(object):

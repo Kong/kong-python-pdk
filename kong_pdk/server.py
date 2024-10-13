@@ -159,11 +159,11 @@ class PluginServer:
         return info
 
     async def start_instance(self, cfg):
-        # async with self.instance_lock:
-        name = cfg['Name']
-        if name not in self.plugins:
-            raise PluginServerException(f"{name} not initialized")
-        plugin = self.plugins[name]
+        async with self.instance_lock:
+            name = cfg['Name']
+            if name not in self.plugins:
+                raise PluginServerException(f"{name} not initialized")
+            plugin = self.plugins[name]
 
         config = json.loads(cfg['Config'])
         iid = self.instance_id
@@ -193,9 +193,9 @@ class PluginServer:
         }
 
     async def close_instance(self, iid):
-        # async with self.instance_lock:
-        if iid not in self.instances:
-            raise PluginServerException(f"no plugin instance #{iid}")
+        async with self.instance_lock:
+            if iid not in self.instances:
+                raise PluginServerException(f"no plugin instance #{iid}")
 
         ins = self.instances[iid]
         ins.close_cb()
@@ -217,9 +217,9 @@ class PluginServer:
         cls = instance.cls
         phase = event['EventName']
 
-        # async with self.event_id_lock:
-        eid = self.event_id
-        self.event_id = eid + 1
+        async with self.event_id_lock:
+            eid = self.event_id
+            self.event_id = eid + 1
 
         ch = asyncio.Queue()
 
@@ -238,8 +238,8 @@ class PluginServer:
 
         r = await ch.get()
         if r != MSG_RET:
-            # async with self.event_lock:
-            self.events[eid] = ch
+            async with self.event_lock:
+                self.events[eid] = ch
     
         instance.reset_expire_ts()
 
@@ -255,12 +255,12 @@ class PluginServer:
         return await self._step(data, True)
 
     async def _step(self, data, is_error):
-        # async with self.event_lock:
-        eid = data['EventId']
-        if eid not in self.events:
-            raise PluginServerException(f"event id {eid} not found")
-        dd = data.get('Data')
-        queue = self.events[eid]
+        async with self.event_lock:
+            eid = data['EventId']
+            if eid not in self.events:
+                raise PluginServerException(f"event id {eid} not found")
+            dd = data.get('Data')
+            queue = self.events[eid]
 
         if is_error:
             await queue.put((None, dd))
@@ -272,8 +272,8 @@ class PluginServer:
         ret = await queue.get()
 
         if ret == MSG_RET or (isinstance(ret, dict) and ret.get("Method") in ("kong.response.exit", "kong.response.error")):
-            # async with self.event_lock:
-            del self.events[eid]
+            async with self.event_lock:
+                del self.events[eid]
 
         return {
             "Data": ret,

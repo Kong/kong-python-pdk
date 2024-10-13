@@ -4,8 +4,8 @@ import os
 import sys
 from .exception import PDKException, PluginServerException
 
-import uvloop
-asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+# import uvloop
+# asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 class AsyncPluginServer:
     def __init__(self, plugin_server):
