@@ -57,7 +57,12 @@ class Server(object):
         unpacker = msgpack.Unpacker(sockf, strict_map_key=False)
 
         for _, msgid, method, args in unpacker:
-            ns, cmd = method.split(".")
+            parts = method.split(".")
+            if len(parts) != 2:
+                write_error(fd, msgid, f"Invalid method format: {method}")
+                continue
+            
+            ns, cmd = parts
             if ns != "plugin":
                 write_error(fd, msgid, "RPC for %s is not supported" % ns)
                 continue
