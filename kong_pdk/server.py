@@ -1,6 +1,7 @@
 import os
 import time
 import json
+import traceback
 
 from .const import PY3K
 
@@ -59,8 +60,16 @@ def locked_by(lock_name):
     return f
 
 def _handler_event_func(cls_phase, ch, lua_style):
-    cls_phase(Kong(ch, lua_style).kong)
-    ch.put(MSG_RET)
+    try:
+        cls_phase(Kong(ch, lua_style).kong)
+    except Exception:
+        # if the exception escapes, MSG_RET is never sent and the thread,
+        # greenlet or process serving this connection waits on ch.get()
+        # forever, leaking one worker per failure and making the
+        # connection to Kong unusable
+        traceback.print_exc()
+    finally:
+        ch.put(MSG_RET)
 
 def _multiprocessing_init(pool_name):
     p = multiprocessing.current_process()
